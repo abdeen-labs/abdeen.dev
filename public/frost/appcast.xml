@@ -3,6 +3,39 @@
     <channel>
         <title>frost</title>
         <item>
+            <title>2.2</title>
+            <pubDate>Sat, 25 Jul 2026 22:33:13 -0400</pubDate>
+            <sparkle:version>15</sparkle:version>
+            <sparkle:shortVersionString>2.2</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.6</sparkle:minimumSystemVersion>
+            <description sparkle:format="markdown"><![CDATA[### Added
+
+- Frost now refuses to lock while another app has secure keyboard entry turned on. In that state macOS never delivers the keyboard to Frost, so the unlock shortcut could not have worked.
+- The locked overlay names Apple Watch when Watch unlock is on, including how to approve with the side button.
+- Shortcut fields can be set from the keyboard, show a focus ring, and say what a rejected combo was missing.
+
+### Changed
+
+- Frost will not unlock itself under any circumstances. If macOS interrupts input blocking and it cannot be restarted, Frost used to take the overlay down and hand the Mac back with no authentication. It now keeps the screen covered and still requires Touch ID — with an unlock button on the overlay, because the unlock shortcut stops working in that state.
+
+### Fixed
+
+- The locked overlay is readable with Reduce Transparency turned on in Light Mode, where it previously showed dark text on a dark card.
+- The overlay's panels, borders, and status pills are visible in Light Mode instead of fading into the background.
+- A long overlay message can no longer push the unlock-shortcut hint off the screen.
+- Recording a lock shortcut that matches the unlock shortcut no longer deletes the lock shortcut you already had.
+- The Launch at login switch stays on after registering when macOS still wants approval in Login Items.
+- Recovery buttons follow macOS order, so the rightmost button is no longer Dismiss.
+- The recovery overlay no longer swallows clicks meant for the apps underneath it, which it did while telling you input was not locked.
+- Quit & Reopen Frost now opens Settings after relaunching, and keeps Frost running if the relaunch fails.
+- The Lock Input shortcuts action now reports an error when the lock did not happen, instead of reporting success.
+- Frost recovers if a display change momentarily leaves it with no screen to draw the overlay on.
+- A disconnected Touch ID keyboard or unavailable Apple Watch is reported as such, instead of "Touch ID didn't match".
+- Auto-lock no longer wakes the app every few seconds when it is turned off.
+]]></description>
+            <enclosure url="https://github.com/Cuzeth/frost/releases/download/v2.2/Frost-2.2.dmg" length="3452991" type="application/octet-stream" sparkle:edSignature="5WzUcyXleFevrxVuaqCngpn5uO45gxnJ3BjaU9Q3ZY26ItyJxK4UJP3HUuJdJ15FXpyjhrn6tpL39UeH0pIxDQ=="/>
+        </item>
+        <item>
             <title>2.1.2</title>
             <pubDate>Tue, 07 Jul 2026 21:00:46 -0400</pubDate>
             <sparkle:version>14</sparkle:version>
@@ -13,18 +46,6 @@
 - Frost no longer opens the Settings window when it starts automatically at login — it now comes up quietly in the background, like other menu-bar apps.
 ]]></description>
             <enclosure url="https://github.com/Cuzeth/frost/releases/download/v2.1.2/Frost-2.1.2.dmg" length="3416264" type="application/octet-stream" sparkle:edSignature="Kb72jmvu6sl8m7OUTaIRBmXYUtchDCtocVWTX3JBHDpPiulQ9YeLockJ2X9/zlZINCSIL44hcLDAC2DrBzagAQ=="/>
-        </item>
-        <item>
-            <title>2.1.2</title>
-            <pubDate>Tue, 07 Jul 2026 20:26:40 -0400</pubDate>
-            <sparkle:version>13</sparkle:version>
-            <sparkle:shortVersionString>2.1.2</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>14.6</sparkle:minimumSystemVersion>
-            <description sparkle:format="markdown"><![CDATA[### Fixed
-
-- Frost no longer opens the Settings window when it starts automatically at login. It now launches quietly in the background, and still opens Settings when you launch Frost yourself.
-]]></description>
-            <enclosure url="https://github.com/Cuzeth/frost/releases/download/v2.1.2/Frost-2.1.2.dmg" length="3417604" type="application/octet-stream" sparkle:edSignature="kh4u1m+JLSKNC6hLW/VsKf0MMR7AbI301usBSC/cPxTvYpdPx8IfCmpW0mv2uiZsSK5fzsFbS6yCD3WZrtf2CA=="/>
         </item>
         <item>
             <title>2.1.1</title>
