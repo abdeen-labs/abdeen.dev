@@ -23,22 +23,9 @@
   --font-mark: var(--font-aref), serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
 
-  /* Legacy aliases still referenced by existing pages/modules */
-  --color-heading: var(--color-paper);
-  --color-text: var(--color-graphite);
-  --color-accent: var(--color-red);
-  --color-accent-hover: #A81616;
-  --color-accent-glow: rgba(204, 27, 27, 0.35);
-  --color-maincolor: var(--color-ink);
-  --color-card-bg: rgba(14, 14, 14, 0.85);
-
   /* Mono tracking — short for product UI, NOT the 0.18em editorial eyebrow */
   --tracking-mono-eyebrow: 0.08em;
   --tracking-mono-chip: 0.04em;
-
-  /* Console pattern (BRAND.md §Console on Card) */
-  --console-prompt: var(--color-red);
-  --console-rule: rgba(255, 255, 255, 0.06);
 }
 
 :root {
@@ -71,27 +58,19 @@
 
   /* Mark color decision (see Mark Color Logic in BRAND.md) */
   --mark-default: var(--color-red);
-  --mark-alt: var(--color-paper);
 
-  /* Tracking */
+  /* Tracking. Deliberately NOT --tracking-tight: that name is Tailwind's own
+     theme key, and an unlayered :root entry would silently redefine every
+     `tracking-tight` utility. Display tracking is set per element instead. */
   --tracking-wordmark: 0.18em;
   --tracking-eyebrow: 0.18em;
-  --tracking-tight: -0.02em;
 
-  /* Legacy alias tokens — mapped to canonical brand values */
-  --maincolor: var(--color-ink);
-  --supportingcolor: #050505;
+  /* Short aliases carried by the JSX (text-[var(--text)] and friends). */
   --text: var(--color-graphite);
   --heading: var(--color-paper);
   --accent: var(--color-red);
   --accent-hover: #A81616;
   --accent-glow: rgba(204, 27, 27, 0.35);
-  --card-bg: var(--surface-card-bg);
-  --card-bg-strong: rgba(14, 14, 14, 0.92);
-  --surface-border: rgba(255, 255, 255, 0.11);
-  --surface-border-strong: rgba(255, 255, 255, 0.16);
-  --shadow-soft: 0 20px 44px rgba(0, 0, 0, 0.22);
-  --shadow-card: 0 32px 90px rgba(0, 0, 0, 0.38);
 }
 
 html {
@@ -167,10 +146,14 @@ body::after {
   scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
 }
 
+/* Focus ring. Deliberately does NOT set border-radius: this rule is unlayered,
+   so it outranks Tailwind's `@layer utilities` — a `border-radius` here would
+   beat `rounded-full` and snap every pill (nav links, CTAs, chips, eyebrows)
+   into a 10px-radius rectangle while keyboard-focused. Outlines already follow
+   the element's own radius. */
 *:focus-visible {
   outline: 2px solid var(--color-red);
   outline-offset: 2px;
-  border-radius: 10px;
 }
 
 *::-webkit-scrollbar {
@@ -194,6 +177,21 @@ a {
 }
 
 @layer base {
+  /* Kill orphans. `balance` evens out short display text (browsers cap it at
+     ~6 lines, so it stays cheap); `pretty` only pulls the last word up on body
+     copy. In @layer base, not unlayered, so a `text-balance`/`text-pretty`
+     utility can still override per element. */
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
   button,
   input,
   textarea,
@@ -223,37 +221,6 @@ canvas {
   box-shadow: var(--surface-ink-elev-shadow), var(--surface-ink-elev-inset);
 }
 
-/* Shell — Ink Elevated + radial red glow corner. Max elaboration. */
-.shell-panel {
-  position: relative;
-  overflow: hidden;
-  background: var(--surface-ink-elev-bg);
-  border: var(--surface-ink-elev-border);
-  box-shadow: var(--surface-ink-elev-shadow), var(--surface-ink-elev-inset);
-  backdrop-filter: blur(28px);
-}
-
-.shell-panel::before {
-  content: "";
-  position: absolute;
-  right: -7rem;
-  top: -7rem;
-  width: 18rem;
-  height: 18rem;
-  border-radius: 999px;
-  background: radial-gradient(circle, rgba(204, 27, 27, 0.2) 0%, rgba(204, 27, 27, 0) 72%);
-  pointer-events: none;
-}
-
-.shell-panel::after {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  border-radius: inherit;
-  border: 1px solid rgba(255, 255, 255, 0.04);
-  pointer-events: none;
-}
-
 /* Surface Card — default container on Ink (BRAND.md rule #13).
    Near-flush fill, hairline border, nothing else. Cards read as bordered
    voids carved out of Ink, not as gray masses floating on black. */
@@ -268,12 +235,6 @@ canvas {
   background: rgba(10, 10, 10, 0.86);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025),
     0 12px 36px rgba(0, 0, 0, 0.16);
-}
-
-.metric-panel {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.028));
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 /* System eyebrow — JetBrains Mono 400, tracking 0.08em, uppercase, graphite.
@@ -507,7 +468,7 @@ canvas {
   font-weight: 500;
   white-space: nowrap;
   cursor: pointer;
-  transition: color 0.2s ease, background 0.2s ease;
+  transition: color 0.2s ease, background 0.2s ease, transform 0.1s ease;
 }
 
 .segmented-item:hover {
@@ -516,6 +477,12 @@ canvas {
 
 .segmented-item[data-active="true"] {
   color: var(--color-paper);
+}
+
+/* Press feedback — the thumb animates on selection, but the tap itself needs
+   its own acknowledgement for the control to feel physical. */
+.segmented-item:active {
+  transform: scale(0.97);
 }
 
 /* Accent variant — red thumb for primary type selectors */
@@ -634,11 +601,6 @@ canvas {
   letter-spacing: var(--tracking-mono-chip);
   color: var(--color-graphite);
   white-space: nowrap;
-}
-
-.chip-accent {
-  color: var(--color-paper);
-  border-color: rgba(204, 27, 27, 0.4);
 }
 
 /* Chips that navigate (ToolPageShell "More tools" strip) get a hover lift

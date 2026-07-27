@@ -97,6 +97,10 @@
   background: var(--color-red);
 }
 
+.slotClear:active {
+  transform: scale(0.92);
+}
+
 .filled:hover .slotClear,
 .filled:focus-within .slotClear {
   display: flex;
@@ -191,13 +195,17 @@
   color: var(--color-graphite);
   font-size: 0.85rem;
   cursor: pointer;
-  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.1s;
 }
 
 .choiceBtn:hover {
   background: rgba(255, 255, 255, 0.06);
   border-color: rgba(255, 255, 255, 0.18);
   color: var(--color-paper);
+}
+
+.choiceBtn:active {
+  transform: translateY(1px);
 }
 
 /* Search modal */
@@ -235,6 +243,10 @@
   transform: scale(1.03);
 }
 
+.searchResult:active {
+  transform: scale(0.98);
+}
+
 .searchResult img {
   width: 100%;
   height: 100%;
@@ -242,10 +254,32 @@
   display: block;
 }
 
-.searchSpinner {
-  display: flex;
-  justify-content: center;
-  padding: 2rem;
+/* Loading state for the results grid. A skeleton in the grid's own shape
+   reserves the layout and shows how many tiles are coming, which a centered
+   spinner cannot — the modal no longer resizes when results land. */
+.searchSkeletonGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.searchSkeleton {
+  aspect-ratio: 1;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  animation: skeletonPulse 1.5s ease-in-out infinite;
+}
+
+/* Stagger the pulse into a slow wave across the grid rather than one flat
+   blink. Opacity only, so it stays GPU-cheap. */
+.searchSkeleton:nth-child(4n + 2) { animation-delay: 0.12s; }
+.searchSkeleton:nth-child(4n + 3) { animation-delay: 0.24s; }
+.searchSkeleton:nth-child(4n + 4) { animation-delay: 0.36s; }
+
+@keyframes skeletonPulse {
+  0%,
+  100% { opacity: 0.4; }
+  50% { opacity: 0.9; }
 }
 
 .searchMessage {
@@ -284,7 +318,8 @@
     display: flex;
   }
 
-  .searchResultsGrid {
+  .searchResultsGrid,
+  .searchSkeletonGrid {
     grid-template-columns: repeat(3, 1fr);
   }
 
@@ -308,5 +343,12 @@
   .spinner {
     animation: none;
     border-color: var(--color-graphite);
+  }
+
+  /* Hold the skeleton at its bright end so it still reads as "content is
+     coming" without pulsing. */
+  .searchSkeleton {
+    animation: none;
+    opacity: 0.7;
   }
 }

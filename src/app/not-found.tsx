@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <div className="mx-auto flex min-h-[calc(100vh-14rem)] w-full max-w-3xl flex-col items-center justify-center gap-6 px-4 py-20 text-center">
+    <div className="mx-auto flex min-h-[calc(100dvh-14rem)] w-full max-w-3xl flex-col items-center justify-center gap-6 px-4 py-20 text-center">
       <FadeInWrapper direction="up" eager>
         <span className="eyebrow-system">
           <span
@@ -37,7 +37,7 @@ export default function NotFound() {
         <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
           <Link
             href="/"
-            className="rounded-full bg-[var(--color-red)] px-5 py-2.5 text-sm font-semibold text-[var(--color-paper)] shadow-[0_10px_28px_var(--accent-glow)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--accent-hover)]"
+            className="rounded-full bg-[var(--color-red)] px-5 py-2.5 text-sm font-semibold text-[var(--color-paper)] shadow-[0_10px_28px_var(--accent-glow)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[var(--accent-hover)] active:translate-y-0"
           >
             Back home
           </Link>

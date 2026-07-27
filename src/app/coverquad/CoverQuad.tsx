@@ -458,8 +458,11 @@ export default function CoverQuad() {
             </div>
 
             {searching && (
-              <div className={styles.searchSpinner}>
-                <div className={styles.spinner} />
+              <div className={styles.searchSkeletonGrid} role="status">
+                <span className="sr-only">Searching for album art…</span>
+                {Array.from({ length: 8 }, (_, i) => (
+                  <div key={i} className={styles.searchSkeleton} aria-hidden="true" />
+                ))}
               </div>
             )}
 
