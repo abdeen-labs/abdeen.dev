@@ -141,7 +141,7 @@ export default function Frost() {
               </a>
             </div>
             <p className="micro-label">
-              License / Free · Source / Public · Account / None
+              License / Free · Open source · Account / None
             </p>
           </div>
         </FadeInWrapper>

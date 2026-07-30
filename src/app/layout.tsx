@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     default: "Abdeen Labs · Defined tasks. Verified output.",
   },
   description:
-    "Abdeen Labs develops bounded software for Apple platforms and the browser. Each tool is assigned one defined task, runs without an account, and states its operating boundaries. Source is public.",
+    "Abdeen Labs develops bounded software for Apple platforms and the browser. Each tool is assigned one defined task, runs without an account, and states its operating boundaries. Open source.",
   metadataBase: new URL("https://abdeen.dev"),
   applicationName: "abdeen.dev",
   authors: [{ name: "Jaafar Abdeen", url: "https://jaafar.cv" }],
@@ -49,14 +49,14 @@ export const metadata: Metadata = {
     url: "https://abdeen.dev",
     title: "Abdeen Labs · Defined tasks. Verified output.",
     description:
-      "Bounded software for Apple platforms and the browser. One defined task per tool, no account, operating boundaries stated. Source is public.",
+      "Bounded software for Apple platforms and the browser. One defined task per tool, no account, operating boundaries stated. Open source.",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title: "Abdeen Labs · Defined tasks. Verified output.",
     description:
-      "Bounded software: password generator, QR codes, regex tester, pomodoro timer, and more. No account. Source public.",
+      "Bounded software: password generator, QR codes, regex tester, pomodoro timer, and more. No account. Open source.",
   },
   robots: {
     index: true,

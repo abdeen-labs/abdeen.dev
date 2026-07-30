@@ -3,7 +3,7 @@ import FadeInWrapper from "@/components/FadeInWrapper";
 import FrostVisual from "@/components/FrostVisual";
 import SectionHeader from "@/components/SectionHeader";
 import { apps, tools, type CatalogEntry } from "@/lib/catalog";
-import { identity, marketing, release } from "@/lib/brand";
+import { identity, marketing } from "@/lib/brand";
 
 const boundaries = [
   {
@@ -18,7 +18,7 @@ const boundaries = [
   },
   {
     num: "03",
-    title: "Source public",
+    title: "Open source",
     body: "Every release retains its code and license on GitHub. Inspect the work, report a fault, or reproduce the build.",
   },
 ];
@@ -109,9 +109,10 @@ export default function HomePage() {
   // carries its own margin instead.
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col pb-20 pt-4 md:pb-28 md:pt-10">
-      {/* Mission — the kit's hero: an identification rail beside the
-          message, so the codes read as an instrument's plate rather than
-          as a caption. */}
+      {/* Mission — the kit's hero: the message holds the full measure,
+          and the identification codes run in a registration strip along
+          the section's foot, so the plate identity survives without a
+          rail competing with the message. */}
       <section
         className="relative overflow-x-clip border-b border-hairline"
         aria-label="Introduction"
@@ -122,86 +123,59 @@ export default function HomePage() {
         >
           عابدين
         </span>
-        <div className="relative grid lg:grid-cols-[minmax(160px,0.48fr)_minmax(0,2.52fr)]">
-          <aside className="hero-rail recess-well" aria-label="Studio facts">
-            <div className="hero-rail-summary">
-              <div className="micro-label">{identity.establishedLine}</div>
-              <div className="rail-index mt-6">
-                <span>
-                  <b>Apps</b>
-                  <span>{pad(apps.length)}</span>
-                </span>
-                <span>
-                  <b>Tools</b>
-                  <span>{pad(tools.length)}</span>
-                </span>
-                <span>
-                  <b>Account</b>
-                  <span>None</span>
-                </span>
-                <span>
-                  <b>Source</b>
-                  <span>Public</span>
-                </span>
+        {/* relative lifts the in-flow content above the positioned
+            watermark; the strip below carries its own. */}
+        <div className="relative py-10 md:py-16">
+          <FadeInWrapper direction="up" eager>
+            <div className="flex flex-col gap-7">
+              <span className="micro-label">
+                <span
+                  aria-hidden="true"
+                  className="inline-block h-2 w-2 bg-signal-identity"
+                />
+                Software module
+              </span>
+              <h1 className="max-w-4xl text-h1 md:text-display">
+                Defined tasks.
+                <br />
+                <span className="text-ink-dim">Verified output.</span>
+              </h1>
+              <p className="max-w-2xl text-lede text-ink-secondary">
+                Abdeen Labs develops bounded software for Apple platforms
+                and the browser. Each tool is assigned one defined task,
+                runs without an account, and states what it stores, sends,
+                and reports.
+              </p>
+              <div className="flex flex-wrap items-center gap-4">
+                <a href="#apps" className="btn btn--primary">
+                  Inspect inventory
+                </a>
+                <a
+                  href="https://github.com/Cuzeth"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn--quiet"
+                >
+                  Audit source
+                </a>
               </div>
             </div>
-            <div className="hero-rail-register">
-              <div className="rail-line" aria-hidden="true" />
-              <div className="rail-codes">
-                <span>
-                  <b>Ref</b>
-                  <span>{marketing.code}</span>
-                </span>
-                <span>
-                  <b>Cal</b>
-                  <span>{release.calibrationShort}</span>
-                </span>
-                <span>
-                  <b>Sheet</b>
-                  <span>01 / 01</span>
-                </span>
-              </div>
-            </div>
-          </aside>
-
-          <div className="flex flex-col justify-center gap-10 py-10 lg:px-10 lg:py-14">
-            <FadeInWrapper direction="up" eager>
-              <div className="flex flex-col gap-7">
-                <span className="micro-label">
-                  <span
-                    aria-hidden="true"
-                    className="inline-block h-2 w-2 bg-signal-identity"
-                  />
-                  Software module
-                </span>
-                <h1 className="max-w-4xl text-h1 md:text-display">
-                  Defined tasks.
-                  <br />
-                  <span className="text-ink-dim">Verified output.</span>
-                </h1>
-                <p className="max-w-2xl text-lede text-ink-secondary">
-                  Abdeen Labs develops bounded software for Apple platforms
-                  and the browser. Each tool is assigned one defined task,
-                  runs without an account, and states what it stores, sends,
-                  and reports.
-                </p>
-                <div className="flex flex-wrap items-center gap-4">
-                  <a href="#apps" className="btn btn--primary">
-                    Inspect inventory
-                  </a>
-                  <a
-                    href="https://github.com/Cuzeth"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn--quiet"
-                  >
-                    Audit source
-                  </a>
-                </div>
-              </div>
-            </FadeInWrapper>
-          </div>
+          </FadeInWrapper>
         </div>
+        {/* Registration strip — just the establishment line and the
+            document reference at the far end. Real content, so the aside
+            keeps an accessible name; eager like the rest of the hero. */}
+        <FadeInWrapper direction="up" eager>
+          <aside className="hero-register relative" aria-label="Registration">
+            <span className="micro-label">{identity.establishedLine}</span>
+            <span className="hero-register-codes">
+              <span className="hero-register-pair">
+                <b>Ref</b>
+                <span>{marketing.code}</span>
+              </span>
+            </span>
+          </aside>
+        </FadeInWrapper>
       </section>
 
       {/* Featured release — product first, with the real Frost interaction
@@ -230,7 +204,7 @@ export default function HomePage() {
               <Link href="/frost" className="btn btn--primary">
                 Inspect Frost
               </Link>
-              <span className="micro-label">License / Free · Source / Public</span>
+              <span className="micro-label">License / Free · Open source</span>
             </div>
           </div>
           <div className="border-t border-hairline p-4 md:border-l md:border-t-0 md:p-6">

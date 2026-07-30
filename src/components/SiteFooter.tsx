@@ -21,7 +21,7 @@ export default function SiteFooter() {
             <p className="max-w-xs text-body text-ink-secondary">
               Defined tasks. Verified output.
             </p>
-            <p className="micro-label">Source / Public · Account / None</p>
+            <p className="micro-label">Open source · Account / None</p>
           </div>
 
           <nav aria-label="Apps" className="flex flex-col gap-4">

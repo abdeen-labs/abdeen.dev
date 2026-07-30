@@ -1733,120 +1733,66 @@ a.chip:focus-visible {
 
 /* ─── Dossier composition — the marketing kit's page structure ─────
    Ported from abdeen-brand/system/ui_kits/marketing/index.html, which is
-   the reference layout for a public marketing surface: a recessed module
-   rail carrying identification codes, instrument panels identified as
-   numbered evidence, a sectioned body with a numbered rail, and one
-   measured record. The kit is the specimen; these are the primitives. */
+   the reference layout for a public marketing surface: instrument panels
+   identified as numbered evidence, a sectioned body with a numbered
+   rail, and one measured record. The kit is the specimen; these are the
+   primitives. */
 
-/* Recessed cell: the mode's sunken surface behind a compartment wall. */
-.recess-well {
-  background: var(--surface-sunken);
-}
-
-/* The hero's identification rail. Sits beside the message, not above it,
-   so the codes read as an instrument's plate rather than as a caption. */
-.hero-rail {
+/* The hero's registration strip. The kit's identification rail, laid
+   flat: one ruled mono line along the hero's foot, so the message keeps
+   the full measure and the studio facts still read as an instrument
+   plate's registration marks rather than as a caption. */
+.hero-register {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: var(--space-7);
-  padding: clamp(28px, 4vw, 64px) clamp(20px, 3vw, 42px);
-  border-inline-end: 1px solid var(--hairline);
-}
-
-.rail-index,
-.rail-codes {
-  display: grid;
-  gap: var(--space-4);
-}
-
-.rail-index > span,
-.rail-codes > span {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--space-3);
-  padding-bottom: var(--space-2);
-  /* A sub-rule inside the rail, never a boundary — hairline-strong keeps
-     it distinct from the compartment wall beside it. */
-  border-bottom: 1px solid var(--hairline-strong);
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--space-5);
+  row-gap: var(--space-3);
+  padding-block: var(--space-4);
+  border-top: 1px solid var(--hairline);
   font-family: var(--font-mono-stack);
   font-size: var(--fs-micro);
+  line-height: 1.4;
   font-feature-settings: "tnum";
-  color: var(--ink-primary);
 }
 
-.rail-index b,
-.rail-codes b {
+/* A label/value pair — the rail's row turned inline. The label sits at
+   the micro tier's tone; the value carries the datum one step brighter. */
+.hero-register-pair {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  color: var(--ink-secondary);
+}
+
+.hero-register-pair b {
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--ink-primary);
+  letter-spacing: var(--tracking-micro);
+  /* Page surface only — the strip sits on the page, never on a plate. */
+  color: var(--ink-faint);
 }
 
-.rail-line {
-  width: 2px;
-  height: var(--space-6);
-  margin-bottom: var(--space-4);
-  background: var(--signal-identity);
+/* Ref / Cal / Sheet — identification furniture, the substrate-independent
+   chrome. Wholly at the faint tier so the codes register more quietly
+   than the facts they follow. */
+.hero-register-codes {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: var(--space-4);
+  row-gap: var(--space-3);
 }
 
-@media (max-width: 899.98px) {
-  .hero-rail {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--space-5);
-    padding: var(--space-5);
-    border-inline-end: 0;
-    border-bottom: 1px solid var(--hairline);
-  }
-
-  .hero-rail-summary {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .rail-index {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-3);
-  }
-
-  .hero-rail-register {
-    display: grid;
-    grid-template-columns: 2px minmax(0, 1fr);
-    align-items: stretch;
-    gap: var(--space-4);
-  }
-
-  .rail-line {
-    width: 2px;
-    height: auto;
-    min-height: 100%;
-    margin: 0;
-  }
-
-  .rail-codes {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: var(--space-3);
-  }
-
-  .rail-codes > span {
-    display: grid;
-    justify-content: initial;
-  }
+.hero-register-codes .hero-register-pair {
+  color: var(--ink-faint);
 }
 
-@media (max-width: 479.98px) {
-  .hero-rail {
-    padding: var(--space-4);
-  }
-
-  .rail-index {
-    margin-top: var(--space-4);
-  }
-
-  .rail-index > span,
-  .rail-codes > span {
-    gap: var(--space-1);
+/* On the wide strip the codes take the right end, clear of the facts;
+   narrower, they wrap into the run rather than float alone. */
+@media (min-width: 900px) {
+  .hero-register-codes {
+    margin-inline-start: auto;
   }
 }
 

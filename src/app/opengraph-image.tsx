@@ -159,7 +159,7 @@ export default async function OGImage() {
               color: '#747C88',
             }}
           >
-            SOURCE / PUBLIC · ACCOUNT / NONE
+            OPEN SOURCE · ACCOUNT / NONE
           </span>
         </div>
       </div>
