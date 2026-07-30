@@ -1,10 +1,12 @@
 /* Frost's product surface. The desktop and overlay are expressed through
    theme roles so light stays light and dark stays dark.
 
-   Value separation, not shadow, does the depth work (Hard Rule #14): the
-   wallpaper sits at the page's far end of the ramp and the windows at the
-   raised end, which reads as "above" in both modes even though the ramps
-   run in opposite directions. */
+   Value separation, not shadow, does the depth work (Hard Rule #14). The
+   wallpaper sits mid-ramp and the windows take --surface-page, which is
+   the extreme of each mode: near-black windows on a lighter desktop in
+   dark, bright windows on a deeper desktop in light. That is how the two
+   modes actually look on a Mac, and it survives the blur — pairing two
+   adjacent ramp steps did not. */
 
 .visual {
   position: relative;
@@ -17,16 +19,9 @@
   isolation: isolate;
   border: 1px solid var(--hairline);
   border-radius: var(--radius-shell);
-  background: var(--surface-sunken);
-  color: var(--ink-primary);
-}
-
-/* ─── The desktop underneath ─────────────────────────────────────── */
-
-.desktop {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
+  /* The wallpaper lives on the shell, not on the blurred layer: a gradient
+     has no edges to soften, and keeping it here means the blur below can
+     smear off-frame without dragging the wallpaper's own edges inward. */
   background:
     radial-gradient(
       86% 64% at 76% 8%,
@@ -38,88 +33,48 @@
       color-mix(in srgb, var(--signal-link) 13%, transparent),
       transparent 70%
     ),
-    linear-gradient(158deg, var(--surface-sunken), var(--surface-page));
+    linear-gradient(158deg, var(--surface-band), var(--surface-sunken));
+  color: var(--ink-primary);
 }
 
-.menuBar {
+/* ─── The desktop underneath ─────────────────────────────────────── */
+
+/* The blur is a plain `filter` on the windows themselves rather than a
+   `backdrop-filter` on the pane above them. backdrop-filter silently drew
+   nothing here — the tint landed and the blur did not — and there is no
+   reason to depend on it: nothing between these windows and the plate
+   needs to stay sharp. The container unit keeps the blur proportional, so
+   the compact instance is not over-frosted; the px value is the fallback
+   where a container unit is refused inside filter(). */
+.desktop {
   position: absolute;
-  inset: 0 0 auto;
-  z-index: 2;
-  display: flex;
-  min-height: 8.5cqi;
-  max-height: 30px;
-  align-items: center;
-  justify-content: space-between;
-  padding-inline: 3.5cqi;
-  background: color-mix(in srgb, var(--surface-band) 62%, transparent);
-  font-family: var(--font-text-stack);
-  font-size: clamp(6px, 2.5cqi, 10px);
-  line-height: 1;
-  color: var(--ink-secondary);
-}
-
-.menuLeft,
-.menuRight {
-  display: flex;
-  align-items: center;
-  gap: 2.6cqi;
-}
-
-.menuApp {
-  font-weight: 700;
-}
-
-.menuItem {
-  color: var(--ink-dim);
-}
-
-.menuMark {
-  width: 2.8cqi;
-  max-width: 11px;
-  height: auto;
-  flex: none;
-  color: var(--signal-identity);
-}
-
-/* A charged battery — the smallest shape that says "this is a Mac". */
-.battery {
-  width: 4cqi;
-  max-width: 15px;
-  aspect-ratio: 5 / 2.6;
-  border: 1px solid currentColor;
-  border-radius: 2px;
-  background: linear-gradient(
-    90deg,
-    currentColor 0 72%,
-    transparent 72%
-  );
-  color: var(--ink-dim);
-  opacity: 0.9;
+  inset: 0;
+  filter: blur(12px) saturate(0.82);
+  filter: blur(2.2cqi) saturate(0.82);
 }
 
 /* ─── Windows ────────────────────────────────────────────────────── */
 
 .window {
   position: absolute;
-  z-index: 1;
   display: flex;
   overflow: hidden;
   flex-direction: column;
   border: 1px solid var(--hairline-strong);
   border-radius: var(--radius-plate);
-  background: color-mix(in srgb, var(--surface-raised) 92%, transparent);
+  background: color-mix(in srgb, var(--surface-page) 94%, transparent);
 }
 
 .windowBack {
-  top: 15%;
+  top: 11%;
   left: 5%;
   width: 62%;
-  height: 60%;
+  height: 62%;
 }
 
 .windowFront {
   right: 4%;
-  bottom: 13%;
+  bottom: 9%;
   width: 44%;
   height: 46%;
 }
@@ -131,7 +86,7 @@
   align-items: center;
   padding-inline: 2.4cqi;
   border-bottom: 1px solid color-mix(in srgb, var(--hairline) 70%, transparent);
-  background: color-mix(in srgb, var(--surface-band) 60%, transparent);
+  background: color-mix(in srgb, var(--surface-sunken) 72%, transparent);
 }
 
 .dots {
@@ -165,7 +120,7 @@
   gap: 3.2cqi;
   padding: 3cqi 2.4cqi;
   border-right: 1px solid color-mix(in srgb, var(--hairline) 70%, transparent);
-  background: color-mix(in srgb, var(--surface-band) 45%, transparent);
+  background: color-mix(in srgb, var(--surface-sunken) 55%, transparent);
 }
 
 .content {
@@ -183,7 +138,7 @@
   max-height: 6px;
   flex: none;
   border-radius: var(--radius-round);
-  background: color-mix(in srgb, var(--ink-primary) 26%, transparent);
+  background: color-mix(in srgb, var(--ink-primary) 36%, transparent);
 }
 
 .rowMarked {
@@ -200,37 +155,11 @@
 
 .tiles > span {
   border-radius: var(--radius-control);
-  background: color-mix(in srgb, var(--ink-primary) 15%, transparent);
+  background: color-mix(in srgb, var(--ink-primary) 22%, transparent);
 }
 
 .tiles > span:nth-child(4) {
-  background: color-mix(in srgb, var(--signal-link) 45%, transparent);
-}
-
-.dock {
-  position: absolute;
-  bottom: 2.5cqi;
-  left: 50%;
-  z-index: 1;
-  display: flex;
-  transform: translateX(-50%);
-  gap: 1.8cqi;
-  padding: 1.6cqi;
-  border: 1px solid color-mix(in srgb, var(--hairline-strong) 70%, transparent);
-  border-radius: var(--radius-plate);
-  background: color-mix(in srgb, var(--surface-raised) 58%, transparent);
-}
-
-.dock > span {
-  width: 4.4cqi;
-  max-width: 20px;
-  aspect-ratio: 1;
-  border-radius: var(--radius-control);
-  background: color-mix(in srgb, var(--ink-primary) 20%, transparent);
-}
-
-.dock > span.dockMarked {
-  background: color-mix(in srgb, var(--signal-identity) 76%, transparent);
+  background: color-mix(in srgb, var(--signal-link) 55%, transparent);
 }
 
 /* ─── The frost ──────────────────────────────────────────────────── */
@@ -238,14 +167,12 @@
 .frost {
   position: absolute;
   inset: 0;
-  z-index: 3;
+  z-index: 2;
   background: linear-gradient(
     170deg,
-    color-mix(in srgb, var(--surface-page) 40%, transparent),
-    color-mix(in srgb, var(--surface-page) 62%, transparent)
+    color-mix(in srgb, var(--surface-page) 18%, transparent),
+    color-mix(in srgb, var(--surface-page) 34%, transparent)
   );
-  backdrop-filter: blur(16px) saturate(0.72);
-  -webkit-backdrop-filter: blur(16px) saturate(0.72);
   box-shadow: inset 0 1px 0 var(--edge-light);
 }
 
@@ -259,12 +186,21 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Where the platform withholds the filter, opacity carries the occlusion
-   alone — the desktop must not stay legible. */
-@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .frost {
-    background: color-mix(in srgb, var(--surface-page) 88%, transparent);
-  }
+/* The wall — the ice deepens where the prompt sits, so the plate reads
+   against a settled field rather than against whatever window it happens
+   to cover. Masked to a soft edge: a hard rectangle here would look like
+   a second card behind the first. */
+.wall {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 3;
+  width: min(96%, 560px);
+  aspect-ratio: 3 / 2;
+  transform: translate(-50%, -50%);
+  background: color-mix(in srgb, var(--surface-page) 26%, transparent);
+  mask-image: radial-gradient(closest-side, #000 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(closest-side, #000 40%, transparent 100%);
 }
 
 /* ─── The plate ──────────────────────────────────────────────────── */
@@ -302,13 +238,6 @@
   color: var(--ink-dim);
 }
 
-.plateMark {
-  width: clamp(10px, 3cqi, 13px);
-  height: auto;
-  flex: none;
-  color: var(--signal-identity);
-}
-
 /* The state pins to the trailing edge; it is the one live value here. */
 .plateState {
   margin-left: auto;
@@ -341,13 +270,16 @@
   line-height: 1;
   letter-spacing: var(--tracking-micro);
   text-transform: uppercase;
-  color: var(--signal-link);
+  color: var(--ink-secondary);
 }
 
-.touchMark {
-  width: clamp(13px, 4cqi, 17px);
+/* The unlock is live, so the glyph takes the active ink — not lacquer:
+   the icon is an affordance, not the signal itself. */
+.fingerprint {
+  width: clamp(14px, 4.4cqi, 18px);
   height: auto;
   flex: none;
+  color: var(--ink-primary);
 }
 
 /* ─── Fitting ────────────────────────────────────────────────────── */
@@ -368,11 +300,6 @@
 @media (max-width: 420px) {
   .visual {
     aspect-ratio: 1 / 1;
-  }
-
-  /* Below this the menus are three grey smudges rather than a signal. */
-  .menuItem {
-    display: none;
   }
 
   .plate {
