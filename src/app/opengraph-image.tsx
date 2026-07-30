@@ -1,31 +1,27 @@
 import { ImageResponse } from 'next/og';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
+import { MARK, SEAL_KEY, SEAL_KEY_MARK } from '@/lib/seal-geometry';
 
 /**
  * OG card — the dark canonical page: Key seal + wordmark lockup, the
  * positioning line as macro display, and the operating boundary as
  * evidence. Ramp literals appear because the artifact is standalone.
- * Fonts are static instances (Satori cannot ingest variable TTFs).
+ * The Key is one inline SVG built from the generated geometry (Satori
+ * cannot shape Arabic); the remaining text uses static font instances
+ * (Satori cannot ingest variable TTFs).
  */
 
 export const alt = 'Abdeen Labs · Defined tasks. Verified output.';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
-// Key geometry at 72px: 26% chamfer, hairline scaled with the plate.
+// Key rendered at 72px via the 0–40 viewBox; the mark transform is in
+// viewBox units, so it holds at any pixel size.
 const SEAL = 72;
-const CUT = SEAL * 0.26;
-const LINE = Math.max(1, SEAL / 40);
-const MARK_SIZE = (SEAL * 0.32) / 0.883;
-
-const chamfer = (inset: number, cut: number) =>
-  `polygon(${cut}px ${inset}px, ${SEAL - inset}px ${inset}px, ${
-    SEAL - inset
-  }px ${SEAL - inset}px, ${inset}px ${SEAL - inset}px, ${inset}px ${cut}px)`;
 
 export default async function OGImage() {
-  const [schibsted, geistMono, arefRuqaa] = await Promise.all([
+  const [schibsted, geistMono] = await Promise.all([
     readFile(
       path.join(
         process.cwd(),
@@ -34,9 +30,6 @@ export default async function OGImage() {
     ),
     readFile(
       path.join(process.cwd(), 'public/fonts/axis/static/GeistMono-Medium.ttf'),
-    ),
-    readFile(
-      path.join(process.cwd(), 'public/fonts/axis/static/ArefRuqaa-Bold.ttf'),
     ),
   ]);
 
@@ -64,45 +57,24 @@ export default async function OGImage() {
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
-            {/* Key seal — lacquer hairline, sunken field, live mark */}
-            <div
-              style={{
-                width: SEAL,
-                height: SEAL,
-                display: 'flex',
-                background: '#D01E3A',
-                clipPath: chamfer(0, CUT),
-              }}
+            {/* Key seal — one inline SVG from the generated geometry: sunken
+                field, lacquer hairline ring, and the mark's painted outline. */}
+            <svg
+              width={SEAL}
+              height={SEAL}
+              viewBox="0 0 40 40"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              <div
-                style={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  background: '#111316',
-                  clipPath: chamfer(LINE, CUT + LINE * 0.41),
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: 'Aref Ruqaa',
-                    fontWeight: 700,
-                    fontSize: MARK_SIZE,
-                    lineHeight: 1,
-                    color: '#D01E3A',
-                    display: 'flex',
-                    marginTop: -(MARK_SIZE * 0.168 * 2),
-                  }}
-                >
-                  عابدين
-                </span>
-              </div>
-            </div>
+              <path d={SEAL_KEY.fieldPath} fill="#111316" />
+              <path
+                d={SEAL_KEY.ringPathEvenOdd}
+                fillRule="evenodd"
+                fill="#D01E3A"
+              />
+              <g transform={SEAL_KEY_MARK.transform}>
+                <path d={MARK.d} fill="#D01E3A" />
+              </g>
+            </svg>
             <div
               style={{ width: 1, height: 44, background: '#2E343C', display: 'flex' }}
             />
@@ -197,7 +169,6 @@ export default async function OGImage() {
       fonts: [
         { name: 'Schibsted Grotesk', data: schibsted, weight: 800, style: 'normal' },
         { name: 'Geist Mono', data: geistMono, weight: 500, style: 'normal' },
-        { name: 'Aref Ruqaa', data: arefRuqaa, weight: 700, style: 'normal' },
       ],
     },
   );
