@@ -139,6 +139,8 @@
   flex-direction: column;
   width: 100%;
   border: 1px solid var(--hairline);
+  border-radius: var(--radius-plate);
+  overflow: hidden; /* the rules must not square off the panel's corners */
 }
 
 .batchItem {
@@ -203,12 +205,14 @@
 
 .batchSelected .batchIndex { color: var(--ink-primary); }
 
-/* ── Controls panel — hairline-framed rows, square structure ── */
+/* ── Controls panel — hairline-framed rows at the plate step ── */
 .controls {
   display: flex;
   flex-direction: column;
   width: 100%;
   border: 1px solid var(--hairline);
+  border-radius: var(--radius-plate);
+  overflow: hidden;
 }
 
 .controls > * {

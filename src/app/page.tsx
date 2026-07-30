@@ -103,7 +103,7 @@ export default function HomePage() {
                 aria-hidden="true"
                 className="inline-block h-2 w-2 bg-signal-identity"
               />
-              Abdeen Labs · Est 2019
+              Abdeen Labs · Est 2027
             </span>
             <h1 className="max-w-4xl text-h1 md:text-display">
               Defined tasks.
@@ -164,7 +164,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="border-t border-hairline p-6 md:border-l md:border-t-0 md:p-12">
-            <div className="console abd-scanlines h-full">
+            <div className="console h-full">
               <div>
                 <span className="prompt" aria-hidden="true">
                   ›

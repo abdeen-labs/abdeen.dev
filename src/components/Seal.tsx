@@ -112,7 +112,7 @@ export function SealRoundel({
         fill="currentColor"
       >
         <textPath href="#seal-roundel-rb" startOffset="50%" textAnchor="middle">
-          EST 2019
+          EST 2027
         </textPath>
       </text>
       <rect

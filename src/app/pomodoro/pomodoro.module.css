@@ -42,14 +42,22 @@
 
 /* Countdown digits. While running, the global .readout carries them —
    the screen's one phosphor element. Color deliberately lives outside
-   .time so this module can never outrank the shared class. */
+   .time so this module can never outrank the shared class.
+
+   Size is the one exception. This is a display number that happens to be
+   live, so it takes an explicit step off the type scale rather than
+   .readout's --readout-scale ratio, and the doubled selector makes that
+   win regardless of which stylesheet lands last. */
 .time {
   z-index: 1;
   font-family: var(--font-mono-stack);
-  font-size: var(--fs-h1);
   font-weight: 500;
   letter-spacing: 0;
   font-feature-settings: "tnum";
+}
+
+.time.time {
+  font-size: var(--fs-h1);
 }
 
 .timeIdle {

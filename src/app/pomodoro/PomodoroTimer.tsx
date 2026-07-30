@@ -162,7 +162,7 @@ export default function PomodoroTimer() {
 
       {/* Sunken readout field — the countdown is this screen's one live
           value: phosphor while running, primary ink when idle. */}
-      <div className="tool-stage abd-scanlines w-full">
+      <div className="tool-stage w-full">
         <div className={styles.timerWrap} role="timer" aria-label={`${MODE_LABELS[mode]}: ${minutes} minutes and ${seconds} seconds remaining`}>
           <svg className={styles.ring} viewBox="0 0 260 260" aria-hidden="true">
             <circle className={styles.ringTrack} cx="130" cy="130" r={RING_RADIUS} />

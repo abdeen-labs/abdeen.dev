@@ -86,7 +86,7 @@ function AppStoreButton() {
 function ScreenshotImage({ src, alt }: { src: string; alt: string }) {
   const [loaded, setLoaded] = useState(false);
   return (
-    <div className="relative h-[480px] w-[222px] flex-shrink-0 overflow-hidden border border-hairline bg-surface-sunken">
+    <div className="relative h-[480px] w-[222px] flex-shrink-0 overflow-hidden rounded-plate border border-hairline bg-surface-sunken">
       <Image
         src={src}
         alt={alt}
@@ -104,9 +104,9 @@ function ScreenshotImage({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-/** Hero device: the first screenshot mounted on a square plate. The
- *  screenshot itself is content; the mount is structure — radius 0,
- *  no glow, no shadow. */
+/** Hero device: the first screenshot mounted on a plate. The screenshot
+ *  itself is content; the mount is structure — the plate step, with the
+ *  10px inset landing the inner frame's corner at 0, no glow, no shadow. */
 function HeroPhone() {
   const [loaded, setLoaded] = useState(false);
   return (

@@ -89,14 +89,15 @@
   overflow-wrap: anywhere;
 }
 
-/* Output wells (match preview, replace result) — sunken structure,
-   radius 0. Roomier leading keeps stacked highlight bars separated. */
+/* Output wells (match preview, replace result) — sunken structure at the
+   plate step. Roomier leading keeps stacked highlight bars separated. */
 .outputBox {
   width: 100%;
   min-height: 92px;
   padding: 0.8rem 0.95rem;
   background: var(--surface-sunken);
   border: 1px solid var(--hairline);
+  border-radius: var(--radius-plate);
   font-family: var(--font-mono-stack);
   font-size: var(--fs-control);
   line-height: 1.65;
@@ -124,6 +125,7 @@
   padding: 0.4rem 0.6rem;
   background: var(--surface-sunken);
   border: 1px solid var(--hairline);
+  border-radius: var(--radius-plate);
   font-family: var(--font-mono-stack);
   font-size: var(--fs-control);
   line-height: var(--leading-mono);
@@ -146,6 +148,7 @@
   padding: 1rem;
   text-align: center;
   border: 1px solid var(--hairline);
+  border-radius: var(--radius-plate);
   background: var(--surface-sunken);
   color: var(--ink-dim);
   font-family: var(--font-mono-stack);
@@ -163,11 +166,13 @@
 }
 
 /* Cheatsheet — reference table: band headers, hairline dividers,
-   mono cells. Structure, radius 0. */
+   mono cells. Structure, so the plate step. */
 .cheatsheet {
   display: flex;
   flex-direction: column;
   border: 1px solid var(--hairline);
+  border-radius: var(--radius-plate);
+  overflow: hidden;
 }
 
 .cheatSection {

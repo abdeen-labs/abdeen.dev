@@ -2,7 +2,7 @@
 
 Defined tasks. Verified output. The source for [abdeen.dev](https://abdeen.dev): product pages for native apps (Frost, Hush) and a set of free, open-source browser tools (password generator, QR generator, regex tester, pomodoro timer, 2FA QR generator, CoverQuad).
 
-Built with [Next.js](https://nextjs.org) (App Router), Tailwind CSS v4, and TypeScript. Deployed on Vercel. The interface implements **Axis** (Abdeen Labs brand v3.0): one role-token set driving a canonical dark mode and a first-class light mode.
+Built with [Next.js](https://nextjs.org) (App Router), Tailwind CSS v4, and TypeScript. Deployed on Vercel. The interface implements **Axis** (Abdeen Labs brand v3.2): one role-token set driving a canonical dark mode and a first-class light mode.
 
 ## Development
 

@@ -1,15 +1,16 @@
 @import "tailwindcss";
 
 /* ──────────────────────────────────────────────────────────────────────
-   Abdeen Labs · Axis (BRAND.md v3.0)
+   Abdeen Labs · Axis (BRAND.md v3.2)
    Token source: abdeen-brand/system/colors_and_type.css. Interfaces ship
    in two first-class modes from one role-token set: dark is canonical
    (:root), light lives in :root[data-theme="light"] and follows
    prefers-color-scheme unless data-theme pins it. Components consume
    role aliases — --surface-*, --ink-*, --hairline*, --signal-*,
-   --readout-* — never a ramp step. Structure is square; touch carries
-   the 3px edge break. Lacquer acts, Hazard alarms, phosphor is one live
-   readout per screen. No shadows, no glows beyond the readout, no
+   --readout-* — never a ramp step. Radius is concentric — 14 · 10 · 6
+   outward to inward — and the seal and print register stay square.
+   Lacquer acts, Hazard alarms, phosphor is one live readout per screen
+   and a dark-mode physic. No shadows, no glows beyond the readout, no
    hollow type.
    ────────────────────────────────────────────────────────────────────── */
 
@@ -84,12 +85,17 @@
   --tracking-wordmark: 0.22em;
   --tracking-display: -0.055em;
 
-  /* Structure is square; touch is edge-broken. rounded-control is the
-     3px edge break; rounded-round exists only for the switch track,
-     roundel, avatars, and dots (Hard Rule #13). Everything else: no
-     radius utility exists, so structure stays at 0. */
+  /* Radius is concentric, three nested steps 4px apart: rounded-shell on
+     shells and rails, rounded-plate on plates, cards, wells, bands, and
+     consoles, rounded-control on the controls a hand touches. A control
+     is always one step tighter than the plate it sits on. rounded-round
+     exists only for the switch track, roundel, avatars, and dots (Hard
+     Rule #13). No other radius utility exists, so the seal, the register,
+     and the marks that score a surface stay at 0. */
   --radius-*: initial;
-  --radius-control: 3px;
+  --radius-control: 6px;
+  --radius-plate: 10px;
+  --radius-shell: 14px;
   --radius-round: 999px;
 
   /* No drop shadows, no glows, no glass (Hard Rule #14). The readout's
@@ -158,11 +164,11 @@
   --lacquer-600: #A2172D;
   --lacquer-700: #791122;
 
-  /* Hazard · Phosphor · State — a bright step and a deep 700 step */
+  /* Hazard · Phosphor · State — a bright step and a deep 700 step.
+     Phosphor has no 700 step: it is a dark-mode physic, like its glow. */
   --hazard-500: #FF2A2A;
   --hazard-700: #BF0000;
   --phosphor-500: #4AF626;
-  --phosphor-700: #156404;
   --jade-400: #2AB084;
   --jade-700: #176149;
   --amber-400: #D1A534;
@@ -196,7 +202,6 @@
 
   /* Effect tokens — physics, derived from ramp steps */
   --edge-light: color-mix(in srgb, var(--chalk-100) 7%, transparent);
-  --texture-line: color-mix(in srgb, var(--pitch-960) 22%, transparent);
 
   /* Type families — next/font variables carry the files (src/app/fonts.ts).
      IBM Plex Sans Arabic is not loaded: the site has no Arabic copy
@@ -241,8 +246,11 @@
   --space-9: 96px;
   --space-10: 128px;
 
-  /* Shape — structure is square; touch is edge-broken */
-  --radius-control: 3px;
+  /* Shape — radius is concentric; the seal and the register are square.
+     Three nested steps, each 4px tighter than the frame around it. */
+  --radius-control: 6px;
+  --radius-plate: 10px;
+  --radius-shell: 14px;
   --radius-round: 999px;
 
   /* Motion — flat, short */
@@ -267,6 +275,7 @@
   --seal-key-ink: var(--lacquer-500);
 
   /* Readout — the one live element */
+  --readout-scale: 1.4;
   --readout-color: var(--phosphor-500);
   --readout-glow: 0 0 8px color-mix(in srgb, var(--phosphor-500) 35%, transparent);
 
@@ -302,11 +311,13 @@
   --signal-alarm: var(--hazard-700);
 
   --edge-light: color-mix(in srgb, var(--carbon-900) 9%, transparent);
-  --texture-line: color-mix(in srgb, var(--carbon-900) 7%, transparent);
 
   --seal-key-field: var(--bone-200);
 
-  --readout-color: var(--phosphor-700);
+  /* Phosphor and its bloom are both dark-mode physics. The light readout
+     is ink at 14.54:1 on the sunken field; the value changing and its
+     label are what read as live. */
+  --readout-color: var(--ink-primary);
   --readout-glow: none;
 
   --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5' stroke='%23544F45' stroke-width='1.4'/%3E%3C/svg%3E");
@@ -341,11 +352,10 @@
     --signal-alarm: var(--hazard-700);
 
     --edge-light: color-mix(in srgb, var(--carbon-900) 9%, transparent);
-    --texture-line: color-mix(in srgb, var(--carbon-900) 7%, transparent);
 
     --seal-key-field: var(--bone-200);
 
-    --readout-color: var(--phosphor-700);
+    --readout-color: var(--ink-primary);
     --readout-glow: none;
 
     --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5' stroke='%23544F45' stroke-width='1.4'/%3E%3C/svg%3E");
@@ -615,8 +625,9 @@ output {
 /* ─── Seal — the mark's carrier. Never redrawn. ──────────────────── */
 
 /* B · Key — standard. Field follows the mode; hairline and ink stay
-   lacquer in both. Min 16px. Radius 0 — the 26% top-left cut is the
-   index. */
+   lacquer in both. Min 16px. Radius 0 — the seal is a square exemption
+   to the concentric scale, because the 26% top-left cut is a silhouette
+   and never pairs with a radius. */
 .seal-key {
   /* Re-declared here so it resolves against each instance's --seal-size;
      a :root-only copy would bake in the 40px default. */
@@ -685,18 +696,25 @@ output {
 
 /* ─── Plates — structure is hairlines and top-edge light ─────────── */
 
+/* A plate is the middle step of the concentric scale: --radius-plate, 4px
+   wider than the --radius-control on the buttons and fields inside it, so
+   the inner corners sit concentric with the outer ones (Hard Rule #13). */
 .plate {
   background: var(--surface-card);
   border: 1px solid var(--hairline);
+  border-radius: var(--radius-plate);
   box-shadow: inset 0 1px 0 var(--edge-light); /* one hairline of light */
 }
 
 .plate--sunken {
   background: var(--surface-sunken);
   border: 1px solid var(--hairline);
+  border-radius: var(--radius-plate);
   box-shadow: none; /* sunken surfaces catch no light */
 }
 
+/* A band spans its container edge to edge, so it is ruled top and bottom
+   rather than boxed — there are no side corners to soften. */
 .plate--band {
   background: var(--surface-band);
   border-block: 1px solid var(--hairline);
@@ -706,16 +724,45 @@ output {
   background: var(--surface-raised);
 }
 
-/* Hairline grids: razor dividers from grid gap, not borders. */
+/* The outermost step: a shell is the frame that holds plates, so it sits
+   4px wider than they do — a modal, a dialog, a floating side rail. A shell
+   flush to the viewport edge has no corner to soften and stays square. */
+.shell {
+  background: var(--surface-band);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-shell);
+  padding: var(--space-1);
+}
+
+/* A shell that clips its children — a grid of plates divided by a hairline
+   gap, where the cells must stay square so the gap colour cannot show
+   through a rounded corner notch. */
+.shell--clip {
+  overflow: hidden;
+  padding: 0;
+}
+
+/* Hairline grids: razor dividers from grid gap, not borders. The grid is
+   the plate, so the radius and the clip live here rather than on the cells
+   — a rounded cell would let the 1px gap colour show through its corner
+   notches as four wedges (the third square exemption in Hard Rule #13). */
 .hairline-grid {
   display: grid;
   gap: 1px;
   background: var(--hairline);
   border: 1px solid var(--hairline);
+  border-radius: var(--radius-plate);
+  overflow: hidden;
 }
 
 .hairline-grid > * {
   background: var(--hairline-grid-cell, var(--surface-page));
+}
+
+/* Square by decree, not by omission — the clip above already shapes the
+   outer corners. This wins over .plate on the same element. */
+.hairline-grid > * {
+  border-radius: 0;
 }
 
 /* ─── Concealment — behaviour, not paint ─────────────────────────── */
@@ -826,7 +873,12 @@ output {
   color: var(--ink-dim);
 }
 
-/* ─── Controls — the 3px edge break ──────────────────────────────── */
+/* ─── Controls — the 6px control step ────────────────────────────────
+   The controls a hand actually touches carry --radius-control, the
+   tightest step — always 4px tighter than the --radius-plate on the
+   plate, well, or console they sit inside. That step is what separates
+   touch from structure now that both are soft, so do not collapse it.
+   The switch is fully circular rather than stepped (Hard Rule #13). */
 
 .btn,
 .chip,
@@ -857,7 +909,7 @@ a {
   color: var(--ink-primary);
 }
 
-/* ─── Buttons — mono 13px, verb + object ─────────────────────────── */
+/* ─── Buttons — mono 13px, verb + object, the 6px control step ───── */
 
 .btn {
   display: inline-flex;
@@ -947,7 +999,7 @@ a {
   width: 100%;
 }
 
-/* ─── Fields — sunken wells with the edge break ──────────────────── */
+/* ─── Fields — sunken wells at the control step ──────────────────── */
 
 .field-label {
   display: block;
@@ -1034,22 +1086,25 @@ a {
 
 /* ─── Segmented control — a machined row of keys ─────────────────── */
 
+/* The row is a sunken well — structure, so --radius-plate — and the keys
+   inside it are controls one step tighter. The 4px padding is the inset
+   that keeps the two sets of corners concentric. */
 .segmented {
   position: relative;
   display: flex;
   gap: 2px;
-  padding: 3px;
+  padding: var(--space-1);
   background: var(--surface-sunken);
   border: 1px solid var(--hairline);
-  border-radius: var(--radius-control);
+  border-radius: var(--radius-plate);
 }
 
 .segmented-thumb {
   position: absolute;
-  top: 3px;
+  top: var(--space-1);
   left: var(--useslider-left, 0px);
   width: var(--useslider-width, 0px);
-  height: calc(100% - 6px);
+  height: calc(100% - var(--space-2));
   opacity: var(--useslider-opacity, 0);
   border-radius: var(--radius-control);
   background: var(--surface-raised);
@@ -1299,14 +1354,16 @@ a.chip:focus-visible {
   padding: 3px;
 }
 
+/* The swatch inside sits 3px in from a 6px control edge, so it takes the
+   3px that keeps the two corners concentric. */
 .color-swatch::-webkit-color-swatch {
   border: none;
-  border-radius: 1px;
+  border-radius: 3px;
 }
 
 .color-swatch::-moz-color-swatch {
   border: none;
-  border-radius: 1px;
+  border-radius: 3px;
 }
 
 .color-hex {
@@ -1328,10 +1385,13 @@ a.chip:focus-visible {
   padding: var(--space-5);
   background: var(--surface-sunken);
   border: 1px solid var(--hairline);
+  border-radius: var(--radius-plate);
 }
 
 /* ─── Console — sunken field, mono, one lacquer prompt ───────────── */
 
+/* The console field is structure, not a control, so it takes
+   --radius-plate and the controls beside it stay one step tighter. */
 .console {
   font-family: var(--font-mono-stack);
   font-size: var(--fs-control);
@@ -1339,6 +1399,7 @@ a.chip:focus-visible {
   color: var(--ink-primary);
   background: var(--surface-sunken);
   border: 1px solid var(--hairline);
+  border-radius: var(--radius-plate);
   padding: var(--space-4) var(--space-5);
   font-feature-settings: "tnum";
 }
@@ -1362,10 +1423,19 @@ a.chip:focus-visible {
   color: var(--signal-warning);
 }
 
-/* ─── Readout — the one phosphor element per screen ──────────────── */
+/* ─── Readout — the one live element per screen ──────────────────── */
 
+/* One device per mode, and no more. In dark that device is emission —
+   phosphor plus the system's only glow. In light it is ink, --ink-primary
+   at 14.54:1 on the sunken bone field, with no glow, tint, or texture.
+   What says "live" in both modes is the value changing and its label.
+   The size is relative, not absolute: --readout-scale is the ratio to the
+   strip the readout sits in, so one rule holds at every scale it is drawn
+   at. A surface needing a larger live number is building a display number
+   that happens to be live, and takes its size from the macro scale. */
 .readout {
   font-family: var(--font-mono-stack);
+  font-size: calc(1em * var(--readout-scale));
   color: var(--readout-color);
   text-shadow: var(--readout-glow); /* the only glow — dark mode only */
   font-feature-settings: "tnum";
@@ -1396,22 +1466,14 @@ a.chip:focus-visible {
 
 /* ─── Texture — opt-in via .abd-*, rationed ──────────────────────── */
 
-/* CRT scanlines — one region per screen, hero or readout only. */
-.abd-scanlines {
-  position: relative;
-}
+/* Every texture here is document furniture — an artefact the dossier
+   register actually produces. That is the test a texture has to pass.
 
-.abd-scanlines::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent 0 2px,
-    var(--texture-line) 2px 4px
-  );
-}
+   .abd-scanlines was retired in 3.1 and is deliberately not replaced: a
+   CRT electron sweep is an artefact of a display, not a document. It
+   measured 1.033:1 on the dark field — invisible in its canonical mode —
+   and 1.156:1 on bone, where it ruled over the ink rather than under it.
+   --texture-line retired with it, having had no other consumer. */
 
 /* Mechanical grain — large fields only; the speckle takes the mode's ink. */
 .abd-grain {
@@ -1638,11 +1700,15 @@ a.chip:focus-visible {
 
 /* ─── Feature grid — one machined panel, hairline-divided ────────── */
 
+/* A hairline gap-grid: the panel takes the radius and clips, so the cells
+   stay square and the 1px gap cannot show through a corner notch. */
 .feature-grid {
   display: grid;
   gap: 1px;
   background: var(--hairline);
   border: 1px solid var(--hairline);
+  border-radius: var(--radius-plate);
+  overflow: hidden;
 }
 
 .feature-cell {
@@ -1672,9 +1738,13 @@ a.chip:focus-visible {
 
 /* ─── Related index — tool-to-tool navigation ────────────────────── */
 
+/* A plate divided by internal rules; it clips so the rows cannot square
+   off the panel's rounded corners. */
 .related-index {
   display: grid;
   border: 1px solid var(--hairline);
+  border-radius: var(--radius-plate);
+  overflow: hidden;
   background: var(--surface-card);
 }
 

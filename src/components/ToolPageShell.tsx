@@ -15,9 +15,9 @@ interface ToolPageShellProps {
   children: ReactNode;
 }
 
-/** The instrument panel every browser tool mounts into: one square plate
- *  with an identification bar, the unit title, and the working surface,
- *  then cross-navigation to related units. */
+/** The instrument panel every browser tool mounts into: one plate with an
+ *  identification bar, the unit title, and the working surface, then
+ *  cross-navigation to related units. */
 export default function ToolPageShell({
   title,
   description,

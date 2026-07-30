@@ -377,9 +377,9 @@ export default function LofiAtcRadio() {
 
   return (
     <div className={styles.container}>
-      {/* Signal stage — the scanlined readout field. The session clock is
-          the screen's one phosphor element and leaves with the stream. */}
-      <div className={`tool-stage abd-scanlines ${styles.stage}`}>
+      {/* Signal stage — a sunken readout field. The session clock is the
+          screen's one phosphor element and leaves with the stream. */}
+      <div className={`tool-stage ${styles.stage}`}>
         <div className={styles.waveWrap} aria-hidden="true">
           {Array.from({ length: BARS }).map((_, i) => (
             <div

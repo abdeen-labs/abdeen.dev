@@ -105,7 +105,8 @@ function useLatestRelease() {
 
 /** The engaged lock session, documented as a console record: a sunken
  *  instrument field with one lacquer prompt and jade state words
- *  (BRAND.md → Console). Structure, not a control — square, no glass. */
+ *  (BRAND.md → Console). Structure, not a control — it takes the plate
+ *  step while the controls beside it stay one step tighter. No glass. */
 const sessionRows: { field: string; value: string; isolated?: boolean }[] = [
   { field: "lock.state", value: "Engaged" },
   { field: "input.keyboard", value: "Isolated", isolated: true },
@@ -120,7 +121,7 @@ const sessionRows: { field: string; value: string; isolated?: boolean }[] = [
 
 function LockConsole() {
   return (
-    <div className="console abd-scanlines">
+    <div className="console">
       <div>
         <span className="prompt" aria-hidden="true">
           ›

@@ -162,7 +162,7 @@ export default function SafeStay() {
               {copied ? "Copied" : "Copy command"}
             </button>
           </div>
-          <div className="console abd-scanlines">
+          <div className="console">
             <pre className="overflow-x-auto">
               <code>
                 <span className="prompt" aria-hidden="true">

@@ -13,7 +13,7 @@
   margin-inline: auto;
 }
 
-/* ---------- signal stage — sunken, scanlined readout field ---------- */
+/* ---------- signal stage — the sunken readout field ---------- */
 
 .stage {
   width: 100%;
@@ -49,9 +49,10 @@
   min-height: 1.4em;
 }
 
-/* The one readout on this screen — phosphor session clock, live only. */
+/* The one readout on this screen — phosphor session clock, live only.
+   The size is not set here: .readout derives it from the strip via
+   --readout-scale, which is the canonical relative rule. */
 .elapsed {
-  font-size: var(--fs-lede);
   line-height: 1;
 }
 

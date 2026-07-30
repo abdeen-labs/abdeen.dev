@@ -68,6 +68,7 @@
   padding: var(--space-5);
   text-align: center;
   border: 1px solid var(--hairline);
+  border-radius: var(--radius-plate);
   font-family: var(--font-text-stack);
   font-size: var(--fs-body);
   line-height: var(--leading-text);

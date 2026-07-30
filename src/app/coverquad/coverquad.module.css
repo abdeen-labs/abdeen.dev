@@ -1,7 +1,9 @@
 /* CoverQuad — tool-specific styling. Shared controls live in globals.css. */
 
-/* 2x2 collage stage — four sunken wells divided by hairlines. Structure:
-   radius 0. The exported canvas itself is content and draws edge to edge. */
+/* 2x2 collage stage — four sunken wells divided by hairlines. A hairline
+   gap-grid, so the stage takes the plate step and clips while the slots
+   stay square. The exported canvas itself is content and draws edge to
+   edge — the radius is preview furniture and never reaches the export. */
 .grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -10,6 +12,7 @@
   gap: 1px;
   background: var(--hairline);
   border: 1px solid var(--hairline);
+  border-radius: var(--radius-plate);
   overflow: hidden;
 }
 

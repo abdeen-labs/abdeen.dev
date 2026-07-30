@@ -518,7 +518,7 @@ export default function QRGenerator() {
                 aria-label="Generated QR code"
               />
               {!generated && (
-                <div className="pointer-events-none absolute inset-0 flex items-center justify-center border border-hairline px-6 text-center font-mono text-control text-ink-dim">
+                <div className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-plate border border-hairline px-6 text-center font-mono text-control text-ink-dim">
                   Awaiting payload. Generate to render.
                 </div>
               )}
