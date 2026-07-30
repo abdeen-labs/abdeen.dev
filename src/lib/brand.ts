@@ -13,7 +13,7 @@
  * internally contradictory chrome.
  */
 
-const releaseVersion = "3.3";
+const releaseVersion = "3.4";
 const releaseIssued = "2026-07";
 const [issuedYear, issuedMonth] = releaseIssued.split("-");
 

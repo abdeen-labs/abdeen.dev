@@ -107,7 +107,7 @@
   font-feature-settings: "tnum";
 }
 
-/* Match spans — the selection idiom: chalk on lacquer (5.35:1). */
+/* Match spans — the selection idiom: chalk on lacquer (5.45:1). */
 .match {
   background: var(--signal-identity);
   color: var(--ink-inverse);

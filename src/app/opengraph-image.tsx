@@ -43,7 +43,7 @@ export default async function OGImage() {
           flexDirection: 'column',
           justifyContent: 'space-between',
           padding: '64px 80px',
-          background: '#0A0B0C',
+          background: '#06080D',
           fontFamily: 'Geist Mono',
         }}
       >
@@ -65,18 +65,18 @@ export default async function OGImage() {
               viewBox="0 0 40 40"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path d={SEAL_KEY.fieldPath} fill="#111316" />
+              <path d={SEAL_KEY.fieldPath} fill="#0C1017" />
               <path
                 d={SEAL_KEY.ringPathEvenOdd}
                 fillRule="evenodd"
-                fill="#D01E3A"
+                fill="#CE2020"
               />
               <g transform={SEAL_KEY_MARK.transform}>
-                <path d={MARK.d} fill="#D01E3A" />
+                <path d={MARK.d} fill="#CE2020" />
               </g>
             </svg>
             <div
-              style={{ width: 1, height: 44, background: '#2E343C', display: 'flex' }}
+              style={{ width: 1, height: 44, background: '#293344', display: 'flex' }}
             />
             <span
               style={{
@@ -94,7 +94,7 @@ export default async function OGImage() {
               fontSize: 18,
               fontWeight: 500,
               letterSpacing: 2,
-              color: '#747C88',
+              color: '#748092',
             }}
           >
             REF / ABDEEN.DEV
@@ -123,7 +123,7 @@ export default async function OGImage() {
               fontSize: 104,
               lineHeight: 0.92,
               letterSpacing: -5.7,
-              color: '#8F96A0',
+              color: '#8E97A8',
             }}
           >
             VERIFIED OUTPUT.
@@ -132,7 +132,7 @@ export default async function OGImage() {
             style={{
               width: 180,
               height: 2,
-              background: '#D01E3A',
+              background: '#CE2020',
               marginTop: 40,
               display: 'flex',
             }}
@@ -156,7 +156,7 @@ export default async function OGImage() {
               fontSize: 18,
               fontWeight: 500,
               letterSpacing: 2,
-              color: '#747C88',
+              color: '#748092',
             }}
           >
             OPEN SOURCE · ACCOUNT / NONE

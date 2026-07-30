@@ -37,7 +37,7 @@ export default async function Icon() {
           display: 'flex',
           // Lacquer plate, clipped to the Key silhouette — reads as the
           // hairline once the field covers all but 1px of it.
-          background: '#D01E3A',
+          background: '#CE2020',
           clipPath: chamfer(0, CUT),
         }}
       >
@@ -52,7 +52,7 @@ export default async function Icon() {
             alignItems: 'center',
             justifyContent: 'center',
             // The sunken field (pitch-900), inset one hairline.
-            background: '#111316',
+            background: '#0C1017',
             clipPath: chamfer(LINE, CUT + LINE * 0.41),
           }}
         >
@@ -62,7 +62,7 @@ export default async function Icon() {
               fontWeight: 700,
               fontSize: MARK_SIZE,
               lineHeight: 1,
-              color: '#D01E3A',
+              color: '#CE2020',
               display: 'flex',
               // The ink sits low in its em box — raise by 0.168em.
               marginTop: -(MARK_SIZE * 0.168 * 2),

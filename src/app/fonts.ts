@@ -1,6 +1,6 @@
 import localFont from "next/font/local";
 
-// Axis type stack (BRAND.md v3.3). Variable files are cut to 400–900 at
+// Axis type stack (BRAND.md v3.4). Variable files are cut to 400–900 at
 // the file level — no thin weights exist in any format (Hard Rule #12).
 // Static TTF instances for ImageResponse live in public/fonts/axis/static.
 
