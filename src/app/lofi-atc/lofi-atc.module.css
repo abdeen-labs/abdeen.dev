@@ -118,7 +118,7 @@
 
 /* globals' .range declares `outline: none` later in the cascade than the
    base :focus-visible rule, which swallows the lacquer ring on sliders.
-   Restore the floor for this unit (Hard Rule 16); the shared .range fix
+   Restore the floor for this module (Hard Rule 16); the shared .range fix
    is flagged for the orchestrator. */
 .sliderGroup :global(.range):focus-visible {
   outline: var(--focus-ring);

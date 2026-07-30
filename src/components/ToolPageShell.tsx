@@ -16,8 +16,8 @@ interface ToolPageShellProps {
 }
 
 /** The instrument panel every browser tool mounts into: one plate with an
- *  identification bar, the unit title, and the working surface, then
- *  cross-navigation to related units. */
+ *  identification bar, the module title, and the working surface, then
+ *  cross-navigation to related modules. */
 export default function ToolPageShell({
   title,
   description,
@@ -34,7 +34,7 @@ export default function ToolPageShell({
     >
       <FadeInWrapper direction="up" eager>
         <section className="plate">
-          {/* Identification bar — ties the unit back to the index */}
+          {/* Identification bar — ties the module back to the index */}
           <div className="flex items-center justify-between gap-3 border-b border-hairline px-5 py-3 md:px-8">
             <Link href="/#tools" className="micro-label chrome-link">
               <span aria-hidden="true" className="text-signal-identity">
@@ -45,7 +45,7 @@ export default function ToolPageShell({
             {eyebrow && <span className="micro-label">{eyebrow}</span>}
           </div>
 
-          {/* Unit title */}
+          {/* Module title */}
           <div className="px-5 py-6 md:px-8 md:py-8">
             <h1 className="text-h3 md:text-h2">{title}</h1>
             <p className="mt-3 max-w-2xl text-body text-ink-secondary">
@@ -60,7 +60,7 @@ export default function ToolPageShell({
         </section>
       </FadeInWrapper>
 
-      {/* Cross-navigation — every unit is one action from the next */}
+      {/* Cross-navigation — every module is one action from the next */}
       <FadeInWrapper direction="up" delay={0.06}>
         <nav aria-label="Related tools" className="px-1">
           <div className="mb-4 flex items-center justify-between gap-4">

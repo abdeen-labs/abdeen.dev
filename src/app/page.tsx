@@ -9,12 +9,12 @@ const boundaries = [
   {
     num: "01",
     title: "No account",
-    body: "Every unit executes without sign-in, subscription, or paywall. Open the page and run the task.",
+    body: "Every module executes without sign-in, subscription, or paywall. Open the page and run the task.",
   },
   {
     num: "02",
     title: "Local execution",
-    body: "Browser tools process input on the device wherever the task permits. What leaves the device is stated on the unit.",
+    body: "Browser tools process input on the device wherever the task permits. What leaves the device is stated on the module.",
   },
   {
     num: "03",

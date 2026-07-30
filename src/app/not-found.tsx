@@ -4,7 +4,7 @@ import FadeInWrapper from "@/components/FadeInWrapper";
 
 export const metadata: Metadata = {
   title: "Not found",
-  description: "This address does not resolve to a unit.",
+  description: "This address does not resolve to a module.",
 };
 
 export default function NotFound() {
@@ -18,12 +18,12 @@ export default function NotFound() {
       </FadeInWrapper>
 
       <FadeInWrapper direction="up" delay={0.05} eager>
-        <h1 className="text-h1 md:text-display">No such unit.</h1>
+        <h1 className="text-h1 md:text-display">No such module.</h1>
       </FadeInWrapper>
 
       <FadeInWrapper direction="up" delay={0.1} eager>
         <p className="max-w-md text-body text-ink-dim">
-          This address does not resolve to a unit. The page moved, retired,
+          This address does not resolve to a module. The page moved, retired,
           or never existed. The index lists everything that runs.
         </p>
       </FadeInWrapper>

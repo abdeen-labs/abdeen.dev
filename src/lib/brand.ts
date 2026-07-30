@@ -27,7 +27,7 @@ export const marketing = {
   control: "AXIS//OPEN · A0",
   /** The complete public marking. Chrome carries this verbatim. */
   banner: "AXIS//OPEN · A0 · Doc ABD-AXS-02 · Rev 3.2",
-  heroEyebrow: "Software unit // AXIS//OPEN · A0",
+  heroEyebrow: "Software module // AXIS//OPEN · A0",
 } as const;
 
 export const identity = {

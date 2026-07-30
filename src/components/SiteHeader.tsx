@@ -60,7 +60,7 @@ export default function SiteHeader() {
             <span className="sep" aria-hidden="true">
               {"///"}
             </span>
-            <span>Software unit</span>
+            <span>Software module</span>
           </span>
           <span className="band-doc band-doc--full">{marketing.banner}</span>
           <span className="band-doc band-doc--compact">

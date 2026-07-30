@@ -6,7 +6,7 @@
  * once. Set `enabled: false` to pull an entry from all of those surfaces;
  * the route's page.tsx reads the same flag via entryEnabled() to 404 itself.
  *
- * Copy follows the Axis voice (BRAND.md → Voice): lead with the unit and
+ * Copy follows the Axis voice (BRAND.md → Voice): lead with the module and
  * its assigned task, then boundary and evidence. No launch language.
  */
 export interface CatalogEntry {
