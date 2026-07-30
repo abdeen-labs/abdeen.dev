@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SealRoundel } from "@/components/Seal";
 import { apps, tools } from "@/lib/catalog";
+import { marketing, release } from "@/lib/brand";
 
 /** Footer: the Roundel (its one appearance per page), the positioning
  *  line, catalog navigation, and a colophon with the barcode rule and
@@ -109,7 +110,7 @@ export default function SiteFooter() {
               © {new Date().getFullYear()} Jaafar Abdeen · Abdeen Labs
             </span>
             <span className="micro-label">
-              AXIS//OPEN · A0 · Release / Public · Handling / None
+              {marketing.control} · Rev {release.version} · Release / Public
             </span>
           </div>
         </div>

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import AppleBadgeLink from "@/components/AppleBadgeLink";
 import FadeInWrapper from "@/components/FadeInWrapper";
 import FeatureGrid from "@/components/FeatureGrid";
+import FrostVisual from "@/components/FrostVisual";
 import SectionHeader from "@/components/SectionHeader";
 
 const REPO_URL = "https://github.com/Cuzeth/frost";
@@ -103,43 +104,6 @@ function useLatestRelease() {
   return { href, label };
 }
 
-/** The engaged lock session, documented as a console record: a sunken
- *  instrument field with one lacquer prompt and jade state words
- *  (BRAND.md → Console). Structure, not a control — it takes the plate
- *  step while the controls beside it stay one step tighter. No glass. */
-const sessionRows: { field: string; value: string; isolated?: boolean }[] = [
-  { field: "lock.state", value: "Engaged" },
-  { field: "input.keyboard", value: "Isolated", isolated: true },
-  { field: "input.pointer", value: "Isolated", isolated: true },
-  { field: "input.trackpad", value: "Isolated", isolated: true },
-  { field: "display.screen", value: "Visible" },
-  { field: "displays.covered", value: "2 / 2" },
-  { field: "overlay.message", value: "“Build running”" },
-  { field: "unlock.touchid", value: "Armed" },
-  { field: "unlock.watch", value: "Paired" },
-];
-
-function LockConsole() {
-  return (
-    <div className="console">
-      <div>
-        <span className="prompt" aria-hidden="true">
-          ›
-        </span>
-        frost --engage --message &ldquo;Build running&rdquo;
-      </div>
-      <div className="mt-3 flex flex-col gap-1.5">
-        {sessionRows.map((row) => (
-          <div key={row.field} className="flex justify-between gap-4">
-            <span className="muted">{row.field}</span>
-            <span className={row.isolated ? "ok" : undefined}>{row.value}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 export default function Frost() {
   const release = useLatestRelease();
 
@@ -183,7 +147,7 @@ export default function Frost() {
         </FadeInWrapper>
 
         <FadeInWrapper direction="up" delay={0.08} eager>
-          <LockConsole />
+          <FrostVisual />
         </FadeInWrapper>
       </section>
 

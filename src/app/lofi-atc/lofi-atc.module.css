@@ -1,7 +1,7 @@
 /* Lo-fi ATC — Axis instrument layout. Shared classes carry the controls
    (.btn, .segmented, .range, .micro-label, .field-label, .tool-stage);
-   this module only lays out the channel board. Structure stays square;
-   every colour is a role token. */
+   this module only lays out the channel board. Surface shape comes from
+   the shared concentric tiers; every colour is a role token. */
 
 .container {
   display: flex;

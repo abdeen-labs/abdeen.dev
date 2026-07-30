@@ -323,6 +323,39 @@
   --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5' stroke='%23544F45' stroke-width='1.4'/%3E%3C/svg%3E");
 }
 
+/* Documentation-only dark specimen scope. It lets a depicted product
+   surface keep its canonical dark physics inside the light page without
+   hand-re-inking the component. Live interface surfaces never mix modes. */
+[data-mode="dark"] {
+  color-scheme: dark;
+
+  --surface-page: var(--pitch-950);
+  --surface-sunken: var(--pitch-900);
+  --surface-card: var(--pitch-850);
+  --surface-band: var(--pitch-800);
+  --surface-raised: var(--pitch-700);
+  --surface-void: var(--pitch-960);
+  --hairline: var(--pitch-600);
+  --hairline-strong: var(--pitch-500);
+
+  --ink-primary: var(--chalk-100);
+  --ink-secondary: var(--chalk-300);
+  --ink-dim: var(--graphite-400);
+  --ink-faint: var(--graphite-500);
+  --ink-structure: var(--graphite-600);
+
+  --signal-link: var(--lacquer-400);
+  --signal-press: var(--lacquer-600);
+  --signal-verified: var(--jade-400);
+  --signal-warning: var(--amber-400);
+  --signal-alarm: var(--hazard-500);
+
+  --edge-light: color-mix(in srgb, var(--chalk-100) 7%, transparent);
+  --seal-key-field: var(--pitch-900);
+  --readout-color: var(--phosphor-500);
+  --readout-glow: 0 0 8px color-mix(in srgb, var(--phosphor-500) 35%, transparent);
+}
+
 /* Follow the operating system unless an explicit data-theme says otherwise.
    Deliberately :root:not([data-theme="dark"]), never a bare :root — the
    declaration list mirrors the [data-theme="light"] block above. */
@@ -1584,8 +1617,60 @@ a.chip:focus-visible {
   -webkit-backdrop-filter: blur(12px);
 }
 
+/* The identification band: bracketed studio name, /// separator, and the
+   functional document code. Codes never carry geography. Mirrors the
+   marketing kit's dossier chrome (abdeen-brand/system/ui_kits/marketing). */
+.dossier-band {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  min-height: 28px;
+  border-top: 1px solid var(--hairline);
+  font-family: var(--font-mono-stack);
+  font-weight: 500;
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-micro);
+  text-transform: uppercase;
+  color: var(--ink-primary);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* `///` carries no information, so it sits at the structure ceiling. */
+.dossier-band .sep {
+  color: var(--ink-structure);
+}
+
+.dossier-band .band-doc {
+  font-feature-settings: "tnum";
+}
+
+.band-doc--compact {
+  display: none;
+}
+
+@media (max-width: 359.98px) {
+  .site-nav .lockup-divider,
+  .site-nav .site-wordmark,
+  .band-doc--full {
+    display: none;
+  }
+
+  .band-doc--compact {
+    display: inline;
+  }
+}
+
+/* The 8px lacquer rule closes the chrome. Lacquer is the one ink both
+   modes share, so this rule is the same colour in either. */
+.lacquer-rule {
+  height: 8px;
+  background: var(--signal-identity);
+}
+
 .nav-link {
-  display: inline-flex;
+  display: none;
   align-items: center;
   min-height: 40px;
   padding-inline: var(--space-3);
@@ -1597,6 +1682,22 @@ a.chip:focus-visible {
   text-decoration: none;
   color: var(--ink-dim);
   transition: color var(--duration-hover) var(--ease-flat);
+}
+
+.nav-link--theme {
+  display: inline-flex;
+}
+
+@media (min-width: 640px) {
+  .nav-link--external {
+    display: inline-flex;
+  }
+}
+
+@media (min-width: 768px) {
+  .nav-link--section {
+    display: inline-flex;
+  }
 }
 
 .nav-link:hover,
@@ -1627,6 +1728,240 @@ a.chip:focus-visible {
 
   :root:not([data-theme="dark"]) .theme-when-light {
     display: inline;
+  }
+}
+
+/* ─── Dossier composition — the marketing kit's page structure ─────
+   Ported from abdeen-brand/system/ui_kits/marketing/index.html, which is
+   the reference layout for a public marketing surface: a recessed unit
+   rail carrying identification codes, instrument panels identified as
+   numbered evidence, a sectioned body with a numbered rail, and one
+   measured record. The kit is the specimen; these are the primitives. */
+
+/* Recessed cell: the mode's sunken surface behind a compartment wall. */
+.recess-well {
+  background: var(--surface-sunken);
+}
+
+/* The hero's identification rail. Sits beside the message, not above it,
+   so the codes read as an instrument's plate rather than as a caption. */
+.hero-rail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-7);
+  padding: clamp(28px, 4vw, 64px) clamp(20px, 3vw, 42px);
+  border-inline-end: 1px solid var(--hairline);
+}
+
+.rail-index,
+.rail-codes {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.rail-index > span,
+.rail-codes > span {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding-bottom: var(--space-2);
+  /* A sub-rule inside the rail, never a boundary — hairline-strong keeps
+     it distinct from the compartment wall beside it. */
+  border-bottom: 1px solid var(--hairline-strong);
+  font-family: var(--font-mono-stack);
+  font-size: var(--fs-micro);
+  font-feature-settings: "tnum";
+  color: var(--ink-primary);
+}
+
+.rail-index b,
+.rail-codes b {
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-primary);
+}
+
+.rail-line {
+  width: 2px;
+  height: var(--space-6);
+  margin-bottom: var(--space-4);
+  background: var(--signal-identity);
+}
+
+@media (max-width: 899.98px) {
+  .hero-rail {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-5);
+    padding: var(--space-5);
+    border-inline-end: 0;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .hero-rail-summary {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .rail-index {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+
+  .hero-rail-register {
+    display: grid;
+    grid-template-columns: 2px minmax(0, 1fr);
+    align-items: stretch;
+    gap: var(--space-4);
+  }
+
+  .rail-line {
+    width: 2px;
+    height: auto;
+    min-height: 100%;
+    margin: 0;
+  }
+
+  .rail-codes {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+
+  .rail-codes > span {
+    display: grid;
+    justify-content: initial;
+  }
+}
+
+@media (max-width: 479.98px) {
+  .hero-rail {
+    padding: var(--space-4);
+  }
+
+  .rail-index {
+    margin-top: var(--space-4);
+  }
+
+  .rail-index > span,
+  .rail-codes > span {
+    gap: var(--space-1);
+  }
+}
+
+/* The kit also carries a hazard edge stripe, a rubber stamp, and
+   registration crosshairs on its hero. Those are print-register furniture
+   and deliberately do not ship here: BRAND.md bars importing them into an
+   interface, and the kit's own README books them as preserved debts from
+   the sheet it grew out of — not as patterns to copy. Same call already
+   made for .abd-stamp above. */
+
+/* ─── Mounted instrument panels — numbered evidence ──────────────── */
+
+.mount {
+  margin: 0;
+  min-width: 0;
+}
+
+.mount-cap {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--hairline-strong);
+}
+
+/* The panel echoes the Key's 26% chamfer as a silhouette, so only the
+   continuous page shows through the notch. A chamfer never pairs with a
+   radius (Hard Rule #13), which is why .obj declares no border-radius. */
+.obj {
+  --cut: 20px;
+  position: relative;
+  background: var(--surface-sunken);
+  color: var(--ink-primary);
+  clip-path: polygon(
+    var(--cut) 0,
+    100% 0,
+    100% 100%,
+    0 100%,
+    0 var(--cut)
+  );
+}
+
+/* The panel paints the field, so the console recipe keeps its type,
+   prompt, and timestamps but drops the border the silhouette replaces. */
+.obj .console {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: var(--space-6) clamp(20px, 3vw, 32px) var(--space-5);
+}
+
+/* ─── Sectioned body — a numbered rail beside each section ───────── */
+
+.section-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.section-rail {
+  padding: clamp(24px, 3vw, 42px) 0 0;
+}
+
+/* Watermark address — decoration, aria-hidden in the markup. Solid, on a
+   structure tone below the text floors: watermark numerals are furniture.
+   Hollow type is not in the system, in either mode or on paper. */
+.section-rail .section-number {
+  display: block;
+  margin-top: var(--space-3);
+  font-family: var(--font-display-stack);
+  /* Sized to the rail track, not to a scale step. */
+  font-size: clamp(56px, 9vw, 138px);
+  font-weight: 900;
+  line-height: 0.8;
+  letter-spacing: var(--tracking-display);
+  color: var(--ink-structure);
+}
+
+@media (max-width: 899.98px) {
+  .section-rail {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: var(--space-6) 0 var(--space-3);
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .section-rail .section-number {
+    margin-top: 0;
+    font-size: 44px;
+    line-height: 0.7;
+  }
+}
+
+@media (min-width: 900px) {
+  .section-shell {
+    grid-template-columns: minmax(160px, 0.48fr) minmax(0, 2.52fr);
+  }
+
+  .section-rail {
+    padding: clamp(42px, 6vw, 88px) clamp(20px, 3vw, 42px);
+    border-inline-end: 1px solid var(--hairline);
+  }
+}
+
+.section-body {
+  min-width: 0;
+  padding-block: clamp(32px, 4vw, 64px);
+}
+
+@media (min-width: 900px) {
+  .section-body {
+    padding-inline: clamp(20px, 3vw, 42px);
   }
 }
 

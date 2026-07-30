@@ -178,13 +178,19 @@
   to { opacity: 1; }
 }
 
-/* Sizing only — surface, hairline, and top-edge light come from .plate. */
+/* The modal is a shell holding one inset plate. Four pixels between the
+   14px and 10px steps keep the two corners concentric. */
 .modal {
   position: relative;
   width: 100%;
   max-width: 440px;
-  padding: var(--space-5);
+  padding: var(--space-1);
   animation: modalIn var(--duration-panel-lg) var(--ease-flat);
+}
+
+.modalBody {
+  position: relative;
+  padding: var(--space-5);
 }
 
 @keyframes modalIn {
@@ -225,7 +231,7 @@
   color: var(--ink-primary);
 }
 
-/* Choice modal — two quiet controls with the 3px edge break. */
+/* Choice modal — two quiet controls at the 6px control step. */
 .choiceButtons {
   display: flex;
   gap: var(--space-3);
@@ -365,6 +371,10 @@
 
   .choiceBtn {
     min-height: 44px;
+  }
+
+  .modalBody {
+    padding: var(--space-4);
   }
 }
 

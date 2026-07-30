@@ -417,25 +417,27 @@ export default function CoverQuad() {
 
       {modal === 'choice' && (
         <div ref={overlayRef} className={styles.overlay} onClick={closeAllModals} onKeyDown={handleOverlayKeyDown} tabIndex={-1} role="dialog" aria-modal="true" aria-label="Add cover art">
-          <div className={`plate ${styles.modal}`} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.modalClose} onClick={closeAllModals} aria-label="Close">&times;</button>
-            <div className={styles.modalTitle}>Add cover art</div>
-            <div className={styles.choiceButtons}>
-              <button className={styles.choiceBtn} onClick={handleUploadChoice}>
-                <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                  <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-                  <polyline points="17 8 12 3 7 8" />
-                  <line x1="12" y1="3" x2="12" y2="15" />
-                </svg>
-                Upload image
-              </button>
-              <button className={styles.choiceBtn} onClick={handleSearchChoice}>
-                <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                  <circle cx="11" cy="11" r="8" />
-                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                </svg>
-                Search cover art
-              </button>
+          <div className={`shell ${styles.modal}`} onClick={(e) => e.stopPropagation()}>
+            <div className={`plate ${styles.modalBody}`}>
+              <button className={styles.modalClose} onClick={closeAllModals} aria-label="Close">&times;</button>
+              <div className={styles.modalTitle}>Add cover art</div>
+              <div className={styles.choiceButtons}>
+                <button className={styles.choiceBtn} onClick={handleUploadChoice}>
+                  <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                    <polyline points="17 8 12 3 7 8" />
+                    <line x1="12" y1="3" x2="12" y2="15" />
+                  </svg>
+                  Upload image
+                </button>
+                <button className={styles.choiceBtn} onClick={handleSearchChoice}>
+                  <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  </svg>
+                  Search cover art
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -443,62 +445,64 @@ export default function CoverQuad() {
 
       {modal === 'search' && (
         <div ref={overlayRef} className={styles.overlay} onClick={closeAllModals} onKeyDown={handleOverlayKeyDown} tabIndex={-1} role="dialog" aria-modal="true" aria-label="Search cover art">
-          <div className={`plate ${styles.modal} ${styles.searchModal}`} onClick={(e) => e.stopPropagation()}>
-            <button className={styles.modalClose} onClick={closeAllModals} aria-label="Close">&times;</button>
-            <div className={styles.modalTitle}>Search cover art</div>
-            <div className={styles.searchBar}>
-              <input
-                className="input min-w-0 flex-1"
-                type="text"
-                placeholder="Artist or album name…"
-                aria-label="Search for artist or album"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={handleSearchKeyDown}
-                autoFocus
-              />
-              <button className="btn btn-ghost" onClick={performSearch} disabled={searching}>
-                Search covers
-              </button>
+          <div className={`shell ${styles.modal} ${styles.searchModal}`} onClick={(e) => e.stopPropagation()}>
+            <div className={`plate ${styles.modalBody}`}>
+              <button className={styles.modalClose} onClick={closeAllModals} aria-label="Close">&times;</button>
+              <div className={styles.modalTitle}>Search cover art</div>
+              <div className={styles.searchBar}>
+                <input
+                  className="input min-w-0 flex-1"
+                  type="text"
+                  placeholder="Artist or album name…"
+                  aria-label="Search for artist or album"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={handleSearchKeyDown}
+                  autoFocus
+                />
+                <button className="btn btn-ghost" onClick={performSearch} disabled={searching}>
+                  Search covers
+                </button>
+              </div>
+
+              {searching && (
+                <div className={styles.searchSkeletonGrid} role="status">
+                  <span className="sr-only">Searching for cover art…</span>
+                  {Array.from({ length: 8 }, (_, i) => (
+                    <div key={i} className={styles.searchSkeleton} aria-hidden="true" />
+                  ))}
+                </div>
+              )}
+
+              {searchError && <div className={styles.searchMessage}>{searchError}</div>}
+
+              {searchResults.length > 0 && failedThumbs.size === searchResults.length && (
+                <div className={styles.searchMessage}>No cover art available for these results.</div>
+              )}
+
+              {searchResults.length > 0 && (
+                <div className={styles.searchResultsGrid}>
+                  {searchResults
+                    .filter((album) => !failedThumbs.has(album.id))
+                    .map((album) => (
+                    <button
+                      key={album.id}
+                      className={styles.searchResult}
+                      onClick={() => selectAlbumArt(album)}
+                      title={`${album.title} \u2014 ${album.artist}${album.year ? ` (${album.year})` : ''}`}
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={`/api/cover-proxy?url=${encodeURIComponent(album.thumb)}`}
+                        alt={`${album.title} by ${album.artist}`}
+                        loading="lazy"
+                        onError={() => setFailedThumbs((prev) => new Set(prev).add(album.id))}
+                      />
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
-
-            {searching && (
-              <div className={styles.searchSkeletonGrid} role="status">
-                <span className="sr-only">Searching for cover art…</span>
-                {Array.from({ length: 8 }, (_, i) => (
-                  <div key={i} className={styles.searchSkeleton} aria-hidden="true" />
-                ))}
-              </div>
-            )}
-
-            {searchError && <div className={styles.searchMessage}>{searchError}</div>}
-
-            {searchResults.length > 0 && failedThumbs.size === searchResults.length && (
-              <div className={styles.searchMessage}>No cover art available for these results.</div>
-            )}
-
-            {searchResults.length > 0 && (
-              <div className={styles.searchResultsGrid}>
-                {searchResults
-                  .filter((album) => !failedThumbs.has(album.id))
-                  .map((album) => (
-                  <button
-                    key={album.id}
-                    className={styles.searchResult}
-                    onClick={() => selectAlbumArt(album)}
-                    title={`${album.title} \u2014 ${album.artist}${album.year ? ` (${album.year})` : ''}`}
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={`/api/cover-proxy?url=${encodeURIComponent(album.thumb)}`}
-                      alt={`${album.title} by ${album.artist}`}
-                      loading="lazy"
-                      onError={() => setFailedThumbs((prev) => new Set(prev).add(album.id))}
-                    />
-                  </button>
-                ))}
-              </div>
-            )}
           </div>
         </div>
       )}

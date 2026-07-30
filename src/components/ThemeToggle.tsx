@@ -58,7 +58,7 @@ export default function ThemeToggle() {
       type="button"
       onClick={switchMode}
       aria-label="Switch color mode"
-      className="nav-link cursor-pointer border-0 bg-transparent"
+      className="nav-link nav-link--theme cursor-pointer border-0 bg-transparent"
     >
       <span className="theme-when-dark" aria-hidden="true">
         Switch to light
