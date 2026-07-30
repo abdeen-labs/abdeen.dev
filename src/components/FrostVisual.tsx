@@ -1,4 +1,4 @@
-import { FingerprintRecognition } from "./icons/carbon";
+import { FingerprintRecognition } from "@carbon/icons-react";
 import styles from "./FrostVisual.module.css";
 
 /* The desktop is what makes the frost read as frost: a blur over an empty

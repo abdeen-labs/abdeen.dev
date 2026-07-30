@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useRef, useCallback, useEffect, type DragEvent, type ChangeEvent, type KeyboardEvent } from 'react';
+import { Add, Search, Upload } from '@carbon/icons-react';
 import styles from './coverquad.module.css';
 
 // --- Types ---
@@ -328,10 +329,7 @@ export default function CoverQuad() {
               aria-label={slot ? `Slot ${i + 1}: ${slot.label} · activate to replace` : `Slot ${i + 1}: empty · activate to add cover art`}
             >
               <div className={styles.slotEmpty}>
-                <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                  <line x1="12" y1="5" x2="12" y2="19" />
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                </svg>
+                <Add size={32} />
               </div>
               {slot && (
                 // eslint-disable-next-line @next/next/no-img-element
@@ -423,18 +421,11 @@ export default function CoverQuad() {
               <div className={styles.modalTitle}>Add cover art</div>
               <div className={styles.choiceButtons}>
                 <button className={styles.choiceBtn} onClick={handleUploadChoice}>
-                  <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
-                    <polyline points="17 8 12 3 7 8" />
-                    <line x1="12" y1="3" x2="12" y2="15" />
-                  </svg>
+                  <Upload size={28} />
                   Upload image
                 </button>
                 <button className={styles.choiceBtn} onClick={handleSearchChoice}>
-                  <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-                    <circle cx="11" cy="11" r="8" />
-                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                  </svg>
+                  <Search size={28} />
                   Search cover art
                 </button>
               </div>
