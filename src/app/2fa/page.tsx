@@ -5,12 +5,12 @@ import TwoFactorQR from './TwoFactorQR';
 export const metadata: Metadata = {
   title: '2FA QR Generator',
   description:
-    'Generate two-factor authentication QR codes from TOTP and HOTP secrets. Compatible with Google Authenticator, Authy, and Yubico. Parse or create otpauth:// URIs.',
+    'Converts TOTP and HOTP secrets or otpauth:// URIs into authenticator-ready QR codes. Encoding runs on the device — Storage / NONE · Egress / 0. Scans into Google Authenticator, Authy, and Yubico Authenticator.',
   alternates: { canonical: 'https://abdeen.dev/2fa' },
   openGraph: {
-    title: '2FA QR Generator | abdeen.dev',
+    title: '2FA QR Generator · Abdeen Labs',
     description:
-      'Create 2FA QR codes from TOTP/HOTP secrets. Works with Google Authenticator and Authy.',
+      'TOTP and HOTP secrets converted to authenticator QR codes, entirely on the device. Storage / NONE · Egress / 0.',
     url: 'https://abdeen.dev/2fa',
   },
 };
@@ -19,10 +19,10 @@ export default function TwoFactorQRPage() {
   return (
     <ToolPageShell
       wide
-      eyebrow="/2fa"
+      eyebrow="REF / 2FA"
       currentPath="/2fa"
       title="2FA QR Generator"
-      description="Create authenticator-ready QR codes from TOTP or HOTP secrets, or generate them directly from an otpauth URI."
+      description="Converts a TOTP or HOTP secret, or a pasted otpauth:// URI, into an authenticator-ready QR code. The secret never leaves this device."
     >
       <TwoFactorQR />
     </ToolPageShell>

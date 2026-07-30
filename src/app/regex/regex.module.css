@@ -12,65 +12,105 @@
   flex-shrink: 0;
 }
 
+/* Flag keys — compact toggles. A set flag takes the lacquer field with
+   the chalk label (the switch-on idiom); the letter itself is content,
+   so it keeps its literal lowercase. */
 .flagBtn {
   width: 38px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0.6rem;
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--color-graphite);
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-control);
+  background: var(--surface-sunken);
+  color: var(--ink-dim);
+  font-family: var(--font-mono-stack);
+  font-weight: 500;
+  font-size: var(--fs-control);
   cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease,
-    transform 0.1s ease;
+  transition: background var(--duration-hover) var(--ease-flat),
+    border-color var(--duration-hover) var(--ease-flat),
+    color var(--duration-hover) var(--ease-flat);
 }
 
-.flagBtn:hover {
-  background: rgba(255, 255, 255, 0.07);
-  color: var(--color-paper);
+.flagBtn:hover:not(.flagBtnActive) {
+  border-color: var(--hairline-strong);
+  color: var(--ink-primary);
 }
 
 .flagBtn:active {
-  transform: scale(0.93);
+  transform: translateY(1px);
 }
 
 .flagBtnActive {
-  background: var(--color-red);
-  border-color: var(--color-red);
-  color: var(--color-paper);
+  background: var(--signal-identity);
+  border-color: transparent;
+  color: var(--ink-inverse);
 }
 
-/* Pattern input error state — layered on the shared .input recipe */
-.inputError,
-.inputError:focus {
-  border-color: var(--color-red);
-  box-shadow: 0 0 0 3px rgba(204, 27, 27, 0.14);
+.flagBtnActive:hover {
+  border-color: var(--signal-link);
 }
 
-/* Output boxes (match preview, replace result) */
+/* Fault report — hazard appears only as the stripe beside a real fault
+   (invalid pattern, killed execution). The text stays in ink. */
+.fault {
+  display: flex;
+  align-items: stretch;
+  gap: 0.7rem;
+}
+
+.faultStripe {
+  width: 6px;
+  flex: none;
+}
+
+.faultBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.faultLine {
+  font-family: var(--font-mono-stack);
+  font-weight: 500;
+  font-size: var(--fs-control);
+  line-height: var(--leading-mono);
+  color: var(--ink-primary);
+  overflow-wrap: anywhere;
+}
+
+.faultDetail {
+  font-family: var(--font-mono-stack);
+  font-size: var(--fs-control);
+  line-height: var(--leading-mono);
+  color: var(--ink-dim);
+  overflow-wrap: anywhere;
+}
+
+/* Output wells (match preview, replace result) — sunken structure,
+   radius 0. Roomier leading keeps stacked highlight bars separated. */
 .outputBox {
   width: 100%;
   min-height: 92px;
   padding: 0.8rem 0.95rem;
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0.75rem;
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
+  background: var(--surface-sunken);
+  border: 1px solid var(--hairline);
+  font-family: var(--font-mono-stack);
+  font-size: var(--fs-control);
   line-height: 1.65;
-  color: var(--color-graphite);
+  color: var(--ink-secondary);
   white-space: pre-wrap;
   word-break: break-word;
+  font-feature-settings: "tnum";
 }
 
+/* Match spans — the selection idiom: chalk on lacquer (5.35:1). */
 .match {
-  background: rgba(204, 27, 27, 0.28);
-  border-radius: 3px;
+  background: var(--signal-identity);
+  color: var(--ink-inverse);
   padding: 0 1px;
-  color: var(--color-paper);
 }
 
 /* Capture groups */
@@ -82,20 +122,22 @@
 
 .group {
   padding: 0.4rem 0.6rem;
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: var(--color-graphite);
+  background: var(--surface-sunken);
+  border: 1px solid var(--hairline);
+  font-family: var(--font-mono-stack);
+  font-size: var(--fs-control);
+  line-height: var(--leading-mono);
+  color: var(--ink-secondary);
+  overflow-wrap: anywhere;
+  font-feature-settings: "tnum";
 }
 
 .groupIndex {
-  color: var(--color-red);
+  color: var(--ink-dim);
   margin-right: 0.5rem;
 }
 
-/* Empty/placeholder state for the results pane */
+/* Empty/status state for the results pane — a quiet well. */
 .placeholder {
   display: flex;
   align-items: center;
@@ -103,10 +145,12 @@
   min-height: 92px;
   padding: 1rem;
   text-align: center;
-  border: 1px dashed rgba(255, 255, 255, 0.1);
-  border-radius: 0.75rem;
-  color: var(--color-graphite);
-  font-size: 0.82rem;
+  border: 1px solid var(--hairline);
+  background: var(--surface-sunken);
+  color: var(--ink-dim);
+  font-family: var(--font-mono-stack);
+  font-size: var(--fs-control);
+  line-height: var(--leading-mono);
 }
 
 /* Spacing for the replace/cheatsheet panels, inside the global
@@ -118,64 +162,79 @@
   padding-top: 0.75rem;
 }
 
-/* Cheatsheet */
+/* Cheatsheet — reference table: band headers, hairline dividers,
+   mono cells. Structure, radius 0. */
 .cheatsheet {
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 0.85rem;
-  overflow: hidden;
+  border: 1px solid var(--hairline);
 }
 
 .cheatSection {
-  padding: 1rem 1.25rem;
-}
-
-.cheatSection + .cheatSection {
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
 }
 
 .cheatTitle {
-  margin-bottom: 0.7rem;
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  font-weight: 400;
-  letter-spacing: 0.1em;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  background: var(--surface-band);
+  border-bottom: 1px solid var(--hairline);
+  font-family: var(--font-mono-stack);
+  font-weight: 500;
+  font-size: var(--fs-micro);
+  line-height: 1.4;
+  letter-spacing: var(--tracking-micro);
   text-transform: uppercase;
-  color: var(--color-graphite);
+  color: var(--ink-dim);
+}
+
+.cheatSection + .cheatSection .cheatTitle {
+  border-top: 1px solid var(--hairline);
 }
 
 .cheatItems {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 0;
-}
-
-@media (min-width: 640px) {
-  .cheatItems {
-    grid-template-columns: 1fr 1fr;
-    gap: 0 1.5rem;
-  }
 }
 
 .cheatItem {
   display: flex;
   align-items: baseline;
   gap: 0.875rem;
-  padding: 0.32rem 0;
+  padding: 0.45rem 1rem;
+  border-top: 1px solid var(--hairline);
+}
+
+.cheatItem:first-child {
+  border-top: 0;
+}
+
+@media (min-width: 640px) {
+  .cheatItems {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cheatItem:nth-child(2) {
+    border-top: 0;
+  }
+
+  .cheatItem:nth-child(even) {
+    border-left: 1px solid var(--hairline);
+  }
 }
 
 .cheatPattern {
   flex-shrink: 0;
-  width: 64px;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--color-paper);
+  width: 80px;
+  color: var(--ink-primary);
 }
 
 .cheatDesc {
-  font-size: 0.76rem;
-  color: var(--color-graphite);
+  font-family: var(--font-mono-stack);
+  font-size: var(--fs-control);
+  line-height: var(--leading-mono);
+  color: var(--ink-dim);
 }
 
 @media (max-width: 480px) {

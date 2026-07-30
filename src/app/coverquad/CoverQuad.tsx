@@ -156,7 +156,7 @@ export default function CoverQuad() {
       const { img, objectUrl } = await loadImageFromFile(file);
       setSlot(index, { img, objectUrl, label: file.name });
     } catch {
-      showSlotError(`Couldn't load “${file.name}”. It may not be a valid image.`);
+      showSlotError(`LOAD FAILURE // ${file.name} // ACTION: select a valid image file.`);
     }
     e.target.value = '';
   };
@@ -173,7 +173,7 @@ export default function CoverQuad() {
       const { img, objectUrl } = await loadImageFromFile(file);
       setSlot(index, { img, objectUrl, label: file.name });
     } catch {
-      showSlotError(`Couldn't load “${file.name}”. It may not be a valid image.`);
+      showSlotError(`LOAD FAILURE // ${file.name} // ACTION: select a valid image file.`);
     }
   };
 
@@ -194,7 +194,7 @@ export default function CoverQuad() {
 
       if (res.status === 429 || res.status === 503) {
         setSearching(false);
-        setSearchError('The album database is rate-limiting requests. Wait a few seconds and try again.');
+        setSearchError('RATE LIMIT // MusicBrainz // ACTION: wait a few seconds, then retry.');
         return;
       }
       if (!res.ok) throw new Error('Search failed');
@@ -228,14 +228,14 @@ export default function CoverQuad() {
       setSearching(false);
 
       if (results.length === 0) {
-        setSearchError('No results found.');
+        setSearchError('No results.');
         return;
       }
 
       setSearchResults(results);
     } catch {
       setSearching(false);
-      setSearchError('Search failed. Try again.');
+      setSearchError('SEARCH FAILURE // MusicBrainz // ACTION: retry.');
     }
   };
 
@@ -255,7 +255,7 @@ export default function CoverQuad() {
       const { img, objectUrl } = await loadImageFromUrl(proxyUrl);
       setSlot(slotIndex, { img, objectUrl, label: `${album.title} \u2014 ${album.artist}` });
     } catch {
-      showSlotError(`Couldn't load the cover for \u201c${album.title}\u201d. Try another result.`);
+      showSlotError(`FETCH FAILURE // ${album.title} // ACTION: select another result.`);
     } finally {
       setLoadingSlot(null);
     }
@@ -328,7 +328,7 @@ export default function CoverQuad() {
               aria-label={slot ? `Slot ${i + 1}: ${slot.label} · activate to replace` : `Slot ${i + 1}: empty · activate to add cover art`}
             >
               <div className={styles.slotEmpty}>
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                   <line x1="12" y1="5" x2="12" y2="19" />
                   <line x1="5" y1="12" x2="19" y2="12" />
                 </svg>
@@ -341,7 +341,7 @@ export default function CoverQuad() {
             {slot && (
               <button
                 className={styles.slotClear}
-                title="Clear"
+                title="Clear slot"
                 aria-label={`Clear slot ${i + 1}`}
                 onClick={(e) => {
                   e.stopPropagation();
@@ -353,7 +353,7 @@ export default function CoverQuad() {
             )}
             {loadingSlot === i && (
               <div className={styles.slotLoading}>
-                <div className={styles.spinner} />
+                <span className={styles.slotLoadingLabel}>Fetching cover&hellip;</span>
               </div>
             )}
             <input
@@ -368,17 +368,18 @@ export default function CoverQuad() {
           </div>
         </div>
         {slotError && (
-          <p role="alert" className="text-center text-xs leading-5 text-[var(--color-red)]">
+          <p role="alert" className={styles.faultLine}>
+            <span aria-hidden="true" className={`${styles.faultStripe} abd-hazard`} />
             {slotError}
           </p>
         )}
-        <p className="text-center text-xs leading-5 text-[var(--color-graphite)]">
-          Click a tile to upload or search album art &middot; drag &amp; drop works too
+        <p className="text-center font-mono text-control text-ink-dim">
+          Select a tile to upload or search cover art. Drag and drop is supported.
         </p>
       </div>
 
       {/* RIGHT — export */}
-      <div className="lg:border-l lg:border-white/[0.06] lg:pl-10">
+      <div className="lg:border-l lg:border-hairline lg:pl-10">
         <div className="flex flex-col gap-4 lg:sticky lg:top-24">
           <div className="flex items-center justify-between">
             <span className="eyebrow-system">Export</span>
@@ -392,9 +393,9 @@ export default function CoverQuad() {
               value={exportSize}
               onChange={(e) => setExportSize(Number(e.target.value) as ExportSize)}
             >
-              <option value={3000}>3000px (Full)</option>
-              <option value={2000}>2000px (Medium)</option>
-              <option value={1000}>1000px (Small)</option>
+              <option value={3000}>3000 px (full)</option>
+              <option value={2000}>2000 px (medium)</option>
+              <option value={1000}>1000 px (small)</option>
             </select>
           </div>
           <button
@@ -404,32 +405,36 @@ export default function CoverQuad() {
           >
             Export PNG
           </button>
-          <p className="text-xs leading-5 text-[var(--color-graphite)]">
-            Fill all four tiles to export a square 2&times;2 collage as a high-resolution PNG.
+          <p className="font-mono text-control text-ink-dim">
+            Fill all four slots to export one square PNG.
+          </p>
+          <p className="micro-label">
+            Search / MUSICBRAINZ &middot; Covers / FETCHED VIA PROXY &middot;
+            Export / LOCAL
           </p>
         </div>
       </div>
 
       {modal === 'choice' && (
         <div ref={overlayRef} className={styles.overlay} onClick={closeAllModals} onKeyDown={handleOverlayKeyDown} tabIndex={-1} role="dialog" aria-modal="true" aria-label="Add cover art">
-          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+          <div className={`plate ${styles.modal}`} onClick={(e) => e.stopPropagation()}>
             <button className={styles.modalClose} onClick={closeAllModals} aria-label="Close">&times;</button>
-            <div className={styles.modalTitle}>Add Cover Art</div>
+            <div className={styles.modalTitle}>Add cover art</div>
             <div className={styles.choiceButtons}>
               <button className={styles.choiceBtn} onClick={handleUploadChoice}>
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                   <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
                   <polyline points="17 8 12 3 7 8" />
                   <line x1="12" y1="3" x2="12" y2="15" />
                 </svg>
-                Upload Image
+                Upload image
               </button>
               <button className={styles.choiceBtn} onClick={handleSearchChoice}>
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                   <circle cx="11" cy="11" r="8" />
                   <line x1="21" y1="21" x2="16.65" y2="16.65" />
                 </svg>
-                Search Album Art
+                Search cover art
               </button>
             </div>
           </div>
@@ -437,10 +442,10 @@ export default function CoverQuad() {
       )}
 
       {modal === 'search' && (
-        <div ref={overlayRef} className={styles.overlay} onClick={closeAllModals} onKeyDown={handleOverlayKeyDown} tabIndex={-1} role="dialog" aria-modal="true" aria-label="Search album art">
-          <div className={`${styles.modal} ${styles.searchModal}`} onClick={(e) => e.stopPropagation()}>
+        <div ref={overlayRef} className={styles.overlay} onClick={closeAllModals} onKeyDown={handleOverlayKeyDown} tabIndex={-1} role="dialog" aria-modal="true" aria-label="Search cover art">
+          <div className={`plate ${styles.modal} ${styles.searchModal}`} onClick={(e) => e.stopPropagation()}>
             <button className={styles.modalClose} onClick={closeAllModals} aria-label="Close">&times;</button>
-            <div className={styles.modalTitle}>Search Album Art</div>
+            <div className={styles.modalTitle}>Search cover art</div>
             <div className={styles.searchBar}>
               <input
                 className="input min-w-0 flex-1"
@@ -453,13 +458,13 @@ export default function CoverQuad() {
                 autoFocus
               />
               <button className="btn btn-ghost" onClick={performSearch} disabled={searching}>
-                Search
+                Search covers
               </button>
             </div>
 
             {searching && (
               <div className={styles.searchSkeletonGrid} role="status">
-                <span className="sr-only">Searching for album art…</span>
+                <span className="sr-only">Searching for cover art…</span>
                 {Array.from({ length: 8 }, (_, i) => (
                   <div key={i} className={styles.searchSkeleton} aria-hidden="true" />
                 ))}

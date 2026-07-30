@@ -250,10 +250,10 @@ export default function RegexTester() {
               <input
                 id="regex-pattern"
                 type="text"
-                className={`input input-mono ${error ? styles.inputError : ''}`}
+                className="input input-mono"
                 value={pattern}
                 onChange={(e) => setPattern(e.target.value)}
-                placeholder="Enter regex pattern..."
+                placeholder="Enter a pattern"
                 spellCheck={false}
                 aria-invalid={!!error}
                 aria-describedby={error ? 'regex-error' : undefined}
@@ -273,18 +273,28 @@ export default function RegexTester() {
                 ))}
               </div>
             </div>
-            {error && <span id="regex-error" className="text-xs text-[var(--color-red)]" role="alert">{error}</span>}
+            {error && (
+              <div id="regex-error" className={styles.fault} role="alert">
+                <span aria-hidden="true" className={`abd-hazard ${styles.faultStripe}`} />
+                <div className={styles.faultBody}>
+                  <span className={styles.faultLine}>
+                    FAULT // PATTERN // ACTION: revise the expression.
+                  </span>
+                  <span className={styles.faultDetail}>{error}</span>
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="flex flex-col gap-2">
-            <label htmlFor="regex-test" className="field-label">Test String</label>
+            <label htmlFor="regex-test" className="field-label">Test string</label>
             <textarea
               id="regex-test"
               className="textarea input-mono"
               style={{ minHeight: '160px' }}
               value={testString}
               onChange={(e) => setTestString(e.target.value)}
-              placeholder="Enter test string..."
+              placeholder="Enter a test string"
               spellCheck={false}
             />
           </div>
@@ -295,7 +305,7 @@ export default function RegexTester() {
               data-active={showReplace}
               onClick={() => setShowReplace(!showReplace)}
             >
-              {showReplace ? 'Hide Replace' : 'Show Replace'}
+              {showReplace ? 'Hide replace' : 'Show replace'}
             </button>
             <div className="disclosure" data-open={showReplace}>
               <div className={`disclosure-inner ${styles.collapseInner}`}>
@@ -304,7 +314,7 @@ export default function RegexTester() {
                   className="input input-mono"
                   value={replaceString}
                   onChange={(e) => setReplaceString(e.target.value)}
-                  placeholder="Replacement string..."
+                  placeholder="Replacement string"
                   aria-label="Replacement string"
                   spellCheck={false}
                 />
@@ -320,7 +330,7 @@ export default function RegexTester() {
         </div>
 
         {/* RIGHT — live results */}
-        <div className="lg:border-l lg:border-white/[0.06] lg:pl-9">
+        <div className="lg:border-l lg:border-hairline lg:pl-9">
           <div className="flex flex-col gap-4">
             <div className="flex items-center justify-between gap-3">
               <span className="eyebrow-system">Matches</span>
@@ -339,29 +349,37 @@ export default function RegexTester() {
             </div>
 
             {error ? (
-              <div className={styles.placeholder}>{error}</div>
+              <div className={styles.placeholder}>Awaiting valid pattern.</div>
             ) : timedOut ? (
-              <div className={styles.placeholder} role="alert">
-                This pattern took too long to run and was stopped. It may
-                suffer from catastrophic backtracking. Try simplifying it.
+              <div className={styles.fault} role="alert">
+                <span aria-hidden="true" className={`abd-hazard ${styles.faultStripe}`} />
+                <div className={styles.faultBody}>
+                  <span className={styles.faultLine}>
+                    FAULT // EXECUTION // ACTION: simplify the pattern.
+                  </span>
+                  <span className={styles.faultDetail}>
+                    Stopped after {MATCH_TIMEOUT_MS} ms. Probable catastrophic
+                    backtracking against this input.
+                  </span>
+                </div>
               </div>
             ) : hasResult ? (
               <div className={styles.outputBox}>{highlighted}</div>
             ) : (
               <div className={styles.placeholder}>
-                Enter a pattern and test string to see matches.
+                Awaiting pattern and test string.
               </div>
             )}
 
             {matches.length > 0 && matches.some((m) => m.groups.length > 0) && (
               <div className="flex flex-col gap-2">
-                <span className="field-label">Capture Groups</span>
+                <span className="field-label">Capture groups</span>
                 <div className={styles.groups}>
                   {matches.map((m, mi) =>
                     m.groups.map((g, gi) => (
                       <div key={`${mi}-${gi}`} className={styles.group}>
                         <span className={styles.groupIndex}>
-                          Match {mi + 1}, Group {gi + 1}:
+                          Match {mi + 1} · Group {gi + 1}
                         </span>
                         {g ?? '(empty)'}
                       </div>
@@ -381,7 +399,7 @@ export default function RegexTester() {
           data-active={showCheatsheet}
           onClick={() => setShowCheatsheet(!showCheatsheet)}
         >
-          {showCheatsheet ? 'Hide Cheatsheet' : 'Regex Cheatsheet'}
+          {showCheatsheet ? 'Hide cheatsheet' : 'Show cheatsheet'}
         </button>
         <div className="disclosure" data-open={showCheatsheet}>
           <div className={`disclosure-inner ${styles.collapseInner}`}>

@@ -14,8 +14,8 @@ const DEFAULT_DURATIONS: Record<Mode, number> = {
 
 const MODE_LABELS: Record<Mode, string> = {
   work: 'Work',
-  short: 'Short Break',
-  long: 'Long Break',
+  short: 'Short break',
+  long: 'Long break',
 };
 
 const RING_RADIUS = 120;
@@ -160,48 +160,56 @@ export default function PomodoroTimer() {
         ))}
       </div>
 
-      <div className={styles.timerWrap} role="timer" aria-label={`${MODE_LABELS[mode]}: ${minutes} minutes and ${seconds} seconds remaining`}>
-        <svg className={styles.ring} viewBox="0 0 260 260" aria-hidden="true">
-          <circle className={styles.ringTrack} cx="130" cy="130" r={RING_RADIUS} />
-          <circle
-            className={styles.ringProgress}
-            cx="130"
-            cy="130"
-            r={RING_RADIUS}
-            strokeDasharray={RING_CIRCUMFERENCE}
-            strokeDashoffset={dashOffset}
-          />
-        </svg>
-        <span className={styles.time} aria-live="off">
-          {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
-        </span>
+      {/* Sunken readout field — the countdown is this screen's one live
+          value: phosphor while running, primary ink when idle. */}
+      <div className="tool-stage abd-scanlines w-full">
+        <div className={styles.timerWrap} role="timer" aria-label={`${MODE_LABELS[mode]}: ${minutes} minutes and ${seconds} seconds remaining`}>
+          <svg className={styles.ring} viewBox="0 0 260 260" aria-hidden="true">
+            <circle className={styles.ringTrack} cx="130" cy="130" r={RING_RADIUS} />
+            <circle
+              className={styles.ringProgress}
+              cx="130"
+              cy="130"
+              r={RING_RADIUS}
+              strokeDasharray={RING_CIRCUMFERENCE}
+              strokeDashoffset={dashOffset}
+            />
+          </svg>
+          <span
+            className={`${styles.time} ${running ? 'readout' : styles.timeIdle}`}
+            aria-live="off"
+          >
+            {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
+          </span>
+        </div>
       </div>
 
       <div className="flex gap-3">
-        <button className="btn btn-primary px-8" onClick={() => setRunning(!running)}>
-          {running ? 'Pause' : 'Start'}
+        <button className="btn btn--primary px-8" onClick={() => setRunning(!running)}>
+          {running ? 'Pause timer' : mode === 'work' ? 'Start focus' : 'Start break'}
         </button>
-        <button className="btn btn-ghost px-8" onClick={reset}>
-          Reset
+        <button className="btn btn--quiet px-8" onClick={reset}>
+          Reset session
         </button>
       </div>
 
       <div className={styles.sessions} aria-label={`${sessions} sessions completed, ${sessions % 4} of 4 in current cycle`}>
-        <span>Sessions</span>
+        <span className="micro-label">Sessions</span>
         <div className={styles.dots} aria-hidden="true">
           {Array.from({ length: 4 }).map((_, i) => (
             <div key={i} className={`${styles.dot} ${i < sessions % 4 ? styles.dotFilled : ''}`} />
           ))}
         </div>
-        <span>{sessions}</span>
+        <span className={styles.sessionCount}>{sessions}</span>
       </div>
 
       <div className={styles.settings}>
         <button
-          className="mx-auto text-xs text-[var(--color-graphite)] transition-colors duration-200 hover:text-[var(--color-paper)]"
+          className="btn btn--quiet mx-auto"
+          aria-expanded={showSettings}
           onClick={() => setShowSettings(!showSettings)}
         >
-          {showSettings ? 'Hide Settings' : 'Customize Durations'}
+          {showSettings ? 'Hide durations' : 'Set durations'}
         </button>
         <div className="disclosure" data-open={showSettings}>
           <div className={`disclosure-inner ${styles.settingsPanelInner}`}>
@@ -211,14 +219,14 @@ export default function PomodoroTimer() {
                 <div className="flex items-center gap-1.5">
                   <input
                     type="number"
-                    className={styles.settingInput}
+                    className={`input input-mono ${styles.settingInput}`}
                     value={durations[m]}
                     onChange={(e) => updateDuration(m, e.target.value)}
                     min={1}
                     max={99}
                     aria-label={`${MODE_LABELS[m]} duration in minutes`}
                   />
-                  <span className="text-xs text-[var(--color-graphite)]">min</span>
+                  <span className="font-mono text-micro uppercase tracking-micro text-ink-dim">min</span>
                 </div>
               </div>
             ))}

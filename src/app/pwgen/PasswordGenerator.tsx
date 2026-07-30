@@ -151,10 +151,13 @@ export default function PasswordGenerator() {
 
   if (loadError) {
     return (
-      <div className="flex flex-col items-center gap-4 py-12 text-center" role="alert">
-        <p className="text-sm text-[var(--text)]">
-          Couldn&apos;t load the word lists. Check your connection and try again.
-        </p>
+      <div className="flex flex-col items-center gap-5 py-12" role="alert">
+        <div className={styles.fault}>
+          <span aria-hidden="true" className={`abd-hazard ${styles.faultStripe}`} />
+          <p className={styles.faultText}>
+            FETCH FAILURE // /data/pwgen // ACTION: check connection and retry.
+          </p>
+        </div>
         <button
           className="btn btn-primary"
           onClick={() => {
@@ -163,7 +166,7 @@ export default function PasswordGenerator() {
             setLoadAttempt((n) => n + 1);
           }}
         >
-          Retry
+          Reload word lists
         </button>
       </div>
     );
@@ -223,15 +226,15 @@ export default function PasswordGenerator() {
 
           {mode === 'memorable' && (
             <>
-              <label className={styles.controlRow} style={{ cursor: 'pointer' }}>
-                <span className={styles.controlLabel}>Common Words</span>
+              <label className={styles.controlRow}>
+                <span className={styles.controlLabel}>Common words</span>
                 <span className="switch">
                   <input type="checkbox" checked={useCommon} onChange={(e) => setUseCommon(e.target.checked)} />
                   <span className="switch-track" />
                 </span>
               </label>
 
-              <label className={styles.controlRow} style={{ cursor: 'pointer' }}>
+              <label className={styles.controlRow}>
                 <span className={styles.controlLabel}>Leetify</span>
                 <span className="switch">
                   <input type="checkbox" checked={useLeet} onChange={(e) => setUseLeet(e.target.checked)} />
@@ -242,7 +245,7 @@ export default function PasswordGenerator() {
               {useLeet && (
                 <div className={styles.rangeGroup}>
                   <div className={styles.rangeHeader}>
-                    <span className={styles.controlLabel}>Leetify Amount</span>
+                    <span className={styles.controlLabel}>Leetify amount</span>
                     <span className={styles.rangeValue}>{leetAmount}%</span>
                   </div>
                   <input
@@ -261,7 +264,7 @@ export default function PasswordGenerator() {
           {mode === 'passphrase' && (
             <>
               <div className={styles.controlRow}>
-                <span className={styles.controlLabel}>Word List</span>
+                <span className={styles.controlLabel}>Word list</span>
                 <div
                   className="segmented"
                   ref={sourceSlider}
@@ -299,7 +302,7 @@ export default function PasswordGenerator() {
                 />
               </div>
 
-              <label className={styles.controlRow} style={{ cursor: 'pointer' }}>
+              <label className={styles.controlRow}>
                 <span className={styles.controlLabel}>Capitalize</span>
                 <span className="switch">
                   <input type="checkbox" checked={passphraseCapitalize} onChange={(e) => setPassphraseCapitalize(e.target.checked)} />
@@ -312,12 +315,13 @@ export default function PasswordGenerator() {
 
         {/* Generate button */}
         <button className="btn btn-primary btn-block" onClick={generate}>
-          <span>Generate</span>
+          <span>{mode === 'memorable' ? 'Generate password' : 'Generate passphrase'}</span>
           <kbd className="kbd">Space</kbd>
         </button>
 
-        {/* Source credits */}
+        {/* Source credits — evidence for the word pools */}
         <div className={styles.credit}>
+          Word lists:{' '}
           <a href="https://github.com/MichaelWehar/Public-Domain-Word-Lists" target="_blank" rel="noopener noreferrer">
             Public Domain Word Lists
           </a>
@@ -334,27 +338,19 @@ export default function PasswordGenerator() {
       </div>
 
       {/* RIGHT — result */}
-      <div className="lg:border-l lg:border-white/[0.06] lg:pl-10">
+      <div className="lg:border-l lg:border-hairline lg:pl-10">
         <div className="flex flex-col gap-4 lg:sticky lg:top-24">
           <div className="flex items-center justify-between gap-3">
             <span className="eyebrow-system">Result</span>
             <div className={styles.hints}>
-              <span><kbd className="kbd">Space</kbd> new</span>
+              <span><kbd className="kbd">Space</kbd> generate</span>
               <span><kbd className="kbd">C</kbd> copy</span>
             </div>
           </div>
 
-          {/* Primary password display */}
+          {/* Primary password display — fresh output, shown plainly */}
           {selected && (
-            <div
-              className={`${styles.result} ${copied ? styles.resultCopied : ''}`}
-              onClick={copyToClipboard}
-              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); copyToClipboard(); } }}
-              title="Click to copy"
-              role="button"
-              tabIndex={0}
-              aria-label={`Password: ${selected.full}. Click to copy.`}
-            >
+            <div className={`tool-stage ${styles.result}`}>
               <div className={styles.passwordSegments}>
                 {selected.segments.map((seg, i) => (
                   <span key={i} className={styles[`seg${capitalize(seg.type)}` as keyof typeof styles]}>
@@ -364,19 +360,11 @@ export default function PasswordGenerator() {
               </div>
               <div className={styles.resultMeta}>
                 <span className={styles.charCount}>{selected.full.length} chars</span>
-                <span className={styles.copyHint}>
-                  {copyFailed ? 'Copy failed. Select and copy manually' : copied ? 'Copied!' : 'Click to copy'}
-                </span>
               </div>
             </div>
           )}
 
-          {/* Announce copy feedback without reading the password aloud */}
-          <span className="sr-only" aria-live="polite">
-            {copyFailed ? 'Copy failed' : copied ? 'Password copied to clipboard' : ''}
-          </span>
-
-          {/* Strength meter */}
+          {/* Strength — neutral meter fill; the word carries the state */}
           {strength && (
             <div className="flex w-full items-center gap-3">
               <div className="meter">
@@ -384,11 +372,32 @@ export default function PasswordGenerator() {
                   <div key={i} className="meter-seg" data-on={i <= strength.level} />
                 ))}
               </div>
-              <span className="whitespace-nowrap font-mono text-[0.66rem] uppercase tracking-[0.06em] tabular-nums text-[var(--color-graphite)]">
-                {selected.entropy} bits &middot; {strength.label}
+              <span className={styles.strengthLabel}>
+                {selected.entropy} bits &middot;{' '}
+                <span className={styles.strengthWord} data-level={strength.level}>
+                  {strength.label}
+                </span>
               </span>
             </div>
           )}
+
+          {/* Copy action */}
+          <div className={styles.copyRow}>
+            <button className="btn btn--quiet" onClick={copyToClipboard}>
+              Copy password
+            </button>
+            {copied && <span className={styles.copyStatus}>Copied</span>}
+            {copyFailed && (
+              <span className={styles.copyFault}>
+                COPY FAULT // CLIPBOARD // ACTION: select and copy manually
+              </span>
+            )}
+          </div>
+
+          {/* Announce copy feedback without reading the password aloud */}
+          <span className="sr-only" aria-live="polite">
+            {copyFailed ? 'Copy failed' : copied ? 'Password copied to clipboard' : ''}
+          </span>
 
           {/* Batch list */}
           <div className={styles.batchList}>
@@ -396,6 +405,7 @@ export default function PasswordGenerator() {
               <button
                 key={i}
                 className={`${styles.batchItem} ${i === selectedIndex ? styles.batchSelected : ''}`}
+                aria-pressed={i === selectedIndex}
                 onClick={() => {
                   setSelectedIndex(i);
                   setCopied(false);
