@@ -12,27 +12,21 @@ interface FadeInWrapperProps {
   eager?: boolean;
 }
 
+/** Entrance confirmation for content arriving into view. Axis motion:
+ *  panel-large duration, the flat easing, a short travel, no blur. */
 export default function FadeInWrapper({ children, delay = 0, direction = 'up', eager = false }: FadeInWrapperProps) {
   // Framer Motion drives these styles from JS, so the global CSS
-  // prefers-reduced-motion rules never apply — gate here instead. The
-  // element must stay a motion.div (server HTML carries the hidden styles;
-  // a plain div would never clear them), so reduced motion becomes an
-  // instant, zero-duration reveal on mount.
+  // prefers-reduced-motion rules never apply — gate here instead.
   const reduceMotion = useReducedMotion();
-  // Keep the reveal crisp. The first redesign used a longer travel and a
-  // 10px blur, which made above-the-fold content look briefly out of focus on
-  // navigation. This smaller transition still gives the page rhythm without
-  // delaying comprehension or interaction.
-  const distance = 18;
+  const distance = 10;
 
   const variants = reduceMotion
     ? {
-        hidden: { opacity: 0, y: 0, x: 0, filter: 'blur(0px)' },
+        hidden: { opacity: 0, y: 0, x: 0 },
         visible: {
           opacity: 1,
           y: 0,
           x: 0,
-          filter: 'blur(0px)',
           transition: { duration: 0 },
         },
       }
@@ -41,17 +35,16 @@ export default function FadeInWrapper({ children, delay = 0, direction = 'up', e
           opacity: 0,
           y: direction === 'up' ? distance : direction === 'down' ? -distance : 0,
           x: direction === 'left' ? distance : direction === 'right' ? -distance : 0,
-          filter: 'blur(4px)',
         },
         visible: {
           opacity: 1,
           y: 0,
           x: 0,
-          filter: 'blur(0px)',
           transition: {
-            duration: 0.48,
+            // --duration-panel-lg and --ease-flat, expressed for Motion.
+            duration: 0.26,
             delay,
-            ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+            ease: [0.3, 0, 0.2, 1] as [number, number, number, number],
           },
         },
       };

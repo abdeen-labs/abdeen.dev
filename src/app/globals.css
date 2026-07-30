@@ -1,159 +1,418 @@
 @import "tailwindcss";
 
 /* ──────────────────────────────────────────────────────────────────────
-   Abdeen Labs brand tokens (BRAND.md v1.10)
-   Canonical palette: red, ink, paper, fog, graphite — no others.
-   Two surface recipes on Ink: Surface Card (default — fill + hairline
-   border, nothing else) and Ink Elevated (reserved — four-layer lift for
-   hero/shell/modal). Mono carries the technical register (system eyebrows,
-   metadata, status chips, kbd, code, console). No thin weights anywhere.
+   Abdeen Labs · Axis (BRAND.md v3.0)
+   Token source: abdeen-brand/system/colors_and_type.css. Interfaces ship
+   in two first-class modes from one role-token set: dark is canonical
+   (:root), light lives in :root[data-theme="light"] and follows
+   prefers-color-scheme unless data-theme pins it. Components consume
+   role aliases — --surface-*, --ink-*, --hairline*, --signal-*,
+   --readout-* — never a ramp step. Structure is square; touch carries
+   the 3px edge break. Lacquer acts, Hazard alarms, phosphor is one live
+   readout per screen. No shadows, no glows beyond the readout, no
+   hollow type.
    ────────────────────────────────────────────────────────────────────── */
 
 @theme inline {
-  /* Canonical brand palette */
-  --color-red: #CC1B1B;
-  --color-ink: #0A0A0A;
-  --color-paper: #FAFAFA;
-  --color-fog: #E5E5E5;
-  --color-graphite: #8A8A8A;
+  /* Default palettes are cleared so an off-system utility (text-white,
+     bg-zinc-900, text-red-500) emits nothing instead of re-inking a mode.
+     Only role tokens are exposed — Tailwind cannot name a ramp step. */
+  --color-*: initial;
+  --color-surface-page: var(--surface-page);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-surface-card: var(--surface-card);
+  --color-surface-band: var(--surface-band);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-void: var(--surface-void);
+  --color-hairline: var(--hairline);
+  --color-hairline-strong: var(--hairline-strong);
+  --color-ink-primary: var(--ink-primary);
+  --color-ink-secondary: var(--ink-secondary);
+  --color-ink-dim: var(--ink-dim);
+  --color-ink-faint: var(--ink-faint);
+  --color-ink-structure: var(--ink-structure);
+  --color-ink-inverse: var(--ink-inverse);
+  --color-signal-identity: var(--signal-identity);
+  --color-signal-link: var(--signal-link);
+  --color-signal-press: var(--signal-press);
+  --color-signal-verified: var(--signal-verified);
+  --color-signal-warning: var(--signal-warning);
+  --color-signal-alarm: var(--signal-alarm);
+  --color-readout: var(--readout-color);
 
-  /* Type families — three distinct Latin roles + one Arabic + mono */
-  --font-sans: var(--font-switzer), -apple-system, system-ui, sans-serif;
-  --font-wordmark: var(--font-plex), -apple-system, sans-serif;
-  --font-mark: var(--font-aref), serif;
-  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  /* Type roles. --font-sans aliases Geist so libraries that assume it
+     still land on the prose face. */
+  --font-display: var(--font-display-stack);
+  --font-mono: var(--font-mono-stack);
+  --font-text: var(--font-text-stack);
+  --font-sans: var(--font-text-stack);
+  --font-mark: var(--font-mark-stack);
+  --font-arabic: var(--font-arabic-stack);
 
-  /* Mono tracking — short for product UI, NOT the 0.18em editorial eyebrow */
-  --tracking-mono-eyebrow: 0.08em;
-  --tracking-mono-chip: 0.04em;
+  /* The eight fixed steps + three fluid macro sizes are the only text
+     sizes. Default sizes are cleared so text-sm/text-base cannot bypass
+     the scale. */
+  --text-*: initial;
+  --text-micro: 11px;
+  --text-micro--line-height: 1.4;
+  --text-control: 13px;
+  --text-control--line-height: var(--leading-mono);
+  --text-body: 15px;
+  --text-body--line-height: var(--leading-text);
+  --text-lede: 18px;
+  --text-lede--line-height: var(--leading-text);
+  --text-h3: 24px;
+  --text-h3--line-height: var(--leading-display);
+  --text-h2: 34px;
+  --text-h2--line-height: var(--leading-display);
+  --text-h1: 52px;
+  --text-h1--line-height: var(--leading-display);
+  --text-display: 84px;
+  --text-display--line-height: var(--leading-display);
+  --text-macro-1: clamp(96px, 11vw, 140px);
+  --text-macro-1--line-height: var(--leading-display);
+  --text-macro-2: clamp(110px, 15vw, 180px);
+  --text-macro-2--line-height: var(--leading-display);
+  --text-macro-3: clamp(128px, 19vw, 220px);
+  --text-macro-3--line-height: var(--leading-display);
+
+  --leading-display: 0.86;
+  --leading-text: 1.55;
+  --leading-mono: 1.45;
+
+  --tracking-micro: 0.11em;
+  --tracking-wordmark: 0.22em;
+  --tracking-display: -0.055em;
+
+  /* Structure is square; touch is edge-broken. rounded-control is the
+     3px edge break; rounded-round exists only for the switch track,
+     roundel, avatars, and dots (Hard Rule #13). Everything else: no
+     radius utility exists, so structure stays at 0. */
+  --radius-*: initial;
+  --radius-control: 3px;
+  --radius-round: 999px;
+
+  /* No drop shadows, no glows, no glass (Hard Rule #14). The readout's
+     glow and the sticky header's blur are handed out in component CSS,
+     never as utilities. */
+  --shadow-*: initial;
+  --inset-shadow-*: initial;
+  --drop-shadow-*: initial;
+  --blur-*: initial;
+  --animate-*: initial;
+
+  /* Motion — flat, short. */
+  --ease-flat: cubic-bezier(0.3, 0, 0.2, 1);
 }
+
+/* ─── Canonical tokens — dark mode (the default) ─────────────────── */
 
 :root {
   color-scheme: dark;
 
-  /* Canonical */
-  --color-red: #CC1B1B;
-  --color-ink: #0A0A0A;
-  --color-paper: #FAFAFA;
-  --color-fog: #E5E5E5;
-  --color-graphite: #8A8A8A;
+  /* Pitch — the dark field */
+  --pitch-960: #000000;
+  --pitch-950: #0A0B0C;
+  --pitch-900: #111316;
+  --pitch-850: #181B1F;
+  --pitch-800: #202429;
+  --pitch-700: #272C32;
+  --pitch-600: #2E343C;
+  --pitch-500: #353C45;
 
-  /* Surface Card — default container on Ink. Two layers, applied together.
-     Near-flush fill defined by a hairline border. No gradient, no shadow,
-     no inset highlight — that recipe is Ink Elevated, not this one. */
-  --surface-card-bg: rgba(14, 14, 14, 0.85);
-  --surface-card-border: 1px solid rgba(255, 255, 255, 0.08);
+  /* Graphite — dark structure and dim text */
+  --graphite-900: #0D1014;
+  --graphite-800: #272B31;
+  --graphite-700: #41464E;
+  --graphite-600: #5A616B;
+  --graphite-500: #747C88;
+  --graphite-400: #8F96A0;
+  --graphite-300: #AAB0B8;
+  --graphite-200: #C4C9D0;
+  --graphite-100: #DFE3E8;
 
-  /* Ink Elevated — reserved surface for hero/shell/modal. Four layers.
-     Stops neutralized (R=G=B) to match the cooler Ink used site-wide. */
-  --surface-ink-elev-bg: linear-gradient(
-    140deg,
-    rgba(26, 26, 26, 0.98) 0%,
-    rgba(18, 18, 18, 0.92) 58%,
-    rgba(12, 12, 12, 0.96) 100%
-  );
-  --surface-ink-elev-border: 1px solid rgba(255, 255, 255, 0.11);
-  --surface-ink-elev-inset: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  --surface-ink-elev-shadow: 0 32px 90px rgba(0, 0, 0, 0.38);
+  /* Chalk — dark-mode text, never a surface */
+  --chalk-100: #FFFFFF;
+  --chalk-200: #F0F2F5;
+  --chalk-300: #E2E5EA;
 
-  /* Mark color decision (see Mark Color Logic in BRAND.md) */
-  --mark-default: var(--color-red);
+  /* Bone — the light field, and the sheet */
+  --bone-100: #EAE7DD;
+  --bone-200: #E1DDCD;
+  --bone-300: #DBD5C5;
+  --bone-400: #D2CBB9;
+  --bone-500: #C9C1AD;
 
-  /* Tracking. Deliberately NOT --tracking-tight: that name is Tailwind's own
-     theme key, and an unlayered :root entry would silently redefine every
-     `tracking-tight` utility. Display tracking is set per element instead. */
-  --tracking-wordmark: 0.18em;
-  --tracking-eyebrow: 0.18em;
+  /* Carbon — light-mode ink and hairlines */
+  --carbon-900: #0B0A08;
+  --carbon-800: #27231C;
+  --carbon-700: #544F45;
+  --carbon-600: #6E675A;
+  --carbon-500: #898070;
+  --carbon-300: #B9B2A0;
+  --carbon-200: #C0BAAA;
 
-  /* Short aliases carried by the JSX (text-[var(--text)] and friends). */
-  --text: var(--color-graphite);
-  --heading: var(--color-paper);
-  --accent: var(--color-red);
-  --accent-hover: #A81616;
-  --accent-glow: rgba(204, 27, 27, 0.35);
+  /* Lacquer — identity red, shared by both modes */
+  --lacquer-400: #DB425A;
+  --lacquer-500: #D01E3A;
+  --lacquer-600: #A2172D;
+  --lacquer-700: #791122;
+
+  /* Hazard · Phosphor · State — a bright step and a deep 700 step */
+  --hazard-500: #FF2A2A;
+  --hazard-700: #BF0000;
+  --phosphor-500: #4AF626;
+  --phosphor-700: #156404;
+  --jade-400: #2AB084;
+  --jade-700: #176149;
+  --amber-400: #D1A534;
+  --amber-700: #695318;
+
+  /* Surface roles (aliases — never re-declare a hex) */
+  --surface-page: var(--pitch-950);
+  --surface-sunken: var(--pitch-900);
+  --surface-card: var(--pitch-850);
+  --surface-band: var(--pitch-800);
+  --surface-raised: var(--pitch-700);
+  --surface-void: var(--pitch-960);
+  --hairline: var(--pitch-600);
+  --hairline-strong: var(--pitch-500);
+
+  /* Ink roles (aliases — the type layer) */
+  --ink-primary: var(--chalk-100);
+  --ink-secondary: var(--chalk-300);
+  --ink-dim: var(--graphite-400);
+  --ink-faint: var(--graphite-500);
+  --ink-structure: var(--graphite-600);
+  --ink-inverse: var(--chalk-100);
+
+  /* Signal roles (aliases — the mode picks the step) */
+  --signal-identity: var(--lacquer-500);
+  --signal-link: var(--lacquer-400);
+  --signal-press: var(--lacquer-600);
+  --signal-verified: var(--jade-400);
+  --signal-warning: var(--amber-400);
+  --signal-alarm: var(--hazard-500);
+
+  /* Effect tokens — physics, derived from ramp steps */
+  --edge-light: color-mix(in srgb, var(--chalk-100) 7%, transparent);
+  --texture-line: color-mix(in srgb, var(--pitch-960) 22%, transparent);
+
+  /* Type families — next/font variables carry the files (src/app/fonts.ts).
+     IBM Plex Sans Arabic is not loaded: the site has no Arabic copy
+     surface. The token stays declared so [lang="ar"] content falls to a
+     correct system stack until the face ships with a localized surface. */
+  --font-display-stack: var(--font-schibsted), -apple-system, sans-serif;
+  --font-mono-stack: var(--font-geist-mono), ui-monospace, monospace;
+  --font-text-stack: var(--font-geist), -apple-system, system-ui, sans-serif;
+  --font-mark-stack: var(--font-aref), serif; /* عابدين only */
+  --font-arabic-stack: "IBM Plex Sans Arabic", "Geeza Pro", system-ui, sans-serif;
+
+  /* Tracking & leading */
+  --tracking-wordmark: 0.22em;
+  --tracking-micro: 0.11em;
+  --tracking-display: -0.055em;
+  --leading-display: 0.86;
+  --leading-text: 1.55;
+  --leading-mono: 1.45;
+
+  /* Type scale — eight steps + three fluid macro */
+  --fs-micro: 11px;
+  --fs-control: 13px;
+  --fs-body: 15px;
+  --fs-lede: 18px;
+  --fs-h3: 24px;
+  --fs-h2: 34px;
+  --fs-h1: 52px;
+  --fs-display: 84px;
+  --fs-macro-1: clamp(96px, 11vw, 140px);
+  --fs-macro-2: clamp(110px, 15vw, 180px);
+  --fs-macro-3: clamp(128px, 19vw, 220px);
+
+  /* Spacing — 4px base, geometric ramp */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  /* Shape — structure is square; touch is edge-broken */
+  --radius-control: 3px;
+  --radius-round: 999px;
+
+  /* Motion — flat, short */
+  --ease-flat: cubic-bezier(0.3, 0, 0.2, 1);
+  --duration-hover: 110ms;
+  --duration-panel: 170ms;
+  --duration-panel-lg: 260ms;
+  --duration-reveal: 340ms;
+
+  /* Focus — the square lacquer ring, identical in both modes */
+  --focus-ring: 2px solid var(--lacquer-500);
+  --focus-ring-offset: 2px;
+
+  /* Seal & mark geometry */
+  --mark-optical-shift: 0.168em;
+  --seal-mark-scale: 0.32;
+  --seal-cut: 26%;
+  --seal-size: 40px;
+  --seal-line: max(1px, calc(var(--seal-size) / 40));
+  --seal-key-field: var(--pitch-900);
+  --seal-key-line: var(--lacquer-500);
+  --seal-key-ink: var(--lacquer-500);
+
+  /* Readout — the one live element */
+  --readout-color: var(--phosphor-500);
+  --readout-glow: 0 0 8px color-mix(in srgb, var(--phosphor-500) 35%, transparent);
+
+  /* Select arrow — furniture glyph at the mode's dim ink (a data URI
+     cannot read var(), so each mode bakes its own literal). */
+  --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5' stroke='%238F96A0' stroke-width='1.4'/%3E%3C/svg%3E");
 }
+
+/* ─── Light mode — same roles, light literals ────────────────────── */
+
+:root[data-theme="light"] {
+  color-scheme: light;
+
+  --surface-page: var(--bone-100);
+  --surface-sunken: var(--bone-200);
+  --surface-card: var(--bone-300);
+  --surface-band: var(--bone-400);
+  --surface-raised: var(--bone-500);
+  --surface-void: var(--carbon-900);
+  --hairline: var(--carbon-200);
+  --hairline-strong: var(--carbon-300);
+
+  --ink-primary: var(--carbon-900);
+  --ink-secondary: var(--carbon-800);
+  --ink-dim: var(--carbon-700);
+  --ink-faint: var(--carbon-600);
+  --ink-structure: var(--carbon-500);
+
+  --signal-link: var(--lacquer-600);
+  --signal-press: var(--lacquer-700);
+  --signal-verified: var(--jade-700);
+  --signal-warning: var(--amber-700);
+  --signal-alarm: var(--hazard-700);
+
+  --edge-light: color-mix(in srgb, var(--carbon-900) 9%, transparent);
+  --texture-line: color-mix(in srgb, var(--carbon-900) 7%, transparent);
+
+  --seal-key-field: var(--bone-200);
+
+  --readout-color: var(--phosphor-700);
+  --readout-glow: none;
+
+  --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5' stroke='%23544F45' stroke-width='1.4'/%3E%3C/svg%3E");
+}
+
+/* Follow the operating system unless an explicit data-theme says otherwise.
+   Deliberately :root:not([data-theme="dark"]), never a bare :root — the
+   declaration list mirrors the [data-theme="light"] block above. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    color-scheme: light;
+
+    --surface-page: var(--bone-100);
+    --surface-sunken: var(--bone-200);
+    --surface-card: var(--bone-300);
+    --surface-band: var(--bone-400);
+    --surface-raised: var(--bone-500);
+    --surface-void: var(--carbon-900);
+    --hairline: var(--carbon-200);
+    --hairline-strong: var(--carbon-300);
+
+    --ink-primary: var(--carbon-900);
+    --ink-secondary: var(--carbon-800);
+    --ink-dim: var(--carbon-700);
+    --ink-faint: var(--carbon-600);
+    --ink-structure: var(--carbon-500);
+
+    --signal-link: var(--lacquer-600);
+    --signal-press: var(--lacquer-700);
+    --signal-verified: var(--jade-700);
+    --signal-warning: var(--amber-700);
+    --signal-alarm: var(--hazard-700);
+
+    --edge-light: color-mix(in srgb, var(--carbon-900) 9%, transparent);
+    --texture-line: color-mix(in srgb, var(--carbon-900) 7%, transparent);
+
+    --seal-key-field: var(--bone-200);
+
+    --readout-color: var(--phosphor-700);
+    --readout-glow: none;
+
+    --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5' stroke='%23544F45' stroke-width='1.4'/%3E%3C/svg%3E");
+  }
+}
+
+/* ─── Base ───────────────────────────────────────────────────────── */
 
 html {
   scroll-behavior: smooth;
-  background-color: var(--color-ink);
-  color-scheme: dark;
+  background: var(--surface-page);
 }
 
-/* The sticky header is ~88px of in-flow chrome. Next.js scrolls the first
-   Page element into view on route changes, and hash anchors align to the
-   viewport top — without an offset both land with content tucked under the
-   navbar. On page navigation the margin overshoots past document top and
-   clamps to 0, which is exactly where we want to land. */
-main,
-main > * {
-  scroll-margin-top: 6rem;
-}
-
-section[id] {
-  scroll-margin-top: 6.5rem;
-}
-
+html,
 body {
-  position: relative;
-  isolation: isolate;
-  background:
-    linear-gradient(135deg, rgba(204, 27, 27, 0.11) 0%, transparent 24%),
-    linear-gradient(180deg, #101010 0%, var(--color-ink) 42%, #050505 100%);
-  background-attachment: fixed;
-  color: var(--text);
-  font-family: var(--font-sans);
+  font-family: var(--font-text-stack);
+  background: var(--surface-page);
+  color: var(--ink-primary);
+}
+
+/* Body carries the reading size, not the root — rem stays anchored to the
+   user's browser setting. */
+body {
+  font-size: var(--fs-body);
+  line-height: var(--leading-text);
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  pointer-events: none;
-  background: linear-gradient(
-    112deg,
-    transparent 0%,
-    transparent 56%,
-    rgba(204, 27, 27, 0.045) 74%,
-    transparent 92%
-  );
+/* The sticky header is in-flow chrome; anchors need clearance under it. */
+main,
+main > * {
+  scroll-margin-top: 5.5rem;
 }
 
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  opacity: 0.18;
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 120px 120px;
-  mask-image: radial-gradient(circle at center, black 34%, transparent 78%);
+section[id] {
+  scroll-margin-top: 6rem;
 }
 
+/* The system's only highlight — selection inverts to chalk on lacquer. */
 ::selection {
-  background: rgba(204, 27, 27, 0.22);
-  color: var(--color-paper);
+  background: var(--signal-identity);
+  color: var(--ink-inverse);
+}
+
+/* Focus & reduced motion ship in the base layer — never per-component.
+   Square 2px lacquer ring, identical in both modes (Hard Rule #16). */
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
-}
-
-/* Focus ring. Deliberately does NOT set border-radius: this rule is unlayered,
-   so it outranks Tailwind's `@layer utilities` — a `border-radius` here would
-   beat `rounded-full` and snap every pill (nav links, CTAs, chips, eyebrows)
-   into a 10px-radius rectangle while keyboard-focused. Outlines already follow
-   the element's own radius. */
-*:focus-visible {
-  outline: 2px solid var(--color-red);
-  outline-offset: 2px;
+  scrollbar-color: var(--hairline-strong) transparent;
 }
 
 *::-webkit-scrollbar {
@@ -166,21 +425,27 @@ body::after {
 }
 
 *::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 999px;
+  background: var(--hairline-strong);
   border: 2px solid transparent;
   background-clip: padding-box;
 }
 
-a {
-  text-decoration-color: rgba(204, 27, 27, 0.25);
+img,
+svg,
+canvas {
+  display: block;
+}
+
+button,
+a,
+[role="button"],
+input,
+select,
+textarea {
+  touch-action: manipulation;
 }
 
 @layer base {
-  /* Kill orphans. `balance` evens out short display text (browsers cap it at
-     ~6 lines, so it stays cheap); `pretty` only pulls the last word up on body
-     copy. In @layer base, not unlayered, so a `text-balance`/`text-pretty`
-     utility can still override per element. */
   h1,
   h2,
   h3,
@@ -197,150 +462,541 @@ a {
   textarea,
   select {
     font: inherit;
-    caret-color: var(--color-red);
-  }
-
-  input,
-  textarea,
-  select {
-    font-size: 16px;
+    caret-color: var(--signal-identity);
   }
 }
 
-img,
-svg,
-canvas {
-  display: block;
+/* ─── Semantic type roles ────────────────────────────────────────── */
+
+/* Schibsted — only shouts. Uppercase, heavy, never below 24px. */
+.display {
+  font-family: var(--font-display-stack);
+  font-weight: 800;
+  font-size: var(--fs-display);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  text-transform: uppercase;
 }
 
-/* ── Ink Elevated — product-UI card recipe (brand rule #11).
-   Register as a component class so the four layers travel together. */
-.surface-ink-elev {
-  background: var(--surface-ink-elev-bg);
-  border: var(--surface-ink-elev-border);
-  box-shadow: var(--surface-ink-elev-shadow), var(--surface-ink-elev-inset);
+h1,
+.h1 {
+  font-family: var(--font-display-stack);
+  font-weight: 800;
+  font-size: var(--fs-h1);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  text-transform: uppercase;
 }
 
-/* Surface Card — default container on Ink (BRAND.md rule #13).
-   Near-flush fill, hairline border, nothing else. Cards read as bordered
-   voids carved out of Ink, not as gray masses floating on black. */
-.surface-card {
-  background: var(--surface-card-bg);
-  border: var(--surface-card-border);
+h2,
+.h2 {
+  font-family: var(--font-display-stack);
+  font-weight: 700;
+  font-size: var(--fs-h2);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  text-transform: uppercase;
 }
 
-/* Persistent site navigation. The faint inner edge is enough to separate the
-   bar from the page without turning it into a glossy floating capsule. */
-.site-nav {
-  background: rgba(10, 10, 10, 0.86);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.025),
-    0 12px 36px rgba(0, 0, 0, 0.16);
+h3,
+.h3 {
+  font-family: var(--font-display-stack);
+  font-weight: 700;
+  font-size: var(--fs-h3);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  text-transform: uppercase;
 }
 
-/* System eyebrow — JetBrains Mono 400, tracking 0.08em, uppercase, graphite.
-   Brand v1.10 default for product UI labels (section captions, metadata
-   rails). The `.eyebrow` below stays in marketing/editorial registers. */
+/* Geist — anything longer than one line. */
+p,
+.body {
+  font-family: var(--font-text-stack);
+  font-weight: 400;
+  font-size: var(--fs-body);
+  line-height: var(--leading-text);
+}
+
+.lede {
+  font-size: var(--fs-lede);
+  line-height: var(--leading-text);
+}
+
+/* Geist Mono — anything one line or shorter. Tabular numerals always. */
+.mono,
+code,
+kbd,
+samp,
+data,
+output {
+  font-family: var(--font-mono-stack);
+  font-weight: 400;
+  font-size: var(--fs-control);
+  line-height: var(--leading-mono);
+  font-feature-settings: "tnum";
+}
+
+/* Mono micro-label — the uppercase 11px tier. Labels, never prose. */
+.micro-label,
 .eyebrow-system {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-weight: 400;
-  font-size: 11px;
-  letter-spacing: var(--tracking-mono-eyebrow);
-  text-transform: uppercase;
-  color: var(--color-graphite);
-}
-
-/* Editorial eyebrow — Switzer 500, tracking 0.18em, uppercase (BRAND.md typography). */
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  min-height: 2rem;
-  padding: 0.45rem 0.85rem;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.03);
-  color: var(--text);
-  font-family: var(--font-sans);
+  gap: var(--space-2);
+  font-family: var(--font-mono-stack);
   font-weight: 500;
-  font-size: 0.68rem;
-  letter-spacing: var(--tracking-eyebrow);
+  font-size: var(--fs-micro);
+  line-height: 1.4;
+  letter-spacing: var(--tracking-micro);
   text-transform: uppercase;
+  color: var(--ink-faint); /* page surface only — --ink-dim on plates */
 }
 
-/* Brand wordmark utility — IBM Plex Sans only. */
-.brand-wordmark {
-  font-family: var(--font-wordmark);
-  font-weight: 500;
-  letter-spacing: var(--tracking-wordmark);
-  text-transform: uppercase;
+/* --ink-faint drops below AA the moment it leaves the page surface. */
+.plate .micro-label,
+.plate--sunken .micro-label,
+.plate--band .micro-label,
+.plate--raised .micro-label,
+.plate .eyebrow-system,
+.plate--sunken .eyebrow-system,
+.plate--band .eyebrow-system,
+.plate--raised .eyebrow-system {
+  color: var(--ink-dim);
 }
 
-/* Brand mark utility — Aref Ruqaa only, RTL. */
-.brand-mark {
-  font-family: var(--font-mark);
+/* Arabic — all Arabic text, display included. Never Aref Ruqaa. */
+.arabic,
+:where([lang="ar"]) {
+  font-family: var(--font-arabic-stack);
+  direction: rtl;
+}
+
+/* ─── Mark · Wordmark · Lockup ───────────────────────────────────── */
+
+/* The mark is live-set. No logo file exists (Hard Rule #1). */
+.mark {
+  font-family: var(--font-mark-stack);
   font-weight: 700;
   line-height: 1;
   direction: rtl;
 }
 
-/* ──────────────────────────────────────────────────────────────────────
-   Tool control vocabulary — shared, brand-true primitives used by every
-   tool page so they read as the same product as the homepage. Canonical
-   palette only (red/ink/paper/fog/graphite); mono carries the technical
-   register. No off-palette colors — strength/state is communicated with
-   the paper ramp + a word label, never green/amber.
-   ────────────────────────────────────────────────────────────────────── */
-
-/* Block field label — mono system register */
-.field-label {
-  display: block;
-  font-family: var(--font-mono);
-  font-weight: 400;
-  font-size: 0.7rem;
-  letter-spacing: var(--tracking-mono-eyebrow);
-  text-transform: uppercase;
-  color: var(--color-graphite);
+/* Box-centred placements correct for the low-sitting ink. */
+.mark-centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% - var(--mark-optical-shift)));
 }
 
-/* Text controls — input / textarea / select share one recipe */
+.wordmark {
+  font-family: var(--font-mono-stack);
+  font-weight: 500;
+  font-size: var(--fs-micro); /* 11px floor — scale up, never down */
+  letter-spacing: var(--tracking-wordmark);
+  text-transform: uppercase;
+  /* letter-spacing trails the last glyph — rebalance the optical box */
+  margin-right: calc(-1 * var(--tracking-wordmark));
+  color: var(--ink-primary);
+}
+
+/* Lockup: key seal · hairline divider · wordmark on one baseline row. */
+.lockup {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.lockup .lockup-divider {
+  width: 1px;
+  align-self: stretch;
+  background: var(--hairline);
+}
+
+/* ─── Seal — the mark's carrier. Never redrawn. ──────────────────── */
+
+/* B · Key — standard. Field follows the mode; hairline and ink stay
+   lacquer in both. Min 16px. Radius 0 — the 26% top-left cut is the
+   index. */
+.seal-key {
+  /* Re-declared here so it resolves against each instance's --seal-size;
+     a :root-only copy would bake in the 40px default. */
+  --seal-line: max(1px, calc(var(--seal-size) / 40));
+  position: relative;
+  width: var(--seal-size);
+  height: var(--seal-size);
+  flex: none;
+  display: inline-block;
+  background: var(--seal-key-field, var(--pitch-900));
+  clip-path: polygon(var(--seal-cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--seal-cut));
+}
+
+.seal-key::before {
+  /* The hairline as a true ring (even-odd keyhole) so transparent fields
+     stay transparent. Chamfer offsets carry the √2−1 compensation. */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--seal-key-line, var(--lacquer-500));
+  clip-path: polygon(
+    evenodd,
+    var(--seal-cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--seal-cut),
+    var(--seal-line) calc(var(--seal-cut) + var(--seal-line) * 0.41),
+    var(--seal-line) calc(100% - var(--seal-line)),
+    calc(100% - var(--seal-line)) calc(100% - var(--seal-line)),
+    calc(100% - var(--seal-line)) var(--seal-line),
+    calc(var(--seal-cut) + var(--seal-line) * 0.41) var(--seal-line),
+    var(--seal-line) calc(var(--seal-cut) + var(--seal-line) * 0.41),
+    0 var(--seal-cut)
+  );
+}
+
+.seal-key .seal-mark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, calc(-50% - var(--mark-optical-shift)));
+  font-family: var(--font-mark-stack);
+  font-weight: 700;
+  color: var(--seal-key-ink, var(--lacquer-500));
+  /* mark ink height = 0.32 × plate; ink height ≈ 0.883 × font-size */
+  font-size: calc(var(--seal-size) * var(--seal-mark-scale) / 0.883);
+  line-height: 1;
+  direction: rtl;
+}
+
+/* Flush: transparent field for grounds the system does not own. */
+.seal-key--flush {
+  --seal-key-field: transparent;
+}
+
+/* Mono: currentColor for print, engraving, monochrome contexts. */
+.seal-key--mono {
+  --seal-key-line: currentColor;
+  --seal-key-ink: currentColor;
+  --seal-key-field: transparent;
+}
+
+/* A · Roundel — ceremonial. currentColor; min 56px; one per page. */
+.seal-roundel {
+  display: inline-block;
+  width: 96px; /* never below 56px */
+  height: 96px;
+}
+
+/* ─── Plates — structure is hairlines and top-edge light ─────────── */
+
+.plate {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  box-shadow: inset 0 1px 0 var(--edge-light); /* one hairline of light */
+}
+
+.plate--sunken {
+  background: var(--surface-sunken);
+  border: 1px solid var(--hairline);
+  box-shadow: none; /* sunken surfaces catch no light */
+}
+
+.plate--band {
+  background: var(--surface-band);
+  border-block: 1px solid var(--hairline);
+}
+
+.plate--raised {
+  background: var(--surface-raised);
+}
+
+/* Hairline grids: razor dividers from grid gap, not borders. */
+.hairline-grid {
+  display: grid;
+  gap: 1px;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
+}
+
+.hairline-grid > * {
+  background: var(--hairline-grid-cell, var(--surface-page));
+}
+
+/* ─── Concealment — behaviour, not paint ─────────────────────────── */
+
+/* Removed, not hidden. Requires aria-hidden="true" on the span. */
+.abd-redact {
+  display: inline-block;
+  padding-block: 0.1em;
+  background: var(--surface-void);
+  color: transparent;
+  user-select: none;
+}
+
+.abd-redact--lacquer {
+  background: var(--signal-identity);
+}
+
+/* Concealed but present. Hover/focus retracts the lacquer bar rightward.
+   Host on a <button type="button"> so keyboard focus reveals too. */
+.abd-reveal {
+  position: relative;
+  display: inline-block;
+  border: 0;
+  padding: 0;
+  background: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  text-align: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.abd-reveal::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--signal-identity);
+  transform-origin: 100% 50%;
+  transition: transform var(--duration-reveal) var(--ease-flat);
+}
+
+.abd-reveal:hover::after,
+.abd-reveal:focus-visible::after {
+  transform: scaleX(0);
+}
+
+/* Sustained intent. Shape-matched mask via data-mask; hint via data-hint.
+   Host: <button type="button" class="abd-hold" aria-pressed="false"
+   data-mask="…" data-hint="hold"><span class="abd-hold-value">…</span> */
+.abd-hold {
+  position: relative;
+  border: 0;
+  padding: 0;
+  background: none;
+  font-family: var(--font-mono-stack);
+  font-size: inherit;
+  text-align: start;
+  color: var(--ink-primary);
+  font-feature-settings: "tnum";
+  cursor: pointer;
+}
+
+.abd-hold-value {
+  color: transparent;
+}
+
+.abd-hold::before {
+  content: attr(data-mask);
+  position: absolute;
+  inset: 0;
+  white-space: pre;
+  color: var(--ink-primary);
+  pointer-events: none;
+}
+
+.abd-hold:active .abd-hold-value,
+.abd-hold[aria-pressed="true"] .abd-hold-value {
+  color: inherit;
+}
+
+.abd-hold:active::before,
+.abd-hold[aria-pressed="true"]::before {
+  content: none;
+}
+
+.abd-hold::after {
+  content: attr(data-hint);
+  position: absolute;
+  inset-inline-start: calc(100% + var(--space-2));
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  font-family: var(--font-mono-stack);
+  font-weight: 500;
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-micro);
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.plate .abd-hold::after,
+.plate--sunken .abd-hold::after,
+.plate--band .abd-hold::after,
+.plate--raised .abd-hold::after {
+  color: var(--ink-dim);
+}
+
+/* ─── Controls — the 3px edge break ──────────────────────────────── */
+
+.btn,
+.chip,
+.field,
+.kbd,
+input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"]),
+textarea,
+select {
+  border-radius: var(--radius-control);
+}
+
+/* Links — --signal-link, always underlined; hue never carries alone. */
+a {
+  color: var(--signal-link);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* Chrome links — nav rows, index rows, chips, buttons-as-links — are
+   controls, not prose: mono type carries them and the underline retires. */
+.chrome-link {
+  color: var(--ink-secondary);
+  text-decoration: none;
+  transition: color var(--duration-hover) var(--ease-flat);
+}
+
+.chrome-link:hover {
+  color: var(--ink-primary);
+}
+
+/* ─── Buttons — mono 13px, verb + object ─────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  box-sizing: border-box;
+  min-height: 40px;
+  padding-block: 0;
+  padding-inline: var(--space-4);
+  font-family: var(--font-mono-stack);
+  font-weight: 500;
+  font-size: var(--fs-control);
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: none;
+  text-decoration: none;
+  border: 1px solid transparent;
+  background: none;
+  color: var(--ink-primary);
+  cursor: pointer;
+  transition: background var(--duration-hover) var(--ease-flat),
+    border-color var(--duration-hover) var(--ease-flat),
+    color var(--duration-hover) var(--ease-flat);
+}
+
+.btn:active {
+  transform: translateY(1px); /* press is translateY, never scale */
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn:disabled:active {
+  transform: none;
+}
+
+/* Primary — the system's one mode-invariant object: lacquer field,
+   chalk label, in dark, in light, and printed. */
+.btn--primary,
+.btn-primary {
+  background: var(--signal-identity);
+  color: var(--ink-inverse);
+}
+
+.btn--primary:hover:not(:disabled),
+.btn-primary:hover:not(:disabled) {
+  border-color: var(--signal-link);
+}
+
+.btn--primary:active:not(:disabled),
+.btn-primary:active:not(:disabled) {
+  background: var(--signal-press);
+}
+
+/* Destructive is OUTLINED — the filled red button is the primary. */
+.btn--destructive {
+  border-color: var(--signal-identity);
+  color: var(--signal-link);
+}
+
+.btn--destructive:hover:not(:disabled) {
+  border-color: var(--signal-link);
+}
+
+/* Quiet — hairline border, secondary ink. (.btn-ghost is the legacy name.) */
+.btn--quiet,
+.btn-ghost {
+  border-color: var(--hairline);
+  color: var(--ink-secondary);
+}
+
+.btn--quiet:hover:not(:disabled),
+.btn-ghost:hover:not(:disabled) {
+  border-color: var(--hairline-strong);
+  color: var(--ink-primary);
+}
+
+.btn-ghost[data-active="true"] {
+  border-color: var(--signal-identity);
+  color: var(--ink-primary);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* ─── Fields — sunken wells with the edge break ──────────────────── */
+
+.field-label {
+  display: block;
+  font-family: var(--font-mono-stack);
+  font-weight: 500;
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-micro);
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
 .input,
 .textarea,
 .select {
   width: 100%;
-  padding: 0.7rem 0.9rem;
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0.75rem;
-  color: var(--color-paper);
-  font-family: var(--font-sans);
-  font-size: 0.9rem;
+  padding: 0.6rem 0.8rem;
+  background: var(--surface-sunken);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-control);
+  color: var(--ink-primary);
+  font-family: var(--font-text-stack);
+  font-size: var(--fs-control);
   line-height: 1.5;
   outline: none;
-  transition: border-color 0.18s ease, background 0.18s ease, box-shadow 0.18s ease;
+  transition: border-color var(--duration-hover) var(--ease-flat),
+    background var(--duration-hover) var(--ease-flat);
 }
 
 .input::placeholder,
 .textarea::placeholder {
-  color: var(--color-graphite);
-  opacity: 0.75;
+  color: var(--ink-dim);
+}
+
+.input:hover:not(:disabled, :focus),
+.textarea:hover:not(:disabled, :focus),
+.select:hover:not(:disabled, :focus) {
+  border-color: var(--hairline-strong);
 }
 
 .input:focus,
 .textarea:focus,
 .select:focus {
-  border-color: var(--color-red);
-  background: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 0 0 3px rgba(204, 27, 27, 0.14);
+  border-color: var(--signal-identity);
 }
 
 .input:disabled,
 .textarea:disabled,
 .select:disabled {
-  opacity: 0.4;
+  opacity: 0.45;
   cursor: not-allowed;
 }
 
@@ -349,10 +1005,11 @@ canvas {
   resize: vertical;
 }
 
-/* Mono modifier for code-like fields (regex pattern, hex, secrets) */
+/* Mono modifier for code-like fields (regex pattern, hex, secrets). */
 .input-mono {
-  font-family: var(--font-mono);
+  font-family: var(--font-mono-stack);
   letter-spacing: 0;
+  font-feature-settings: "tnum";
 }
 
 .select {
@@ -360,96 +1017,45 @@ canvas {
   appearance: none;
   -webkit-appearance: none;
   padding-right: 2.2rem;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5' stroke='%238A8A8A' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-image: var(--select-arrow);
   background-repeat: no-repeat;
   background-position: right 0.85rem center;
 }
 
-/* Buttons */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.7rem 1.25rem;
-  border: 1px solid transparent;
-  border-radius: 0.75rem;
-  font-family: var(--font-sans);
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.01em;
-  cursor: pointer;
-  min-height: 44px;
-  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease,
-    box-shadow 0.18s ease, transform 0.1s ease;
+/* iOS zooms any focused input below 16px; hold the type floor on
+   desktop and concede the platform accommodation on touch widths. */
+@media (max-width: 767px) {
+  .input,
+  .textarea,
+  .select {
+    font-size: 16px;
+  }
 }
 
-.btn:active {
-  transform: scale(0.98);
-}
+/* ─── Segmented control — a machined row of keys ─────────────────── */
 
-.btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-.btn-primary {
-  background: var(--color-red);
-  color: var(--color-paper);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 10px 24px -12px var(--accent-glow);
-}
-
-.btn-primary:hover:not(:disabled) {
-  background: var(--accent-hover);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08),
-    0 14px 30px -10px var(--accent-glow);
-}
-
-.btn-ghost {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.1);
-  color: var(--color-graphite);
-}
-
-.btn-ghost:hover:not(:disabled) {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.16);
-  color: var(--color-paper);
-}
-
-.btn-ghost[data-active="true"] {
-  border-color: var(--color-red);
-  color: var(--color-paper);
-}
-
-.btn-block {
-  width: 100%;
-}
-
-/* Segmented control — track + animated thumb + items */
 .segmented {
   position: relative;
   display: flex;
-  gap: 0.2rem;
-  padding: 0.25rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 0.7rem;
+  gap: 2px;
+  padding: 3px;
+  background: var(--surface-sunken);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-control);
 }
 
 .segmented-thumb {
   position: absolute;
-  top: 0.25rem;
+  top: 3px;
   left: var(--useslider-left, 0px);
   width: var(--useslider-width, 0px);
-  height: calc(100% - 0.5rem);
+  height: calc(100% - 6px);
   opacity: var(--useslider-opacity, 0);
-  border-radius: 0.5rem;
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  transition: left 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    width 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  border-radius: var(--radius-control);
+  background: var(--surface-raised);
+  border: 1px solid var(--hairline-strong);
+  transition: left var(--duration-panel) var(--ease-flat),
+    width var(--duration-panel) var(--ease-flat);
   z-index: 0;
   pointer-events: none;
 }
@@ -458,46 +1064,52 @@ canvas {
   position: relative;
   z-index: 1;
   flex: 1;
-  padding: 0.45rem 0.85rem;
+  min-height: 32px;
+  padding: 0.35rem 0.75rem;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: var(--radius-control);
   background: transparent;
-  color: var(--color-graphite);
-  font-family: var(--font-sans);
-  font-size: 0.78rem;
+  color: var(--ink-dim);
+  font-family: var(--font-mono-stack);
+  font-size: var(--fs-control);
   font-weight: 500;
   white-space: nowrap;
   cursor: pointer;
-  transition: color 0.2s ease, background 0.2s ease, transform 0.1s ease;
+  transition: color var(--duration-hover) var(--ease-flat);
 }
 
 .segmented-item:hover {
-  color: var(--color-paper);
+  color: var(--ink-primary);
 }
 
 .segmented-item[data-active="true"] {
-  color: var(--color-paper);
+  color: var(--ink-primary);
 }
 
-/* Press feedback — the thumb animates on selection, but the tap itself needs
-   its own acknowledgement for the control to feel physical. */
 .segmented-item:active {
-  transform: scale(0.97);
+  transform: translateY(1px);
 }
 
-/* Accent variant — red thumb for primary type selectors */
+/* Accent variant — lacquer thumb for primary type selectors. */
 .segmented--accent .segmented-thumb {
-  background: var(--color-red);
-  box-shadow: 0 8px 20px -10px var(--accent-glow);
+  background: var(--signal-identity);
+  border-color: transparent;
 }
 
-/* Switch (styled checkbox) */
+.segmented--accent .segmented-item[data-active="true"] {
+  color: var(--ink-inverse);
+}
+
+/* ─── Switch — the one circular control ──────────────────────────── */
+
+/* Checkbox-hosted variant of the brand switch: 36×20 track, 14px thumb,
+   lacquer field when on. The only rounded track in the system. */
 .switch {
   position: relative;
   display: inline-flex;
   flex-shrink: 0;
-  width: 38px;
-  height: 22px;
+  width: 36px;
+  height: 20px;
 }
 
 .switch input {
@@ -510,9 +1122,19 @@ canvas {
 .switch-track {
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 999px;
-  transition: background 0.2s ease;
+  box-sizing: border-box;
+  background: var(--surface-raised);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-round);
+  transition: background var(--duration-hover) var(--ease-flat);
+}
+
+/* 40×24 hit target without moving a pixel of paint. */
+.switch-track::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: var(--radius-round);
 }
 
 .switch-track::after {
@@ -520,149 +1142,154 @@ canvas {
   position: absolute;
   top: 2px;
   left: 2px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: var(--color-paper);
-  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-round);
+  background: var(--ink-primary);
+  transition: transform var(--duration-hover) var(--ease-flat);
 }
 
 .switch input:checked + .switch-track {
-  background: var(--color-red);
+  background: var(--signal-identity);
+  border-color: transparent;
 }
 
 .switch input:checked + .switch-track::after {
+  background: var(--ink-inverse);
   transform: translateX(16px);
 }
 
-/* Check row */
+.switch input:focus-visible + .switch-track {
+  outline: var(--focus-ring);
+  outline-offset: var(--focus-ring-offset);
+}
+
+/* ─── Check row · Range ──────────────────────────────────────────── */
+
 .check-row {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  color: var(--color-graphite);
-  font-size: 0.85rem;
+  gap: var(--space-2);
+  color: var(--ink-secondary);
+  font-family: var(--font-mono-stack);
+  font-size: var(--fs-control);
   cursor: pointer;
 }
 
 .check-row input[type="checkbox"] {
   width: 1rem;
   height: 1rem;
-  accent-color: var(--color-red);
+  accent-color: var(--signal-identity);
 }
 
-/* Range slider */
+/* Range — hairline track (structure, square), circular lacquer thumb
+   (a dot — the sanctioned round form). No glow ring. */
 .range {
   -webkit-appearance: none;
   appearance: none;
   width: 100%;
-  height: 4px;
-  background: rgba(255, 255, 255, 0.12);
-  border-radius: 999px;
+  height: 3px;
+  background: var(--hairline-strong);
   outline: none;
 }
 
 .range::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--color-red);
+  width: 14px;
+  height: 14px;
+  border-radius: var(--radius-round);
+  background: var(--signal-identity);
   cursor: pointer;
-  box-shadow: 0 0 0 0 rgba(204, 27, 27, 0);
-  transition: box-shadow 0.15s ease;
+  border: none;
+  transition: background var(--duration-hover) var(--ease-flat);
 }
 
-.range:hover::-webkit-slider-thumb {
-  box-shadow: 0 0 0 5px rgba(204, 27, 27, 0.16);
+.range::-webkit-slider-thumb:hover {
+  background: var(--signal-press);
 }
 
 .range::-moz-range-thumb {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   border: none;
-  border-radius: 50%;
-  background: var(--color-red);
+  border-radius: var(--radius-round);
+  background: var(--signal-identity);
   cursor: pointer;
 }
 
-/* Chip / badge — mono pill */
+/* ─── Chip · Kbd ─────────────────────────────────────────────────── */
+
 .chip {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.25rem 0.6rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.03);
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: var(--tracking-mono-chip);
-  color: var(--color-graphite);
+  gap: var(--space-1);
+  padding: 3px 8px;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-control);
+  background: var(--surface-sunken);
+  font-family: var(--font-mono-stack);
+  font-weight: 500;
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-micro);
+  text-transform: uppercase;
+  color: var(--ink-secondary);
   white-space: nowrap;
 }
 
-/* Chips that navigate (ToolPageShell "More tools" strip) get a hover lift
-   in the same register as the index rows: paper text, brighter hairline. */
 a.chip {
   text-decoration: none;
-  transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+  transition: border-color var(--duration-hover) var(--ease-flat),
+    color var(--duration-hover) var(--ease-flat);
 }
 
 a.chip:hover,
 a.chip:focus-visible {
-  border-color: rgba(255, 255, 255, 0.22);
-  background: rgba(255, 255, 255, 0.05);
-  color: var(--color-paper);
+  border-color: var(--hairline-strong);
+  color: var(--ink-primary);
 }
 
-a.chip:hover .index-arrow,
-a.chip:focus-visible .index-arrow {
-  transform: translateX(3px);
-  color: var(--color-paper);
-}
-
-/* Keyboard hint */
 .kbd {
   display: inline-flex;
   align-items: center;
-  padding: 0.12rem 0.4rem;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 0.3rem;
-  background: rgba(255, 255, 255, 0.08);
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
+  padding: 2px 6px;
+  border: 1px solid var(--hairline);
+  border-bottom-width: 2px;
+  border-radius: var(--radius-control);
+  background: var(--surface-band);
+  font-family: var(--font-mono-stack);
+  font-size: var(--fs-micro);
   letter-spacing: 0.04em;
-  color: var(--color-graphite);
+  color: var(--ink-secondary);
 }
 
-/* Strength/quality meter — monochrome paper ramp (palette-only) */
+/* ─── Meter — neutral fill; the word label carries the state ─────── */
+
 .meter {
   display: flex;
   flex: 1;
-  gap: 4px;
+  gap: 3px;
 }
 
 .meter-seg {
   flex: 1;
   height: 4px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.08);
-  transition: background 0.3s ease;
+  background: var(--surface-raised);
+  transition: background var(--duration-panel) var(--ease-flat);
 }
 
 .meter-seg[data-on="true"] {
-  background: var(--color-paper);
+  background: var(--ink-secondary);
 }
 
-/* Color picker */
+/* ─── Color picker ───────────────────────────────────────────────── */
+
 .color-swatch {
   width: 34px;
   height: 34px;
   padding: 0;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  border-radius: 0.55rem;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-control);
   background: none;
   cursor: pointer;
   -webkit-appearance: none;
@@ -675,47 +1302,86 @@ a.chip:focus-visible .index-arrow {
 
 .color-swatch::-webkit-color-swatch {
   border: none;
-  border-radius: 0.35rem;
+  border-radius: 1px;
 }
 
 .color-swatch::-moz-color-swatch {
   border: none;
-  border-radius: 0.35rem;
+  border-radius: 1px;
 }
 
 .color-hex {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--color-graphite);
+  font-family: var(--font-mono-stack);
+  font-size: var(--fs-micro);
+  letter-spacing: 0.04em;
+  color: var(--ink-dim);
+  text-transform: uppercase;
 }
 
-/* Preview stage — framed surface for the output pane of a two-pane tool */
+/* ─── Tool stage — sunken output pane ────────────────────────────── */
+
 .tool-stage {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  padding: 1.5rem;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 1rem;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  gap: var(--space-4);
+  padding: var(--space-5);
+  background: var(--surface-sunken);
+  border: 1px solid var(--hairline);
 }
 
-/* Disclosure — animated expand/collapse for optional panels (QR style
-   options, regex replace/cheatsheet, 2FA advanced options, pomodoro
-   settings). Toggle via data-open; per-tool inner spacing stays in the
-   tool's module. The inner element needs min-height: 0 so the 0fr row
-   can actually collapse. Named "disclosure" because Tailwind already
-   claims `collapse` for visibility. */
+/* ─── Console — sunken field, mono, one lacquer prompt ───────────── */
+
+.console {
+  font-family: var(--font-mono-stack);
+  font-size: var(--fs-control);
+  line-height: var(--leading-mono);
+  color: var(--ink-primary);
+  background: var(--surface-sunken);
+  border: 1px solid var(--hairline);
+  padding: var(--space-4) var(--space-5);
+  font-feature-settings: "tnum";
+}
+
+/* Decorative, aria-hidden — exempt from text floors (≥3:1 non-text). */
+.console .prompt {
+  color: var(--signal-identity);
+  font-weight: 500;
+  margin-right: 0.6em;
+}
+
+.console .muted {
+  color: var(--ink-dim);
+}
+
+.console .ok {
+  color: var(--signal-verified);
+}
+
+.console .warn {
+  color: var(--signal-warning);
+}
+
+/* ─── Readout — the one phosphor element per screen ──────────────── */
+
+.readout {
+  font-family: var(--font-mono-stack);
+  color: var(--readout-color);
+  text-shadow: var(--readout-glow); /* the only glow — dark mode only */
+  font-feature-settings: "tnum";
+}
+
+/* ─── Disclosure — expand/collapse for optional panels ───────────── */
+
 .disclosure {
   display: grid;
   grid-template-rows: 0fr;
   opacity: 0;
   visibility: hidden;
-  transition: grid-template-rows 0.35s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.35s ease, visibility 0.35s;
+  transition: grid-template-rows var(--duration-panel-lg) var(--ease-flat),
+    opacity var(--duration-panel-lg) var(--ease-flat),
+    visibility var(--duration-panel-lg);
 }
 
 .disclosure[data-open="true"] {
@@ -729,23 +1395,197 @@ a.chip:focus-visible .index-arrow {
   overflow: hidden;
 }
 
-/* ──────────────────────────────────────────────────────────────────────
-   Editorial index — numbered list entries with hairline rules. Used by
-   the homepage (apps/tools indices). Rows are full-width links; hover
-   raises a faint wash, extends a red rule down the left edge, turns the
-   entry number red, and slides the arrow. All palette-true.
-   ────────────────────────────────────────────────────────────────────── */
+/* ─── Texture — opt-in via .abd-*, rationed ──────────────────────── */
+
+/* CRT scanlines — one region per screen, hero or readout only. */
+.abd-scanlines {
+  position: relative;
+}
+
+.abd-scanlines::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0 2px,
+    var(--texture-line) 2px 4px
+  );
+}
+
+/* Mechanical grain — large fields only; the speckle takes the mode's ink. */
+.abd-grain {
+  position: relative;
+}
+
+.abd-grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Light mode inverts the speckle's polarity: dark ink on bone. */
+:root[data-theme="light"] .abd-grain::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0.5 0.5 0 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .abd-grain::before {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0.5 0.5 0 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/* Registration crosshairs — specimen and diagnostic surfaces. */
+.abd-crosshair {
+  position: relative;
+}
+
+.abd-crosshair::before,
+.abd-crosshair::after {
+  font-family: var(--font-mono-stack);
+  font-size: 10px;
+  line-height: 1;
+  color: var(--ink-structure);
+  position: absolute;
+  pointer-events: none;
+}
+
+.abd-crosshair::before {
+  content: "+" / "";
+  top: 4px;
+  left: 6px;
+}
+
+.abd-crosshair::after {
+  content: "+" / "";
+  bottom: 4px;
+  right: 6px;
+}
+
+/* Hazard tape — ONLY beside something actually wrong. 1.2s is the alarm
+   constant, deliberately slower than any interface duration. */
+.abd-hazard {
+  background: repeating-linear-gradient(
+    135deg,
+    var(--signal-alarm) 0 8px,
+    transparent 8px 16px
+  );
+  animation: abd-hazard-pulse 1.2s var(--ease-flat) infinite alternate;
+}
+
+@keyframes abd-hazard-pulse {
+  from {
+    opacity: 0.72;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Struck rule — the alarm form for a line of text. */
+.abd-struck {
+  text-decoration: line-through;
+  text-decoration-color: var(--signal-alarm);
+  text-decoration-thickness: 2px;
+}
+
+/* Barcode rules — colophons, footers, spec sheets. */
+.abd-barcode {
+  height: 24px;
+  background: repeating-linear-gradient(
+    90deg,
+    currentColor 0 1px,
+    transparent 1px 3px,
+    currentColor 3px 5px,
+    transparent 5px 9px,
+    currentColor 9px 10px,
+    transparent 10px 14px,
+    currentColor 14px 17px,
+    transparent 17px 21px
+  );
+  color: var(--ink-structure);
+}
+
+/* .abd-stamp is print-register furniture and deliberately does not ship
+   here: an interface never carries the stamp (BRAND.md → Print Register). */
+
+/* ─── Site chrome ────────────────────────────────────────────────── */
+
+/* The sticky header band — the one surface sanctioned to blur. */
+.site-nav {
+  background: color-mix(in srgb, var(--surface-page) 82%, transparent);
+  border-bottom: 1px solid var(--hairline);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding-inline: var(--space-3);
+  font-family: var(--font-mono-stack);
+  font-weight: 500;
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-micro);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink-dim);
+  transition: color var(--duration-hover) var(--ease-flat);
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--ink-primary);
+}
+
+/* Mode-toggle labels — CSS resolves the active mode, so the server can
+   render both actions and the cascade shows the right one before any
+   JS runs. The action is named, never the colour ("Switch to light",
+   not "Toggle theme"). */
+.theme-when-light {
+  display: none;
+}
+
+:root[data-theme="light"] .theme-when-dark {
+  display: none;
+}
+
+:root[data-theme="light"] .theme-when-light {
+  display: inline;
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) .theme-when-dark {
+    display: none;
+  }
+
+  :root:not([data-theme="dark"]) .theme-when-light {
+    display: inline;
+  }
+}
+
+/* ─── Editorial index — numbered rows with hairline rules ────────── */
+
 .index-list {
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid var(--hairline);
 }
 
 .index-row {
   position: relative;
   display: grid;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  transition: background 0.3s ease;
+  border-bottom: 1px solid var(--hairline);
+  text-decoration: none;
+  color: inherit;
+  transition: background var(--duration-hover) var(--ease-flat);
 }
 
+/* Hover extends a lacquer rule down the left edge — the active-rule
+   gesture, not a glow. */
 .index-row::before {
   content: "";
   position: absolute;
@@ -753,15 +1593,15 @@ a.chip:focus-visible .index-arrow {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: var(--color-red);
+  background: var(--signal-identity);
   transform: scaleY(0);
   transform-origin: top;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform var(--duration-panel) var(--ease-flat);
 }
 
 .index-row:hover,
 .index-row:focus-visible {
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--surface-sunken);
 }
 
 .index-row:hover::before,
@@ -770,199 +1610,85 @@ a.chip:focus-visible .index-arrow {
 }
 
 .index-num {
-  font-family: var(--font-mono);
-  font-weight: 400;
-  font-size: 0.7rem;
-  letter-spacing: var(--tracking-mono-eyebrow);
-  color: var(--color-graphite);
-  transition: color 0.25s ease;
+  font-family: var(--font-mono-stack);
+  font-weight: 500;
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-micro);
+  color: var(--ink-faint);
+  font-feature-settings: "tnum";
+  transition: color var(--duration-hover) var(--ease-flat);
 }
 
 .index-row:hover .index-num,
 .index-row:focus-visible .index-num {
-  color: var(--color-red);
+  color: var(--signal-link);
 }
 
 .index-arrow {
   display: inline-block;
-  color: var(--color-graphite);
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), color 0.25s ease;
+  color: var(--ink-faint);
+  transition: transform var(--duration-panel) var(--ease-flat),
+    color var(--duration-hover) var(--ease-flat);
 }
 
 .index-row:hover .index-arrow,
 .index-row:focus-visible .index-arrow {
   transform: translateX(6px);
-  color: var(--color-paper);
+  color: var(--ink-primary);
 }
 
-/* ── Divided feature grid — one engineered panel, hairline-separated
-   cells. Reads as a single machined surface, not floating cards. ── */
+/* ─── Feature grid — one machined panel, hairline-divided ────────── */
+
 .feature-grid {
   display: grid;
   gap: 1px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1.25rem;
-  overflow: hidden;
+  background: var(--hairline);
+  border: 1px solid var(--hairline);
 }
 
 .feature-cell {
   display: flex;
   flex-direction: column;
-  gap: 0.8rem;
-  padding: 1.4rem 1.5rem 1.6rem;
-  background: rgba(12, 12, 12, 0.92);
-  transition: background 0.3s ease;
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-5) var(--space-6);
+  background: var(--surface-card);
+  transition: background var(--duration-hover) var(--ease-flat);
 }
 
 .feature-cell:hover {
-  background: rgba(19, 19, 19, 0.92);
+  background: var(--surface-raised);
 }
 
 .feature-cell:hover .index-num {
-  color: var(--color-red);
+  color: var(--signal-link);
 }
 
-/* ── Featured release — an editorial split panel, not a card grid. The left
-   side carries the proposition; the right behaves like a small, dimmed Mac
-   desktop so Frost is legible before a visitor opens its product page. ── */
-.featured-release {
-  display: grid;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 1.5rem;
-  background: rgba(12, 12, 12, 0.9);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+/* Odd cell counts at the two-column breakpoint would expose the grid
+   background as a slab; stretch the last cell instead. */
+@media (min-width: 640px) and (max-width: 1023.98px) {
+  .feature-grid > .feature-cell:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
 }
 
-.featured-copy {
-  padding: clamp(1.5rem, 5vw, 4rem);
-}
+/* ─── Related index — tool-to-tool navigation ────────────────────── */
 
-.featured-visual {
-  position: relative;
-  min-height: 25rem;
-  overflow: hidden;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  background:
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    linear-gradient(145deg, rgba(204, 27, 27, 0.15), transparent 42%),
-    #101010;
-  background-size: 64px 64px, 64px 64px, auto, auto;
-}
-
-.featured-visual::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(8, 8, 8, 0.2);
-  backdrop-filter: blur(6px);
-}
-
-.featured-menu {
-  position: absolute;
-  inset: 0 0 auto;
-  z-index: 1;
-  display: flex;
-  height: 2.25rem;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 0.65rem;
-  padding: 0 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  background: rgba(0, 0, 0, 0.3);
-  color: var(--color-graphite);
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.08em;
-}
-
-.featured-status-dot {
-  width: 0.42rem;
-  height: 0.42rem;
-  border-radius: 999px;
-  background: var(--color-red);
-  box-shadow: 0 0 12px var(--accent-glow);
-}
-
-.featured-window {
-  position: absolute;
-  border: 1px solid rgba(255, 255, 255, 0.055);
-  border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.025);
-}
-
-.featured-window-one {
-  left: 8%;
-  top: 18%;
-  width: 48%;
-  height: 42%;
-}
-
-.featured-window-two {
-  right: 8%;
-  bottom: 10%;
-  width: 42%;
-  height: 34%;
-}
-
-.featured-lock {
-  position: absolute;
-  inset: 50% auto auto 50%;
-  z-index: 2;
-  display: flex;
-  min-width: 13rem;
-  transform: translate(-50%, -50%);
-  flex-direction: column;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 1.65rem 2rem;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 1rem;
-  background: rgba(8, 8, 8, 0.76);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.46);
-  backdrop-filter: blur(18px);
-  color: var(--color-paper);
-}
-
-.featured-lock-mark {
-  margin-bottom: 0.35rem;
-  color: var(--color-red);
-  font-size: 1.7rem;
-  line-height: 1;
-}
-
-.featured-lock strong {
-  font-size: 0.9rem;
-  letter-spacing: -0.01em;
-}
-
-.featured-lock > span:last-child {
-  color: var(--color-graphite);
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-/* Tool-to-tool navigation uses the homepage's numbered index language. */
 .related-index {
   display: grid;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1rem;
-  background: rgba(12, 12, 12, 0.7);
+  border: 1px solid var(--hairline);
+  background: var(--surface-card);
 }
 
 .related-link {
   display: flex;
-  min-height: 4.25rem;
+  min-height: 4rem;
   align-items: center;
-  gap: 0.85rem;
-  padding: 1rem 1.1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-  transition: background 0.22s ease, padding 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  gap: var(--space-3);
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--hairline);
+  text-decoration: none;
+  color: inherit;
+  transition: background var(--duration-hover) var(--ease-flat);
 }
 
 .related-link:last-child {
@@ -971,38 +1697,27 @@ a.chip:focus-visible .index-arrow {
 
 .related-link:hover,
 .related-link:focus-visible {
-  padding-left: 1.35rem;
-  background: rgba(255, 255, 255, 0.035);
+  background: var(--surface-raised);
 }
 
 .related-link:hover .index-num,
 .related-link:focus-visible .index-num {
-  color: var(--color-red);
+  color: var(--signal-link);
 }
 
 .related-link:hover .index-arrow,
 .related-link:focus-visible .index-arrow {
   transform: translateX(4px);
-  color: var(--color-paper);
+  color: var(--ink-primary);
 }
 
 @media (min-width: 768px) {
-  .featured-release {
-    grid-template-columns: 1.03fr 0.97fr;
-  }
-
-  .featured-visual {
-    min-height: 31rem;
-    border-top: 0;
-    border-left: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
   .related-index {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .related-link {
-    border-right: 1px solid rgba(255, 255, 255, 0.07);
+    border-right: 1px solid var(--hairline);
     border-bottom: 0;
   }
 
@@ -1011,72 +1726,22 @@ a.chip:focus-visible .index-arrow {
   }
 }
 
-/* Odd cell counts at the two-column breakpoint would leave an empty slot
-   showing the grid's hairline background as a light slab. Stretch the last
-   cell across the row instead so the panel always reads fully machined. */
-@media (min-width: 640px) and (max-width: 1023.98px) {
-  .feature-grid > .feature-cell:last-child:nth-child(odd) {
-    grid-column: 1 / -1;
-  }
-}
+/* ─── Hero watermark — the mark as furniture, printed solid ──────── */
 
-/* ── Hero watermark — the calligraphic mark as outlined art. Decorative
-   only (aria-hidden); faint red fill as fallback where text-stroke is
-   unsupported, masked so it dissolves into Ink. ── */
+/* Decorative only (aria-hidden). Solid structure tone — outline and
+   stroked type are not in the system (Hard Rule #12). */
 .hero-mark {
   position: absolute;
   pointer-events: none;
   user-select: none;
-  font-family: var(--font-mark);
+  font-family: var(--font-mark-stack);
   font-weight: 700;
-  /* The mask can only cover the element's own box, and Ruqaa swashes
-     overflow a tight line box — ink outside it hits the mask edge and
-     shears off. 1.7 leading (split evenly, so the glyph doesn't move)
-     pulls all ink inside; the stops are rescaled so the fade crosses
-     the glyph exactly where the 0.95/30%/92% version did. */
   line-height: 1.7;
-  /* Same fix, horizontal: the final noon's bowl overflows the box's left
-     edge. Left-only padding widens the box leftward — the element is
-     right-pinned, so the glyph itself stays put. */
   padding-left: 0.35em;
   direction: rtl;
-  color: rgba(204, 27, 27, 0.06);
-  -webkit-text-stroke: 1.5px rgba(204, 27, 27, 0.38);
+  color: color-mix(in srgb, var(--ink-structure) 30%, transparent);
   -webkit-mask-image: linear-gradient(155deg, black 39%, transparent 73%);
   mask-image: linear-gradient(155deg, black 39%, transparent 73%);
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
-}
-
-/* ── Mobile touch & performance fixes ── */
-button, a, [role="button"], input, select, textarea {
-  touch-action: manipulation;
-}
-
-@media (max-width: 767px) {
-  body {
-    background-attachment: scroll;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation: none !important;
-    transition: none !important;
-  }
-
-  html {
-    scroll-behavior: auto !important;
-  }
-
-  /* Reduced motion is not zero motion: keep the fades that explain a state
-     change and carry no movement (opacity/color only). The panel still
-     snaps to size (no growth animation); only its contents fade in. */
-  .disclosure {
-    transition: opacity 0.2s ease !important;
-  }
-
-  .meter-seg {
-    transition: background 0.3s ease !important;
-  }
 }

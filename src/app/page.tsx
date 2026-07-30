@@ -3,21 +3,21 @@ import FadeInWrapper from "@/components/FadeInWrapper";
 import SectionHeader from "@/components/SectionHeader";
 import { apps, tools, type CatalogEntry } from "@/lib/catalog";
 
-const principles = [
+const boundaries = [
   {
     num: "01",
-    title: "Free, forever",
-    body: "Use every tool without a paywall, an account, an upsell, or an ad in the way.",
+    title: "No account",
+    body: "Every unit executes without sign-in, subscription, or paywall. Open the page and run the task.",
   },
   {
     num: "02",
-    title: "Private by default",
-    body: "Your inputs stay yours. The browser tools do their work on your device whenever possible.",
+    title: "Local execution",
+    body: "Browser tools process input on the device wherever the task permits. What leaves the device is stated on the unit.",
   },
   {
     num: "03",
-    title: "Built in public",
-    body: "The source is open on GitHub. Inspect the work, report a problem, or make it better.",
+    title: "Source public",
+    body: "Every release retains its code and license on GitHub. Inspect the work, report a fault, or reproduce the build.",
   },
 ];
 
@@ -43,8 +43,9 @@ function IndexRow({
   return (
     <Tag
       href={item.href}
-      className={`index-row grid-cols-[2.5rem_minmax(0,1fr)] items-baseline gap-x-3 pl-4 pr-2 md:grid-cols-[3.5rem_minmax(0,1fr)_auto] md:gap-x-8 md:pl-6 md:pr-3 ${large ? "py-7 md:py-9" : "py-5 md:py-6"
-        }`}
+      className={`index-row grid-cols-[2.5rem_minmax(0,1fr)] items-baseline gap-x-3 pl-4 pr-2 md:grid-cols-[3.5rem_minmax(0,1fr)_auto] md:gap-x-8 md:pl-6 md:pr-3 ${
+        large ? "py-7 md:py-9" : "py-5 md:py-6"
+      }`}
       {...externalProps}
     >
       <span aria-hidden="true" className="index-num">
@@ -52,19 +53,19 @@ function IndexRow({
       </span>
       <span className="block">
         <span
-          className={`block font-semibold tracking-[-0.02em] text-[var(--color-paper)] ${large ? "text-2xl md:text-[2rem]" : "text-lg md:text-xl"
-            }`}
+          className={
+            large
+              ? "h3 block text-ink-primary"
+              : "block font-mono text-lede font-medium text-ink-primary"
+          }
         >
           {item.title}
         </span>
-        <span
-          className={`mt-1.5 block max-w-2xl leading-7 text-[var(--text)] ${large ? "text-[0.95rem]" : "text-sm"
-            }`}
-        >
+        <span className="mt-2 block max-w-2xl text-body text-ink-dim">
           {item.description}
         </span>
         <span className="mt-3 block md:hidden">
-          <span className="eyebrow-system">
+          <span className="micro-label">
             {item.meta}
             <span aria-hidden="true" className="index-arrow">
               {arrow}
@@ -73,7 +74,7 @@ function IndexRow({
         </span>
       </span>
       <span className="hidden md:block">
-        <span className="eyebrow-system gap-3">
+        <span className="micro-label gap-3">
           {item.meta}
           <span aria-hidden="true" className="index-arrow">
             {arrow}
@@ -87,7 +88,7 @@ function IndexRow({
 export default function HomePage() {
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col gap-16 pb-20 pt-4 md:gap-24 md:pb-28 md:pt-10">
-      {/* Hero */}
+      {/* Hero — the positioning line as macro display */}
       <section className="relative overflow-x-clip" aria-label="Introduction">
         <span
           aria-hidden="true"
@@ -96,83 +97,102 @@ export default function HomePage() {
           عابدين
         </span>
         <FadeInWrapper direction="up" eager>
-          <div className="relative flex min-h-[31rem] flex-col justify-center gap-6 py-8 md:min-h-[38rem] md:py-14">
-            <span className="eyebrow-system">
+          <div className="relative flex min-h-[28rem] flex-col justify-center gap-7 py-8 md:min-h-[34rem] md:py-14">
+            <span className="micro-label">
               <span
                 aria-hidden="true"
-                className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-red)] shadow-[0_0_10px_var(--accent-glow)]"
+                className="inline-block h-2 w-2 bg-signal-identity"
               />
-              Abdeen Labs · Independent software
+              Abdeen Labs · Est 2019
             </span>
-            <h1 className="max-w-4xl text-[clamp(2.85rem,7.5vw,5.4rem)] font-semibold leading-[0.98] tracking-[-0.035em] text-[var(--color-paper)]">
-              Small tools,
+            <h1 className="max-w-4xl text-h1 md:text-display">
+              Defined tasks.
               <br />
-              carefully engineered
-              <span className="text-[var(--color-red)]">.</span>
+              <span className="text-ink-dim">Verified output.</span>
             </h1>
-            <p className="max-w-2xl text-base leading-8 text-[var(--text)] md:text-lg">
-              Independent software for small, specific problems: native apps
-              for Apple platforms and focused utilities for the browser. Free
-              to use, open source, and built without account walls.
+            <p className="max-w-2xl text-lede text-ink-secondary">
+              Abdeen Labs develops bounded software for Apple platforms and
+              the browser. Each tool is assigned one defined task, runs
+              without an account, and states what it stores, sends, and
+              reports.
             </p>
-            <p className="eyebrow-system flex-wrap gap-x-3 gap-y-1 pt-1">
-              <a
-                href="#apps"
-                className="underline decoration-white/20 underline-offset-4 transition-colors duration-200 hover:text-[var(--color-paper)] hover:decoration-white/40"
-              >
+            <p className="micro-label flex-wrap gap-x-3 gap-y-1 pt-1">
+              <a href="#apps" className="chrome-link">
                 {pad(apps.length)} apps
               </a>
-              <span aria-hidden="true" className="opacity-40">·</span>
-              <a
-                href="#tools"
-                className="underline decoration-white/20 underline-offset-4 transition-colors duration-200 hover:text-[var(--color-paper)] hover:decoration-white/40"
-              >
+              <span aria-hidden="true" className="text-ink-structure">
+                ·
+              </span>
+              <a href="#tools" className="chrome-link">
                 {pad(tools.length)} web tools
               </a>
-              <span aria-hidden="true" className="opacity-40">·</span>
-              <span>Free &amp; open source</span>
+              <span aria-hidden="true" className="text-ink-structure">
+                ·
+              </span>
+              <span>Source / Public</span>
             </p>
           </div>
         </FadeInWrapper>
       </section>
 
-      {/* Featured release */}
+      {/* Featured release — Frost, documented as an instrument readout */}
       <FadeInWrapper direction="up">
-        <section aria-labelledby="featured-release-title" className="featured-release">
-          <div className="featured-copy">
-            <span className="eyebrow-system">
-              <span aria-hidden="true" className="text-[var(--color-red)]">/</span>
+        <section
+          aria-labelledby="featured-release-title"
+          className="plate grid md:grid-cols-[1.03fr_0.97fr]"
+        >
+          <div className="p-6 md:p-12">
+            <span className="micro-label">
+              <span aria-hidden="true" className="text-signal-identity">
+                /
+              </span>
               Featured release · macOS
             </span>
-            <h2
-              id="featured-release-title"
-              className="mt-5 max-w-xl text-3xl font-semibold leading-[1.08] tracking-[-0.03em] text-[var(--color-paper)] md:text-5xl"
-            >
+            <h2 id="featured-release-title" className="mt-5 max-w-xl text-h3 md:text-h2">
               Lock every input. Keep the screen in view.
             </h2>
-            <p className="mt-4 max-w-lg text-sm leading-7 text-[var(--text)] md:text-base md:leading-8">
+            <p className="mt-4 max-w-lg text-body text-ink-secondary">
               Frost freezes the keyboard, mouse, and trackpad while a build,
-              render, or agent keeps running visibly. Unlock with TouchID or a
-              paired Apple Watch.
+              render, or agent keeps running visibly. The session unlocks
+              with Touch ID or a paired Apple Watch.
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-4">
-              <Link href="/frost" className="btn btn-primary rounded-full px-5">
-                Explore Frost <span aria-hidden="true">&rarr;</span>
+              <Link href="/frost" className="btn btn--primary">
+                Inspect Frost
               </Link>
-              <span className="eyebrow-system">Free · Open source</span>
+              <span className="micro-label">License / Free · Source / Public</span>
             </div>
           </div>
-          <div className="featured-visual" aria-hidden="true">
-            <div className="featured-menu">
-              <span>FROST</span>
-              <span className="featured-status-dot" />
-            </div>
-            <div className="featured-window featured-window-one" />
-            <div className="featured-window featured-window-two" />
-            <div className="featured-lock">
-              <span className="featured-lock-mark">✳</span>
-              <strong>Input Locked</strong>
-              <span>TouchID to unlock</span>
+          <div className="border-t border-hairline p-6 md:border-l md:border-t-0 md:p-12">
+            <div className="console abd-scanlines h-full">
+              <div>
+                <span className="prompt" aria-hidden="true">
+                  ›
+                </span>
+                frost --engage
+              </div>
+              <div className="mt-3 flex flex-col gap-1.5">
+                <div className="flex justify-between gap-4">
+                  <span className="muted">input.keyboard</span>
+                  <span className="ok">Isolated</span>
+                </div>
+                <div className="flex justify-between gap-4">
+                  <span className="muted">input.pointer</span>
+                  <span className="ok">Isolated</span>
+                </div>
+                <div className="flex justify-between gap-4">
+                  <span className="muted">display.screen</span>
+                  <span>Visible</span>
+                </div>
+                <div className="flex justify-between gap-4">
+                  <span className="muted">unlock.method</span>
+                  <span>Touch ID</span>
+                </div>
+                <div className="flex justify-between gap-4">
+                  <span className="muted">session.log</span>
+                  <span>Retained / Local</span>
+                </div>
+              </div>
             </div>
           </div>
         </section>
@@ -206,23 +226,25 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Principles */}
-      <section aria-label="Principles">
+      {/* Operating boundaries */}
+      <section aria-label="Operating boundaries">
         <FadeInWrapper direction="up">
-          <SectionHeader label="The operating principles" count={principles.length} />
+          <SectionHeader label="Operating boundaries" count={boundaries.length} />
         </FadeInWrapper>
         <FadeInWrapper direction="up" delay={0.04}>
-          <div className="grid gap-8 border-t border-white/[0.08] pt-8 md:grid-cols-3 md:gap-6 md:pt-10">
-            {principles.map((p) => (
+          <div className="grid gap-8 border-t border-hairline pt-8 md:grid-cols-3 md:gap-6 md:pt-10">
+            {boundaries.map((b) => (
               <div
-                key={p.num}
-                className="flex flex-col gap-2.5 md:border-l md:border-white/[0.08] md:pl-6 md:first:border-l-0 md:first:pl-0"
+                key={b.num}
+                className="flex flex-col gap-3 md:border-l md:border-hairline md:pl-6 md:first:border-l-0 md:first:pl-0"
               >
-                <span aria-hidden="true" className="index-num">{p.num}</span>
-                <h3 className="text-base font-semibold tracking-[-0.02em] text-[var(--color-paper)]">
-                  {p.title}
+                <span aria-hidden="true" className="index-num">
+                  {b.num}
+                </span>
+                <h3 className="font-mono text-control font-medium uppercase tracking-micro text-ink-primary">
+                  {b.title}
                 </h3>
-                <p className="text-sm leading-7 text-[var(--text)]">{p.body}</p>
+                <p className="text-body text-ink-dim">{b.body}</p>
               </div>
             ))}
           </div>

@@ -71,14 +71,14 @@ export default function QRGenerator() {
     switch (activeTab) {
       case 'text': {
         const val = text.trim();
-        if (!val) { setError('Please enter some text or a URL'); return null; }
+        if (!val) { setError('FAULT // TEXT // ACTION: enter text or a URL.'); return null; }
         return val;
       }
       case 'wifi': {
         const ssid = wifiSSID.trim();
-        if (!ssid) { setError('Please enter a network name (SSID)'); return null; }
+        if (!ssid) { setError('FAULT // WIFI // ACTION: enter the network name (SSID).'); return null; }
         if (wifiSecurity !== 'nopass' && !wifiPassword) {
-          setError('Please enter a password for the secured network');
+          setError('FAULT // WIFI // ACTION: enter the network password, or set security to None.');
           return null;
         }
         // Backslash-escape the WIFI: format's reserved characters so networks
@@ -88,7 +88,7 @@ export default function QRGenerator() {
       }
       case 'email': {
         const to = emailTo.trim();
-        if (!to) { setError('Please enter an email address'); return null; }
+        if (!to) { setError('FAULT // EMAIL // ACTION: enter a recipient address.'); return null; }
         const params = new URLSearchParams();
         if (emailSubject.trim()) params.append('subject', emailSubject.trim());
         if (emailBody.trim()) params.append('body', emailBody.trim());
@@ -97,7 +97,7 @@ export default function QRGenerator() {
       }
       case 'phone': {
         const num = phoneNumber.trim();
-        if (!num) { setError('Please enter a phone number'); return null; }
+        if (!num) { setError('FAULT // PHONE // ACTION: enter a phone number.'); return null; }
         const msg = phoneMessage.trim();
         return msg ? `smsto:${num}:${msg}` : `tel:${num}`;
       }
@@ -245,7 +245,7 @@ export default function QRGenerator() {
               <textarea
                 id="qr-text"
                 className="textarea"
-                placeholder="Enter text or URL..."
+                placeholder="Enter text or a URL"
                 value={text}
                 onChange={(e) => setText(e.target.value)}
               />
@@ -254,7 +254,7 @@ export default function QRGenerator() {
 
           {activeTab === 'wifi' && (
             <>
-              <label htmlFor="qr-wifi-ssid" className="field-label">Network Name (SSID)</label>
+              <label htmlFor="qr-wifi-ssid" className="field-label">Network name (SSID)</label>
               <input
                 id="qr-wifi-ssid"
                 className="input"
@@ -299,7 +299,7 @@ export default function QRGenerator() {
 
           {activeTab === 'email' && (
             <>
-              <label htmlFor="qr-email-to" className="field-label">Email Address</label>
+              <label htmlFor="qr-email-to" className="field-label">Email address</label>
               <input
                 id="qr-email-to"
                 className="input"
@@ -320,7 +320,7 @@ export default function QRGenerator() {
               <textarea
                 id="qr-email-body"
                 className="textarea"
-                placeholder="Email body..."
+                placeholder="Email body"
                 value={emailBody}
                 onChange={(e) => setEmailBody(e.target.value)}
               />
@@ -329,7 +329,7 @@ export default function QRGenerator() {
 
           {activeTab === 'phone' && (
             <>
-              <label htmlFor="qr-phone" className="field-label">Phone Number</label>
+              <label htmlFor="qr-phone" className="field-label">Phone number</label>
               <input
                 id="qr-phone"
                 className="input"
@@ -338,11 +338,11 @@ export default function QRGenerator() {
                 value={phoneNumber}
                 onChange={(e) => setPhoneNumber(e.target.value)}
               />
-              <label htmlFor="qr-phone-msg" className="field-label">SMS Message (optional)</label>
+              <label htmlFor="qr-phone-msg" className="field-label">SMS message (optional)</label>
               <textarea
                 id="qr-phone-msg"
                 className="textarea"
-                placeholder="Leave blank for call, or enter a message for SMS..."
+                placeholder="Leave blank for a call; enter a message for SMS"
                 value={phoneMessage}
                 onChange={(e) => setPhoneMessage(e.target.value)}
               />
@@ -351,27 +351,34 @@ export default function QRGenerator() {
         </div>
 
         {/* Generate */}
-        <button className="btn btn-primary btn-block" onClick={generate}>
-          Generate QR Code
+        <button className="btn btn--primary btn-block" onClick={generate}>
+          Generate QR code
         </button>
 
-        {error && <p className="text-center text-sm text-[var(--color-red)]">{error}</p>}
+        {/* Hazard tape sits beside an actual fault — an invalid input is one. */}
+        {error && (
+          <div role="alert" className="flex items-center gap-3">
+            <span aria-hidden="true" className="abd-hazard h-3 w-12 flex-none" />
+            <p className="font-mono text-control text-ink-secondary">{error}</p>
+          </div>
+        )}
 
-        {/* Style Panel */}
+        {/* Style options */}
         <button
           className="btn btn-ghost btn-block"
           data-active={showStyle}
+          aria-expanded={showStyle}
           onClick={() => setShowStyle(!showStyle)}
         >
-          {showStyle ? 'Hide Style Options' : 'Customize Style'}
+          {showStyle ? 'Hide style options' : 'Show style options'}
         </button>
 
         <div className="disclosure" data-open={showStyle}>
           <div className="disclosure-inner">
-            <div className={styles.panel}>
+            <div className={`plate--sunken ${styles.panel}`}>
               <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="qr-dot-style" className="field-label">Dot Style</label>
+                  <label htmlFor="qr-dot-style" className="field-label">Dot style</label>
                   <select
                     id="qr-dot-style"
                     className="select"
@@ -385,7 +392,7 @@ export default function QRGenerator() {
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="qr-corner-style" className="field-label">Corner Style</label>
+                  <label htmlFor="qr-corner-style" className="field-label">Corner style</label>
                   <select
                     id="qr-corner-style"
                     className="select"
@@ -399,7 +406,7 @@ export default function QRGenerator() {
                 </div>
 
                 <div className="flex flex-col gap-1.5">
-                  <label htmlFor="qr-corner-dot" className="field-label">Corner Dot</label>
+                  <label htmlFor="qr-corner-dot" className="field-label">Corner dot</label>
                   <select
                     id="qr-corner-dot"
                     className="select"
@@ -480,7 +487,7 @@ export default function QRGenerator() {
                   </div>
                 ) : (
                   <div className="flex flex-col gap-1.5">
-                    <label className="field-label">Dot Color</label>
+                    <label className="field-label">Dot color</label>
                     <div className="flex items-center gap-2.5">
                       <input
                         type="color"
@@ -500,9 +507,9 @@ export default function QRGenerator() {
       </div>
 
       {/* RIGHT — preview */}
-      <div className="lg:border-l lg:border-white/[0.06] lg:pl-10">
+      <div className="lg:border-l lg:border-hairline lg:pl-10">
         <div className="flex flex-col gap-4 lg:sticky lg:top-24">
-          <span className="eyebrow-system">Preview</span>
+          <span className="micro-label">Preview</span>
           <div className="tool-stage">
             <div className="relative flex aspect-square w-full max-w-[240px] items-center justify-center">
               <div
@@ -511,13 +518,13 @@ export default function QRGenerator() {
                 aria-label="Generated QR code"
               />
               {!generated && (
-                <div className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-xl border border-dashed border-white/10 px-6 text-center text-xs leading-5 text-[var(--color-graphite)]">
-                  Generate to preview your code
+                <div className="pointer-events-none absolute inset-0 flex items-center justify-center border border-hairline px-6 text-center font-mono text-control text-ink-dim">
+                  Awaiting payload. Generate to render.
                 </div>
               )}
             </div>
             {generated ? (
-              <button className="btn btn-ghost btn-block" onClick={download}>
+              <button className="btn btn--quiet btn-block" onClick={download}>
                 Download PNG
               </button>
             ) : (
