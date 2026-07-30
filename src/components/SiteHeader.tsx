@@ -51,8 +51,8 @@ export default function SiteHeader() {
         </div>
       </nav>
 
-      {/* The identification band carries the complete public marking. It is
-          a proprietary handling label, not a classification. */}
+      {/* This continuous public surface carries its proprietary A0 mark once
+          in the top identification band, beside document metadata. */}
       <div className="mx-auto max-w-6xl px-4 md:px-8">
         <div className="dossier-band">
           <span className="hidden items-center gap-2 sm:flex">
@@ -62,9 +62,11 @@ export default function SiteHeader() {
             </span>
             <span>Software module</span>
           </span>
-          <span className="band-doc band-doc--full">{marketing.banner}</span>
+          <span className="band-doc band-doc--full">
+            {marketing.topChrome}
+          </span>
           <span className="band-doc band-doc--compact">
-            {marketing.control} · {release.revision}
+            {marketing.controlMark} · {release.revision}
           </span>
         </div>
       </div>

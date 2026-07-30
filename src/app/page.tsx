@@ -172,7 +172,7 @@ export default function HomePage() {
                     aria-hidden="true"
                     className="inline-block h-2 w-2 bg-signal-identity"
                   />
-                  {marketing.heroEyebrow}
+                  Software module
                 </span>
                 <h1 className="max-w-4xl text-h1 md:text-display">
                   Defined tasks.

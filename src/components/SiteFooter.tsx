@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { SealRoundel } from "@/components/Seal";
 import { apps, tools } from "@/lib/catalog";
-import { marketing, release } from "@/lib/brand";
+import { marketing } from "@/lib/brand";
 
 /** Footer: the Roundel (its one appearance per page), the positioning
  *  line, catalog navigation, and a colophon with the barcode rule and
- *  the Axis release marking. */
+ *  release metadata. The A0 mark stays in the top identity band. */
 export default function SiteFooter() {
   return (
     <footer
@@ -107,11 +107,9 @@ export default function SiteFooter() {
           <div className="abd-barcode" aria-hidden="true" />
           <div className="flex flex-wrap items-center justify-between gap-3 border-t border-hairline pt-5">
             <span className="micro-label">
-              © {new Date().getFullYear()} Jaafar Abdeen · Abdeen Labs
+              © {new Date().getFullYear()} Jaafar Abdeen
             </span>
-            <span className="micro-label">
-              {marketing.control} · Rev {release.version} · Release / Public
-            </span>
+            <span className="micro-label">{marketing.footer}</span>
           </div>
         </div>
       </div>
