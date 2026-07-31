@@ -145,9 +145,7 @@ export default function SafeStay() {
           Runtime / Local · Probes / LAN only · Telemetry / None
         </p>
         <p className="text-body text-ink-dim">
-          Hobby project. MIT-licensed, provided AS IS — no warranty, no
-          liability, not legal advice. Network scanning may be illegal where
-          you are; confirm you are authorized before running it.
+          Hobby project — the full disclaimer sits at the end of this page.
         </p>
 
         <div className="flex flex-col gap-2">

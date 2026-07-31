@@ -406,10 +406,6 @@ export default function CoverQuad() {
           <p className="font-mono text-control text-ink-dim">
             Fill all four slots to export one square PNG.
           </p>
-          <p className="micro-label">
-            Search / MUSICBRAINZ &middot; Covers / FETCHED VIA PROXY &middot;
-            Export / LOCAL
-          </p>
         </div>
       </div>
 

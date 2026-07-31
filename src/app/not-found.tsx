@@ -4,7 +4,7 @@ import FadeInWrapper from "@/components/FadeInWrapper";
 
 export const metadata: Metadata = {
   title: "Not found",
-  description: "This address does not resolve to a module.",
+  description: "The page moved, retired, or never existed. The index lists everything that runs.",
 };
 
 export default function NotFound() {
@@ -23,8 +23,8 @@ export default function NotFound() {
 
       <FadeInWrapper direction="up" delay={0.1} eager>
         <p className="max-w-md text-body text-ink-dim">
-          This address does not resolve to a module. The page moved, retired,
-          or never existed. The index lists everything that runs.
+          The page moved, retired, or never existed. The index lists
+          everything that runs.
         </p>
       </FadeInWrapper>
 

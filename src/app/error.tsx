@@ -22,10 +22,6 @@ export default function Error({
         <span className="micro-label">Render fault</span>
       </div>
       <h1 className="text-h2 md:text-h1">Page fault.</h1>
-      <p className="max-w-xl font-mono text-control text-ink-secondary">
-        FAULT // THIS PAGE // ACTION: retry the render or return to the
-        index.
-      </p>
       <p className="max-w-xl text-body text-ink-dim">
         The fault is on this end, not yours. Nothing you entered was sent
         anywhere.

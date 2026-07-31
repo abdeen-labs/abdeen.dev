@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { SealKey } from "@/components/Seal";
 import ThemeToggle from "@/components/ThemeToggle";
-import { identity, marketing, release } from "@/lib/brand";
+import { identity, marketing } from "@/lib/brand";
 
 /** Dossier chrome, in the marketing kit's order: the lockup (Key seal ·
  *  divider · wordmark) with mono navigation and the mode control, then the
@@ -60,13 +60,13 @@ export default function SiteHeader() {
             <span className="sep" aria-hidden="true">
               {"///"}
             </span>
-            <span>Software module</span>
+            <span>Studio site</span>
           </span>
           <span className="band-doc band-doc--full">
             {marketing.topChrome}
           </span>
           <span className="band-doc band-doc--compact">
-            {marketing.controlMark} · {release.revision}
+            {marketing.controlMark}
           </span>
         </div>
       </div>

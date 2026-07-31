@@ -5,12 +5,12 @@ import PasswordGenerator from './PasswordGenerator';
 export const metadata: Metadata = {
   title: 'Password Generator',
   description:
-    'Generate memorable passwords in the classic Apple Keychain format, or diceware passphrases from the EFF Large and BIP-39 word lists. Each result reports its entropy in bits. Generation runs on-device: Storage / NONE · Egress / 0.',
+    'Generate memorable passwords in the classic Apple Keychain format, or diceware passphrases from the EFF Large and BIP-39 word lists. Each result reports its entropy in bits. Generation runs on your device; nothing is stored or sent.',
   alternates: { canonical: 'https://abdeen.dev/pwgen' },
   openGraph: {
     title: 'Password Generator | abdeen.dev',
     description:
-      'Memorable passwords and diceware passphrases, generated on-device. Entropy stated per result. Storage / NONE · Egress / 0.',
+      'Memorable passwords and diceware passphrases, generated on your device. Entropy stated per result; nothing is stored or sent.',
     url: 'https://abdeen.dev/pwgen',
   },
 };

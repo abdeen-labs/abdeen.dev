@@ -166,7 +166,7 @@ export default function Hush() {
               </a>
             </div>
             <p className="micro-label">
-              Storage / LOCAL &middot; Egress / 0 &middot; Open source
+              iOS &middot; Free &middot; Open source
             </p>
           </div>
         </FadeInWrapper>
@@ -234,9 +234,6 @@ export default function Hush() {
               <p className="text-body text-ink-secondary">
                 Free on the App Store. No account, no analytics, no tracking.
                 Open source under GPL-3.0.
-              </p>
-              <p className="micro-label">
-                iOS &middot; License / GPL-3.0
               </p>
             </div>
             <div className="flex flex-col items-start gap-3">

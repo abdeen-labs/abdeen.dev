@@ -71,14 +71,14 @@ export default function QRGenerator() {
     switch (activeTab) {
       case 'text': {
         const val = text.trim();
-        if (!val) { setError('FAULT // TEXT // ACTION: enter text or a URL.'); return null; }
+        if (!val) { setError('Enter text or a URL first.'); return null; }
         return val;
       }
       case 'wifi': {
         const ssid = wifiSSID.trim();
-        if (!ssid) { setError('FAULT // WIFI // ACTION: enter the network name (SSID).'); return null; }
+        if (!ssid) { setError('Enter the network name (SSID) first.'); return null; }
         if (wifiSecurity !== 'nopass' && !wifiPassword) {
-          setError('FAULT // WIFI // ACTION: enter the network password, or set security to None.');
+          setError('Enter the network password, or set security to None.');
           return null;
         }
         // Backslash-escape the WIFI: format's reserved characters so networks
@@ -88,7 +88,7 @@ export default function QRGenerator() {
       }
       case 'email': {
         const to = emailTo.trim();
-        if (!to) { setError('FAULT // EMAIL // ACTION: enter a recipient address.'); return null; }
+        if (!to) { setError('Enter a recipient address first.'); return null; }
         const params = new URLSearchParams();
         if (emailSubject.trim()) params.append('subject', emailSubject.trim());
         if (emailBody.trim()) params.append('body', emailBody.trim());
@@ -97,7 +97,7 @@ export default function QRGenerator() {
       }
       case 'phone': {
         const num = phoneNumber.trim();
-        if (!num) { setError('FAULT // PHONE // ACTION: enter a phone number.'); return null; }
+        if (!num) { setError('Enter a phone number first.'); return null; }
         const msg = phoneMessage.trim();
         return msg ? `smsto:${num}:${msg}` : `tel:${num}`;
       }
@@ -355,7 +355,8 @@ export default function QRGenerator() {
           Generate QR code
         </button>
 
-        {/* Hazard tape sits beside an actual fault — an invalid input is one. */}
+        {/* Validation notice — a plain sentence; the hazard stripe marks the
+            blocked generate. */}
         {error && (
           <div role="alert" className="flex items-center gap-3">
             <span aria-hidden="true" className="abd-hazard h-3 w-12 flex-none" />
@@ -519,7 +520,7 @@ export default function QRGenerator() {
               />
               {!generated && (
                 <div className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-plate border border-hairline px-6 text-center font-mono text-control text-ink-dim">
-                  Awaiting payload. Generate to render.
+                  Enter details and generate to preview.
                 </div>
               )}
             </div>

@@ -15,16 +15,16 @@
 
 const releaseVersion = "3.4";
 const releaseIssued = "2026-07";
-const [issuedYear, issuedMonth] = releaseIssued.split("-");
 
+/**
+ * The brand release. Display forms (`v3.4`, `Rev 3.4`) are deliberately
+ * absent: the revision appears only inside the brand guide PDF (hard
+ * rule 17) — public chrome carries the document code unversioned.
+ */
 export const release = {
   version: releaseVersion,
   label: "Axis",
   issued: releaseIssued,
-  short: `v${releaseVersion}`,
-  revision: `Rev ${releaseVersion}`,
-  /** Calibration stamp — the release's issue month. */
-  calibrationShort: `${issuedMonth} / ${issuedYear.slice(2, 4)}`,
 } as const;
 
 export const identity = {
@@ -43,9 +43,8 @@ export const marketing = {
   code: marketingCode,
   controlId: marketingControlId,
   controlMark: marketingControlMark,
-  /** The public mark plus document metadata, carried once in top chrome. */
-  topChrome:
-    `${marketingControlMark} · Doc ${marketingCode} · ${release.revision}`,
-  /** Release metadata for the footer; the A0 mark is not repeated here. */
-  footer: `${identity.studio} · ${release.short} · Doc ${marketingCode}`,
+  /** The public mark plus the document code, carried once in top chrome. */
+  topChrome: `${marketingControlMark} · Doc ${marketingCode}`,
+  /** Footer identification; the A0 mark is not repeated here. */
+  footer: `${identity.studio} · Doc ${marketingCode}`,
 } as const;

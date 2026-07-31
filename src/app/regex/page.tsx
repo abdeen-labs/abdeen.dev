@@ -22,7 +22,7 @@ export default function RegexTesterPage() {
       eyebrow="REF / REGEX"
       currentPath="/regex"
       title="Regex Tester"
-      description="Execute a pattern against sample text and inspect every match live. Capture groups, a replacement preview, and a syntax reference sit on the same panel. Matching runs in the browser; the pattern and text stay on this device."
+      description="Test a pattern against sample text with live highlighting, capture groups, and a replacement preview. Matching runs in the browser; the pattern and text stay on this device."
     >
       <RegexTester />
     </ToolPageShell>

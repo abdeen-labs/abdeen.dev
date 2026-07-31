@@ -1756,46 +1756,6 @@ a.chip:focus-visible {
   font-feature-settings: "tnum";
 }
 
-/* A label/value pair — the rail's row turned inline. The label sits at
-   the micro tier's tone; the value carries the datum one step brighter. */
-.hero-register-pair {
-  display: inline-flex;
-  align-items: baseline;
-  gap: var(--space-2);
-  color: var(--ink-secondary);
-}
-
-.hero-register-pair b {
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-micro);
-  /* Page surface only — the strip sits on the page, never on a plate. */
-  color: var(--ink-faint);
-}
-
-/* Ref / Cal / Sheet — identification furniture, the substrate-independent
-   chrome. Wholly at the faint tier so the codes register more quietly
-   than the facts they follow. */
-.hero-register-codes {
-  display: inline-flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  column-gap: var(--space-4);
-  row-gap: var(--space-3);
-}
-
-.hero-register-codes .hero-register-pair {
-  color: var(--ink-faint);
-}
-
-/* On the wide strip the codes take the right end, clear of the facts;
-   narrower, they wrap into the run rather than float alone. */
-@media (min-width: 900px) {
-  .hero-register-codes {
-    margin-inline-start: auto;
-  }
-}
-
 /* The kit also carries a hazard edge stripe, a rubber stamp, and
    registration crosshairs on its hero. Those are print-register furniture
    and deliberately do not ship here: BRAND.md bars importing them into an

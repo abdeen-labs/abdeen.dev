@@ -3,23 +3,23 @@ import FadeInWrapper from "@/components/FadeInWrapper";
 import FrostVisual from "@/components/FrostVisual";
 import SectionHeader from "@/components/SectionHeader";
 import { apps, tools, type CatalogEntry } from "@/lib/catalog";
-import { identity, marketing } from "@/lib/brand";
+import { identity } from "@/lib/brand";
 
 const boundaries = [
   {
     num: "01",
     title: "No account",
-    body: "Every module executes without sign-in, subscription, or paywall. Open the page and run the task.",
+    body: "No sign-in, subscription, or paywall. Open the page and run the task.",
   },
   {
     num: "02",
     title: "Local execution",
-    body: "Browser tools process input on the device wherever the task permits. What leaves the device is stated on the module.",
+    body: "Browser tools process input on your device wherever possible. Each tool's page says what leaves it.",
   },
   {
     num: "03",
     title: "Open source",
-    body: "Every release retains its code and license on GitHub. Inspect the work, report a fault, or reproduce the build.",
+    body: "The code and license for every release are on GitHub. Read it, file an issue, or reproduce the build.",
   },
 ];
 
@@ -110,7 +110,7 @@ export default function HomePage() {
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col pb-20 pt-4 md:pb-28 md:pt-10">
       {/* Mission — the kit's hero: the message holds the full measure,
-          and the identification codes run in a registration strip along
+          and the establishment line runs in a registration strip along
           the section's foot, so the plate identity survives without a
           rail competing with the message. */}
       <section
@@ -128,13 +128,6 @@ export default function HomePage() {
         <div className="relative py-10 md:py-16">
           <FadeInWrapper direction="up" eager>
             <div className="flex flex-col gap-7">
-              <span className="micro-label">
-                <span
-                  aria-hidden="true"
-                  className="inline-block h-2 w-2 bg-signal-identity"
-                />
-                Software module
-              </span>
               <h1 className="max-w-4xl text-h1 md:text-display">
                 Defined tasks.
                 <br />
@@ -142,9 +135,8 @@ export default function HomePage() {
               </h1>
               <p className="max-w-2xl text-lede text-ink-secondary">
                 Abdeen Labs develops bounded software for Apple platforms
-                and the browser. Each tool is assigned one defined task,
-                runs without an account, and states what it stores, sends,
-                and reports.
+                and the browser. Each tool does one job, runs without an
+                account, and says what it stores and sends.
               </p>
               <div className="flex flex-wrap items-center gap-4">
                 <a href="#apps" className="btn btn--primary">
@@ -162,18 +154,12 @@ export default function HomePage() {
             </div>
           </FadeInWrapper>
         </div>
-        {/* Registration strip — just the establishment line and the
-            document reference at the far end. Real content, so the aside
-            keeps an accessible name; eager like the rest of the hero. */}
+        {/* Registration strip — just the establishment line. Real content,
+            so the aside keeps an accessible name; eager like the rest of
+            the hero. */}
         <FadeInWrapper direction="up" eager>
           <aside className="hero-register relative" aria-label="Registration">
             <span className="micro-label">{identity.establishedLine}</span>
-            <span className="hero-register-codes">
-              <span className="hero-register-pair">
-                <b>Ref</b>
-                <span>{marketing.code}</span>
-              </span>
-            </span>
           </aside>
         </FadeInWrapper>
       </section>
@@ -202,9 +188,9 @@ export default function HomePage() {
             </p>
             <div className="mt-7 flex flex-wrap items-center gap-4">
               <Link href="/frost" className="btn btn--primary">
-                Inspect Frost
+                See Frost
               </Link>
-              <span className="micro-label">License / Free · Open source</span>
+              <span className="micro-label">Free · Open source</span>
             </div>
           </div>
           <div className="border-t border-hairline p-4 md:border-l md:border-t-0 md:p-6">
@@ -215,7 +201,7 @@ export default function HomePage() {
 
       {/* Apps */}
       <section id="apps" className="section-shell" aria-label="Apps">
-        <SectionRail label="Inventory" number="01" />
+        <SectionRail label="Apple platforms" number="01" />
         <div className="section-body">
           <FadeInWrapper direction="up">
             <SectionHeader label="Apps" count={apps.length} inset />
@@ -232,7 +218,7 @@ export default function HomePage() {
 
       {/* Tools */}
       <section id="tools" className="section-shell" aria-label="Tools">
-        <SectionRail label="Inventory" number="02" />
+        <SectionRail label="In the browser" number="02" />
         <div className="section-body">
           <FadeInWrapper direction="up">
             <SectionHeader label="Web tools" count={tools.length} inset />
@@ -253,7 +239,7 @@ export default function HomePage() {
         className="section-shell"
         aria-label="Operating boundaries"
       >
-        <SectionRail label="Controls" number="03" />
+        <SectionRail label="All tools" number="03" />
         <div className="section-body">
           <FadeInWrapper direction="up">
             <SectionHeader label="Operating boundaries" count={boundaries.length} />
