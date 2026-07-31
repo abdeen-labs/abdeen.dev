@@ -21,7 +21,7 @@ bun run build    # production build
 - `src/components/` · shared UI (tool page shell, Seal, section header, fade-in wrapper).
 - `src/lib/catalog.ts` · the single index of apps and tools that drives the homepage, footer, and cross-links.
 - `src/app/globals.css` · Axis role tokens (both modes) and the shared control vocabulary (buttons, fields, segmented controls, console, textures).
-- `public/fonts/axis/` · self-hosted webfonts (Schibsted Grotesk, Geist, Geist Mono, Aref Ruqaa — all OFL); `static/` holds instanced TTFs for the OG/icon renderers.
+- `public/fonts/axis/static/` · instanced TTFs for the OG renderer (Satori cannot ingest variable files). Page fonts load via `next/font/google` — downloaded at build time, served from this origin.
 - `public/data/` · word lists and lookup data fetched by the tools at runtime.
 
 There is no logo file: the mark `عابدين` is set live in Aref Ruqaa 700, and the favicon/OG renders derive from the Seal component at build time.
