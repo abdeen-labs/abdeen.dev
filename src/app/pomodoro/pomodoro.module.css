@@ -4,7 +4,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: var(--space-6);
   width: 100%;
   max-width: 380px;
   margin: 0 auto;
@@ -27,57 +27,79 @@
 
 .ringTrack {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.06);
+  stroke: var(--hairline);
   stroke-width: 4;
 }
 
+/* The active rule — lacquer sweeps as the interval elapses. Butt caps:
+   structure is square. The arc steps once per second on the motion tokens. */
 .ringProgress {
   fill: none;
-  stroke: var(--color-red);
+  stroke: var(--signal-identity);
   stroke-width: 4;
-  stroke-linecap: round;
-  transition: stroke-dashoffset 1s linear;
+  transition: stroke-dashoffset var(--duration-reveal) var(--ease-flat);
 }
 
+/* Countdown digits. While running, the global .readout carries them —
+   the screen's one phosphor element. Color deliberately lives outside
+   .time so this module can never outrank the shared class.
+
+   Size is the one exception. This is a display number that happens to be
+   live, so it takes an explicit step off the type scale rather than
+   .readout's --readout-scale ratio, and the doubled selector makes that
+   win regardless of which stylesheet lands last. */
 .time {
   z-index: 1;
-  font-family: var(--font-mono);
-  font-size: 3.6rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: var(--color-paper);
-  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono-stack);
+  font-weight: 500;
+  letter-spacing: 0;
+  font-feature-settings: "tnum";
+}
+
+.time.time {
+  font-size: var(--fs-h1);
+}
+
+.timeIdle {
+  color: var(--ink-primary);
 }
 
 .sessions {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.8rem;
-  color: var(--color-graphite);
+  gap: var(--space-2);
+}
+
+.sessionCount {
+  font-family: var(--font-mono-stack);
+  font-size: var(--fs-control);
+  color: var(--ink-secondary);
+  font-feature-settings: "tnum";
 }
 
 .dots {
   display: flex;
-  gap: 0.375rem;
+  gap: 6px;
 }
 
+/* Cycle pips — a four-segment meter. Neutral fill; the label and count
+   beside it carry the state. True dots, so the round radius is sanctioned. */
 .dot {
   width: 8px;
   height: 8px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  transition: background 0.3s ease;
+  border-radius: var(--radius-round);
+  background: var(--surface-raised);
+  transition: background var(--duration-panel) var(--ease-flat);
 }
 
 .dotFilled {
-  background: var(--color-red);
+  background: var(--ink-secondary);
 }
 
 .settings {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--space-3);
   width: 100%;
 }
 
@@ -85,48 +107,33 @@
 .settingsPanelInner {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
-  padding-top: 0.4rem;
+  gap: var(--space-2);
+  padding-top: var(--space-1);
 }
 
 .settingRow {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 0.82rem;
-  color: var(--color-graphite);
+  font-family: var(--font-mono-stack);
+  font-size: var(--fs-control);
+  color: var(--ink-secondary);
 }
 
-.settingInput {
+/* Narrow the shared .input to a two-digit minute field. Scoped under
+   .settingRow so it outranks .input's width regardless of sheet order. */
+.settingRow .settingInput {
   width: 64px;
-  padding: 0.4rem 0.5rem;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 0.5rem;
-  color: var(--color-paper);
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
   text-align: center;
-  outline: none;
-  transition: border-color 0.18s ease, box-shadow 0.18s ease;
-}
-
-.settingInput:focus {
-  border-color: var(--color-red);
-  box-shadow: 0 0 0 3px rgba(204, 27, 27, 0.14);
 }
 
 @media (max-width: 480px) {
   .container {
-    gap: 1.5rem;
+    gap: var(--space-5);
   }
 
   .timerWrap {
     width: 200px;
     height: 200px;
-  }
-
-  .time {
-    font-size: 3rem;
   }
 }

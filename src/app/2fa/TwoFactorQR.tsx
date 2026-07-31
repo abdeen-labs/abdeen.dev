@@ -157,7 +157,7 @@ export default function TwoFactorQR() {
             id="twofa-issuer"
             className="input"
             type="text"
-            placeholder="e.g. Google, GitHub, etc."
+            placeholder="e.g. Google, GitHub"
             value={issuer}
             onChange={(e) => { setIssuer(e.target.value); handleFieldChange(); }}
             list="issuers-list"
@@ -172,7 +172,7 @@ export default function TwoFactorQR() {
 
         {type === 'hotp' && (
           <div className="flex flex-col gap-2">
-            <label htmlFor="twofa-counter" className="field-label">Initial Counter</label>
+            <label htmlFor="twofa-counter" className="field-label">Initial counter</label>
             <input
               id="twofa-counter"
               className="input"
@@ -199,7 +199,7 @@ export default function TwoFactorQR() {
         <div className="disclosure" data-open={showAdvanced}>
           <div className={`disclosure-inner ${styles.advancedPanelInner}`}>
             <p className={styles.advancedNote}>
-              Advanced options are not supported by Google Authenticator (they are ignored). Yubico Authenticator supports them.
+              Google Authenticator ignores advanced parameters. Yubico Authenticator applies them.
             </p>
             <div className="flex flex-col gap-2">
               <label htmlFor="twofa-algorithm" className="field-label">Algorithm</label>
@@ -209,7 +209,7 @@ export default function TwoFactorQR() {
                 value={algorithm}
                 onChange={(e) => { setAlgorithm(e.target.value); handleFieldChange(); }}
               >
-                <option value="SHA1">SHA1 (Default)</option>
+                <option value="SHA1">SHA1 (default)</option>
                 <option value="SHA256">SHA256</option>
                 <option value="SHA512">SHA512</option>
               </select>
@@ -222,7 +222,7 @@ export default function TwoFactorQR() {
                 value={digits}
                 onChange={(e) => { setDigits(e.target.value); handleFieldChange(); }}
               >
-                <option value="6">6 digits (Default)</option>
+                <option value="6">6 digits (default)</option>
                 <option value="8">8 digits</option>
               </select>
             </div>
@@ -248,10 +248,10 @@ export default function TwoFactorQR() {
         <hr className={styles.divider} />
 
         <div className="flex flex-col gap-2">
-          <label htmlFor="twofa-uri" className="field-label">OTPAuth URI</label>
+          <label htmlFor="twofa-uri" className="field-label">otpauth URI</label>
           <input
             id="twofa-uri"
-            className="input input-mono text-xs"
+            className="input input-mono"
             type="text"
             placeholder="otpauth://"
             aria-invalid={uriInvalid}
@@ -262,24 +262,28 @@ export default function TwoFactorQR() {
             spellCheck={false}
           />
           {uriInvalid && (
-            <p id="twofa-uri-error" role="alert" className="text-xs text-[var(--color-red)]">
-              Not a valid otpauth:// URI. Authenticator apps won&apos;t recognize this code.
+            <p id="twofa-uri-error" role="alert" className={styles.fault}>
+              <span aria-hidden="true" className={`abd-hazard ${styles.faultStripe}`} />
+              <span>
+                PARSE FAILURE // OTPAUTH URI // ACTION: enter a valid
+                otpauth:// address.
+              </span>
             </p>
           )}
         </div>
       </div>
 
       {/* RIGHT — QR preview */}
-      <div className="lg:border-l lg:border-white/[0.06] lg:pl-10">
+      <div className="lg:border-l lg:border-hairline lg:pl-10">
         <div className="flex flex-col gap-4 lg:sticky lg:top-24">
-          <span className="eyebrow-system">QR Code</span>
+          <span className="micro-label">Output / QR</span>
           <div className="tool-stage">
             {showQr ? (
               <>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={displayQr!}
-                  alt="2FA QR Code"
+                  alt="2FA QR code"
                   width={size}
                   height={size}
                   className={styles.qrImage}
@@ -303,10 +307,11 @@ export default function TwoFactorQR() {
               </>
             ) : (
               <div className={styles.placeholder}>
-                Enter a secret and label to generate your code.
+                Enter a secret and label to generate the code.
               </div>
             )}
           </div>
+          <span className="micro-label">Storage / NONE · Egress / 0</span>
         </div>
       </div>
     </div>

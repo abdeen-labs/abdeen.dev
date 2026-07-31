@@ -1,10 +1,13 @@
 /**
  * Single source of truth for everything the site indexes: native apps and
  * browser tools. The homepage index, the footer navigation, the ToolPageShell
- * "More tools" strip, the sitemap, and the layout JSON-LD all render from
+ * "Related tools" strip, the sitemap, and the layout JSON-LD all render from
  * these arrays, so an entry added (or re-enabled) here appears everywhere at
  * once. Set `enabled: false` to pull an entry from all of those surfaces;
  * the route's page.tsx reads the same flag via entryEnabled() to 404 itself.
+ *
+ * Copy follows the Axis voice (BRAND.md → Voice): lead with the module and
+ * its assigned task, then boundary and evidence. No launch language.
  */
 export interface CatalogEntry {
   title: string;
@@ -33,7 +36,7 @@ const allApps: CatalogEntry[] = [
   {
     title: "Frost",
     description:
-      "Input locker for macOS. Freeze keyboard, mouse, and trackpad while the screen stays visible, then unlock with TouchID.",
+      "Input locker for macOS. Freezes the keyboard, mouse, and trackpad while the screen stays visible. Unlocks with Touch ID.",
     href: "/frost",
     meta: "macOS",
     sitemapPriority: 0.9,
@@ -42,13 +45,13 @@ const allApps: CatalogEntry[] = [
       applicationCategory: "UtilityApplication",
       operatingSystem: "macOS",
       description:
-        "Input locker for macOS. Freeze keyboard, mouse, and trackpad while the screen stays visible. Unlocks with TouchID.",
+        "Input locker for macOS. Freezes keyboard, mouse, and trackpad while the screen stays visible. Unlocks with Touch ID.",
     },
   },
   {
     title: "Hush",
     description:
-      "A focused sound studio for iOS with real-time noise, binaural beats, and 80+ ambient recordings to layer and mix.",
+      "Sound studio for iOS. Generates real-time noise and binaural beats, and layers 80+ recorded ambiences into one mix.",
     href: "/hush",
     meta: "iOS",
     sitemapPriority: 0.9,
@@ -57,13 +60,13 @@ const allApps: CatalogEntry[] = [
       applicationCategory: "UtilityApplication",
       operatingSystem: "iOS",
       description:
-        "Focus sounds for iOS. Noise generators, binaural beats, and 80+ ambient sounds.",
+        "Focus sounds for iOS. Noise generators, binaural beats, and 80+ recorded ambiences, layered on the device.",
     },
   },
   {
     title: "SafeStay Scanner",
     description:
-      "Detect hidden cameras at Airbnbs and rentals. Network scanner, MAC lookup, and inspection checklist.",
+      "Network inspection CLI for rentals. Scans the local network, resolves MAC vendors, and flags camera-class devices.",
     href: "/safestay",
     meta: "macOS · Linux",
     enabled: false,
@@ -73,13 +76,13 @@ const allApps: CatalogEntry[] = [
       applicationCategory: "SecurityApplication",
       operatingSystem: "macOS, Linux",
       description:
-        "CLI tool to detect hidden cameras on WiFi networks. ARP scanning, MAC address lookup, and port detection.",
+        "CLI that inspects WiFi networks for hidden cameras: ARP scanning, MAC vendor lookup, and port detection.",
     },
   },
   {
     title: "Strobe",
     description:
-      "A rapid serial visual reader for iPhone, iPad, and Mac that turns PDFs, EPUBs, and plain text into a focused reading stream.",
+      "Rapid serial visual reader for iPhone, iPad, and Mac. Converts PDFs, EPUBs, and plain text into a timed reading stream.",
     href: "https://strobefast.app",
     meta: "strobefast.app",
     external: true,
@@ -90,7 +93,7 @@ const allTools: CatalogEntry[] = [
   {
     title: "CoverQuad",
     description:
-      "Apple killed the 2×2 playlist covers. This brings them back.",
+      "Rebuilds the 2×2 playlist cover Apple retired. Four covers in, one square export out.",
     href: "/coverquad",
     meta: "/coverquad",
     sitemapPriority: 0.8,
@@ -103,7 +106,7 @@ const allTools: CatalogEntry[] = [
   {
     title: "Regex Tester",
     description:
-      "Test and debug regular expressions with live match highlighting.",
+      "Executes a regular expression against sample text with live match highlighting. Runs in the browser.",
     href: "/regex",
     meta: "/regex",
     sitemapPriority: 0.9,
@@ -115,7 +118,8 @@ const allTools: CatalogEntry[] = [
   },
   {
     title: "Pomodoro Timer",
-    description: "A calm, adjustable focus timer with deliberate work intervals, breaks, and lightweight session tracking.",
+    description:
+      "Interval timer for focused work. Configurable work and break durations, with session counts kept on the device.",
     href: "/pomodoro",
     meta: "/pomodoro",
     sitemapPriority: 0.8,
@@ -128,7 +132,7 @@ const allTools: CatalogEntry[] = [
   {
     title: "Password Generator",
     description:
-      "Generate memorable passwords and diceware passphrases with clear entropy feedback and secure defaults.",
+      "Generates random passwords and diceware passphrases with stated entropy. Generation runs on the device.",
     href: "/pwgen",
     meta: "/pwgen",
     sitemapPriority: 0.9,
@@ -141,7 +145,7 @@ const allTools: CatalogEntry[] = [
   {
     title: "2FA QR Generator",
     description:
-      "Turn TOTP or HOTP secrets and otpauth links into authenticator-ready QR codes without exposing the secret.",
+      "Converts TOTP and HOTP secrets or otpauth links into authenticator-ready QR codes. The secret stays on the device.",
     href: "/2fa",
     meta: "/2fa",
     sitemapPriority: 0.8,
@@ -154,7 +158,7 @@ const allTools: CatalogEntry[] = [
   {
     title: "QR Generator",
     description:
-      "QR codes for links, WiFi, email, and phone. Styled, then downloaded.",
+      "Renders QR codes for links, WiFi, email, and phone. Styled on the device and exported as an image.",
     href: "/qr",
     meta: "/qr",
     sitemapPriority: 0.9,
@@ -168,7 +172,7 @@ const allTools: CatalogEntry[] = [
   {
     title: "Lo-fi ATC Radio",
     description:
-      "Lo-fi beats mixed with live JFK Tower air-traffic control radio.",
+      "Streams lo-fi beats mixed with live JFK Tower air-traffic control radio.",
     href: "/lofi-atc",
     meta: "/lofi-atc",
     enabled: false,

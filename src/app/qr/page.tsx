@@ -5,12 +5,12 @@ import QRGenerator from './QRGenerator';
 export const metadata: Metadata = {
   title: 'QR Generator',
   description:
-    'Generate custom QR codes for URLs, WiFi networks, email, and phone numbers. Customize colors, dot styles, and gradients. Download as PNG. Free, no sign-up.',
+    'Encode links, WiFi credentials, email, and phone numbers as QR codes. Set module shape, colors, and gradients. Export PNG. The payload never leaves the browser.',
   alternates: { canonical: 'https://abdeen.dev/qr' },
   openGraph: {
-    title: 'QR Generator | abdeen.dev',
+    title: 'QR Generator · Abdeen Labs',
     description:
-      'Create QR codes for text, WiFi, email, and phone. Customize styles and download as PNG.',
+      'Encode links, WiFi, email, and phone numbers as QR codes. Style the modules and export PNG. The payload never leaves the browser.',
     url: 'https://abdeen.dev/qr',
   },
 };
@@ -19,10 +19,10 @@ export default function QRGeneratorPage() {
   return (
     <ToolPageShell
       wide
-      eyebrow="/qr"
+      eyebrow="REF / QR"
       currentPath="/qr"
       title="QR Generator"
-      description="Generate QR codes for links, WiFi credentials, contact details, and more with tasteful styling controls and quick download."
+      description="Encode a link, WiFi credential, email, or phone number as a scannable code. Style the modules, verify the preview, export PNG. Encoding runs in the browser; the payload stays on this device."
     >
       <QRGenerator />
     </ToolPageShell>

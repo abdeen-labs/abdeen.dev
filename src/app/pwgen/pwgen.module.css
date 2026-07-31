@@ -5,7 +5,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: var(--space-2);
   padding: 4rem 0;
   /* Hold roughly the height the two-pane UI will occupy. Without this the
      page mounts as a short stub and regrows when the word lists arrive,
@@ -16,144 +16,202 @@
   min-height: 560px;
 }
 
+/* True dots — the sanctioned round form. Furniture; the row's aria-label
+   carries the meaning. */
 .loadingDot {
   width: 6px;
   height: 6px;
-  border-radius: 50%;
-  background: var(--color-graphite);
-  opacity: 0.4;
-  animation: pulse 1.2s ease-in-out infinite;
+  border-radius: var(--radius-round);
+  background: var(--ink-dim);
+  opacity: 0.25;
+  animation: pulse 1s var(--ease-flat) infinite;
 }
 
 .loadingDot:nth-child(2) { animation-delay: 0.15s; }
 .loadingDot:nth-child(3) { animation-delay: 0.3s; }
 
 @keyframes pulse {
-  0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
-  40% { opacity: 1; transform: scale(1); }
+  0%, 80%, 100% { opacity: 0.25; }
+  40% { opacity: 1; }
 }
 
-/* ── Primary result ── */
-.result {
-  width: 100%;
-  padding: 1.4rem;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1rem;
-  cursor: pointer;
-  text-align: center;
-  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
-  user-select: none;
-}
-
-.result:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.12);
-}
-
-.resultCopied {
-  border-color: var(--color-red);
-  box-shadow: 0 0 0 1px var(--color-red), 0 0 24px -6px var(--accent-glow);
-}
-
-/* ── Color-coded segments (palette-only) ── */
-.passwordSegments {
-  font-family: var(--font-mono);
-  font-size: 1.05rem;
-  line-height: 1.8;
-  word-break: break-all;
-  letter-spacing: 0.01em;
-}
-
-.segWord { color: var(--color-paper); }
-.segNumber { color: var(--color-graphite); }
-.segSpecial { color: var(--color-red); }
-.segSeparator { color: var(--color-graphite); opacity: 0.5; }
-
-/* ── Result meta ── */
-.resultMeta {
+/* ── Load fault — hazard stripe beside a real failure ── */
+.fault {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 0.8rem;
-  font-family: var(--font-mono);
-  font-size: 0.66rem;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
-.charCount {
-  color: var(--color-graphite);
-  font-variant-numeric: tabular-nums;
-}
-
-.copyHint {
-  color: var(--color-graphite);
-  transition: color 0.15s;
-}
-
-.result:hover .copyHint { color: var(--color-paper); }
-.resultCopied .copyHint { color: var(--color-red); }
-
-/* ── Batch list ── */
-.batchList {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  width: 100%;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 0.6rem;
-  overflow: hidden;
-}
-
-.batchItem {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: 0.6rem 0.8rem;
-  background: rgba(255, 255, 255, 0.02);
-  border: none;
-  cursor: pointer;
-  transition: background 0.12s;
+  align-items: stretch;
+  gap: var(--space-3);
+  max-width: 32rem;
   text-align: left;
 }
 
-.batchItem:hover { background: rgba(255, 255, 255, 0.05); }
-.batchSelected { background: rgba(255, 255, 255, 0.06); }
-.batchSelected .batchIndex { color: var(--color-red); opacity: 1; }
+/* Sizing only — .abd-hazard supplies the tape and pulse. */
+.faultStripe {
+  flex: none;
+  width: 6px;
+}
+
+.faultText {
+  font-family: var(--font-mono-stack);
+  font-size: var(--fs-control);
+  line-height: var(--leading-mono);
+  color: var(--ink-secondary);
+}
+
+/* ── Primary result — plain fresh output on the sunken stage ── */
+/* Surface, border, and layout come from the shared .tool-stage. The value
+   stays selectable: manual select-and-copy is the clipboard fallback. */
+.result {
+  text-align: center;
+}
+
+.passwordSegments {
+  font-family: var(--font-mono-stack);
+  font-size: var(--fs-lede);
+  line-height: 1.8;
+  word-break: break-all;
+  font-feature-settings: "tnum";
+}
+
+/* Segment differentiation rides on ink tiers and weight, never on a
+   signal colour — the characters are values, not status. */
+.segWord { color: var(--ink-primary); }
+.segNumber { color: var(--ink-secondary); }
+.segSpecial { color: var(--ink-primary); font-weight: 700; }
+.segSeparator { color: var(--ink-dim); }
+
+/* ── Result meta ── */
+.resultMeta {
+  align-self: stretch;
+  display: flex;
+  justify-content: center;
+  font-family: var(--font-mono-stack);
+  font-weight: 500;
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-micro);
+  text-transform: uppercase;
+}
+
+.charCount {
+  color: var(--ink-dim); /* well floor — dim or brighter */
+  font-feature-settings: "tnum";
+}
+
+/* ── Strength — neutral meter; the word carries the state ── */
+.strengthLabel {
+  white-space: nowrap;
+  font-family: var(--font-mono-stack);
+  font-weight: 500;
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-micro);
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  font-feature-settings: "tnum";
+}
+
+.strengthWord[data-level="1"] { color: var(--signal-warning); }
+.strengthWord[data-level="2"] { color: var(--ink-secondary); }
+.strengthWord[data-level="3"],
+.strengthWord[data-level="4"] { color: var(--signal-verified); }
+
+/* ── Copy action ── */
+.copyRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.copyStatus,
+.copyFault {
+  font-family: var(--font-mono-stack);
+  font-weight: 500;
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-micro);
+  text-transform: uppercase;
+}
+
+.copyStatus { color: var(--signal-verified); }
+.copyFault { color: var(--signal-warning); }
+
+/* ── Batch list — hairline-ruled index of candidates ── */
+.batchList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-plate);
+  overflow: hidden; /* the rules must not square off the panel's corners */
+}
+
+.batchItem {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 40px;
+  padding: 0.55rem 0.8rem;
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--hairline);
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--duration-hover) var(--ease-flat);
+}
+
+.batchItem:first-child { border-top: none; }
+
+.batchItem:hover { background: var(--surface-raised); }
+
+.batchItem:active { transform: translateY(1px); }
+
+/* Selected — sunken well plus the lacquer active rule. */
+.batchSelected,
+.batchSelected:hover {
+  background: var(--surface-sunken);
+}
+
+.batchSelected::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--signal-identity);
+}
 
 .batchPassword {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--color-graphite);
+  font-family: var(--font-mono-stack);
+  font-size: var(--fs-control);
+  color: var(--ink-dim);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-feature-settings: "tnum";
+  transition: color var(--duration-hover) var(--ease-flat);
 }
 
-.batchSelected .batchPassword {
-  color: var(--color-paper);
-}
+.batchSelected .batchPassword { color: var(--ink-primary); }
 
 .batchIndex {
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  color: var(--color-graphite);
-  opacity: 0.4;
-  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono-stack);
+  font-size: var(--fs-micro);
+  color: var(--ink-dim);
+  font-feature-settings: "tnum";
   flex-shrink: 0;
   margin-left: 0.75rem;
 }
 
-/* ── Controls panel ── */
+.batchSelected .batchIndex { color: var(--ink-primary); }
+
+/* ── Controls panel — hairline-framed rows at the plate step ── */
 .controls {
   display: flex;
   flex-direction: column;
   width: 100%;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 0.9rem;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-plate);
   overflow: hidden;
 }
 
@@ -162,7 +220,7 @@
 }
 
 .controls > * + * {
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid var(--hairline);
 }
 
 .controlRow {
@@ -172,9 +230,15 @@
   gap: 1rem;
 }
 
+label.controlRow { cursor: pointer; }
+
 .controlLabel {
-  font-size: 0.83rem;
-  color: var(--color-graphite);
+  font-family: var(--font-mono-stack);
+  font-weight: 500;
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-micro);
+  text-transform: uppercase;
+  color: var(--ink-dim); /* plate floor — dim or brighter */
 }
 
 /* ── Range group ── */
@@ -191,45 +255,46 @@
 }
 
 .rangeValue {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--color-paper);
-  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono-stack);
+  font-size: var(--fs-control);
+  color: var(--ink-primary);
+  font-feature-settings: "tnum";
 }
 
-/* ── Credit ── */
+/* ── Credit — quiet citation line; underline carries the affordance ── */
 .credit {
-  font-size: 0.66rem;
-  color: var(--color-graphite);
-  line-height: 1.7;
+  font-family: var(--font-mono-stack);
+  font-size: var(--fs-control);
+  line-height: var(--leading-mono);
+  color: var(--ink-dim); /* plate floor */
 }
 
 .credit a {
-  color: var(--color-graphite);
+  color: inherit;
   text-decoration: underline;
   text-underline-offset: 2px;
-  transition: color 0.15s;
+  transition: color var(--duration-hover) var(--ease-flat);
 }
 
-.credit a:hover { color: var(--color-paper); }
+.credit a:hover,
+.credit a:focus-visible { color: var(--ink-secondary); }
 
 /* ── Keyboard hints ── */
 .hints {
   display: flex;
-  gap: 1rem;
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  color: var(--color-graphite);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+  gap: var(--space-4);
   align-items: center;
+  font-family: var(--font-mono-stack);
+  font-weight: 500;
+  font-size: var(--fs-micro);
+  letter-spacing: var(--tracking-micro);
+  text-transform: uppercase;
+  color: var(--ink-dim); /* plate floor */
 }
 
 @media (max-width: 480px) {
-  .result { padding: 1.1rem; }
-  .passwordSegments { font-size: 0.95rem; }
+  .passwordSegments { font-size: var(--fs-body); }
   .batchItem { min-height: 44px; }
-  .batchPassword { font-size: 0.68rem; }
   .hints { display: none; }
   .credit { text-align: center; }
 }

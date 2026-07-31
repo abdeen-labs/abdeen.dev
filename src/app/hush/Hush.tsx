@@ -10,28 +10,29 @@ import SectionHeader from "@/components/SectionHeader";
 
 const features = [
   {
-    label: "Noise Generators",
-    detail: "White, pink, brown, and gray noise synthesized in real-time.",
+    label: "Noise generators",
+    detail: "White, pink, brown, and gray noise, synthesized in real time.",
   },
   {
-    label: "Binaural Beats",
+    label: "Binaural beats",
     detail:
-      "Alpha, SMR, Beta, and Gamma ranges with configurable carrier frequency.",
+      "Alpha, SMR, Beta, and Gamma ranges with a configurable carrier frequency.",
   },
   {
-    label: "Isochronic Tones",
-    detail: "Alternative brainwave entrainment with isochronic and monaural beats.",
+    label: "Isochronic tones",
+    detail: "Brainwave entrainment with isochronic and monaural beats.",
   },
   {
-    label: "80+ Ambient Sounds",
-    detail: "Rain, fire, ocean, birds, cafe, train, forest, and many more.",
+    label: "Recorded ambiences",
+    detail:
+      "80+ recordings: rain, fire, ocean, birds, cafe, train, forest, and more. Bundled with the app and played offline.",
   },
   {
-    label: "Layer & Mix",
+    label: "Layer and mix",
     detail: "Combine up to 6 sounds with independent volume controls.",
   },
   {
-    label: "Focus Timer",
+    label: "Focus timer",
     detail: "Built-in timer with fade-out for focused work sessions.",
   },
 ];
@@ -67,15 +68,15 @@ const screenshots = [
 ];
 
 /** Primary conversion action, shared by the hero and closing CTA. Falls back
- *  to a disabled "coming soon" chip while APP_STORE_URL is unset. */
+ *  to a non-interactive status chip while APP_STORE_URL is unset. */
 function AppStoreButton() {
   if (!APP_STORE_URL) {
     return (
-      <span className="inline-flex items-center gap-2 rounded-full border border-white/[0.08] bg-white/[0.03] px-5 py-2.5 text-sm text-[var(--text)] opacity-50">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <span className="chip">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d={APPLE_PATH} />
         </svg>
-        Coming soon on the App Store
+        App Store / Pending
       </span>
     );
   }
@@ -85,14 +86,14 @@ function AppStoreButton() {
 function ScreenshotImage({ src, alt }: { src: string; alt: string }) {
   const [loaded, setLoaded] = useState(false);
   return (
-    <div className="relative h-[480px] w-[222px] flex-shrink-0 rounded-[1.25rem] border border-white/[0.08] overflow-hidden bg-white/[0.02]">
+    <div className="relative h-[480px] w-[222px] flex-shrink-0 overflow-hidden rounded-plate border border-hairline bg-surface-sunken">
       <Image
         src={src}
         alt={alt}
         width={222}
         height={480}
         sizes="222px"
-        className={`h-full w-full object-cover transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"}`}
+        className={`h-full w-full object-cover transition-opacity duration-[var(--duration-reveal)] ease-[var(--ease-flat)] ${loaded ? "opacity-100" : "opacity-0"}`}
         onLoad={() => setLoaded(true)}
         ref={(img) => {
           // Cached images can finish before hydration attaches onLoad
@@ -103,14 +104,15 @@ function ScreenshotImage({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-/** Hero device: the first screenshot in a phone frame with an ambient glow. */
+/** Hero device: the first screenshot mounted on a plate. The screenshot
+ *  itself is content; the mount is structure — the plate step, with the
+ *  10px inset landing the inner frame's corner at 0, no glow, no shadow. */
 function HeroPhone() {
   const [loaded, setLoaded] = useState(false);
   return (
     <div className="relative mx-auto w-full max-w-[280px] lg:ml-auto lg:mr-0">
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[440px] w-[440px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(204,27,27,0.18),transparent_70%)]" />
-      <div className="relative rounded-[2.3rem] border border-white/[0.1] bg-white/[0.03] p-2.5 shadow-[0_40px_100px_rgba(0,0,0,0.55)]">
-        <div className="overflow-hidden rounded-[1.8rem] border border-white/[0.06]">
+      <div className="plate p-2.5">
+        <div className="overflow-hidden border border-hairline">
           <Image
             src="/hush/screen-1.png"
             alt="Hush app interface"
@@ -118,7 +120,7 @@ function HeroPhone() {
             height={528}
             preload
             sizes="(min-width: 1024px) 244px, 280px"
-            className={`block h-auto w-full transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"}`}
+            className={`block h-auto w-full transition-opacity duration-[var(--duration-reveal)] ease-[var(--ease-flat)] ${loaded ? "opacity-100" : "opacity-0"}`}
             onLoad={() => setLoaded(true)}
             ref={(img) => {
               if (img?.complete) setLoaded(true);
@@ -137,20 +139,20 @@ export default function Hush() {
       <section className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
         <FadeInWrapper direction="up" eager>
           <div className="flex flex-col gap-5">
-            <span className="eyebrow-system">
+            <span className="micro-label">
               <span
                 aria-hidden="true"
-                className="inline-block h-1.5 w-1.5 rounded-full bg-[var(--color-red)] shadow-[0_0_10px_var(--accent-glow)]"
+                className="inline-block h-2 w-2 bg-signal-identity"
               />
               iOS App · Abdeen Labs
             </span>
-            <h1 className="text-5xl font-semibold tracking-[-0.02em] text-[var(--color-paper)] md:text-7xl">
-              Hush<span className="text-[var(--color-red)]">.</span>
+            <h1 className="text-h1 md:text-display">
+              Hush<span className="text-signal-identity">.</span>
             </h1>
-            <p className="max-w-xl text-base leading-8 text-[var(--text)] md:text-lg">
-              Focus sounds for iOS. Real-time DSP noise generators, binaural
-              beats, and a curated library of 80+ ambient recordings, all mixed
-              together in a simple, distraction-free interface.
+            <p className="max-w-xl text-lede text-ink-secondary">
+              Sound studio for iOS. Hush generates noise and binaural beats in
+              real time and layers 80+ recorded ambiences into one mix. Up to
+              6 sources run together, all on the device.
             </p>
             <div className="mt-1 flex flex-wrap items-center gap-x-5 gap-y-3">
               <AppStoreButton />
@@ -158,13 +160,13 @@ export default function Hush() {
                 href={REPO_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-sm text-[var(--text)] transition-colors hover:text-[var(--color-paper)]"
+                className="chrome-link font-mono text-control"
               >
                 View source &rarr;
               </a>
             </div>
-            <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-[var(--color-graphite)]">
-              Free &amp; open source &middot; No accounts, no tracking
+            <p className="micro-label">
+              iOS &middot; Free &middot; Open source
             </p>
           </div>
         </FadeInWrapper>
@@ -177,9 +179,9 @@ export default function Hush() {
       {/* Screenshots */}
       <FadeInWrapper direction="up">
         <section>
-          <SectionHeader label="Screenshots" />
+          <SectionHeader label="Screenshots" count={screenshots.length} />
           <div
-            className="flex gap-4 overflow-x-auto pb-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--color-red)]"
+            className="flex gap-4 overflow-x-auto pb-4"
             tabIndex={0}
             role="region"
             aria-label="App screenshots, scrollable"
@@ -204,7 +206,7 @@ export default function Hush() {
       {/* Presets */}
       <FadeInWrapper direction="up">
         <section>
-          <SectionHeader label="Built-in Presets" />
+          <SectionHeader label="Built-in presets" count={presets.length} />
           <div className="flex flex-wrap gap-2">
             {presets.map((p) => (
               <span key={p} className="chip">
@@ -219,44 +221,41 @@ export default function Hush() {
       <FadeInWrapper direction="up">
         <section
           aria-label="Get Hush"
-          className="border-t border-white/[0.08] pt-8 md:pt-10"
+          className="border-t border-hairline pt-8 md:pt-10"
         >
           <div className="flex flex-wrap items-center justify-between gap-x-12 gap-y-8">
             <div className="flex max-w-md flex-col gap-3">
-              <h2 className="eyebrow-system">
-                <span aria-hidden="true" className="text-[var(--color-red)]">
+              <h2 className="micro-label">
+                <span aria-hidden="true" className="text-signal-identity">
                   /
                 </span>
-                Get the app
+                Get Hush
               </h2>
-              <p className="text-sm leading-7 text-[var(--text)]">
-                Free on the App Store. No accounts, no analytics, no tracking.
+              <p className="text-body text-ink-secondary">
+                Free on the App Store. No account, no analytics, no tracking.
                 Open source under GPL-3.0.
-              </p>
-              <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-[var(--color-graphite)]">
-                iOS &middot; Free &amp; open source
               </p>
             </div>
             <div className="flex flex-col items-start gap-3">
               <AppStoreButton />
-              <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-[var(--text)]">
+              <div className="flex flex-wrap gap-x-4 gap-y-1">
                 <a
                   href={REPO_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="transition-colors hover:text-[var(--color-paper)]"
+                  className="chrome-link font-mono text-control"
                 >
                   GitHub &rarr;
                 </a>
                 <Link
                   href="/hush/privacy"
-                  className="transition-colors hover:text-[var(--color-paper)]"
+                  className="chrome-link font-mono text-control"
                 >
                   Privacy
                 </Link>
                 <Link
                   href="/hush/terms"
-                  className="transition-colors hover:text-[var(--color-paper)]"
+                  className="chrome-link font-mono text-control"
                 >
                   Terms
                 </Link>

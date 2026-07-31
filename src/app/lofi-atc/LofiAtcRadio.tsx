@@ -13,7 +13,7 @@ interface LofiStation {
 
 const LOFI_STATIONS: LofiStation[] = [
   {
-    name: "Lofi",
+    name: "Lo-fi",
     url: "https://play.streamafrica.net/lofiradio",
     credit: "Stream Africa",
     creditUrl: "https://streamafrica.net",
@@ -58,6 +58,23 @@ function killAllAudio() {
   activeAudios.clear();
 }
 
+/** Session clock for the readout — mm:ss, h:mm:ss past the first hour. */
+function formatElapsed(total: number): string {
+  const h = Math.floor(total / 3600);
+  const m = Math.floor((total % 3600) / 60);
+  const s = total % 60;
+  const mm = String(m).padStart(2, "0");
+  const ss = String(s).padStart(2, "0");
+  return h > 0 ? `${h}:${mm}:${ss}` : `${mm}:${ss}`;
+}
+
+function statusLabel(s: StreamStatus): string {
+  if (s === "idle") return "Standby";
+  if (s === "connecting") return "Connecting";
+  if (s === "live") return "Live";
+  return "Fault";
+}
+
 export default function LofiAtcRadio() {
   const lofiRef = useRef<HTMLAudioElement | null>(null);
   const atcRef = useRef<HTMLAudioElement | null>(null);
@@ -76,6 +93,7 @@ export default function LofiAtcRadio() {
   const [atcVol, setAtcVol] = useState(0.5);
   const [lofiStatus, setLofiStatus] = useState<StreamStatus>("idle");
   const [atcStatus, setAtcStatus] = useState<StreamStatus>("idle");
+  const [elapsedSec, setElapsedSec] = useState(0);
 
   const station = LOFI_STATIONS[stationIdx];
   const stationSlider = useSlider(stationIdx);
@@ -100,6 +118,20 @@ export default function LofiAtcRadio() {
       // storage unavailable — nothing to do
     }
   }, [lofiVol, atcVol]);
+
+  // Session clock — feeds the one phosphor readout. Runs only while the
+  // session is open; on stop the readout leaves the screen with it.
+  useEffect(() => {
+    if (!playing) {
+      setElapsedSec(0);
+      return;
+    }
+    const startedAt = Date.now();
+    const id = setInterval(() => {
+      setElapsedSec(Math.floor((Date.now() - startedAt) / 1000));
+    }, 1000);
+    return () => clearInterval(id);
+  }, [playing]);
 
   // stop everything on unmount
   useEffect(() => {
@@ -333,88 +365,105 @@ export default function LofiAtcRadio() {
     [],
   );
 
-  const statusLabel = (s: StreamStatus) => {
-    if (s === "idle") return "Offline";
-    if (s === "connecting") return "Connecting";
-    if (s === "live") return "Live";
-    return "Error";
-  };
+  // The word carries the state; jade only for Live, ink for the rest. A
+  // fault gets the hazard stripe beside it, never a red fill or button.
+  const stateClass = (s: StreamStatus) =>
+    s === "live" ? styles.stateLive : s === "error" ? styles.stateFault : undefined;
+
+  const channels = [
+    { name: "Lo-fi", status: lofiStatus },
+    { name: "ATC", status: atcStatus },
+  ];
 
   return (
     <div className={styles.container}>
-      {/* soundwave */}
-      <div className={styles.waveWrap} aria-hidden="true">
-        {Array.from({ length: BARS }).map((_, i) => (
-          <div
-            key={i}
-            ref={(el) => { barsRef.current[i] = el; }}
-            className={styles.bar}
-          />
+      {/* Signal stage — a sunken readout field. The session clock is the
+          screen's one phosphor element and leaves with the stream. */}
+      <div className={`tool-stage ${styles.stage}`}>
+        <div className={styles.waveWrap} aria-hidden="true">
+          {Array.from({ length: BARS }).map((_, i) => (
+            <div
+              key={i}
+              ref={(el) => { barsRef.current[i] = el; }}
+              className={styles.bar}
+            />
+          ))}
+        </div>
+        <div className={styles.stageStatus}>
+          {playing ? (
+            <>
+              <span className="micro-label">On air</span>
+              <span className={`readout ${styles.elapsed}`}>
+                {formatElapsed(elapsedSec)}
+              </span>
+            </>
+          ) : (
+            <span className="micro-label">Standby</span>
+          )}
+        </div>
+      </div>
+
+      {/* Channel status — one word per stream */}
+      <div className={styles.statusRow}>
+        {channels.map(({ name, status }) => (
+          <span key={name} className="micro-label">
+            {name}
+            <span aria-hidden="true" className={styles.statusSep}>
+              /
+            </span>
+            <span className={stateClass(status)}>{statusLabel(status)}</span>
+            {status === "error" && (
+              <span
+                aria-hidden="true"
+                className={`abd-hazard ${styles.faultStripe}`}
+              />
+            )}
+          </span>
         ))}
       </div>
 
-      {/* play / pause */}
-      <button
-        className={`${styles.playBtn} ${playing ? styles.playBtnPlaying : ""}`}
-        onClick={handlePlay}
-        aria-label={playing ? "Stop radio" : "Play radio"}
-      >
-        {playing && <span className={styles.pulse} />}
-        {playing ? (
-          <svg className={styles.playIcon} viewBox="0 0 24 24">
-            <rect x="6" y="5" width="4" height="14" rx="1" />
-            <rect x="14" y="5" width="4" height="14" rx="1" />
-          </svg>
-        ) : (
-          <svg className={styles.playIcon} viewBox="0 0 24 24">
-            <path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11.04-6.86a1 1 0 0 0 0-1.72L9.5 4.28A1 1 0 0 0 8 5.14z" />
-          </svg>
-        )}
+      <button className="btn btn--primary px-8" onClick={handlePlay}>
+        {playing ? "Stop radio" : "Start radio"}
       </button>
 
-      {/* status badges */}
-      <div className={styles.statusRow}>
-        <span className={styles.statusBadge}>
-          <span
-            className={`${styles.dot} ${lofiStatus === "live" ? styles.dotLive : ""} ${lofiStatus === "error" ? styles.dotError : ""}`}
-          />
-          Lo-fi &middot; {statusLabel(lofiStatus)}
+      {/* Station selector */}
+      <div className={styles.stationField}>
+        <span className="micro-label" id="lofi-station-label">
+          Station
         </span>
-        <span className={styles.statusBadge}>
-          <span
-            className={`${styles.dot} ${atcStatus === "live" ? styles.dotLive : ""} ${atcStatus === "error" ? styles.dotError : ""}`}
-          />
-          ATC &middot; {statusLabel(atcStatus)}
-        </span>
-      </div>
-
-      {/* station switcher */}
-      <div className={styles.stationPicker} role="radiogroup" aria-label="Lo-fi station" ref={stationSlider}>
-        <div className={styles.stationSlider} />
-        {LOFI_STATIONS.map((s, i) => (
-          <button
-            key={s.url}
-            data-active={i === stationIdx}
-            className={`${styles.stationBtn} ${i === stationIdx ? styles.stationBtnActive : ""}`}
-            onClick={() => handleStationChange(i)}
-            role="radio"
-            aria-checked={i === stationIdx}
-          >
-            {s.name}
-          </button>
-        ))}
+        <div
+          className="segmented"
+          role="radiogroup"
+          aria-labelledby="lofi-station-label"
+          ref={stationSlider}
+        >
+          <div className="segmented-thumb" />
+          {LOFI_STATIONS.map((s, i) => (
+            <button
+              key={s.url}
+              data-active={i === stationIdx}
+              className="segmented-item"
+              onClick={() => handleStationChange(i)}
+              role="radio"
+              aria-checked={i === stationIdx}
+            >
+              {s.name}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* volume sliders — hidden on Safari where volume is not programmable */}
       {isSafari ? (
         <p className={styles.notice}>
-          Volume controls aren&apos;t supported in Safari. Use your device&apos;s volume instead.
+          Per-channel volume is not available in Safari. Use the device volume
+          control.
         </p>
       ) : (
         <div className={styles.sliders}>
           <div className={styles.sliderGroup}>
-            <label className={styles.sliderLabel} htmlFor="lofi-vol">
-              Lo-fi
+            <label className="field-label" htmlFor="lofi-vol">
+              Lo-fi volume
             </label>
             <input
               id="lofi-vol"
@@ -424,8 +473,7 @@ export default function LofiAtcRadio() {
               step={0.01}
               value={lofiVol}
               onChange={handleLofiVol}
-              className={styles.slider}
-              aria-label="Lo-fi music volume"
+              className="range"
             />
             <span className={styles.sliderValue}>
               {Math.round(lofiVol * 100)}%
@@ -433,8 +481,8 @@ export default function LofiAtcRadio() {
           </div>
 
           <div className={styles.sliderGroup}>
-            <label className={styles.sliderLabel} htmlFor="atc-vol">
-              ATC
+            <label className="field-label" htmlFor="atc-vol">
+              ATC volume
             </label>
             <input
               id="atc-vol"
@@ -444,8 +492,7 @@ export default function LofiAtcRadio() {
               step={0.01}
               value={atcVol}
               onChange={handleAtcVol}
-              className={styles.slider}
-              aria-label="ATC radio volume"
+              className="range"
             />
             <span className={styles.sliderValue}>
               {Math.round(atcVol * 100)}%
@@ -454,27 +501,27 @@ export default function LofiAtcRadio() {
         </div>
       )}
 
-      {/* credits */}
+      {/* Source manifest */}
       <div className={styles.credits}>
         <span className={styles.creditItem}>
-          Music:{" "}
+          Music /{" "}
           <a
             href={station.creditUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.creditLink}
           >
             {station.credit}
           </a>
         </span>
-        <span className={styles.creditSep} aria-hidden="true">/</span>
+        <span className={styles.creditSep} aria-hidden="true">
+          &middot;
+        </span>
         <span className={styles.creditItem}>
-          ATC:{" "}
+          ATC /{" "}
           <a
             href={ATC_SOURCE.creditUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className={styles.creditLink}
           >
             {ATC_SOURCE.credit}
           </a>{" "}

@@ -13,12 +13,12 @@ export const metadata: Metadata = ENABLED
   ? {
       title: "SafeStay Scanner",
       description:
-        "Detect hidden cameras at Airbnbs, hotels, and rentals. Install the network scanner with one command, look up MAC addresses against a curated camera-manufacturer OUI table, and run the physical-check guide.",
+        "Network inspection CLI for rentals. One command installs it; the scan maps the local WiFi by ARP, resolves MAC vendors against a curated camera OUI table, and probes camera-class ports. A built-in guide covers the physical sweep no scan replaces.",
       alternates: { canonical: "https://abdeen.dev/safestay" },
       openGraph: {
-        title: "SafeStay Scanner | abdeen.dev",
+        title: "SafeStay Scanner · Abdeen Labs",
         description:
-          "Hidden-camera detection toolkit: network scanner, MAC address lookup, and physical-check guide for Airbnbs and rentals.",
+          "CLI that inspects rental WiFi for camera-class devices: ARP scan, MAC vendor lookup, port detection, and a physical-sweep guide. Runs on your machine.",
         url: "https://abdeen.dev/safestay",
       },
     }
@@ -29,10 +29,10 @@ export default function SafeStayPage() {
 
   return (
     <ToolPageShell
-      eyebrow="/safestay"
+      eyebrow="REF / SAFESTAY"
       currentPath="/safestay"
       title="SafeStay Scanner"
-      description="Detect hidden cameras and suspicious devices at Airbnbs, hotels, and rentals."
+      description="Network inspection CLI for rentals. Scans the local WiFi, resolves MAC vendors, and flags camera-class devices. Pairs with a physical sweep for what a scan cannot see."
     >
       <SafeStay />
     </ToolPageShell>

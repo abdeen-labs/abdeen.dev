@@ -1,128 +1,174 @@
 import { ImageResponse } from 'next/og';
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
+import { MARK, SEAL_KEY, SEAL_KEY_MARK } from '@/lib/seal-geometry';
 
-export const alt = 'abdeen.dev · Small tools, carefully engineered.';
+/**
+ * OG card — the dark canonical page: Key seal + wordmark lockup, the
+ * positioning line as macro display, and the operating boundary as
+ * evidence. Ramp literals appear because the artifact is standalone.
+ * The Key is one inline SVG built from the generated geometry (Satori
+ * cannot shape Arabic); the remaining text uses static font instances
+ * (Satori cannot ingest variable TTFs).
+ */
+
+export const alt = 'Abdeen Labs · Defined tasks. Verified output.';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
-// Satori can't ingest Switzer's woff2 distribution or IBM Plex Sans as a
-// variable TTF, so the OG image uses the shipped brand lockup SVG (which
-// bakes the Plex wordmark into path data) for the mark and JetBrains Mono
-// (static TTF) for the URL + tagline — monospaced is brand-appropriate for
-// a technical value like a URL.
+// Key rendered at 72px via the 0–40 viewBox; the mark transform is in
+// viewBox units, so it holds at any pixel size.
+const SEAL = 72;
+
 export default async function OGImage() {
-  const [lockupSvg, monoMedium, monoRegular] = await Promise.all([
+  const [schibsted, geistMono] = await Promise.all([
     readFile(
-      path.join(process.cwd(), 'public/abdeen_assets/svg/horizontal_signature.svg'),
-      'utf-8',
+      path.join(
+        process.cwd(),
+        'public/fonts/axis/static/SchibstedGrotesk-ExtraBold.ttf',
+      ),
     ),
-    readFile(path.join(process.cwd(), 'public/fonts/brand/JetBrainsMono-Medium.ttf')),
-    readFile(path.join(process.cwd(), 'public/fonts/brand/JetBrainsMono-Regular.ttf')),
+    readFile(
+      path.join(process.cwd(), 'public/fonts/axis/static/GeistMono-Medium.ttf'),
+    ),
   ]);
-  const lockupDataUri = `data:image/svg+xml;base64,${Buffer.from(lockupSvg).toString('base64')}`;
 
   return new ImageResponse(
     (
       <div
         style={{
-          background: '#0A0A0A',
           width: '100%',
           height: '100%',
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'flex-start',
           justifyContent: 'space-between',
-          padding: '72px 80px',
-          position: 'relative',
-          fontFamily: 'JetBrains Mono',
+          padding: '64px 80px',
+          background: '#06080D',
+          fontFamily: 'Geist Mono',
         }}
       >
+        {/* Identification row — lockup left, reference code right */}
         <div
           style={{
-            position: 'absolute',
-            inset: 0,
-            background:
-              'linear-gradient(140deg, rgba(26,26,26,0.98) 0%, rgba(18,18,18,0.92) 58%, rgba(12,12,12,0.96) 100%)',
             display: 'flex',
-          }}
-        />
-        <div
-          style={{
-            position: 'absolute',
-            top: -160,
-            right: -160,
-            width: 520,
-            height: 520,
-            borderRadius: 9999,
-            background:
-              'radial-gradient(circle, rgba(204,27,27,0.28) 0%, rgba(204,27,27,0) 70%)',
-            display: 'flex',
-          }}
-        />
-
-        <img
-          src={lockupDataUri}
-          width={360}
-          height={106}
-          alt=""
-          style={{ position: 'relative' }}
-        />
-
-        <div
-          style={{
-            position: 'relative',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 20,
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            width: '100%',
           }}
         >
-          <div
+          <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+            {/* Key seal — one inline SVG from the generated geometry: sunken
+                field, lacquer hairline ring, and the mark's painted outline. */}
+            <svg
+              width={SEAL}
+              height={SEAL}
+              viewBox="0 0 40 40"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d={SEAL_KEY.fieldPath} fill="#0C1017" />
+              <path
+                d={SEAL_KEY.ringPathEvenOdd}
+                fillRule="evenodd"
+                fill="#CE2020"
+              />
+              <g transform={SEAL_KEY_MARK.transform}>
+                <path d={MARK.d} fill="#CE2020" />
+              </g>
+            </svg>
+            <div
+              style={{ width: 1, height: 44, background: '#293344', display: 'flex' }}
+            />
+            <span
+              style={{
+                fontSize: 22,
+                fontWeight: 500,
+                letterSpacing: 4.84,
+                color: '#FFFFFF',
+              }}
+            >
+              ABDEEN LABS
+            </span>
+          </div>
+          <span
             style={{
-              fontFamily: 'JetBrains Mono',
+              fontSize: 18,
               fontWeight: 500,
-              fontSize: 108,
-              letterSpacing: '-0.04em',
-              lineHeight: 1,
-              color: '#FAFAFA',
-              display: 'flex',
+              letterSpacing: 2,
+              color: '#748092',
             }}
           >
-            abdeen<span style={{ color: '#CC1B1B' }}>.</span>dev
-          </div>
-          <div
-            style={{
-              fontFamily: 'JetBrains Mono',
-              fontWeight: 400,
-              fontSize: 26,
-              letterSpacing: '0.02em',
-              color: '#8A8A8A',
-              display: 'flex',
-            }}
-          >
-            Small tools, carefully engineered.
-          </div>
+            REF / ABDEEN.DEV
+          </span>
         </div>
 
+        {/* Positioning line as macro display; the second line steps its
+            ink down a tier — never hollow type. */}
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <span
+            style={{
+              fontFamily: 'Schibsted Grotesk',
+              fontWeight: 800,
+              fontSize: 104,
+              lineHeight: 0.92,
+              letterSpacing: -5.7,
+              color: '#FFFFFF',
+            }}
+          >
+            DEFINED TASKS.
+          </span>
+          <span
+            style={{
+              fontFamily: 'Schibsted Grotesk',
+              fontWeight: 800,
+              fontSize: 104,
+              lineHeight: 0.92,
+              letterSpacing: -5.7,
+              color: '#8E97A8',
+            }}
+          >
+            VERIFIED OUTPUT.
+          </span>
+          <div
+            style={{
+              width: 180,
+              height: 2,
+              background: '#CE2020',
+              marginTop: 40,
+              display: 'flex',
+            }}
+          />
+        </div>
+
+        {/* Evidence row */}
         <div
           style={{
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            bottom: 0,
-            height: 4,
-            background:
-              'linear-gradient(90deg, #CC1B1B 0%, #CC1B1B 38%, #8A8A8A 38%, #8A8A8A 72%, #FAFAFA 72%, #FAFAFA 100%)',
             display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            width: '100%',
           }}
-        />
+        >
+          <span style={{ fontSize: 30, fontWeight: 500, color: '#FFFFFF' }}>
+            abdeen.dev
+          </span>
+          <span
+            style={{
+              fontSize: 18,
+              fontWeight: 500,
+              letterSpacing: 2,
+              color: '#748092',
+            }}
+          >
+            OPEN SOURCE · NO ACCOUNT
+          </span>
+        </div>
       </div>
     ),
     {
       ...size,
       fonts: [
-        { name: 'JetBrains Mono', data: monoMedium, weight: 500, style: 'normal' },
-        { name: 'JetBrains Mono', data: monoRegular, weight: 400, style: 'normal' },
+        { name: 'Schibsted Grotesk', data: schibsted, weight: 800, style: 'normal' },
+        { name: 'Geist Mono', data: geistMono, weight: 500, style: 'normal' },
       ],
     },
   );

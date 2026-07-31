@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import Frost from "./Frost";
 
 export const metadata: Metadata = {
-  title: "Frost",
+  title: "Frost — macOS input locker",
   description:
-    "A macOS menu-bar input locker. Freezes the keyboard, mouse, and trackpad while keeping the display visible. Unlocks with TouchID or, optionally, a paired Apple Watch.",
+    "Frost locks the keyboard, mouse, and trackpad on macOS while the screen stays visible. Touch ID or a paired Apple Watch releases the lock. Free, no account, open source.",
   alternates: { canonical: "https://abdeen.dev/frost" },
   openGraph: {
-    title: "Frost | abdeen.dev",
+    title: "Frost · Abdeen Labs",
     description:
-      "A macOS menu-bar input locker. Freezes input while the screen stays visible. Unlocks with TouchID or Apple Watch.",
+      "A menu-bar input locker for macOS. Input frozen, screen visible. Touch ID or a paired Apple Watch releases the lock.",
     url: "https://abdeen.dev/frost",
   },
 };

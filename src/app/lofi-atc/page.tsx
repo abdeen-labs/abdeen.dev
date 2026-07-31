@@ -12,12 +12,12 @@ export const metadata: Metadata = ENABLED
   ? {
       title: "Lo-fi ATC Radio",
       description:
-        "Lo-fi beats mixed with live JFK Tower air-traffic control radio. Two streams, two volume sliders, zero distractions.",
+        "Lo-fi beats mixed with the live JFK Tower air-traffic feed. Two streams, one mix, independent volume per channel. Runs in the browser; no account.",
       alternates: { canonical: "https://abdeen.dev/lofi-atc" },
       openGraph: {
-        title: "Lo-fi ATC Radio | abdeen.dev",
+        title: "Lo-fi ATC Radio · Abdeen Labs",
         description:
-          "Lo-fi beats mixed with live JFK Tower air-traffic control radio.",
+          "Lo-fi beats mixed with the live JFK Tower air-traffic feed. Two streams, one mix.",
         url: "https://abdeen.dev/lofi-atc",
         type: "website",
       },
@@ -30,8 +30,9 @@ export default function LofiAtcPage() {
   return (
     <ToolPageShell
       currentPath="/lofi-atc"
+      eyebrow="REF / ATC"
       title="Lo-fi ATC Radio"
-      description="Lo-fi beats + live JFK Tower air-traffic control. Two streams, two sliders."
+      description="Lo-fi beats over the live JFK Tower feed. Two streams, one mix, independent volume per channel."
     >
       <LofiAtcRadio />
     </ToolPageShell>

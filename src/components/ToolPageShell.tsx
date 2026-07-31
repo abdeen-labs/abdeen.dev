@@ -6,15 +6,18 @@ import { relatedTools } from "@/lib/catalog";
 interface ToolPageShellProps {
   title: string;
   description: string;
-  /** Mono system label shown top-right (e.g. the route "/qr"). */
+  /** Mono identification code shown top-right (e.g. "REF / QR"). */
   eyebrow?: string;
-  /** Catalog href of this tool — keys the "Continue exploring" rotation. */
+  /** Catalog href of this tool — keys the related-tools rotation. */
   currentPath?: string;
   /** Widen the shell for tools that lay out two panes internally. */
   wide?: boolean;
   children: ReactNode;
 }
 
+/** The instrument panel every browser tool mounts into: one plate with an
+ *  identification bar, the module title, and the working surface, then
+ *  cross-navigation to related modules. */
 export default function ToolPageShell({
   title,
   description,
@@ -30,54 +33,48 @@ export default function ToolPageShell({
       }`}
     >
       <FadeInWrapper direction="up" eager>
-        <section className="tool-shell surface-ink-elev overflow-hidden rounded-[1.25rem] md:rounded-[1.75rem]">
-          {/* Meta bar — ties the page back to the homepage system */}
-          <div className="flex items-center justify-between gap-3 border-b border-white/[0.06] px-5 py-3.5 md:px-8">
-            <Link
-              href="/#tools"
-              className="eyebrow-system transition-colors duration-200 hover:text-[var(--color-paper)]"
-            >
-              <span aria-hidden="true" className="text-[var(--color-red)]">
+        <section className="plate">
+          {/* Identification bar — ties the module back to the index */}
+          <div className="flex items-center justify-between gap-3 border-b border-hairline px-5 py-3 md:px-8">
+            <Link href="/#tools" className="micro-label chrome-link">
+              <span aria-hidden="true" className="text-signal-identity">
                 &larr;
               </span>
               All tools
             </Link>
-            {eyebrow && <span className="eyebrow-system">{eyebrow}</span>}
+            {eyebrow && <span className="micro-label">{eyebrow}</span>}
           </div>
 
-          {/* Title block */}
+          {/* Module title */}
           <div className="px-5 py-6 md:px-8 md:py-8">
-            <h1 className="text-[1.75rem] font-semibold leading-tight tracking-[-0.025em] text-[var(--color-paper)] md:text-[2.15rem]">
-              {title}
-            </h1>
-            <p className="mt-2 max-w-2xl text-sm leading-7 text-[var(--text)] md:text-[0.95rem]">
+            <h1 className="text-h3 md:text-h2">{title}</h1>
+            <p className="mt-3 max-w-2xl text-body text-ink-secondary">
               {description}
             </p>
           </div>
 
-          {/* Body */}
-          <div className="border-t border-white/[0.06] px-5 py-7 md:px-8 md:py-9">
+          {/* Working surface */}
+          <div className="border-t border-hairline px-5 py-7 md:px-8 md:py-9">
             {children}
           </div>
         </section>
       </FadeInWrapper>
 
-      {/* Cross-navigation — keeps every tool one click from the next */}
-      <FadeInWrapper direction="up" delay={0.08}>
-        <nav
-          aria-label="More tools"
-          className="px-1"
-        >
+      {/* Cross-navigation — every module is one action from the next */}
+      <FadeInWrapper direction="up" delay={0.06}>
+        <nav aria-label="Related tools" className="px-1">
           <div className="mb-4 flex items-center justify-between gap-4">
-            <span className="eyebrow-system">
-              <span aria-hidden="true" className="text-[var(--color-red)]">/</span>
-              Continue exploring
+            <span className="micro-label">
+              <span aria-hidden="true" className="text-signal-identity">
+                /
+              </span>
+              Related tools
             </span>
-            <Link
-              href="/#tools"
-              className="eyebrow-system transition-colors duration-200 hover:text-[var(--color-paper)]"
-            >
-              View all <span aria-hidden="true" className="index-arrow">&rarr;</span>
+            <Link href="/#tools" className="micro-label chrome-link">
+              View all{" "}
+              <span aria-hidden="true" className="index-arrow">
+                &rarr;
+              </span>
             </Link>
           </div>
           <div className="related-index">
@@ -86,10 +83,12 @@ export default function ToolPageShell({
                 <span aria-hidden="true" className="index-num">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <span className="font-medium tracking-[-0.01em] text-[var(--color-paper)]">
+                <span className="font-mono text-control font-medium text-ink-primary">
                   {tool.title}
                 </span>
-                <span aria-hidden="true" className="index-arrow ml-auto">&rarr;</span>
+                <span aria-hidden="true" className="index-arrow ml-auto">
+                  &rarr;
+                </span>
               </Link>
             ))}
           </div>

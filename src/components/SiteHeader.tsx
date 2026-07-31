@@ -1,73 +1,77 @@
 import Link from "next/link";
+import { SealKey } from "@/components/Seal";
+import ThemeToggle from "@/components/ThemeToggle";
+import { identity, marketing } from "@/lib/brand";
 
-/** Sticky pill navigation: brand lockup, section anchors, GitHub, jaafar.cv. */
+/** Dossier chrome, in the marketing kit's order: the lockup (Key seal ·
+ *  divider · wordmark) with mono navigation and the mode control, then the
+ *  canonical public identification band, then the 8px lacquer rule that
+ *  closes the chrome. The one surface sanctioned to use backdrop blur. */
 export default function SiteHeader() {
   return (
-    <header className="sticky top-0 z-40 w-full px-4 py-4 md:px-8" role="banner">
+    <header className="site-nav sticky top-0 z-40 w-full" role="banner">
       <nav
-        className="site-nav surface-card mx-auto flex max-w-6xl items-center justify-between gap-3 rounded-full px-3 py-1.5 backdrop-blur-xl md:px-4 md:py-2"
+        className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-3 px-4 md:h-16 md:px-8"
         aria-label="Main"
       >
         <Link
           href="/"
-          className="group flex min-h-10 min-w-0 items-center gap-3 rounded-full px-2 py-1.5 transition-opacity hover:opacity-90"
+          className="lockup chrome-link min-h-10 shrink-0"
           aria-label="Abdeen Labs · Home"
         >
-          <span
-            aria-hidden="true"
-            className="brand-mark shrink-0 text-[26px] leading-none text-[var(--mark-default)] md:text-[30px]"
-          >
-            عابدين
-          </span>
-          <span className="brand-wordmark shrink-0 text-[10px] text-[var(--color-paper)] md:text-[11px]">
-            Abdeen Labs
-          </span>
+          <SealKey size={28} decorative />
+          <span className="lockup-divider" aria-hidden="true" />
+          <span className="wordmark site-wordmark">Abdeen Labs</span>
         </Link>
 
-        <div className="flex items-center gap-1.5 md:gap-2">
-          <Link
-            href="/#apps"
-            className="hidden rounded-full px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.08em] text-[var(--color-graphite)] transition-colors duration-200 hover:text-[var(--color-paper)] md:block"
-          >
+        <div className="flex items-center gap-0 md:gap-1">
+          <Link href="/#apps" className="nav-link nav-link--section">
             Apps
           </Link>
-          <Link
-            href="/#tools"
-            className="hidden rounded-full px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.08em] text-[var(--color-graphite)] transition-colors duration-200 hover:text-[var(--color-paper)] md:block"
-          >
+          <Link href="/#tools" className="nav-link nav-link--section">
             Tools
           </Link>
-          <span
-            aria-hidden="true"
-            className="hidden h-4 w-px bg-white/[0.1] md:block"
-          />
           <a
             href="https://github.com/Cuzeth"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Cuzeth on GitHub"
-            className="flex min-h-10 min-w-10 items-center justify-center rounded-full text-[var(--color-graphite)] transition-colors duration-200 hover:bg-white/[0.04] hover:text-[var(--color-paper)]"
+            className="nav-link nav-link--external"
           >
-            <svg
-              width="17"
-              height="17"
-              viewBox="0 0 16 16"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
-            </svg>
+            GitHub<span aria-hidden="true">&nbsp;↗</span>
           </a>
           <a
             href="https://jaafar.cv"
             target="_blank"
             rel="noopener noreferrer"
-            className="eyebrow transition-colors duration-200 hover:border-white/20 hover:text-[var(--color-paper)]"
+            className="nav-link nav-link--external"
           >
-            jaafar.cv
+            jaafar.cv<span aria-hidden="true">&nbsp;↗</span>
           </a>
+          <ThemeToggle />
         </div>
       </nav>
+
+      {/* This continuous public surface carries its proprietary A0 mark once
+          in the top identification band, beside document metadata. */}
+      <div className="mx-auto max-w-6xl px-4 md:px-8">
+        <div className="dossier-band">
+          <span className="hidden items-center gap-2 sm:flex">
+            <span>[ {identity.studio} ]</span>
+            <span className="sep" aria-hidden="true">
+              {"///"}
+            </span>
+            <span>Studio site</span>
+          </span>
+          <span className="band-doc band-doc--full">
+            {marketing.topChrome}
+          </span>
+          <span className="band-doc band-doc--compact">
+            {marketing.controlMark}
+          </span>
+        </div>
+      </div>
+
+      <div className="lacquer-rule" aria-hidden="true" />
     </header>
   );
 }

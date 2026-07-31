@@ -5,12 +5,12 @@ import CoverQuad from './CoverQuad';
 export const metadata: Metadata = {
   title: 'CoverQuad',
   description:
-    'Apple removed the classic 2\u00d72 album art playlist covers. CoverQuad brings them back \u2014 upload your own images or search for album art and export as high-resolution PNG.',
+    'Apple retired the classic 2×2 playlist cover. CoverQuad rebuilds it from four album covers — upload files or search the Cover Art Archive — and exports one square PNG at up to 3000 px. No account.',
   alternates: { canonical: 'https://abdeen.dev/coverquad' },
   openGraph: {
-    title: 'CoverQuad | abdeen.dev',
+    title: 'CoverQuad · Abdeen Labs',
     description:
-      'Apple removed the classic 2\u00d72 playlist covers. CoverQuad brings them back.',
+      'Rebuild the classic 2×2 playlist cover. Four covers in, one square PNG out at up to 3000 px.',
     url: 'https://abdeen.dev/coverquad',
   },
 };
@@ -19,10 +19,12 @@ export default function CoverQuadPage() {
   return (
     <ToolPageShell
       wide
-      eyebrow="/coverquad"
+      eyebrow="REF / QUAD"
       currentPath="/coverquad"
       title="CoverQuad"
-      description="Rebuild the classic 2x2 playlist cover look with a clean collage workflow, album art search, and high-resolution export."
+      description={
+        'Apple retired the 2×2 playlist cover. CoverQuad rebuilds it: four covers in, one square PNG out at up to 3000 px. Upload files or search the Cover Art Archive; covers fetch through the site proxy and the export renders locally.'
+      }
     >
       <CoverQuad />
     </ToolPageShell>

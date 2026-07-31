@@ -3,8 +3,8 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 0.875rem;
-  animation: formFade 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  gap: var(--space-3);
+  animation: formFade var(--duration-panel) var(--ease-flat);
 }
 
 @keyframes formFade {
@@ -12,18 +12,17 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* "Customize Style" panel body, inside the global .disclosure primitive */
+/* Style-options panel body — the surface is the shared .plate--sunken,
+   which carries the plate step; this class carries layout only. */
 .panel {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 1rem;
-  background: rgba(255, 255, 255, 0.025);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 0.9rem;
+  gap: var(--space-4);
+  padding: var(--space-4);
 }
 
-/* QR canvas holder */
+/* QR canvas holder. The canvas itself is content — its internal colors
+   are the user's export, not interface ink — and it stays square. */
 .qr {
   display: flex;
   align-items: center;
@@ -33,7 +32,6 @@
 .qr canvas {
   max-width: 100%;
   height: auto;
-  border-radius: 0.75rem;
 }
 
 .qrHidden {

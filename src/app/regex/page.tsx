@@ -5,12 +5,12 @@ import RegexTester from './RegexTester';
 export const metadata: Metadata = {
   title: 'Regex Tester',
   description:
-    'Free online regex tester with live match highlighting, capture group display, string replacement preview, and a built-in regex cheatsheet. No sign-up needed.',
+    'Execute a regular expression against sample text. Live match highlighting, capture groups, replacement preview, and a syntax reference. Matching runs in the browser; the pattern and text never leave this device.',
   alternates: { canonical: 'https://abdeen.dev/regex' },
   openGraph: {
-    title: 'Regex Tester | abdeen.dev',
+    title: 'Regex Tester · Abdeen Labs',
     description:
-      'Test and debug regular expressions with live highlighting, groups, and replace preview.',
+      'Execute a regular expression against sample text. Matches, capture groups, and the replacement preview update live. Nothing leaves the browser.',
     url: 'https://abdeen.dev/regex',
   },
 };
@@ -19,10 +19,10 @@ export default function RegexTesterPage() {
   return (
     <ToolPageShell
       wide
-      eyebrow="/regex"
+      eyebrow="REF / REGEX"
       currentPath="/regex"
       title="Regex Tester"
-      description="Test patterns, inspect matches, preview replacements, and keep your regex workflow readable while you iterate."
+      description="Test a pattern against sample text with live highlighting, capture groups, and a replacement preview. Matching runs in the browser; the pattern and text stay on this device."
     >
       <RegexTester />
     </ToolPageShell>

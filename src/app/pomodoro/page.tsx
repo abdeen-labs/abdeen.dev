@@ -5,12 +5,12 @@ import PomodoroTimer from './PomodoroTimer';
 export const metadata: Metadata = {
   title: 'Pomodoro Timer',
   description:
-    'A clean Pomodoro timer with customizable work and break durations, session tracking, and audio notifications. Boost productivity with the Pomodoro Technique.',
+    'Pomodoro interval timer. Set work and break durations, start the countdown, and count completed sessions. Runs in the page — no account, nothing leaves it.',
   alternates: { canonical: 'https://abdeen.dev/pomodoro' },
   openGraph: {
     title: 'Pomodoro Timer | abdeen.dev',
     description:
-      'Stay productive with customizable focus sessions and breaks. Track your sessions with a clean, minimal timer.',
+      'Interval timer with work and break durations and a session tally. Runs in the page — nothing leaves it.',
     url: 'https://abdeen.dev/pomodoro',
   },
 };
@@ -18,10 +18,10 @@ export const metadata: Metadata = {
 export default function PomodoroPage() {
   return (
     <ToolPageShell
-      eyebrow="/pomodoro"
+      eyebrow="REF / POMODORO"
       currentPath="/pomodoro"
       title="Pomodoro Timer"
-      description="A stripped-back focus timer with customizable sessions, calm pacing, and just enough feedback to keep momentum."
+      description="Interval timer for focused work. Set work and break durations, start the countdown, and count completed sessions. Timing and tally stay in this page — 0 egress."
     >
       <PomodoroTimer />
     </ToolPageShell>
