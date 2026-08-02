@@ -76,7 +76,7 @@ function AppStoreButton() {
         <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d={APPLE_PATH} />
         </svg>
-        App Store / Pending
+        Coming to the App Store
       </span>
     );
   }
@@ -104,9 +104,7 @@ function ScreenshotImage({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-/** Hero device: the first screenshot mounted on a plate. The screenshot
- *  itself is content; the mount is structure — the plate step, with the
- *  10px inset landing the inner frame's corner at 0, no glow, no shadow. */
+/** Hero device: the first screenshot mounted on a simple plate. */
 function HeroPhone() {
   const [loaded, setLoaded] = useState(false);
   return (

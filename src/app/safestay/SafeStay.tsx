@@ -142,7 +142,7 @@ export default function SafeStay() {
           network scan can see.
         </p>
         <p className="micro-label">
-          Runtime / Local · Probes / LAN only · Telemetry / None
+          Runs locally · Scans this network only · No telemetry
         </p>
         <p className="text-body text-ink-dim">
           Hobby project — the full disclaimer sits at the end of this page.
@@ -150,7 +150,7 @@ export default function SafeStay() {
 
         <div className="flex flex-col gap-2">
           <div className="flex flex-wrap items-center justify-between gap-3">
-            <p className="micro-label">Install / macOS · Linux</p>
+            <p className="micro-label">macOS and Linux</p>
             <button
               type="button"
               onClick={copyInstall}
@@ -278,7 +278,7 @@ export default function SafeStay() {
               {lookupResult.risk === "high" && (
                 <>
                   <p className="font-mono text-control font-medium text-signal-warning">
-                    Match / camera vendor — {lookupResult.vendor}
+                    Camera vendor match — {lookupResult.vendor}
                   </p>
                   <p className="mt-2 text-body text-ink-dim">
                     This prefix is registered to a surveillance or camera
@@ -292,7 +292,7 @@ export default function SafeStay() {
               {lookupResult.risk === "medium" && (
                 <>
                   <p className="font-mono text-control font-medium text-ink-primary">
-                    Match / chipset vendor — {lookupResult.vendor}
+                    Chipset vendor match — {lookupResult.vendor}
                   </p>
                   <p className="mt-2 text-body text-ink-dim">
                     This chipset ships inside many hidden cameras — and inside
@@ -390,7 +390,7 @@ export default function SafeStay() {
       {/* ── Divider ── */}
       <div className="border-t border-hairline" />
 
-      {/* ── Disposition ── */}
+      {/* ── Disclaimer ── */}
       <section className="flex flex-col gap-4">
         <p className="text-body text-ink-dim">
           Hobby project. MIT-licensed, provided AS IS — no warranty, no

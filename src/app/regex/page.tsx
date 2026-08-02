@@ -5,12 +5,12 @@ import RegexTester from './RegexTester';
 export const metadata: Metadata = {
   title: 'Regex Tester',
   description:
-    'Execute a regular expression against sample text. Live match highlighting, capture groups, replacement preview, and a syntax reference. Matching runs in the browser; the pattern and text never leave this device.',
+    'Test a regular expression against sample text. Live match highlighting, capture groups, replacement preview, and a syntax reference. The pattern and text stay on this device.',
   alternates: { canonical: 'https://abdeen.dev/regex' },
   openGraph: {
     title: 'Regex Tester · Abdeen Labs',
     description:
-      'Execute a regular expression against sample text. Matches, capture groups, and the replacement preview update live. Nothing leaves the browser.',
+      'Test a regular expression against sample text with live matches, capture groups, and a replacement preview. Nothing is stored or sent.',
     url: 'https://abdeen.dev/regex',
   },
 };

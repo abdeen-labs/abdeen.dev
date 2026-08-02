@@ -157,7 +157,7 @@ export default function CoverQuad() {
       const { img, objectUrl } = await loadImageFromFile(file);
       setSlot(index, { img, objectUrl, label: file.name });
     } catch {
-      showSlotError(`LOAD FAILURE // ${file.name} // ACTION: select a valid image file.`);
+      showSlotError(`${file.name} could not be loaded. Choose another image file.`);
     }
     e.target.value = '';
   };
@@ -174,7 +174,7 @@ export default function CoverQuad() {
       const { img, objectUrl } = await loadImageFromFile(file);
       setSlot(index, { img, objectUrl, label: file.name });
     } catch {
-      showSlotError(`LOAD FAILURE // ${file.name} // ACTION: select a valid image file.`);
+      showSlotError(`${file.name} could not be loaded. Choose another image file.`);
     }
   };
 
@@ -195,7 +195,7 @@ export default function CoverQuad() {
 
       if (res.status === 429 || res.status === 503) {
         setSearching(false);
-        setSearchError('RATE LIMIT // MusicBrainz // ACTION: wait a few seconds, then retry.');
+        setSearchError('MusicBrainz is receiving too many requests. Wait a few seconds and try again.');
         return;
       }
       if (!res.ok) throw new Error('Search failed');
@@ -236,7 +236,7 @@ export default function CoverQuad() {
       setSearchResults(results);
     } catch {
       setSearching(false);
-      setSearchError('SEARCH FAILURE // MusicBrainz // ACTION: retry.');
+      setSearchError('MusicBrainz search is unavailable. Try again.');
     }
   };
 
@@ -256,7 +256,7 @@ export default function CoverQuad() {
       const { img, objectUrl } = await loadImageFromUrl(proxyUrl);
       setSlot(slotIndex, { img, objectUrl, label: `${album.title} \u2014 ${album.artist}` });
     } catch {
-      showSlotError(`FETCH FAILURE // ${album.title} // ACTION: select another result.`);
+      showSlotError(`${album.title} could not be loaded. Choose another result.`);
     } finally {
       setLoadingSlot(null);
     }

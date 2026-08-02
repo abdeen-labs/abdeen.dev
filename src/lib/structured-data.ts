@@ -30,7 +30,7 @@ export function buildJsonLd() {
         name: "abdeen.dev",
         url: SITE_URL,
         description:
-          "Free tools by Abdeen Labs: password generator, QR code maker, regex tester, pomodoro timer, and more. One job per tool, no account required.",
+          "An Abdeen Labs site for private software, including apps and small tools that work without an account.",
         author: { "@id": `${SITE_URL}/#person` },
         publisher: { "@id": `${SITE_URL}/#organization` },
       },
@@ -38,7 +38,8 @@ export function buildJsonLd() {
         "@type": "Organization",
         "@id": `${SITE_URL}/#organization`,
         name: "Abdeen Labs",
-        url: SITE_URL,
+        description:
+          "Abdeen Labs makes private software with clear data boundaries and no account required.",
         founder: { "@id": `${SITE_URL}/#person` },
       },
       {
@@ -56,9 +57,9 @@ export function buildJsonLd() {
       {
         "@type": "CollectionPage",
         "@id": `${SITE_URL}/#collection`,
-        name: "Tool Index",
+        name: "Apps and tools",
         description:
-          "Free browser tools and native apps by Abdeen Labs, each doing one job.",
+          "Apps and small tools from Abdeen Labs, with clear privacy details for each product.",
         url: SITE_URL,
         isPartOf: { "@id": `${SITE_URL}/#website` },
         about: [...tools, ...apps]

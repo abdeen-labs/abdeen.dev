@@ -10,8 +10,7 @@ const sidebar = [70, 52, 84, 61];
 /** A compact depiction of Frost itself: the visible Mac desktop beneath
  * the product's overlay, with the single unlock prompt that matters.
  *
- * It deliberately inherits the page theme. Frost is the subject of the
- * visual, not a permanently dark specimen embedded in the page.
+ * It deliberately inherits the page theme so Frost remains the subject.
  */
 export default function FrostVisual({ compact = false }: { compact?: boolean }) {
   return (

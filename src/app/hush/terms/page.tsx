@@ -16,8 +16,7 @@ export const metadata: Metadata = {
   },
 };
 
-/** Legal record: presentation follows the instrument register; the terms
- *  themselves are the governing text and stay verbatim. */
+/** The terms are governing copy and should stay precise. */
 const sections = [
   {
     heading: "Use of the App",
@@ -92,18 +91,18 @@ export default function HushTermsPage() {
               </span>
               Hush
             </Link>
-            <span className="micro-label">Doc / Terms</span>
+            <span className="micro-label">REF / TERMS</span>
           </div>
 
           {/* Document title */}
           <div className="px-5 py-6 md:px-8 md:py-8">
             <h1 className="text-h3 md:text-h2">Terms of Service</h1>
             <p className="mt-3 micro-label">
-              Hush for iOS &middot; Last updated / April 10, 2026
+              Hush for iOS &middot; Last updated April 10, 2026
             </p>
           </div>
 
-          {/* Record body */}
+          {/* Terms */}
           <div className="border-t border-hairline px-5 py-7 md:px-8 md:py-9">
             <div className="flex flex-col gap-7">
               {sections.map((s, i) => (

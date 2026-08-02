@@ -4,7 +4,7 @@ import FadeInWrapper from "@/components/FadeInWrapper";
 
 export const metadata: Metadata = {
   title: "Not found",
-  description: "The page moved, retired, or never existed. The index lists everything that runs.",
+  description: "The page could not be found.",
 };
 
 export default function NotFound() {
@@ -18,20 +18,19 @@ export default function NotFound() {
       </FadeInWrapper>
 
       <FadeInWrapper direction="up" delay={0.05} eager>
-        <h1 className="text-h1 md:text-display">No such module.</h1>
+        <h1 className="text-h1 md:text-display">Page not found.</h1>
       </FadeInWrapper>
 
       <FadeInWrapper direction="up" delay={0.1} eager>
         <p className="max-w-md text-body text-ink-dim">
-          The page moved, retired, or never existed. The index lists
-          everything that runs.
+          The page may have moved or no longer exist.
         </p>
       </FadeInWrapper>
 
       <FadeInWrapper direction="up" delay={0.15} eager>
         <div className="mt-2 flex flex-wrap items-center justify-center gap-3">
           <Link href="/" className="btn btn--primary">
-            Return to index
+            Back to home
           </Link>
         </div>
       </FadeInWrapper>

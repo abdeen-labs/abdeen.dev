@@ -16,8 +16,7 @@
   min-height: 560px;
 }
 
-/* True dots — the sanctioned round form. Furniture; the row's aria-label
-   carries the meaning. */
+/* Loading dots; the row's aria-label carries the meaning. */
 .loadingDot {
   width: 6px;
   height: 6px;
@@ -35,7 +34,7 @@
   40% { opacity: 1; }
 }
 
-/* ── Load fault — hazard stripe beside a real failure ── */
+/* ── Load error ── */
 .fault {
   display: flex;
   align-items: stretch;

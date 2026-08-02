@@ -4,16 +4,16 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { schibsted, geist, geistMono, arefRuqaa } from "./fonts";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import { identity } from "@/lib/brand";
 import { buildJsonLd } from "@/lib/structured-data";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: {
     template: "%s · Abdeen Labs",
-    default: "Abdeen Labs · Defined tasks. Verified output.",
+    default: `${identity.studio} · ${identity.positioning}`,
   },
-  description:
-    "Free, open-source tools for Apple platforms and the browser. Each one does one job and runs without an account.",
+  description: identity.description,
   metadataBase: new URL("https://abdeen.dev"),
   applicationName: "abdeen.dev",
   authors: [{ name: "Jaafar Abdeen", url: "https://jaafar.cv" }],
@@ -47,16 +47,15 @@ export const metadata: Metadata = {
     siteName: "abdeen.dev",
     type: "website",
     url: "https://abdeen.dev",
-    title: "Abdeen Labs · Defined tasks. Verified output.",
-    description:
-      "Free, open-source tools for Apple platforms and the browser. One job per tool, no account.",
+    title: `${identity.studio} · ${identity.positioning}`,
+    description: identity.description,
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Abdeen Labs · Defined tasks. Verified output.",
+    title: `${identity.studio} · ${identity.positioning}`,
     description:
-      "Password generator, QR codes, regex tester, pomodoro timer, and more. Free, open source, no account.",
+      "Private software. No account. Open source.",
   },
   robots: {
     index: true,

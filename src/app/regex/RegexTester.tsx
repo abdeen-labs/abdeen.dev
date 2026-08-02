@@ -278,7 +278,7 @@ export default function RegexTester() {
                 <span aria-hidden="true" className={`abd-hazard ${styles.faultStripe}`} />
                 <div className={styles.faultBody}>
                   <span className={styles.faultLine}>
-                    FAULT // PATTERN // ACTION: revise the expression.
+                    Check the pattern and try again.
                   </span>
                   <span className={styles.faultDetail}>{error}</span>
                 </div>
@@ -349,13 +349,13 @@ export default function RegexTester() {
             </div>
 
             {error ? (
-              <div className={styles.placeholder}>Awaiting valid pattern.</div>
+              <div className={styles.placeholder}>Enter a valid pattern.</div>
             ) : timedOut ? (
               <div className={styles.fault} role="alert">
                 <span aria-hidden="true" className={`abd-hazard ${styles.faultStripe}`} />
                 <div className={styles.faultBody}>
                   <span className={styles.faultLine}>
-                    FAULT // EXECUTION // ACTION: simplify the pattern.
+                    This pattern took too long. Try simplifying it.
                   </span>
                   <span className={styles.faultDetail}>
                     Stopped after {MATCH_TIMEOUT_MS} ms. Probable catastrophic
@@ -367,7 +367,7 @@ export default function RegexTester() {
               <div className={styles.outputBox}>{highlighted}</div>
             ) : (
               <div className={styles.placeholder}>
-                Awaiting pattern and test string.
+                Enter a pattern and test string.
               </div>
             )}
 

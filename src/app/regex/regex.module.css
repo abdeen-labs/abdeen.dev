@@ -52,8 +52,8 @@
   border-color: var(--signal-link);
 }
 
-/* Fault report — hazard appears only as the stripe beside a real fault
-   (invalid pattern, killed execution). The text stays in ink. */
+/* Error report — the hazard stripe supports clear text for an invalid or
+   timed-out pattern. */
 .fault {
   display: flex;
   align-items: stretch;

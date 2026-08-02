@@ -1,6 +1,6 @@
 /* 2FA — tool-specific styling. Shared controls live in globals.css. */
 
-/* Faulted field — layered on the shared .input recipe. Real faults only:
+/* Invalid field — layered on the shared .input recipe. Real errors only:
    one of the secret/label pair is missing, or the URI fails to parse. */
 .invalid,
 .invalid:focus {
@@ -29,8 +29,7 @@
   color: var(--ink-dim); /* dim floor on the card plate */
 }
 
-/* FAULT // LOCATION // ACTION line under the URI field. The hazard tape
-   stripe marks the fault; the words carry the meaning. */
+/* Error line under the URI field. The hazard stripe supports the text. */
 .fault {
   display: flex;
   align-items: stretch;

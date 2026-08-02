@@ -1,5 +1,5 @@
 /**
- * Section caption in the mono micro register: a lacquer slash, the label,
+ * Section caption in mono: a lacquer slash, the label,
  * and an optional zero-padded count on the far edge. Shared by the index
  * pages and product pages so section rhythm stays identical.
  */

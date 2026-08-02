@@ -1,6 +1,6 @@
-/* Lo-fi ATC — Axis instrument layout. Shared classes carry the controls
+/* Lo-fi ATC layout. Shared classes carry the controls
    (.btn, .segmented, .range, .micro-label, .field-label, .tool-stage);
-   this module only lays out the channel board. Surface shape comes from
+   this file only lays out the channel board. Surface shape comes from
    the shared concentric tiers; every colour is a role token. */
 
 .container {
@@ -49,7 +49,7 @@
   min-height: 1.4em;
 }
 
-/* The one readout on this screen — phosphor session clock, live only.
+/* The one live readout on this screen: the session clock.
    The size is not set here: .readout derives it from the strip via
    --readout-scale, which is the canonical relative rule. */
 .elapsed {
@@ -118,8 +118,7 @@
 
 /* globals' .range declares `outline: none` later in the cascade than the
    base :focus-visible rule, which swallows the lacquer ring on sliders.
-   Restore the floor for this module (Hard Rule 16); the shared .range fix
-   is flagged for the orchestrator. */
+   Restore the focus ring here until the shared .range rule handles it. */
 .sliderGroup :global(.range):focus-visible {
   outline: var(--focus-ring);
   outline-offset: var(--focus-ring-offset);
@@ -136,7 +135,7 @@
   text-align: center;
 }
 
-/* ---------- source manifest ---------- */
+/* ---------- source credits ---------- */
 
 .credits {
   display: flex;

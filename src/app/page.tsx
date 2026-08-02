@@ -5,21 +5,21 @@ import SectionHeader from "@/components/SectionHeader";
 import { apps, tools, type CatalogEntry } from "@/lib/catalog";
 import { identity } from "@/lib/brand";
 
-const boundaries = [
+const privacyPractices = [
   {
     num: "01",
     title: "No account",
-    body: "No sign-in, subscription, or paywall. Open the page and run the task.",
+    body: "Open a product and start working. There is no Abdeen Labs profile or account to manage.",
   },
   {
     num: "02",
-    title: "Local execution",
-    body: "Browser tools process input on your device wherever possible. Each tool's page says what leaves it.",
+    title: "Local by default",
+    body: "Work stays on your device wherever the product allows. Each product says when it needs the network.",
   },
   {
     num: "03",
     title: "Open source",
-    body: "The code and license for every release are on GitHub. Read it, file an issue, or reproduce the build.",
+    body: "The source and license for every release are public on GitHub.",
   },
 ];
 
@@ -108,10 +108,8 @@ export default function HomePage() {
   // carries its own margin instead.
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-col pb-20 pt-4 md:pb-28 md:pt-10">
-      {/* Mission — the kit's hero: the message holds the full measure,
-          and the establishment line runs in a registration strip along
-          the section's foot, so the plate identity survives without a
-          rail competing with the message. */}
+      {/* Introduction — the positioning holds the full measure and the
+          establishment line sits quietly at the section's foot. */}
       <section
         className="relative overflow-x-clip border-b border-hairline"
         aria-label="Introduction"
@@ -128,18 +126,16 @@ export default function HomePage() {
           <FadeInWrapper direction="up" eager>
             <div className="flex flex-col gap-7">
               <h1 className="max-w-4xl text-h1 md:text-display">
-                Defined tasks.
+                Private software.
                 <br />
-                <span className="text-ink-dim">Verified output.</span>
+                <span className="text-ink-dim">Clear boundaries.</span>
               </h1>
               <p className="max-w-2xl text-lede text-ink-secondary">
-                Abdeen Labs develops bounded software for Apple platforms
-                and the browser. Each tool does one job, runs without an
-                account, and says what it stores and sends.
+                {identity.description}
               </p>
               <div className="flex flex-wrap items-center gap-4">
                 <a href="#apps" className="btn btn--primary">
-                  Inspect inventory
+                  View apps
                 </a>
                 <a
                   href="https://github.com/abdeen-labs"
@@ -147,17 +143,15 @@ export default function HomePage() {
                   rel="noopener noreferrer"
                   className="btn btn--quiet"
                 >
-                  Audit source
+                  View source
                 </a>
               </div>
             </div>
           </FadeInWrapper>
         </div>
-        {/* Registration strip — just the establishment line. Real content,
-            so the aside keeps an accessible name; eager like the rest of
-            the hero. */}
+        {/* Studio line — real content, kept accessible like the rest of the hero. */}
         <FadeInWrapper direction="up" eager>
-          <aside className="hero-register relative" aria-label="Registration">
+          <aside className="hero-register relative" aria-label="About Abdeen Labs">
             <span className="micro-label">{identity.establishedLine}</span>
           </aside>
         </FadeInWrapper>
@@ -200,7 +194,7 @@ export default function HomePage() {
 
       {/* Apps */}
       <section id="apps" className="section-shell" aria-label="Apps">
-        <SectionRail label="Apple platforms" number="01" />
+        <SectionRail label="Apps" number="01" />
         <div className="section-body">
           <FadeInWrapper direction="up">
             <SectionHeader label="Apps" count={apps.length} inset />
@@ -217,10 +211,10 @@ export default function HomePage() {
 
       {/* Tools */}
       <section id="tools" className="section-shell" aria-label="Tools">
-        <SectionRail label="In the browser" number="02" />
+        <SectionRail label="Tools" number="02" />
         <div className="section-body">
           <FadeInWrapper direction="up">
-            <SectionHeader label="Web tools" count={tools.length} inset />
+            <SectionHeader label="Tools" count={tools.length} inset />
           </FadeInWrapper>
           <div className="index-list">
             {tools.map((item, index) => (
@@ -232,20 +226,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Operating boundaries */}
+      {/* Privacy */}
       <section
         id="principles"
         className="section-shell"
-        aria-label="Operating boundaries"
+        aria-label="Privacy"
       >
         <SectionRail label="All tools" number="03" />
         <div className="section-body">
           <FadeInWrapper direction="up">
-            <SectionHeader label="Operating boundaries" count={boundaries.length} />
+            <SectionHeader label="Privacy" count={privacyPractices.length} />
           </FadeInWrapper>
           <FadeInWrapper direction="up" delay={0.04}>
             <div className="grid gap-8 border-t border-hairline pt-8 md:grid-cols-3 md:gap-6 md:pt-10">
-              {boundaries.map((b) => (
+              {privacyPractices.map((b) => (
                 <div
                   key={b.num}
                   className="flex flex-col gap-3 md:border-l md:border-hairline md:pl-6 md:first:border-l-0 md:first:pl-0"

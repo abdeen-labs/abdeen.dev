@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 /* ──────────────────────────────────────────────────────────────────────
-   Abdeen Labs · Axis (BRAND.md v3.4)
+   Abdeen Labs · Axis (BRAND.md v3.5)
    Token source: abdeen-brand/system/colors_and_type.css. Interfaces ship
    in two first-class modes from one role-token set: dark is canonical
    (:root), light lives in :root[data-theme="light"] and follows
@@ -10,8 +10,8 @@
    --readout-* — never a ramp step. Radius is concentric — 14 · 10 · 6
    outward to inward — and the seal and print register stay square.
    Lacquer acts, Hazard alarms, phosphor is one live readout per screen
-   and a dark-mode physic. No shadows, no glows beyond the readout, no
-   hollow type.
+   and is reserved for one live dark-mode readout. No shadows, no glows
+   beyond the readout, no hollow type.
    ────────────────────────────────────────────────────────────────────── */
 
 @theme inline {
@@ -165,7 +165,7 @@
   --lacquer-700: #7C0E0E;
 
   /* Hazard · Phosphor · State — a bright step and a deep 700 step.
-     Phosphor has no 700 step: it is a dark-mode physic, like its glow. */
+     Phosphor has no 700 step because it is only used in dark mode. */
   --hazard-500: #FF2A2A;
   --hazard-700: #BF0000;
   --phosphor-500: #4AF626;
@@ -314,7 +314,7 @@
 
   --seal-key-field: var(--bone-200);
 
-  /* Phosphor and its bloom are both dark-mode physics. The light readout
+  /* Phosphor and its bloom are dark-mode effects. The light readout
      is ink at 17.04:1 on the sunken field; the value changing and its
      label are what read as live. */
   --readout-color: var(--ink-primary);
@@ -323,8 +323,8 @@
   --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5' stroke='%23554F44' stroke-width='1.4'/%3E%3C/svg%3E");
 }
 
-/* Documentation-only dark specimen scope. It lets a depicted product
-   surface keep its canonical dark physics inside the light page without
+/* Documentation-only dark preview scope. It lets a depicted product
+   surface keep its dark appearance inside the light page without
    hand-re-inking the component. Live interface surfaces never mix modes. */
 [data-mode="dark"] {
   color-scheme: dark;
@@ -792,8 +792,8 @@ output {
   background: var(--hairline-grid-cell, var(--surface-page));
 }
 
-/* Square by decree, not by omission — the clip above already shapes the
-   outer corners. This wins over .plate on the same element. */
+/* Keep grid cells square; the clip above already shapes the outer corners.
+   This wins over .plate on the same element. */
 .hairline-grid > * {
   border-radius: 0;
 }
@@ -1458,8 +1458,8 @@ a.chip:focus-visible {
 
 /* ─── Readout — the one live element per screen ──────────────────── */
 
-/* One device per mode, and no more. In dark that device is emission —
-   phosphor plus the system's only glow. In light it is ink, --ink-primary
+/* One live readout per screen. In dark it uses phosphor and the system's
+   only glow. In light it uses --ink-primary
    at 17.04:1 on the sunken bone field, with no glow, tint, or texture.
    What says "live" in both modes is the value changing and its label.
    The size is relative, not absolute: --readout-scale is the ratio to the
@@ -1499,8 +1499,8 @@ a.chip:focus-visible {
 
 /* ─── Texture — opt-in via .abd-*, rationed ──────────────────────── */
 
-/* Every texture here is document furniture — an artefact the dossier
-   register actually produces. That is the test a texture has to pass.
+/* Every texture here represents a real material or production effect.
+   That is the test a texture has to pass.
 
    .abd-scanlines was retired in 3.1 and is deliberately not replaced: a
    CRT electron sweep is an artefact of a display, not a document. It
@@ -1533,7 +1533,7 @@ a.chip:focus-visible {
   }
 }
 
-/* Registration crosshairs — specimen and diagnostic surfaces. */
+/* Crosshairs for print references and diagnostic surfaces. */
 .abd-crosshair {
   position: relative;
 }
@@ -1617,9 +1617,8 @@ a.chip:focus-visible {
   -webkit-backdrop-filter: blur(12px);
 }
 
-/* The identification band: bracketed studio name, /// separator, and the
-   functional document code. Codes never carry geography. Mirrors the
-   marketing kit's dossier chrome (abdeen-brand/system/ui_kits/marketing). */
+/* The identity band: bracketed studio name, /// separator, and AXIS//OPEN.
+   Mirrors the marketing reference kit. */
 .dossier-band {
   display: flex;
   align-items: center;
@@ -1731,17 +1730,11 @@ a.chip:focus-visible {
   }
 }
 
-/* ─── Dossier composition — the marketing kit's page structure ─────
-   Ported from abdeen-brand/system/ui_kits/marketing/index.html, which is
-   the reference layout for a public marketing surface: instrument panels
-   identified as numbered evidence, a sectioned body with a numbered
-   rail, and one measured record. The kit is the specimen; these are the
-   primitives. */
+/* ─── Marketing page structure ─────────────────────────────────────
+   Ported from abdeen-brand/system/ui_kits/marketing/index.html: a clear
+   introduction, section rails, and measured content panels. */
 
-/* The hero's registration strip. The kit's identification rail, laid
-   flat: one ruled mono line along the hero's foot, so the message keeps
-   the full measure and the studio facts still read as an instrument
-   plate's registration marks rather than as a caption. */
+/* The hero's studio line: one ruled mono line along the section's foot. */
 .hero-register {
   display: flex;
   flex-wrap: wrap;
@@ -1756,14 +1749,10 @@ a.chip:focus-visible {
   font-feature-settings: "tnum";
 }
 
-/* The kit also carries a hazard edge stripe, a rubber stamp, and
-   registration crosshairs on its hero. Those are print-register furniture
-   and deliberately do not ship here: BRAND.md bars importing them into an
-   interface, and the kit's own README books them as preserved debts from
-   the sheet it grew out of — not as patterns to copy. Same call already
-   made for .abd-stamp above. */
+/* The reference kit also shows print-only furniture that does not ship in
+   this interface. Same decision already applies to .abd-stamp above. */
 
-/* ─── Mounted instrument panels — numbered evidence ──────────────── */
+/* ─── Numbered content panels ────────────────────────────────────── */
 
 .mount {
   margin: 0;

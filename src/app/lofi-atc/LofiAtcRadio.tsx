@@ -72,7 +72,7 @@ function statusLabel(s: StreamStatus): string {
   if (s === "idle") return "Standby";
   if (s === "connecting") return "Connecting";
   if (s === "live") return "Live";
-  return "Fault";
+  return "Error";
 }
 
 export default function LofiAtcRadio() {
@@ -365,8 +365,8 @@ export default function LofiAtcRadio() {
     [],
   );
 
-  // The word carries the state; jade only for Live, ink for the rest. A
-  // fault gets the hazard stripe beside it, never a red fill or button.
+  // The word carries the state; jade only for Live, ink for the rest. An
+  // error gets the hazard stripe beside it, never a red fill or button.
   const stateClass = (s: StreamStatus) =>
     s === "live" ? styles.stateLive : s === "error" ? styles.stateFault : undefined;
 
@@ -501,7 +501,7 @@ export default function LofiAtcRadio() {
         </div>
       )}
 
-      {/* Source manifest */}
+      {/* Source credits */}
       <div className={styles.credits}>
         <span className={styles.creditItem}>
           Music /{" "}

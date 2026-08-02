@@ -5,14 +5,14 @@ import { MARK, SEAL_KEY, SEAL_KEY_MARK } from '@/lib/seal-geometry';
 
 /**
  * OG card — the dark canonical page: Key seal + wordmark lockup, the
- * positioning line as macro display, and the operating boundary as
- * evidence. Ramp literals appear because the artifact is standalone.
+ * positioning line as macro display, and the privacy promise below.
+ * Ramp literals appear because the artifact is standalone.
  * The Key is one inline SVG built from the generated geometry (Satori
  * cannot shape Arabic); the remaining text uses static font instances
  * (Satori cannot ingest variable TTFs).
  */
 
-export const alt = 'Abdeen Labs · Defined tasks. Verified output.';
+export const alt = 'Abdeen Labs · Private software. Clear boundaries.';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
@@ -114,7 +114,7 @@ export default async function OGImage() {
               color: '#FFFFFF',
             }}
           >
-            DEFINED TASKS.
+            PRIVATE SOFTWARE.
           </span>
           <span
             style={{
@@ -126,7 +126,7 @@ export default async function OGImage() {
               color: '#8E97A8',
             }}
           >
-            VERIFIED OUTPUT.
+            CLEAR BOUNDARIES.
           </span>
           <div
             style={{
@@ -139,7 +139,7 @@ export default async function OGImage() {
           />
         </div>
 
-        {/* Evidence row */}
+        {/* Property and direct privacy promise. */}
         <div
           style={{
             display: 'flex',
@@ -159,7 +159,7 @@ export default async function OGImage() {
               color: '#748092',
             }}
           >
-            OPEN SOURCE · NO ACCOUNT
+            NO ACCOUNT · OPEN SOURCE
           </span>
         </div>
       </div>

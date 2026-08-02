@@ -264,10 +264,7 @@ export default function TwoFactorQR() {
           {uriInvalid && (
             <p id="twofa-uri-error" role="alert" className={styles.fault}>
               <span aria-hidden="true" className={`abd-hazard ${styles.faultStripe}`} />
-              <span>
-                PARSE FAILURE // OTPAUTH URI // ACTION: enter a valid
-                otpauth:// address.
-              </span>
+              <span>Enter a valid otpauth:// address.</span>
             </p>
           )}
         </div>
@@ -276,7 +273,7 @@ export default function TwoFactorQR() {
       {/* RIGHT — QR preview */}
       <div className="lg:border-l lg:border-hairline lg:pl-10">
         <div className="flex flex-col gap-4 lg:sticky lg:top-24">
-          <span className="micro-label">Output / QR</span>
+          <span className="micro-label">Preview</span>
           <div className="tool-stage">
             {showQr ? (
               <>
@@ -311,7 +308,7 @@ export default function TwoFactorQR() {
               </div>
             )}
           </div>
-          <span className="micro-label">Storage / NONE · Egress / 0</span>
+          <span className="micro-label">Nothing stored. Nothing sent.</span>
         </div>
       </div>
     </div>

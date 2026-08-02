@@ -3,10 +3,8 @@ import { SealKey } from "@/components/Seal";
 import ThemeToggle from "@/components/ThemeToggle";
 import { identity, marketing } from "@/lib/brand";
 
-/** Dossier chrome, in the marketing kit's order: the lockup (Key seal ·
- *  divider · wordmark) with mono navigation and the mode control, then the
- *  canonical public identification band, then the 8px lacquer rule that
- *  closes the chrome. The one surface sanctioned to use backdrop blur. */
+/** Site chrome: the lockup (Key seal · divider · wordmark), navigation,
+ *  mode control, public identity band, and lacquer rule. */
 export default function SiteHeader() {
   return (
     <header className="site-nav sticky top-0 z-40 w-full" role="banner">
@@ -51,8 +49,8 @@ export default function SiteHeader() {
         </div>
       </nav>
 
-      {/* This continuous public surface carries its proprietary A0 mark once
-          in the top identification band, beside document metadata. */}
+      {/* This continuous public surface carries AXIS//OPEN once in its
+          identity band, without record metadata. */}
       <div className="mx-auto max-w-6xl px-4 md:px-8">
         <div className="dossier-band">
           <span className="hidden items-center gap-2 sm:flex">

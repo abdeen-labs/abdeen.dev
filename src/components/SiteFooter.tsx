@@ -1,11 +1,9 @@
 import Link from "next/link";
 import { SealRoundel } from "@/components/Seal";
 import { apps, tools } from "@/lib/catalog";
-import { marketing } from "@/lib/brand";
+import { identity, marketing } from "@/lib/brand";
 
-/** Footer: the Roundel (its one appearance per page), the positioning
- *  line, catalog navigation, and a colophon with the barcode rule and
- *  release metadata. The A0 mark stays in the top identity band. */
+/** Footer: the Roundel, positioning, navigation, and a compact colophon. */
 export default function SiteFooter() {
   return (
     <footer
@@ -19,9 +17,9 @@ export default function SiteFooter() {
               <SealRoundel size={88} />
             </span>
             <p className="max-w-xs text-body text-ink-secondary">
-              Defined tasks. Verified output.
+              {identity.positioning}
             </p>
-            <p className="micro-label">Open source · No account</p>
+            <p className="micro-label">No account. Open source.</p>
           </div>
 
           <nav aria-label="Apps" className="flex flex-col gap-4">
@@ -53,12 +51,12 @@ export default function SiteFooter() {
             </ul>
           </nav>
 
-          <nav aria-label="Web tools" className="flex flex-col gap-4">
+          <nav aria-label="Tools" className="flex flex-col gap-4">
             <h2 className="micro-label">
               <span aria-hidden="true" className="text-signal-identity">
                 /
               </span>
-              Web tools
+              Tools
             </h2>
             <ul className="flex flex-col gap-2.5 font-mono text-control">
               {tools.map((tool) => (

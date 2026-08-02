@@ -6,8 +6,8 @@
  * once. Set `enabled: false` to pull an entry from all of those surfaces;
  * the route's page.tsx reads the same flag via entryEnabled() to 404 itself.
  *
- * Copy follows the Axis voice (BRAND.md → Voice): lead with the module and
- * its assigned task, then boundary and evidence. No launch language.
+ * Copy stays specific: what the product does, where it runs when useful,
+ * and what happens to the user's data.
  */
 export interface CatalogEntry {
   title: string;
@@ -106,7 +106,7 @@ const allTools: CatalogEntry[] = [
   {
     title: "Regex Tester",
     description:
-      "Executes a regular expression against sample text with live match highlighting. Runs in the browser.",
+      "Tests a regular expression against sample text with live match highlighting. Runs in the browser.",
     href: "/regex",
     meta: "/regex",
     sitemapPriority: 0.9,

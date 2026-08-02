@@ -15,9 +15,7 @@ interface ToolPageShellProps {
   children: ReactNode;
 }
 
-/** The instrument panel every browser tool mounts into: one plate with an
- *  identification bar, the module title, and the working surface, then
- *  cross-navigation to related modules. */
+/** Shared tool-page layout: index link, title, working area, and related tools. */
 export default function ToolPageShell({
   title,
   description,
@@ -34,7 +32,7 @@ export default function ToolPageShell({
     >
       <FadeInWrapper direction="up" eager>
         <section className="plate">
-          {/* Identification bar — ties the module back to the index */}
+          {/* Identification bar — ties the tool back to the index. */}
           <div className="flex items-center justify-between gap-3 border-b border-hairline px-5 py-3 md:px-8">
             <Link href="/#tools" className="micro-label chrome-link">
               <span aria-hidden="true" className="text-signal-identity">
@@ -45,7 +43,7 @@ export default function ToolPageShell({
             {eyebrow && <span className="micro-label">{eyebrow}</span>}
           </div>
 
-          {/* Module title */}
+          {/* Tool title */}
           <div className="px-5 py-6 md:px-8 md:py-8">
             <h1 className="text-h3 md:text-h2">{title}</h1>
             <p className="mt-3 max-w-2xl text-body text-ink-secondary">
@@ -53,14 +51,14 @@ export default function ToolPageShell({
             </p>
           </div>
 
-          {/* Working surface */}
+          {/* Tool interface */}
           <div className="border-t border-hairline px-5 py-7 md:px-8 md:py-9">
             {children}
           </div>
         </section>
       </FadeInWrapper>
 
-      {/* Cross-navigation — every module is one action from the next */}
+      {/* Cross-navigation to related tools. */}
       <FadeInWrapper direction="up" delay={0.06}>
         <nav aria-label="Related tools" className="px-1">
           <div className="mb-4 flex items-center justify-between gap-4">

@@ -141,7 +141,7 @@
   to { opacity: 1; }
 }
 
-/* Fault line — hazard appears as a stripe beside the fault, never a fill. */
+/* Error line — the hazard stripe supports the message without filling it. */
 .faultLine {
   display: flex;
   align-items: center;

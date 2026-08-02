@@ -206,7 +206,7 @@ export default function Frost() {
                 One DMG. No installer, no account. Drag Frost to Applications
                 and lock the desk from the menu bar.
               </p>
-              <p className="micro-label">macOS 14.6+ · Telemetry / None</p>
+              <p className="micro-label">macOS 14.6+ · No telemetry</p>
             </div>
             <div className="flex flex-col items-start gap-3">
               <AppleBadgeLink href={release.href} label={release.label} />

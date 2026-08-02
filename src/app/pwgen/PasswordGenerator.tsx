@@ -155,7 +155,7 @@ export default function PasswordGenerator() {
         <div className={styles.fault}>
           <span aria-hidden="true" className={`abd-hazard ${styles.faultStripe}`} />
           <p className={styles.faultText}>
-            FETCH FAILURE // /data/pwgen // ACTION: check connection and retry.
+            The word lists could not be loaded. Check your connection and try again.
           </p>
         </div>
         <button
@@ -319,7 +319,7 @@ export default function PasswordGenerator() {
           <kbd className="kbd">Space</kbd>
         </button>
 
-        {/* Source credits — evidence for the word pools */}
+        {/* Word-list sources. */}
         <div className={styles.credit}>
           Word lists:{' '}
           <a href="https://github.com/MichaelWehar/Public-Domain-Word-Lists" target="_blank" rel="noopener noreferrer">
@@ -389,7 +389,7 @@ export default function PasswordGenerator() {
             {copied && <span className={styles.copyStatus}>Copied</span>}
             {copyFailed && (
               <span className={styles.copyFault}>
-                COPY FAULT // CLIPBOARD // ACTION: select and copy manually
+                Couldn&apos;t copy. Select the password and copy it manually.
               </span>
             )}
           </div>

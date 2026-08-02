@@ -16,8 +16,7 @@ export const metadata: Metadata = {
   },
 };
 
-/** Legal record: presentation follows the instrument register; the policy
- *  statements themselves are the governing text and stay verbatim. */
+/** The policy statements are governing copy and should stay precise. */
 const sections = [
   {
     heading: "Data Collection",
@@ -81,21 +80,21 @@ export default function HushPrivacyPage() {
               </span>
               Hush
             </Link>
-            <span className="micro-label">Doc / Privacy</span>
+            <span className="micro-label">REF / PRIVACY</span>
           </div>
 
           {/* Document title */}
           <div className="px-5 py-6 md:px-8 md:py-8">
             <h1 className="text-h3 md:text-h2">Privacy Policy</h1>
             <p className="mt-3 micro-label">
-              Hush for iOS &middot; Last updated / April 10, 2026
+              Hush for iOS &middot; Last updated April 10, 2026
             </p>
           </div>
 
-          {/* Record body */}
+          {/* Policy */}
           <div className="border-t border-hairline px-5 py-7 md:px-8 md:py-9">
             <p className="micro-label">
-              Storage / LOCAL &middot; Egress / 0 &middot; Telemetry / NONE
+              Stored on device &middot; Nothing sent &middot; No analytics
             </p>
 
             <div className="mt-7 flex flex-col gap-7">
