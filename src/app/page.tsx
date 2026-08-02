@@ -60,9 +60,8 @@ function IndexRow({
   return (
     <Tag
       href={item.href}
-      className={`index-row grid-cols-[2.5rem_minmax(0,1fr)] items-baseline gap-x-3 pl-4 pr-2 md:grid-cols-[3.5rem_minmax(0,1fr)_auto] md:gap-x-8 md:pl-6 md:pr-3 ${
-        large ? "py-7 md:py-9" : "py-5 md:py-6"
-      }`}
+      className={`index-row grid-cols-[2.5rem_minmax(0,1fr)] items-baseline gap-x-3 pl-4 pr-2 md:grid-cols-[3.5rem_minmax(0,1fr)_auto] md:gap-x-8 md:pl-6 md:pr-3 ${large ? "py-7 md:py-9" : "py-5 md:py-6"
+        }`}
       {...externalProps}
     >
       <span aria-hidden="true" className="index-num">
@@ -143,7 +142,7 @@ export default function HomePage() {
                   Inspect inventory
                 </a>
                 <a
-                  href="https://github.com/Cuzeth"
+                  href="https://github.com/abdeen-labs"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn btn--quiet"

@@ -32,7 +32,7 @@ export default function SiteHeader() {
             Tools
           </Link>
           <a
-            href="https://github.com/Cuzeth"
+            href="https://github.com/abdeen-labs"
             target="_blank"
             rel="noopener noreferrer"
             className="nav-link nav-link--external"

@@ -81,7 +81,7 @@ export default function SiteFooter() {
             <ul className="flex flex-col gap-2.5 font-mono text-control">
               <li>
                 <a
-                  href="https://github.com/Cuzeth"
+                  href="https://github.com/abdeen-labs"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="chrome-link"
