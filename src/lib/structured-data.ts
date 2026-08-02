@@ -30,7 +30,7 @@ export function buildJsonLd() {
         name: "abdeen.dev",
         url: SITE_URL,
         description:
-          "An Abdeen Labs site for private software, including apps and small tools that work without an account.",
+          "The Abdeen Labs studio site for private software, including apps and small tools that work without an account.",
         author: { "@id": `${SITE_URL}/#person` },
         publisher: { "@id": `${SITE_URL}/#organization` },
       },

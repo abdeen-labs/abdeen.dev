@@ -1,6 +1,6 @@
 # abdeen.dev
 
-Private software. Clear boundaries. This repository powers [abdeen.dev](https://abdeen.dev), one Abdeen Labs property for product pages and small open-source tools.
+Private software. Clear boundaries. This repository powers [abdeen.dev](https://abdeen.dev), the Abdeen Labs studio site for product pages, releases, and small open-source tools.
 
 Built with [Next.js](https://nextjs.org) (App Router), Tailwind CSS v4, and TypeScript. Deployed on Vercel. The interface implements **Axis** (Abdeen Labs brand v3.5): one role-token set driving a canonical dark mode and a first-class light mode.
 
