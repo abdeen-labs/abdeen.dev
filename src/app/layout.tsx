@@ -5,8 +5,10 @@ import { schibsted, geist, geistMono, arefRuqaa } from "./fonts";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import RouteTransition from "@/components/RouteTransition";
+import SmoothScroll from "@/components/SmoothScroll";
 import { identity } from "@/lib/brand";
 import { buildJsonLd } from "@/lib/structured-data";
+import "lenis/dist/lenis.css";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -114,6 +116,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <RouteTransition />
+        <SmoothScroll />
         <SiteHeader />
         <main id="main-content" tabIndex={-1} className="relative flex-1 outline-none">
           {children}

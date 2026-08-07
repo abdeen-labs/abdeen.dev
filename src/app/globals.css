@@ -279,6 +279,12 @@ html {
   background: var(--surface-page);
 }
 
+/* Lenis owns interpolation while active; leaving CSS smooth scrolling on
+   would make every animation frame start a second browser-level animation. */
+html.lenis {
+  scroll-behavior: auto;
+}
+
 html,
 body {
   font-family: var(--font-text-stack);

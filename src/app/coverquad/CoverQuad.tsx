@@ -468,7 +468,7 @@ export default function CoverQuad() {
               )}
 
               {searchResults.length > 0 && (
-                <div className={styles.searchResultsGrid}>
+                <div className={styles.searchResultsGrid} data-lenis-prevent>
                   {searchResults
                     .filter((album) => !failedThumbs.has(album.id))
                     .map((album) => (
