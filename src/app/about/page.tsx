@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <div className="site-frame site-frame--wide">
-      <section className="about-hero motion-block" aria-labelledby="about-title" style={{ animationDelay: "30ms" }}>
+      <section className="about-hero motion-block" aria-labelledby="about-title">
         <div>
           <span className="page-kicker">The studio</span>
           <h1 id="about-title">A small studio, run in the open</h1>
@@ -25,14 +25,14 @@ export default function AboutPage() {
       </section>
 
       <section className="about-details">
-        <div className="motion-row" style={{ animationDelay: "170ms" }}>
+        <div className="motion-row" style={{ animationDelay: "calc(var(--route-hold) + 140ms)" }}>
           <span className="page-kicker">Record</span>
           <dl className="record-list">
             <div><dt>2027</dt><dd>Abdeen Labs established.</dd></div>
             <div><dt>2026</dt><dd>Public tools and product work published in the open.</dd></div>
           </dl>
         </div>
-        <div className="motion-row" style={{ animationDelay: "240ms" }}>
+        <div className="motion-row" style={{ animationDelay: "calc(var(--route-hold) + 200ms)" }}>
           <span className="page-kicker">Contact</span>
           <div className="contact-list">
             <a href="mailto:help@abdeen.dev" className="text-link">help@abdeen.dev <Icon name="mail" size={16} /></a>

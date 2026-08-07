@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function PrivacyPage() {
   return (
     <div className="site-frame site-frame--reading">
-      <header className="document-intro motion-block" style={{ animationDelay: "30ms" }}>
+      <header className="document-intro motion-block">
         <span className="page-kicker">Privacy</span>
         <h1>What stays, and what leaves</h1>
         <p>Every browser tool works without an account and states its boundary here in plain language. Where a tool can send something, it happens only when you ask.</p>
@@ -25,7 +25,7 @@ export default function PrivacyPage() {
           <article
             className="privacy-table__row motion-row"
             key={tool.href}
-            style={{ animationDelay: `${100 + index * 45}ms` }}
+            style={{ animationDelay: `calc(var(--route-hold) + ${80 + index * 45}ms)` }}
           >
             <h2>{tool.title}</h2>
             <p><span className="mobile-field-label">Stays</span>{tool.privacy?.stays}</p>
@@ -34,7 +34,7 @@ export default function PrivacyPage() {
         ))}
       </section>
 
-      <section className="verify-block motion-block" aria-labelledby="verify-title" style={{ animationDelay: "420ms" }}>
+      <section className="verify-block motion-block" aria-labelledby="verify-title" style={{ animationDelay: "calc(var(--route-hold) + 360ms)" }}>
         <span className="page-kicker">Verify it</span>
         <h2 id="verify-title">Don&apos;t take our word for it</h2>
         <p>The source is public. You can inspect what each tool does, build it yourself, and report anything that does not match the boundary stated here.</p>

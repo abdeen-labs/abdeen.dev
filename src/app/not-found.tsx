@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function NotFound() {
   return (
     <div className="site-frame site-frame--reading not-found">
-      <section className="not-found__content">
+      <section className="not-found__content motion-block">
         <span className="page-kicker">HTTP 404</span>
         <h1>Nothing at this address</h1>
         <p className="not-found__address">abdeen.dev/<span aria-hidden="true" className="redaction-bar" /></p>

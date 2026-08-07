@@ -216,6 +216,15 @@
   --duration-panel: 170ms;
   --duration-panel-lg: 260ms;
   --duration-reveal: 340ms;
+  /* Route motion is the one place the flat system stretches out. Three
+     beats, in sequence: a brisk exit that drops the old text below
+     readability in its first frames, a short hold that keeps the incoming
+     blocks still until that has happened, then a long settle. Overlapping
+     the first and third beats is what reads as double-exposure. */
+  --duration-route-exit: 200ms;
+  --duration-route-enter: 520ms;
+  --route-hold: 70ms;
+  --ease-route: cubic-bezier(0.16, 1, 0.3, 1);
   --focus-ring: 2px solid var(--accent);
   --focus-ring-offset: 3px;
   --mark-optical-shift: 0.168em;
@@ -1825,25 +1834,33 @@ a.chip:focus-visible {
 
 /* ─── Approved Nightfield studio site ───────────────────────────── */
 
-@keyframes route-stage-in {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
+/* The stage used to translate 12px while every block inside it translated
+   another 16px, so a route change played two nested slides at once — the
+   compound travel is what read as mush rather than motion. The stage is
+   still now; the blocks carry the whole entrance, and the outgoing page is
+   handled by the view transition further down. */
 @keyframes surface-rise {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translate3d(0, 14px, 0);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: none;
+  }
+}
+
+/* The outgoing frame. Opacity only: header, footer, and utility bar are
+   identical on both pages, and identical pixels cross-fading in place are
+   invisible — the chrome holds perfectly still while the content changes
+   under it. The old -10px lift is what double-printed the chrome against
+   itself, one copy offset from the other, on every navigation. */
+@keyframes route-dissolve {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
   }
 }
 
@@ -1860,12 +1877,70 @@ a.chip:focus-visible {
 
 .route-stage {
   min-height: 100%;
-  animation: route-stage-in var(--duration-reveal) var(--ease-flat) both;
 }
 
+/* Every block waits out the hold so the rise starts against a mostly-clear
+   ground. Pages add their own stagger on top of it, inline, as
+   calc(var(--route-hold) + Nms). */
 .motion-block,
 .motion-row {
-  animation: surface-rise 420ms var(--ease-flat) both;
+  animation: surface-rise var(--duration-route-enter) var(--ease-route) both;
+  animation-delay: var(--route-hold);
+}
+
+/* ─── Route exit — View Transitions API ─────────────────────────── */
+
+/* App Router swaps route content inside a single frame, so the page being
+   left had no way to animate: it was there, then it wasn't. A view
+   transition is the only thing that keeps that frame on screen past the
+   swap.
+
+   The incoming page is live underneath at full opacity and already running
+   surface-rise, so the transition has exactly one job — clear the outgoing
+   snapshot off the top. Animating both halves is what produces the washed-out
+   double-exposure most cross-fades suffer from. */
+
+/* Nothing below the root is given a name of its own. A named group animates
+   between the old and new positions of its element, and this header is
+   in-flow rather than sticky — leaving a route scrolled down would slide the
+   chrome the full scroll distance. One group for the whole frame means the
+   route label and the active underline cross-fade with everything else. */
+::view-transition-group(root) {
+  animation-duration: var(--duration-route-exit);
+}
+
+/* The UA isolates the pair and blends it plus-lighter, which blows out a
+   fade over an opaque layer. Normal blending keeps the dissolve honest. */
+::view-transition-image-pair(root) {
+  isolation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  mix-blend-mode: normal;
+}
+
+/* The route ease is front-loaded, so as a fade-out it collapses the old
+   text below readability inside the first ~60ms, then shimmers out the
+   remainder — fast enough that nothing readable overlaps the incoming
+   page, long enough that it never reads as a hard cut. */
+::view-transition-old(root) {
+  z-index: 1;
+  animation: route-dissolve var(--duration-route-exit) var(--ease-route) both;
+}
+
+/* Held at rest — the new page shows through as the old one clears. */
+::view-transition-new(root) {
+  z-index: 0;
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(root),
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
 }
 
 .home-hero__seal .seal-key,

@@ -16,7 +16,7 @@ export default function HomePage() {
 
   return (
     <div className="site-frame site-frame--wide">
-      <section className="home-hero motion-block" aria-labelledby="home-title" style={{ animationDelay: "30ms" }}>
+      <section className="home-hero motion-block" aria-labelledby="home-title">
         <div className="home-hero__copy">
           <span className="page-kicker">An independent studio</span>
           <h1 id="home-title">Software that stays yours.</h1>
@@ -35,7 +35,7 @@ export default function HomePage() {
           <article
             key={item.href}
             className="featured-card motion-row"
-            style={{ animationDelay: `${120 + index * 70}ms` }}
+            style={{ animationDelay: `calc(var(--route-hold) + ${80 + index * 60}ms)` }}
           >
             <span className="featured-card__number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
             <h2>{item.title}</h2>
@@ -48,7 +48,7 @@ export default function HomePage() {
         ))}
       </section>
 
-      <section className="home-tools motion-block" aria-labelledby="home-tools-title" style={{ animationDelay: "270ms" }}>
+      <section className="home-tools motion-block" aria-labelledby="home-tools-title" style={{ animationDelay: "calc(var(--route-hold) + 190ms)" }}>
         <div>
           <span className="page-kicker">Browser tools</span>
           <h2 id="home-tools-title">Small utilities, plain boundaries.</h2>
@@ -59,14 +59,14 @@ export default function HomePage() {
               href={tool.href}
               className="home-tool-row motion-row"
               key={tool.href}
-              style={{ animationDelay: `${320 + index * 55}ms` }}
+              style={{ animationDelay: `calc(var(--route-hold) + ${230 + index * 45}ms)` }}
             >
               <span className="registry-meta">{String(index + 1).padStart(2, "0")}</span>
               <span>{tool.title}</span>
               <Icon name="arrow-right" size={16} />
             </Link>
           ))}
-          <Link href="/tools" className="home-tool-row home-tool-row--all motion-row" style={{ animationDelay: "540ms" }}>
+          <Link href="/tools" className="home-tool-row home-tool-row--all motion-row" style={{ animationDelay: "calc(var(--route-hold) + 410ms)" }}>
             <span className="registry-meta">{String(tools.length).padStart(2, "0")}</span>
             <span>View every tool</span>
             <Icon name="arrow-right" size={16} />
@@ -74,7 +74,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="privacy-statement motion-block" aria-labelledby="privacy-statement-title" style={{ animationDelay: "440ms" }}>
+      <section className="privacy-statement motion-block" aria-labelledby="privacy-statement-title" style={{ animationDelay: "calc(var(--route-hold) + 350ms)" }}>
         <p id="privacy-statement-title">No account. No telemetry. Your work stays on your device.</p>
         <Link href="/privacy" className="text-link">How each tool draws the line <Icon name="arrow-right" size={16} /></Link>
       </section>

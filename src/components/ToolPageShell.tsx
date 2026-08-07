@@ -25,7 +25,7 @@ export default function ToolPageShell({
 
   return (
     <div className={`site-frame tool-page${wide ? " tool-page--wide" : ""}`}>
-      <header className="tool-intro motion-block" style={{ animationDelay: "30ms" }}>
+      <header className="tool-intro motion-block">
         <span className="page-kicker">Tool {eyebrow ? `· ${eyebrow.replace("REF / ", "")}` : ""}</span>
         <h1>{title}</h1>
         <p>{description}</p>
@@ -42,12 +42,12 @@ export default function ToolPageShell({
         </div>
       </header>
 
-      <section className="tool-interface motion-block" aria-label={`${title} interface`} style={{ animationDelay: "120ms" }}>
+      <section className="tool-interface motion-block" aria-label={`${title} interface`} style={{ animationDelay: "calc(var(--route-hold) + 90ms)" }}>
         {children}
       </section>
 
       {entry?.privacy && (
-        <section className="tool-boundaries motion-block" aria-labelledby="tool-boundaries-title" style={{ animationDelay: "200ms" }}>
+        <section className="tool-boundaries motion-block" aria-labelledby="tool-boundaries-title" style={{ animationDelay: "calc(var(--route-hold) + 160ms)" }}>
           <span className="page-kicker">Boundaries</span>
           <h2 id="tool-boundaries-title">What stays, and what leaves</h2>
           <div className="tool-boundaries__grid">
@@ -73,7 +73,7 @@ export default function ToolPageShell({
             href={tool.href}
             className="related-tools__row motion-row"
             key={tool.href}
-            style={{ animationDelay: `${270 + index * 60}ms` }}
+            style={{ animationDelay: `calc(var(--route-hold) + ${220 + index * 50}ms)` }}
           >
             <span className="registry-meta">{String(index + 1).padStart(2, "0")}</span>
             <span>{tool.title}</span>

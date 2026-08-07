@@ -15,7 +15,7 @@ export default function Error({
   }, [error]);
 
   return (
-    <div className="mx-auto flex w-full max-w-6xl flex-col items-start gap-6 pb-20 pt-16 md:pt-24">
+    <div className="motion-block mx-auto flex w-full max-w-6xl flex-col items-start gap-6 pb-20 pt-16 md:pt-24">
       {/* Hazard tape is reserved for a real error state. */}
       <div className="flex items-center gap-3">
         <span aria-hidden="true" className="abd-hazard h-4 w-16" />

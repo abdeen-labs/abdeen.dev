@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function ToolsPage() {
   return (
     <div className="site-frame site-frame--wide">
-      <header className="registry-intro motion-block" style={{ animationDelay: "30ms" }}>
+      <header className="registry-intro motion-block">
         <div>
           <span className="page-kicker">Tools</span>
           <h1>Every tool, on the record</h1>
@@ -28,7 +28,7 @@ export default function ToolsPage() {
             href={tool.href}
             className="tool-registry__row motion-row"
             key={tool.href}
-            style={{ animationDelay: `${100 + index * 45}ms` }}
+            style={{ animationDelay: `calc(var(--route-hold) + ${80 + index * 45}ms)` }}
           >
             <span className="registry-meta">{String(index + 1).padStart(2, "0")}</span>
             <h2>{tool.title}</h2>
