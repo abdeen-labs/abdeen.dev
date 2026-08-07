@@ -137,13 +137,13 @@ export default function SiteHeader() {
             );
           })}
           <a
-            href="https://github.com/abdeen-labs"
+            href="https://jaafar.cv"
             target="_blank"
             rel="noopener noreferrer"
             className="site-navigation__link"
             onClick={() => setOpen(false)}
           >
-            Source <Icon name="arrow-up-right" size={16} />
+            Jaafar <Icon name="arrow-up-right" size={16} />
           </a>
         </nav>
       </div>

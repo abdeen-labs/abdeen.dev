@@ -36,9 +36,16 @@ export default function ToolPageShell({
         </div>
         <div className="tool-intro__actions">
           <Link href="/tools" className="text-link">All tools <Icon name="arrow-right" size={16} /></Link>
-          <a href="https://github.com/abdeen-labs" target="_blank" rel="noopener noreferrer" className="text-link">
-            View source <Icon name="arrow-up-right" size={16} />
-          </a>
+          {currentPath && (
+            <a
+              href={`https://github.com/abdeen-labs/abdeen.dev/tree/main/src/app${currentPath}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-link"
+            >
+              View source <Icon name="arrow-up-right" size={16} />
+            </a>
+          )}
         </div>
       </header>
 

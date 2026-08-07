@@ -26,6 +26,31 @@ describe('buildOtpauthUri', () => {
     );
   });
 
+  test('strips all whitespace from a pasted secret', () => {
+    expect(buildOtpauthUri({ ...base, secret: 'JBSW\tY3DP\nEHPK 3PXP' })).toContain(
+      'secret=JBSWY3DPEHPK3PXP',
+    );
+  });
+
+  test('percent-encodes base32 padding in the secret', () => {
+    expect(buildOtpauthUri({ ...base, secret: 'JBSWY3DP====' })).toContain(
+      'secret=JBSWY3DP%3D%3D%3D%3D',
+    );
+  });
+
+  test('a secret with reserved characters cannot corrupt the query', () => {
+    const uri = buildOtpauthUri({ ...base, secret: 'ABC&issuer=evil#x', issuer: 'Real' });
+    expect(uri).toContain('secret=ABC%26issuer%3Devil%23x');
+    const fields = parseOtpauthUri(uri);
+    expect(fields?.secret).toBe('ABC&issuer=evil#x');
+    expect(fields?.issuer).toBe('Real');
+  });
+
+  test('padded secrets round-trip through parse', () => {
+    const uri = buildOtpauthUri({ ...base, secret: 'JBSWY3DP====' });
+    expect(parseOtpauthUri(uri)?.secret).toBe('JBSWY3DP====');
+  });
+
   test('appends the issuer when set', () => {
     expect(buildOtpauthUri({ ...base, issuer: 'GitHub' })).toContain('&issuer=GitHub');
   });

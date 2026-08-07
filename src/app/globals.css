@@ -2524,6 +2524,22 @@ a:focus-visible [data-icon="arrow-up-right"] {
 .privacy-table__row p { font-size: 13.5px; line-height: 1.6; color: var(--ink-secondary); }
 .mobile-field-label { display: none; }
 
+/* Quiet framed aside inside a tool interface — a statement of intent, not
+   an alarm, so it stays on hairlines and ink rather than hazard red. */
+.tool-note {
+  margin-bottom: 28px;
+  padding: 18px 20px;
+  border: 1px solid var(--hairline-strong);
+}
+
+.tool-note p {
+  max-width: 70ch;
+  margin-top: 8px;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-secondary);
+}
+
 .verify-block { padding-block: 44px 56px; }
 .verify-block h2,
 .tool-boundaries h2 { margin: 14px 0 18px; font-size: 24px; line-height: 1.2; }

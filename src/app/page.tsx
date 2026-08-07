@@ -21,9 +21,6 @@ export default function HomePage() {
           <span className="page-kicker">An independent studio</span>
           <h1 id="home-title">Software that stays yours.</h1>
           <p>{identity.description}</p>
-          <a href="https://github.com/abdeen-labs" target="_blank" rel="noopener noreferrer" className="text-link">
-            View source <Icon name="arrow-up-right" size={16} />
-          </a>
         </div>
         <div className="home-hero__seal" aria-hidden="true">
           <SealKey size={176} decorative />

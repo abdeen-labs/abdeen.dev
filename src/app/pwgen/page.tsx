@@ -24,6 +24,16 @@ export default function PasswordGeneratorPage() {
       title="Password Generator"
       description="Generate memorable passwords or diceware passphrases. Each result reports its entropy in bits. Nothing is stored or sent."
     >
+      <div className="tool-note" role="note">
+        <span className="page-kicker">For show</span>
+        <p>
+          This recreates the memorable-password generator Apple retired from
+          Keychain — rebuilt here because it was missed, not because it should
+          be used. Passwords in this format are weak by modern standards,
+          which is part of why it was retired. Enjoy the format; protect real
+          accounts with your password manager&apos;s generator.
+        </p>
+      </div>
       <PasswordGenerator />
     </ToolPageShell>
   );

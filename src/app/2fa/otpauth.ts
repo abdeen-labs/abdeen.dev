@@ -41,12 +41,18 @@ export function buildOtpauthUri({
   digits,
   period,
 }: OtpauthBuildInput): string {
-  let s = `otpauth://${type}/${encodeURIComponent(label)}?secret=${secret.replace(/ /g, '')}`;
+  // Every interpolated value is percent-encoded, so a pasted secret with
+  // base32 padding ("=") or a stray reserved character corrupts nothing.
+  // Authenticator apps read these as query parameters and percent-decode
+  // them, and parseOtpauthUri below round-trips through the same decoding.
+  // Whitespace is stripped from the secret first — pasted secrets arrive
+  // with spaces and line breaks, which are never part of the secret itself.
+  let s = `otpauth://${type}/${encodeURIComponent(label)}?secret=${encodeURIComponent(secret.replace(/\s+/g, ''))}`;
   if (issuer) s += `&issuer=${encodeURIComponent(issuer)}`;
-  if (type === 'hotp') s += `&counter=${counter || '0'}`;
+  if (type === 'hotp') s += `&counter=${encodeURIComponent(counter || '0')}`;
   if (includeAdvanced) {
-    s += `&algorithm=${algorithm}&digits=${digits}`;
-    if (type === 'totp') s += `&period=${period || '30'}`;
+    s += `&algorithm=${encodeURIComponent(algorithm)}&digits=${encodeURIComponent(digits)}`;
+    if (type === 'totp') s += `&period=${encodeURIComponent(period || '30')}`;
   }
   return s;
 }
