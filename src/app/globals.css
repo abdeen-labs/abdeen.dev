@@ -217,14 +217,16 @@
   --duration-panel-lg: 260ms;
   --duration-reveal: 340ms;
   /* Route motion is the one place the flat system stretches out. Three
-     beats, in sequence: a brisk exit that drops the old text below
-     readability in its first frames, a short hold that keeps the incoming
-     blocks still until that has happened, then a long settle. Overlapping
-     the first and third beats is what reads as double-exposure. */
-  --duration-route-exit: 200ms;
+     beats, in sequence: a visible dissolve out, a hold that keeps the
+     incoming blocks still until the old text has dropped below
+     readability, then a long settle. The hold has to sit past the
+     dissolve's midpoint — earlier reads as double-exposure, and a dissolve
+     much faster than this reads as a blink. */
+  --duration-route-exit: 320ms;
   --duration-route-enter: 520ms;
-  --route-hold: 70ms;
+  --route-hold: 140ms;
   --ease-route: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-route-exit: cubic-bezier(0.25, 0.1, 0.25, 1);
   --focus-ring: 2px solid var(--accent);
   --focus-ring-offset: 3px;
   --mark-optical-shift: 0.168em;
@@ -1920,13 +1922,12 @@ a.chip:focus-visible {
   mix-blend-mode: normal;
 }
 
-/* The route ease is front-loaded, so as a fade-out it collapses the old
-   text below readability inside the first ~60ms, then shimmers out the
-   remainder — fast enough that nothing readable overlaps the incoming
-   page, long enough that it never reads as a hard cut. */
+/* An even, watchable dissolve — the departing page is meant to be seen
+   leaving. The route hold covers its readable half, so by the time the
+   incoming blocks rise only an unreadable veil is still clearing. */
 ::view-transition-old(root) {
   z-index: 1;
-  animation: route-dissolve var(--duration-route-exit) var(--ease-route) both;
+  animation: route-dissolve var(--duration-route-exit) var(--ease-route-exit) both;
 }
 
 /* Held at rest — the new page shows through as the old one clears. */
@@ -1935,14 +1936,45 @@ a.chip:focus-visible {
   animation: none;
 }
 
-/* ─── Breadcrumb roll ───────────────────────────────────────────── */
+/* ─── Breadcrumb split-flap ─────────────────────────────────────── */
 
 /* The route label is the one piece of chrome that names the page, so it is
-   the one piece that announces the change: a split-flap roll instead of the
-   chrome's invisible crossfade. Naming it lifts it out of the root group. */
+   the one piece that announces the change: a split-flap wave that sweeps
+   right to left, one character flipping up and away as its replacement
+   rolls up beneath it. The flip runs in the live DOM (SiteHeader.tsx) —
+   per-character stagger is beyond what a view-transition snapshot can do —
+   so the label's view-transition group exists only to pin the region:
+   naming it cuts it out of the root crossfade, hiding the old snapshot
+   outright and showing the live page there from the first frame. */
 .route-label {
   display: inline-block;
   view-transition-name: route-label;
+}
+
+.route-label__flip {
+  position: relative;
+  display: inline-block;
+}
+
+.route-label__line {
+  display: inline-block;
+  white-space: pre;
+  perspective: 300px;
+}
+
+.route-label__line--out {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: 0;
+}
+
+.route-label__ch {
+  display: inline-block;
+  animation: label-roll-in 240ms var(--ease-route) both;
+}
+
+.route-label__line--out .route-label__ch {
+  animation: label-roll-out 200ms var(--ease-route) both;
 }
 
 @keyframes label-roll-out {
@@ -1969,33 +2001,24 @@ a.chip:focus-visible {
 
 /* Pinned: the UA's group animation slides the label between its old and new
    viewport positions, and leaving a scrolled page that would read as the
-   label flying the scroll distance. The roll plays where the new label sits. */
+   label flying the scroll distance. */
 ::view-transition-group(route-label) {
   animation: none;
 }
 
 ::view-transition-image-pair(route-label) {
   isolation: auto;
-  perspective: 260px;
 }
 
-/* Natural sizes: the default stretches the old snapshot to the new label's
-   width, which squeezes a long label into a short one mid-roll. */
-::view-transition-old(route-label),
-::view-transition-new(route-label) {
-  mix-blend-mode: normal;
-  inline-size: auto;
-  block-size: auto;
-}
-
+/* The live DOM plays the outgoing flaps itself; the stale snapshot on top
+   would only double them. */
 ::view-transition-old(route-label) {
-  animation: label-roll-out var(--duration-route-exit) var(--ease-route) both;
+  display: none;
 }
 
-/* Follows the old flap out with the same hold the content blocks obey. */
 ::view-transition-new(route-label) {
-  animation: label-roll-in 240ms var(--ease-route) both;
-  animation-delay: var(--route-hold);
+  animation: none;
+  mix-blend-mode: normal;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -38,6 +38,55 @@ function routeLabel(pathname: string) {
     : "NOT FOUND";
 }
 
+/* The wave sweeps right to left, so a character's delay counts from the end
+   of its line. The label is mono, so column x of the outgoing and incoming
+   lines sit at the same spot and each column reads as one flap turning. */
+const FLAP_STEP_MS = 20;
+/* How long a column stays empty between its old flap leaving and its new
+   one arriving. Shorter than the page's --route-hold: the breadcrumb is
+   the announcement, so it may run ahead of the content. */
+const FLAP_LAG_MS = 110;
+
+function flapChars(text: string, extraDelay: number) {
+  const chars = [...text];
+  return chars.map((ch, i) => (
+    <span
+      key={i}
+      className="route-label__ch"
+      style={{ animationDelay: `${(chars.length - 1 - i) * FLAP_STEP_MS + extraDelay}ms` }}
+    >
+      {ch === " " ? " " : ch}
+    </span>
+  ));
+}
+
+/** Split-flap roll: on a route change each column flips up and away, right
+ *  to left, with the new character rolling up beneath it. Per-character
+ *  animation needs the live DOM, so the label's view-transition group only
+ *  pins the region (globals.css) and the flip itself runs here. */
+function RouteLabel({ label }: { label: string }) {
+  const [pair, setPair] = useState<{ from: string | null; to: string }>({ from: null, to: label });
+  // Adjusting state during render (not in an effect) so the outgoing label
+  // is already flipping on the very frame the new route commits.
+  if (pair.to !== label) {
+    setPair({ from: pair.to, to: label });
+  }
+
+  if (pair.from === null || pair.from === pair.to) {
+    return <span className="route-label">{label}</span>;
+  }
+
+  return (
+    <span className="route-label">
+      <span className="sr-only">{pair.to}</span>
+      <span key={`${pair.from}->${pair.to}`} className="route-label__flip" aria-hidden="true">
+        <span className="route-label__line route-label__line--out">{flapChars(pair.from, 0)}</span>
+        <span className="route-label__line route-label__line--in">{flapChars(pair.to, FLAP_LAG_MS)}</span>
+      </span>
+    </span>
+  );
+}
+
 /** Shared Nightfield chrome. The route owns the approved dark/light ground. */
 export default function SiteHeader() {
   const pathname = usePathname();
@@ -46,7 +95,7 @@ export default function SiteHeader() {
   return (
     <header className="site-header" role="banner">
       <div className="identity-rail">
-        <span>[ {identity.studio.toUpperCase()} ] <span aria-hidden="true">{"///"}</span> <span className="route-label">{routeLabel(pathname)}</span></span>
+        <span>[ {identity.studio.toUpperCase()} ] <span aria-hidden="true">{"///"}</span> <RouteLabel label={routeLabel(pathname)} /></span>
         <span>{marketing.topChrome}</span>
       </div>
 
