@@ -42,7 +42,7 @@ export default function PrivacyPage() {
           <a href="https://github.com/abdeen-labs" target="_blank" rel="noopener noreferrer" className="text-link">
             Inspect the source <Icon name="arrow-up-right" size={16} />
           </a>
-          <a href="mailto:mail@abdeen.dev" className="text-link">
+          <a href="mailto:help@abdeen.dev" className="text-link">
             Ask a question <Icon name="mail" size={16} />
           </a>
         </div>

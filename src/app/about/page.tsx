@@ -35,7 +35,7 @@ export default function AboutPage() {
         <div className="motion-row" style={{ animationDelay: "240ms" }}>
           <span className="page-kicker">Contact</span>
           <div className="contact-list">
-            <a href="mailto:mail@abdeen.dev" className="text-link">mail@abdeen.dev <Icon name="mail" size={16} /></a>
+            <a href="mailto:help@abdeen.dev" className="text-link">help@abdeen.dev <Icon name="mail" size={16} /></a>
             <a href="https://github.com/abdeen-labs" target="_blank" rel="noopener noreferrer" className="text-link">Issues, on any repository <Icon name="arrow-up-right" size={16} /></a>
             <p>No forms. No newsletter. Mail gets read.</p>
           </div>
