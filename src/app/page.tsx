@@ -48,7 +48,7 @@ export default function HomePage() {
       <section className="home-tools motion-block" aria-labelledby="home-tools-title" style={{ animationDelay: "calc(var(--route-hold) + 190ms)" }}>
         <div>
           <span className="page-kicker">Browser tools</span>
-          <h2 id="home-tools-title">Small utilities, plain boundaries.</h2>
+          <h2 id="home-tools-title">Small utilities that do one thing well.</h2>
         </div>
         <div className="home-tools__list">
           {tools.slice(0, 4).map((tool, index) => (
@@ -71,10 +71,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="privacy-statement motion-block" aria-labelledby="privacy-statement-title" style={{ animationDelay: "calc(var(--route-hold) + 350ms)" }}>
-        <p id="privacy-statement-title">No account. No telemetry. Your work stays on your device.</p>
-        <Link href="/privacy" className="text-link">How each tool draws the line <Icon name="arrow-right" size={16} /></Link>
-      </section>
     </div>
   );
 }

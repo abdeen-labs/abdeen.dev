@@ -117,7 +117,7 @@ const allTools: CatalogEntry[] = [
   {
     title: "Regex Tester",
     description:
-      "Tests a regular expression against sample text with live match highlighting. Runs in the browser.",
+      "Tests a regular expression against sample text with live match highlighting, capture groups, and replacement previews.",
     href: "/regex",
     meta: "/regex",
     boundary: "Patterns and sample text stay in this browser.",
@@ -135,7 +135,7 @@ const allTools: CatalogEntry[] = [
   {
     title: "Pomodoro Timer",
     description:
-      "Interval timer for focused work. Configurable work and break durations, with session counts kept on the device.",
+      "Interval timer for focused work with configurable work and break durations and a running session count.",
     href: "/pomodoro",
     meta: "/pomodoro",
     boundary: "Timing and session counts stay in this browser.",
@@ -153,7 +153,7 @@ const allTools: CatalogEntry[] = [
   {
     title: "Password Generator",
     description:
-      "Generates random passwords and diceware passphrases with stated entropy. Generation runs on the device.",
+      "Generates random passwords and diceware passphrases with an entropy estimate for every result.",
     href: "/pwgen",
     meta: "/pwgen",
     boundary: "Generation and word lists stay on this device.",
@@ -171,7 +171,7 @@ const allTools: CatalogEntry[] = [
   {
     title: "2FA QR Generator",
     description:
-      "Converts TOTP and HOTP secrets or otpauth links into authenticator-ready QR codes. The secret stays on the device.",
+      "Converts TOTP and HOTP secrets or otpauth links into authenticator-ready QR codes.",
     href: "/2fa",
     meta: "/2fa",
     boundary: "Secrets and QR rendering stay on this device.",
@@ -189,7 +189,7 @@ const allTools: CatalogEntry[] = [
   {
     title: "QR Generator",
     description:
-      "Renders QR codes for links, WiFi, email, and phone. Styled on the device and exported as an image.",
+      "Renders customizable QR codes for links, WiFi, email, and phone, then exports them as images.",
     href: "/qr",
     meta: "/qr",
     boundary: "Content and QR rendering stay on this device.",

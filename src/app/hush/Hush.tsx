@@ -228,8 +228,7 @@ export default function Hush() {
                 Get Hush
               </h2>
               <p className="text-body text-ink-secondary">
-                Free on the App Store. No account, no analytics, no tracking.
-                Open source under GPL-3.0.
+                Free on the App Store and open source under GPL-3.0.
               </p>
             </div>
             <div className="flex flex-col items-start gap-3">

@@ -142,9 +142,7 @@ export default function SafeStay() {
           level. A built-in guide covers the physical sweep for the cameras no
           network scan can see.
         </p>
-        <p className="micro-label">
-          Runs locally · Scans this network only · No telemetry
-        </p>
+        <p className="micro-label">Scans this network only</p>
         <p className="text-body text-ink-dim">
           Hobby project — the full disclaimer sits at the end of this page.
         </p>

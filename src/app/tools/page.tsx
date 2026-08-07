@@ -4,7 +4,7 @@ import { tools } from "@/lib/catalog";
 
 export const metadata: Metadata = {
   title: "Tools",
-  description: "Every Abdeen Labs browser tool, with its privacy boundary stated in plain language.",
+  description: "Small, focused browser tools from Abdeen Labs.",
   alternates: { canonical: "https://abdeen.dev/tools" },
 };
 
@@ -15,7 +15,7 @@ export default function ToolsPage() {
         <div>
           <span className="page-kicker">Tools</span>
           <h1>Every tool, on the record</h1>
-          <p>Each one works without an account and publishes its boundary: what stays on this device, what leaves it, and when.</p>
+          <p>A collection of small, focused utilities. Pick one and get to work.</p>
         </div>
       </header>
 

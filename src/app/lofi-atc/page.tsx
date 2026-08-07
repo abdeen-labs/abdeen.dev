@@ -12,7 +12,7 @@ export const metadata: Metadata = ENABLED
   ? {
       title: "Lo-fi ATC Radio",
       description:
-        "Lo-fi beats mixed with the live JFK Tower air-traffic feed. Two streams, one mix, independent volume per channel. Runs in the browser; no account.",
+        "Lo-fi beats mixed with the live JFK Tower air-traffic feed. Two streams, one mix, independent volume per channel.",
       alternates: { canonical: "https://abdeen.dev/lofi-atc" },
       openGraph: {
         title: "Lo-fi ATC Radio · Abdeen Labs",

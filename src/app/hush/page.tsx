@@ -4,7 +4,7 @@ import Hush from "./Hush";
 export const metadata: Metadata = {
   title: "Hush",
   description:
-    "Sound studio for iOS. Hush generates noise and binaural beats in real time and layers 80+ recorded ambiences into one mix, all on the device. No account, no tracking.",
+    "Sound studio for iOS. Hush generates noise and binaural beats in real time and layers more than 80 recorded ambiences into one mix.",
   alternates: { canonical: "https://abdeen.dev/hush" },
   openGraph: {
     title: "Hush · Abdeen Labs",

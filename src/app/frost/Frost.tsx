@@ -156,7 +156,7 @@ export default function Frost() {
               </a>
             </div>
             <p className="micro-label">
-              Free · Open source · No account
+              Free · Open source
             </p>
           </div>
         </FadeInWrapper>
@@ -218,10 +218,10 @@ export default function Frost() {
                 Download
               </h2>
               <p className="text-body text-ink-secondary">
-                One DMG. No installer, no account. Drag Frost to Applications
-                and lock the desk from the menu bar.
+                One DMG and no installer. Drag Frost to Applications, then lock
+                the desk from the menu bar.
               </p>
-              <p className="micro-label">macOS 14.6+ · No telemetry</p>
+              <p className="micro-label">macOS 14.6+</p>
             </div>
             <div className="flex flex-col items-start gap-3">
               <DownloadButton href={release.href} label={release.label} />

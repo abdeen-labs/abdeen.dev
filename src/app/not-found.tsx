@@ -14,7 +14,7 @@ export default function NotFound() {
         <span className="page-kicker">HTTP 404</span>
         <h1>Nothing at this address</h1>
         <p className="not-found__address">abdeen.dev/<span aria-hidden="true" className="redaction-bar" /></p>
-        <p>The page was moved, or it never existed. Nothing was logged either way—this site keeps no record of what you looked for.</p>
+        <p>The page was moved, or it never existed.</p>
         <div className="not-found__links">
           <Link href="/" className="text-link">Back to the start <Icon name="arrow-right" size={16} /></Link>
           <Link href="/tools" className="text-link">Tools <Icon name="arrow-right" size={16} /></Link>

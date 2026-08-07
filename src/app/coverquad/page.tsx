@@ -5,7 +5,7 @@ import CoverQuad from './CoverQuad';
 export const metadata: Metadata = {
   title: 'CoverQuad',
   description:
-    'Apple retired the classic 2×2 playlist cover. CoverQuad rebuilds it from four album covers — upload files or search the Cover Art Archive — and exports one square PNG at up to 3000 px. No account.',
+    'Apple retired the classic 2×2 playlist cover. CoverQuad rebuilds it from four album covers and exports one square PNG at up to 3000 px.',
   alternates: { canonical: 'https://abdeen.dev/coverquad' },
   openGraph: {
     title: 'CoverQuad · Abdeen Labs',
@@ -23,7 +23,7 @@ export default function CoverQuadPage() {
       currentPath="/coverquad"
       title="CoverQuad"
       description={
-        'Apple retired the 2×2 playlist cover. CoverQuad rebuilds it: four covers in, one square PNG out at up to 3000 px. Upload files or search the Cover Art Archive; covers fetch through the site proxy and the export renders locally.'
+        'Apple retired the 2×2 playlist cover. CoverQuad rebuilds it: four covers in, one square PNG out at up to 3000 px. Upload files or search the Cover Art Archive.'
       }
     >
       <CoverQuad />

@@ -31,8 +31,6 @@ export default function ToolPageShell({
         <p>{description}</p>
         <div className="tool-intro__meta">
           <span>{entry?.meta ?? currentPath}</span>
-          <span>No account</span>
-          <span>Runs in the browser</span>
         </div>
         <div className="tool-intro__actions">
           <Link href="/tools" className="text-link">All tools <Icon name="arrow-right" size={16} /></Link>

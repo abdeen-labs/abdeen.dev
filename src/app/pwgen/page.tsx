@@ -5,12 +5,12 @@ import PasswordGenerator from './PasswordGenerator';
 export const metadata: Metadata = {
   title: 'Password Generator',
   description:
-    'Generate memorable passwords in the classic Apple Keychain format, or diceware passphrases from the EFF Large and BIP-39 word lists. Each result reports its entropy in bits. Generation runs on your device; nothing is stored or sent.',
+    'Generate memorable passwords in the classic Apple Keychain format, or diceware passphrases from the EFF Large and BIP-39 word lists. Each result reports its entropy in bits.',
   alternates: { canonical: 'https://abdeen.dev/pwgen' },
   openGraph: {
     title: 'Password Generator · Abdeen Labs',
     description:
-      'Memorable passwords and diceware passphrases, generated on your device. Entropy stated per result; nothing is stored or sent.',
+      'Memorable passwords and diceware passphrases with an entropy estimate for every result.',
     url: 'https://abdeen.dev/pwgen',
   },
 };
@@ -22,25 +22,23 @@ export default function PasswordGeneratorPage() {
       eyebrow="REF / PWGEN"
       currentPath="/pwgen"
       title="Password Generator"
-      description="Generate memorable passwords or diceware passphrases. Each result reports its entropy in bits. Nothing is stored or sent."
+      description="Generate memorable passwords or diceware passphrases. Each result reports its entropy in bits."
     >
       <div className="tool-note" role="note">
-        <span className="page-kicker">For show</span>
+        <span className="page-kicker">A quick note</span>
         <div className="tool-note__grid">
           <div>
-            <h3>What this is</h3>
+            <h3>Why this exists</h3>
             <p>
-              A recreation of the memorable-password generator Apple retired
-              from Keychain — rebuilt because it was missed, not because it
-              should be used.
+              Apple used to make passwords in this format. I missed that
+              Keychain generator, so I rebuilt it here.
             </p>
           </div>
           <div>
-            <h3>Why not to rely on it</h3>
+            <h3>Before you use one</h3>
             <p>
-              Passwords in this format are weak by modern standards, which is
-              part of why Apple retired it. Protect real accounts with your
-              password manager&apos;s generator.
+              This mode is mostly here for nostalgia. For an account you care
+              about, use your password manager&apos;s generator instead.
             </p>
           </div>
         </div>

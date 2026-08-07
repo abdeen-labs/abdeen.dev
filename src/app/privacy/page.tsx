@@ -14,7 +14,7 @@ export default function PrivacyPage() {
       <header className="document-intro motion-block">
         <span className="page-kicker">Privacy</span>
         <h1>What stays, and what leaves</h1>
-        <p>Every browser tool works without an account and states its boundary here in plain language. Where a tool can send something, it happens only when you ask.</p>
+        <p>This page lists what each tool keeps on your device and what it sends elsewhere. A tool only makes a request when you choose an action that needs one.</p>
       </header>
 
       <section className="privacy-table" aria-label="Privacy boundaries by tool">

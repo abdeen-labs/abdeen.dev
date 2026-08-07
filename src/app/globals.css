@@ -2362,21 +2362,6 @@ a:focus-visible [data-icon="arrow-up-right"] {
 }
 .home-tool-row--all { color: var(--signal-link); }
 
-.privacy-statement {
-  padding: 58px 36px 64px;
-  border-bottom: 1px solid var(--hairline);
-}
-
-.privacy-statement p {
-  max-width: 30ch;
-  margin-bottom: 14px;
-  font-family: var(--font-mono-stack);
-  font-size: clamp(22px, 3vw, 28px);
-  font-weight: 500;
-  line-height: 1.45;
-  color: var(--ink-primary);
-}
-
 .site-footer {
   display: flex;
   min-height: 112px;
@@ -2730,7 +2715,6 @@ a:focus-visible [data-icon="arrow-up-right"] {
   .featured-card:last-child { border-bottom: 0; }
   .featured-card p { min-height: 0; }
   .home-tools { grid-template-columns: 1fr; gap: 28px; padding: 48px 20px; }
-  .privacy-statement { padding: 48px 20px; }
   .site-footer { flex-direction: column; align-items: flex-start; justify-content: center; padding-block: 28px; }
   .registry-intro { display: block; padding: 48px 20px 36px; }
   .tool-registry__row { grid-template-columns: 30px 1fr 64px; gap: 12px; padding-inline: 20px; }
