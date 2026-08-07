@@ -1935,10 +1935,74 @@ a.chip:focus-visible {
   animation: none;
 }
 
+/* ─── Breadcrumb roll ───────────────────────────────────────────── */
+
+/* The route label is the one piece of chrome that names the page, so it is
+   the one piece that announces the change: a split-flap roll instead of the
+   chrome's invisible crossfade. Naming it lifts it out of the root group. */
+.route-label {
+  display: inline-block;
+  view-transition-name: route-label;
+}
+
+@keyframes label-roll-out {
+  from {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-0.8em) rotateX(70deg);
+  }
+}
+
+@keyframes label-roll-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.8em) rotateX(-70deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+  }
+}
+
+/* Pinned: the UA's group animation slides the label between its old and new
+   viewport positions, and leaving a scrolled page that would read as the
+   label flying the scroll distance. The roll plays where the new label sits. */
+::view-transition-group(route-label) {
+  animation: none;
+}
+
+::view-transition-image-pair(route-label) {
+  isolation: auto;
+  perspective: 260px;
+}
+
+/* Natural sizes: the default stretches the old snapshot to the new label's
+   width, which squeezes a long label into a short one mid-roll. */
+::view-transition-old(route-label),
+::view-transition-new(route-label) {
+  mix-blend-mode: normal;
+  inline-size: auto;
+  block-size: auto;
+}
+
+::view-transition-old(route-label) {
+  animation: label-roll-out var(--duration-route-exit) var(--ease-route) both;
+}
+
+/* Follows the old flap out with the same hold the content blocks obey. */
+::view-transition-new(route-label) {
+  animation: label-roll-in 240ms var(--ease-route) both;
+  animation-delay: var(--route-hold);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  ::view-transition-group(root),
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
+  ::view-transition-group(*),
+  ::view-transition-image-pair(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
     animation: none !important;
   }
 }

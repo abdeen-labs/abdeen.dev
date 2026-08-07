@@ -46,7 +46,7 @@ export default function SiteHeader() {
   return (
     <header className="site-header" role="banner">
       <div className="identity-rail">
-        <span>[ {identity.studio.toUpperCase()} ] <span aria-hidden="true">{"///"}</span> {routeLabel(pathname)}</span>
+        <span>[ {identity.studio.toUpperCase()} ] <span aria-hidden="true">{"///"}</span> <span className="route-label">{routeLabel(pathname)}</span></span>
         <span>{marketing.topChrome}</span>
       </div>
 
