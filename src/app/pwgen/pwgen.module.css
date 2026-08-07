@@ -164,7 +164,7 @@
 
 .batchItem:active { transform: translateY(1px); }
 
-/* Selected — sunken well plus the lacquer active rule. */
+/* Selected — sunken well plus the Accent active rule. */
 .batchSelected,
 .batchSelected:hover {
   background: var(--surface-sunken);

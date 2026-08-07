@@ -1,9 +1,8 @@
-import { FingerprintRecognition } from "@carbon/icons-react";
+import Icon from "@/components/Icon";
 import styles from "./FrostVisual.module.css";
 
-/* The desktop is what makes the frost read as frost: a blur over an empty
-   field is just grey. These are the shapes with enough edge and value to
-   survive it. */
+/* The desktop geometry keeps the product behavior legible beneath the
+   flat lock-state overlay. */
 const paragraph = [94, 71, 88, 62, 81, 44];
 const sidebar = [70, 52, 84, 61];
 
@@ -65,7 +64,7 @@ export default function FrostVisual({ compact = false }: { compact?: boolean }) 
         </div>
       </div>
 
-      {/* The blur depicts the app's real output; it is not page chrome. */}
+      {/* The flat overlay depicts the app's locked state. */}
       <div className={styles.frost} aria-hidden="true" />
       <div className={styles.wall} aria-hidden="true" />
 
@@ -83,7 +82,7 @@ export default function FrostVisual({ compact = false }: { compact?: boolean }) 
         </strong>
 
         <span className={styles.plateHint}>
-          <FingerprintRecognition className={styles.fingerprint} />
+          <Icon name="fingerprint" size={20} className={styles.fingerprint} />
           <span>Touch ID to unlock</span>
         </span>
       </div>

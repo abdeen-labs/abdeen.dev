@@ -1,75 +1,103 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState } from "react";
+import Icon from "@/components/Icon";
 import { SealKey } from "@/components/Seal";
-import ThemeToggle from "@/components/ThemeToggle";
 import { identity, marketing } from "@/lib/brand";
 
-/** Site chrome: the lockup (Key seal · divider · wordmark), navigation,
- *  mode control, public identity band, and lacquer rule. */
+const navItems = [
+  { label: "Tools", href: "/tools" },
+  { label: "Privacy", href: "/privacy" },
+  { label: "About", href: "/about" },
+] as const;
+
+const productRoutes = new Set([
+  "2fa",
+  "coverquad",
+  "frost",
+  "hush",
+  "icon",
+  "lofi-atc",
+  "pomodoro",
+  "pwgen",
+  "qr",
+  "regex",
+  "safestay",
+]);
+
+function routeLabel(pathname: string) {
+  if (pathname === "/") return "STUDIO SITE";
+  if (pathname === "/tools") return "TOOLS";
+  if (pathname === "/privacy") return "PRIVACY";
+  if (pathname === "/about") return "THE STUDIO";
+  const segment = pathname.split("/").filter(Boolean)[0];
+  return segment && productRoutes.has(segment)
+    ? `TOOLS / ${segment.toUpperCase()}`
+    : "NOT FOUND";
+}
+
+/** Shared Nightfield chrome. The route owns the approved dark/light ground. */
 export default function SiteHeader() {
+  const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+
   return (
-    <header className="site-nav sticky top-0 z-40 w-full" role="banner">
-      <nav
-        className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-3 px-4 md:h-16 md:px-8"
-        aria-label="Main"
-      >
-        <Link
-          href="/"
-          className="lockup chrome-link min-h-10 shrink-0"
-          aria-label="Abdeen Labs · Home"
-        >
-          <SealKey size={28} decorative />
+    <header className="site-header" role="banner">
+      <div className="identity-rail">
+        <span>[ {identity.studio.toUpperCase()} ] <span aria-hidden="true">{"///"}</span> {routeLabel(pathname)}</span>
+        <span>{marketing.topChrome}</span>
+      </div>
+
+      <div className="site-header__main">
+        <Link href="/" className="lockup site-lockup" aria-label="Abdeen Labs · Home">
+          <SealKey size={30} decorative />
           <span className="lockup-divider" aria-hidden="true" />
-          <span className="wordmark site-wordmark">Abdeen Labs</span>
+          <span className="wordmark">Abdeen Labs</span>
         </Link>
 
-        <div className="flex items-center gap-0 md:gap-1">
-          <Link href="/#apps" className="nav-link nav-link--section">
-            Apps
-          </Link>
-          <Link href="/#tools" className="nav-link nav-link--section">
-            Tools
-          </Link>
+        <button
+          type="button"
+          className="mobile-menu-button"
+          aria-expanded={open}
+          aria-controls="site-navigation"
+          aria-label={open ? "Close navigation" : "Open navigation"}
+          onClick={() => setOpen((value) => !value)}
+        >
+          <Icon name={open ? "xmark" : "menu"} size={20} />
+        </button>
+
+        <nav
+          id="site-navigation"
+          aria-label="Main"
+          className={`site-navigation${open ? " site-navigation--open" : ""}`}
+        >
+          {navItems.map((item) => {
+            const active = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="site-navigation__link"
+                aria-current={active ? "page" : undefined}
+                onClick={() => setOpen(false)}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
           <a
             href="https://github.com/abdeen-labs"
             target="_blank"
             rel="noopener noreferrer"
-            className="nav-link nav-link--external"
+            className="site-navigation__link"
+            onClick={() => setOpen(false)}
           >
-            GitHub<span aria-hidden="true">&nbsp;↗</span>
+            Source <Icon name="arrow-up-right" size={16} />
           </a>
-          <a
-            href="https://jaafar.cv"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="nav-link nav-link--external"
-          >
-            jaafar.cv<span aria-hidden="true">&nbsp;↗</span>
-          </a>
-          <ThemeToggle />
-        </div>
-      </nav>
-
-      {/* This continuous public surface carries AXIS//OPEN once in its
-          identity band, without record metadata. */}
-      <div className="mx-auto max-w-6xl px-4 md:px-8">
-        <div className="dossier-band">
-          <span className="hidden items-center gap-2 sm:flex">
-            <span>[ {identity.studio} ]</span>
-            <span className="sep" aria-hidden="true">
-              {"///"}
-            </span>
-            <span>Studio site</span>
-          </span>
-          <span className="band-doc band-doc--full">
-            {marketing.topChrome}
-          </span>
-          <span className="band-doc band-doc--compact">
-            {marketing.controlMark}
-          </span>
-        </div>
+        </nav>
       </div>
-
-      <div className="lacquer-rule" aria-hidden="true" />
     </header>
   );
 }

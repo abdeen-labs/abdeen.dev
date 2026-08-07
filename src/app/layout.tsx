@@ -73,19 +73,12 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#06080D" },
-    { media: "(prefers-color-scheme: light)", color: "#F7F4ED" },
-  ],
+  themeColor: "#000704",
 };
 
 // Application entries derive from src/lib/catalog.ts, so a catalog toggle
 // updates the structured data automatically.
 const jsonLd = buildJsonLd();
-
-// Runs before first paint: a stored mode pins data-theme on <html>; with
-// nothing stored the page follows prefers-color-scheme (dark canonical).
-const themeInit = `(function(){try{var t=localStorage.getItem("abdeen-theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}})()`;
 
 export default function RootLayout({
   children,
@@ -103,11 +96,10 @@ export default function RootLayout({
     <html
       lang="en"
       className={fontVars}
+      data-theme="dark"
       data-scroll-behavior="smooth"
-      suppressHydrationWarning
     >
       <body className="flex min-h-screen flex-col">
-        <script dangerouslySetInnerHTML={{ __html: themeInit }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -121,11 +113,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <SiteHeader />
-        <main
-          id="main-content"
-          tabIndex={-1}
-          className="relative flex-1 px-4 outline-none md:px-8"
-        >
+        <main id="main-content" tabIndex={-1} className="relative flex-1 outline-none">
           {children}
         </main>
         <SiteFooter />

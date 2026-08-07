@@ -31,7 +31,7 @@
   stroke-width: 4;
 }
 
-/* The active rule — lacquer sweeps as the interval elapses. Butt caps:
+/* The active rule — Accent sweeps as the interval elapses. Butt caps:
    structure is square. The arc steps once per second on the motion tokens. */
 .ringProgress {
   fill: none;
@@ -40,8 +40,8 @@
   transition: stroke-dashoffset var(--duration-reveal) var(--ease-flat);
 }
 
-/* Countdown digits. While running, the global .readout carries them —
-   the screen's one phosphor element. Color deliberately lives outside
+/* Countdown digits. While running, the global .readout carries them.
+   Color deliberately lives outside
    .time so this module can never outrank the shared class.
 
    Size is the one exception. This is a display number that happens to be

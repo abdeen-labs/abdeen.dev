@@ -1,18 +1,7 @@
 @import "tailwindcss";
 
-/* ──────────────────────────────────────────────────────────────────────
-   Abdeen Labs · Axis (BRAND.md v3.5)
-   Token source: abdeen-brand/system/colors_and_type.css. Interfaces ship
-   in two first-class modes from one role-token set: dark is canonical
-   (:root), light lives in :root[data-theme="light"] and follows
-   prefers-color-scheme unless data-theme pins it. Components consume
-   role aliases — --surface-*, --ink-*, --hairline*, --signal-*,
-   --readout-* — never a ramp step. Radius is concentric — 14 · 10 · 6
-   outward to inward — and the seal and print register stay square.
-   Lacquer acts, Hazard alarms, phosphor is one live readout per screen
-   and is reserved for one live dark-mode readout. No shadows, no glows
-   beyond the readout, no hollow type.
-   ────────────────────────────────────────────────────────────────────── */
+/* Abdeen Labs · Nightfield. Canonical anchors: Void, Surface, Border,
+   Mist, Accent. */
 
 @theme inline {
   /* Default palettes are cleared so an off-system utility (text-white,
@@ -93,14 +82,12 @@
      Rule #13). No other radius utility exists, so the seal, the register,
      and the marks that score a surface stay at 0. */
   --radius-*: initial;
-  --radius-control: 6px;
-  --radius-plate: 10px;
-  --radius-shell: 14px;
+  --radius-control: 0;
+  --radius-plate: 0;
+  --radius-shell: 0;
   --radius-round: 999px;
 
-  /* No drop shadows, no glows, no glass (Hard Rule #14). The readout's
-     glow and the sticky header's blur are handed out in component CSS,
-     never as utilities. */
+  /* Nightfield is a flat system. */
   --shadow-*: initial;
   --inset-shadow-*: initial;
   --drop-shadow-*: initial;
@@ -111,117 +98,93 @@
   --ease-flat: cubic-bezier(0.3, 0, 0.2, 1);
 }
 
-/* ─── Canonical tokens — dark mode (the default) ─────────────────── */
+/* ─── Canonical Nightfield tokens ───────────────────────────────── */
 
-:root {
+:root,
+[data-mode="dark"] {
   color-scheme: dark;
 
-  /* Pitch — the dark field */
   --pitch-960: #000000;
-  --pitch-950: #06080D;
-  --pitch-900: #0C1017;
-  --pitch-850: #131822;
-  --pitch-800: #1A212C;
-  --pitch-700: #212936;
-  --pitch-600: #293344;
-  --pitch-500: #323E50;
+  --void: #000704;
+  --pitch-900: #00100a;
+  --surface: #001a0f;
+  --pitch-800: #012416;
+  --pitch-700: #022e1d;
+  --pitch-600: #043923;
+  --border: #07452d;
 
-  /* Graphite — dark structure and dim text */
-  --graphite-900: #0B0F17;
-  --graphite-800: #252C39;
-  --graphite-700: #3E4756;
-  --graphite-600: #576274;
-  --graphite-500: #748092;
-  --graphite-400: #8E97A8;
-  --graphite-300: #A9B2C0;
-  --graphite-200: #C3CAD6;
-  --graphite-100: #DEE4EE;
+  --graphite-900: #00140c;
+  --graphite-800: #163128;
+  --graphite-700: #345248;
+  --graphite-600: #48665b;
+  --graphite-500: #6b837a;
+  --graphite-400: #86a998;
+  --graphite-300: #a6c0b4;
+  --graphite-200: #c1d7cc;
+  --graphite-100: #dcebe3;
 
-  /* Chalk — dark-mode text, never a surface */
-  --chalk-100: #FFFFFF;
-  --chalk-200: #EFF2F7;
-  --chalk-300: #E0E5EE;
+  --chalk-100: #f0faf5;
+  --chalk-200: #e5f2eb;
+  --chalk-300: #d4e8de;
 
-  /* Bone — the light field, and the sheet */
-  --bone-100: #F7F4ED;
-  --bone-200: #F1EEE3;
-  --bone-300: #E8E3D3;
-  --bone-400: #DED8C5;
-  --bone-500: #D3CCB4;
+  --mist: #eef5f0;
+  --mist-200: #e8f0eb;
+  --mist-300: #d9e8df;
+  --mist-400: #ccdfd3;
+  --mist-500: #bcd3c4;
 
-  /* Carbon — light-mode ink and hairlines */
-  --carbon-900: #0B0A08;
-  --carbon-800: #27231C;
-  --carbon-700: #554F44;
-  --carbon-600: #6E675A;
-  --carbon-500: #898070;
-  --carbon-300: #C4BDAB;
-  --carbon-200: #CBC5B4;
+  --carbon-900: #06150d;
+  --carbon-800: #142b20;
+  --carbon-700: #314c40;
+  --carbon-600: #486557;
+  --carbon-500: #6f887a;
+  --carbon-300: #a9c2b3;
+  --carbon-200: #b4ccbd;
 
-  /* Lacquer — identity red, shared by both modes */
-  --lacquer-400: #E13B3B;
-  --lacquer-500: #CE2020;
-  --lacquer-600: #A31818;
-  --lacquer-700: #7C0E0E;
-
-  /* Hazard · Phosphor · State — a bright step and a deep 700 step.
-     Phosphor has no 700 step because it is only used in dark mode. */
-  --hazard-500: #FF2A2A;
-  --hazard-700: #BF0000;
-  --phosphor-500: #4AF626;
-  --jade-400: #16B37D;
-  --jade-700: #176149;
-  --amber-400: #E2A81E;
+  --accent-bright: #43d995;
+  --accent: #1fb977;
+  --accent-deep: #0d8f5b;
+  --accent-ink: #087248;
+  --hazard-500: #ff2a2a;
+  --hazard-700: #bf0000;
+  --cobalt-400: #5aa7ff;
+  --cobalt-700: #1d5a96;
+  --amber-400: #e2a81e;
   --amber-700: #695318;
 
-  /* Surface roles (aliases — never re-declare a hex) */
-  --surface-page: var(--pitch-950);
+  --surface-page: var(--void);
   --surface-sunken: var(--pitch-900);
-  --surface-card: var(--pitch-850);
+  --surface-card: var(--surface);
   --surface-band: var(--pitch-800);
   --surface-raised: var(--pitch-700);
   --surface-void: var(--pitch-960);
   --hairline: var(--pitch-600);
-  --hairline-strong: var(--pitch-500);
-
-  /* Ink roles (aliases — the type layer) */
+  --hairline-strong: var(--border);
   --ink-primary: var(--chalk-100);
   --ink-secondary: var(--chalk-300);
   --ink-dim: var(--graphite-400);
   --ink-faint: var(--graphite-500);
-  --ink-structure: var(--graphite-600);
-  --ink-inverse: var(--chalk-100);
-
-  /* Signal roles (aliases — the mode picks the step) */
-  --signal-identity: var(--lacquer-500);
-  --signal-link: var(--lacquer-400);
-  --signal-press: var(--lacquer-600);
-  --signal-verified: var(--jade-400);
+  --ink-structure: var(--graphite-700);
+  --ink-inverse: var(--carbon-900);
+  --signal-identity: var(--accent);
+  --signal-link: var(--accent-bright);
+  --signal-press: var(--accent-deep);
+  --signal-verified: var(--accent-bright);
   --signal-warning: var(--amber-400);
   --signal-alarm: var(--hazard-500);
 
-  /* Effect tokens — physics, derived from ramp steps */
-  --edge-light: color-mix(in srgb, var(--chalk-100) 7%, transparent);
-
-  /* Type families — next/font variables carry the files (src/app/fonts.ts).
-     IBM Plex Sans Arabic is not loaded: the site has no Arabic copy
-     surface. The token stays declared so [lang="ar"] content falls to a
-     correct system stack until the face ships with a localized surface. */
   --font-display-stack: var(--font-schibsted), -apple-system, sans-serif;
   --font-mono-stack: var(--font-geist-mono), ui-monospace, monospace;
   --font-text-stack: var(--font-geist), -apple-system, system-ui, sans-serif;
-  --font-mark-stack: var(--font-aref), serif; /* عابدين only */
+  --font-mark-stack: var(--font-aref), serif;
   --font-arabic-stack: "IBM Plex Sans Arabic", "Geeza Pro", system-ui, sans-serif;
 
-  /* Tracking & leading */
   --tracking-wordmark: 0.22em;
   --tracking-micro: 0.11em;
-  --tracking-display: -0.055em;
-  --leading-display: 0.86;
-  --leading-text: 1.55;
+  --tracking-display: -0.025em;
+  --leading-display: 1.06;
+  --leading-text: 1.6;
   --leading-mono: 1.45;
-
-  /* Type scale — eight steps + three fluid macro */
   --fs-micro: 11px;
   --fs-control: 13px;
   --fs-body: 15px;
@@ -234,7 +197,6 @@
   --fs-macro-2: clamp(110px, 15vw, 180px);
   --fs-macro-3: clamp(128px, 19vw, 220px);
 
-  /* Spacing — 4px base, geometric ramp */
   --space-1: 4px;
   --space-2: 8px;
   --space-3: 12px;
@@ -245,154 +207,58 @@
   --space-8: 64px;
   --space-9: 96px;
   --space-10: 128px;
-
-  /* Shape — radius is concentric; the seal and the register are square.
-     Three nested steps, each 4px tighter than the frame around it. */
   --radius-control: 6px;
   --radius-plate: 10px;
   --radius-shell: 14px;
   --radius-round: 999px;
-
-  /* Motion — flat, short */
-  --ease-flat: cubic-bezier(0.3, 0, 0.2, 1);
-  --duration-hover: 110ms;
+  --ease-flat: cubic-bezier(0.2, 0, 0, 1);
+  --duration-hover: 120ms;
   --duration-panel: 170ms;
   --duration-panel-lg: 260ms;
   --duration-reveal: 340ms;
-
-  /* Focus — the square lacquer ring, identical in both modes */
-  --focus-ring: 2px solid var(--lacquer-500);
-  --focus-ring-offset: 2px;
-
-  /* Seal & mark geometry */
+  --focus-ring: 2px solid var(--accent);
+  --focus-ring-offset: 3px;
   --mark-optical-shift: 0.168em;
-  --seal-mark-scale: 0.32;
+  --seal-mark-scale: 0.36;
   --seal-cut: 26%;
   --seal-size: 40px;
   --seal-line: max(1px, calc(var(--seal-size) / 40));
   --seal-key-field: var(--pitch-900);
-  --seal-key-line: var(--lacquer-500);
-  --seal-key-ink: var(--lacquer-500);
-
-  /* Readout — the one live element */
+  --seal-key-line: var(--accent);
+  --seal-key-ink: var(--chalk-100);
   --readout-scale: 1.4;
-  --readout-color: var(--phosphor-500);
-  --readout-glow: 0 0 8px color-mix(in srgb, var(--phosphor-500) 35%, transparent);
-
-  /* Select arrow — furniture glyph at the mode's dim ink (a data URI
-     cannot read var(), so each mode bakes its own literal). */
-  --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5' stroke='%238E97A8' stroke-width='1.4'/%3E%3C/svg%3E");
+  --readout-color: var(--accent-bright);
+  --readout-glow: none;
+  --edge-light: transparent;
+  --select-arrow: none;
 }
 
-/* ─── Light mode — same roles, light literals ────────────────────── */
-
-:root[data-theme="light"] {
+:root[data-theme="light"],
+[data-mode="light"] {
   color-scheme: light;
-
-  --surface-page: var(--bone-100);
-  --surface-sunken: var(--bone-200);
-  --surface-card: var(--bone-300);
-  --surface-band: var(--bone-400);
-  --surface-raised: var(--bone-500);
+  --surface-page: var(--mist);
+  --surface-sunken: var(--mist-200);
+  --surface-card: var(--mist-300);
+  --surface-band: var(--mist-400);
+  --surface-raised: var(--mist-500);
   --surface-void: var(--carbon-900);
   --hairline: var(--carbon-200);
   --hairline-strong: var(--carbon-300);
-
   --ink-primary: var(--carbon-900);
   --ink-secondary: var(--carbon-800);
   --ink-dim: var(--carbon-700);
   --ink-faint: var(--carbon-600);
   --ink-structure: var(--carbon-500);
-
-  --signal-link: var(--lacquer-600);
-  --signal-press: var(--lacquer-700);
-  --signal-verified: var(--jade-700);
+  --ink-inverse: var(--chalk-100);
+  --signal-link: var(--accent-ink);
+  --signal-press: var(--accent-deep);
+  --signal-verified: var(--accent-ink);
   --signal-warning: var(--amber-700);
   --signal-alarm: var(--hazard-700);
-
-  --edge-light: color-mix(in srgb, var(--carbon-900) 9%, transparent);
-
-  --seal-key-field: var(--bone-200);
-
-  /* Phosphor and its bloom are dark-mode effects. The light readout
-     is ink at 17.04:1 on the sunken field; the value changing and its
-     label are what read as live. */
+  --seal-key-field: var(--mist-200);
+  --seal-key-line: var(--accent-deep);
+  --seal-key-ink: var(--carbon-900);
   --readout-color: var(--ink-primary);
-  --readout-glow: none;
-
-  --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5' stroke='%23554F44' stroke-width='1.4'/%3E%3C/svg%3E");
-}
-
-/* Documentation-only dark preview scope. It lets a depicted product
-   surface keep its dark appearance inside the light page without
-   hand-re-inking the component. Live interface surfaces never mix modes. */
-[data-mode="dark"] {
-  color-scheme: dark;
-
-  --surface-page: var(--pitch-950);
-  --surface-sunken: var(--pitch-900);
-  --surface-card: var(--pitch-850);
-  --surface-band: var(--pitch-800);
-  --surface-raised: var(--pitch-700);
-  --surface-void: var(--pitch-960);
-  --hairline: var(--pitch-600);
-  --hairline-strong: var(--pitch-500);
-
-  --ink-primary: var(--chalk-100);
-  --ink-secondary: var(--chalk-300);
-  --ink-dim: var(--graphite-400);
-  --ink-faint: var(--graphite-500);
-  --ink-structure: var(--graphite-600);
-
-  --signal-link: var(--lacquer-400);
-  --signal-press: var(--lacquer-600);
-  --signal-verified: var(--jade-400);
-  --signal-warning: var(--amber-400);
-  --signal-alarm: var(--hazard-500);
-
-  --edge-light: color-mix(in srgb, var(--chalk-100) 7%, transparent);
-  --seal-key-field: var(--pitch-900);
-  --readout-color: var(--phosphor-500);
-  --readout-glow: 0 0 8px color-mix(in srgb, var(--phosphor-500) 35%, transparent);
-}
-
-/* Follow the operating system unless an explicit data-theme says otherwise.
-   Deliberately :root:not([data-theme="dark"]), never a bare :root — the
-   declaration list mirrors the [data-theme="light"] block above. */
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) {
-    color-scheme: light;
-
-    --surface-page: var(--bone-100);
-    --surface-sunken: var(--bone-200);
-    --surface-card: var(--bone-300);
-    --surface-band: var(--bone-400);
-    --surface-raised: var(--bone-500);
-    --surface-void: var(--carbon-900);
-    --hairline: var(--carbon-200);
-    --hairline-strong: var(--carbon-300);
-
-    --ink-primary: var(--carbon-900);
-    --ink-secondary: var(--carbon-800);
-    --ink-dim: var(--carbon-700);
-    --ink-faint: var(--carbon-600);
-    --ink-structure: var(--carbon-500);
-
-    --signal-link: var(--lacquer-600);
-    --signal-press: var(--lacquer-700);
-    --signal-verified: var(--jade-700);
-    --signal-warning: var(--amber-700);
-    --signal-alarm: var(--hazard-700);
-
-    --edge-light: color-mix(in srgb, var(--carbon-900) 9%, transparent);
-
-    --seal-key-field: var(--bone-200);
-
-    --readout-color: var(--ink-primary);
-    --readout-glow: none;
-
-    --select-arrow: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12' fill='none'%3E%3Cpath d='M3 4.5 6 7.5 9 4.5' stroke='%23554F44' stroke-width='1.4'/%3E%3C/svg%3E");
-  }
 }
 
 /* ─── Base ───────────────────────────────────────────────────────── */
@@ -429,14 +295,13 @@ section[id] {
   scroll-margin-top: 6rem;
 }
 
-/* The system's only highlight — selection inverts to chalk on lacquer. */
+/* Selection uses the canonical Accent. */
 ::selection {
   background: var(--signal-identity);
   color: var(--ink-inverse);
 }
 
-/* Focus & reduced motion ship in the base layer — never per-component.
-   Square 2px lacquer ring, identical in both modes (Hard Rule #16). */
+/* Focus & reduced motion ship in the base layer. */
 :focus-visible {
   outline: var(--focus-ring);
   outline-offset: var(--focus-ring-offset);
@@ -524,31 +389,31 @@ textarea {
 h1,
 .h1 {
   font-family: var(--font-display-stack);
-  font-weight: 800;
+  font-weight: 500;
   font-size: var(--fs-h1);
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 h2,
 .h2 {
   font-family: var(--font-display-stack);
-  font-weight: 700;
+  font-weight: 500;
   font-size: var(--fs-h2);
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 h3,
 .h3 {
   font-family: var(--font-display-stack);
-  font-weight: 700;
+  font-weight: 500;
   font-size: var(--fs-h3);
   line-height: var(--leading-display);
   letter-spacing: var(--tracking-display);
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 /* Geist — anything longer than one line. */
@@ -657,8 +522,8 @@ output {
 
 /* ─── Seal — the mark's carrier. Never redrawn. ──────────────────── */
 
-/* B · Key — standard. Field follows the mode; hairline and ink stay
-   lacquer in both. Min 16px. Radius 0 — the seal is a square exemption
+/* B · Key — standard. Field follows the mode; the hairline uses Accent.
+   Min 16px. Radius 0 — the seal is a square exemption
    to the concentric scale, because the 26% top-left cut is a silhouette
    and never pairs with a radius. */
 .seal-key {
@@ -680,7 +545,7 @@ output {
   content: "";
   position: absolute;
   inset: 0;
-  background: var(--seal-key-line, var(--lacquer-500));
+  background: var(--seal-key-line, var(--accent));
   clip-path: polygon(
     evenodd,
     var(--seal-cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--seal-cut),
@@ -701,8 +566,8 @@ output {
   transform: translate(-50%, calc(-50% - var(--mark-optical-shift)));
   font-family: var(--font-mark-stack);
   font-weight: 700;
-  color: var(--seal-key-ink, var(--lacquer-500));
-  /* mark ink height = 0.32 × plate; ink height ≈ 0.883 × font-size */
+  color: var(--seal-key-ink, var(--chalk-100));
+  /* mark ink height = 0.36 × plate; ink height ≈ 0.883 × font-size */
   font-size: calc(var(--seal-size) * var(--seal-mark-scale) / 0.883);
   line-height: 1;
   direction: rtl;
@@ -727,7 +592,7 @@ output {
   height: 96px;
 }
 
-/* ─── Plates — structure is hairlines and top-edge light ─────────── */
+/* ─── Plates — structure comes from hairlines ───────────────────── */
 
 /* A plate is the middle step of the concentric scale: --radius-plate, 4px
    wider than the --radius-control on the buttons and fields inside it, so
@@ -736,14 +601,12 @@ output {
   background: var(--surface-card);
   border: 1px solid var(--hairline);
   border-radius: var(--radius-plate);
-  box-shadow: inset 0 1px 0 var(--edge-light); /* one hairline of light */
 }
 
 .plate--sunken {
   background: var(--surface-sunken);
   border: 1px solid var(--hairline);
   border-radius: var(--radius-plate);
-  box-shadow: none; /* sunken surfaces catch no light */
 }
 
 /* A band spans its container edge to edge, so it is ruled top and bottom
@@ -809,11 +672,7 @@ output {
   user-select: none;
 }
 
-.abd-redact--lacquer {
-  background: var(--signal-identity);
-}
-
-/* Concealed but present. Hover/focus retracts the lacquer bar rightward.
+/* Concealed but present. Hover/focus retracts the Accent bar rightward.
    Host on a <button type="button"> so keyboard focus reveals too. */
 .abd-reveal {
   position: relative;
@@ -933,8 +792,12 @@ a {
 /* Chrome links — nav rows, index rows, chips, buttons-as-links — are
    controls, not prose: mono type carries them and the underline retires. */
 .chrome-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
   color: var(--ink-secondary);
   text-decoration: none;
+  white-space: nowrap;
   transition: color var(--duration-hover) var(--ease-flat);
 }
 
@@ -970,7 +833,7 @@ a {
 }
 
 .btn:active {
-  transform: translateY(1px); /* press is translateY, never scale */
+  transform: scale(0.96);
 }
 
 .btn:disabled {
@@ -982,8 +845,7 @@ a {
   transform: none;
 }
 
-/* Primary — the system's one mode-invariant object: lacquer field,
-   chalk label, in dark, in light, and printed. */
+/* Primary — the system's mode-invariant Accent field and inverse label. */
 .btn--primary,
 .btn-primary {
   background: var(--signal-identity);
@@ -1178,7 +1040,7 @@ a {
   transform: translateY(1px);
 }
 
-/* Accent variant — lacquer thumb for primary type selectors. */
+/* Accent variant for primary type selectors. */
 .segmented--accent .segmented-thumb {
   background: var(--signal-identity);
   border-color: transparent;
@@ -1191,7 +1053,7 @@ a {
 /* ─── Switch — the one circular control ──────────────────────────── */
 
 /* Checkbox-hosted variant of the brand switch: 36×20 track, 14px thumb,
-   lacquer field when on. The only rounded track in the system. */
+   Accent field when on. The only rounded track in the system. */
 .switch {
   position: relative;
   display: inline-flex;
@@ -1270,7 +1132,7 @@ a {
   accent-color: var(--signal-identity);
 }
 
-/* Range — hairline track (structure, square), circular lacquer thumb
+/* Range — hairline track (structure, square), circular Accent thumb
    (a dot — the sanctioned round form). No glow ring. */
 .range {
   -webkit-appearance: none;
@@ -1421,7 +1283,7 @@ a.chip:focus-visible {
   border-radius: var(--radius-plate);
 }
 
-/* ─── Console — sunken field, mono, one lacquer prompt ───────────── */
+/* ─── Console — sunken field, mono, one Accent prompt ────────────── */
 
 /* The console field is structure, not a control, so it takes
    --radius-plate and the controls beside it stay one step tighter. */
@@ -1458,9 +1320,7 @@ a.chip:focus-visible {
 
 /* ─── Readout — the one live element per screen ──────────────────── */
 
-/* One live readout per screen. In dark it uses phosphor and the system's
-   only glow. In light it uses --ink-primary
-   at 17.04:1 on the sunken bone field, with no glow, tint, or texture.
+/* One live readout per screen. Dark uses Accent; light uses primary ink.
    What says "live" in both modes is the value changing and its label.
    The size is relative, not absolute: --readout-scale is the ratio to the
    strip the readout sits in, so one rule holds at every scale it is drawn
@@ -1470,7 +1330,6 @@ a.chip:focus-visible {
   font-family: var(--font-mono-stack);
   font-size: calc(1em * var(--readout-scale));
   color: var(--readout-color);
-  text-shadow: var(--readout-glow); /* the only glow — dark mode only */
   font-feature-settings: "tnum";
 }
 
@@ -1495,42 +1354,6 @@ a.chip:focus-visible {
 .disclosure-inner {
   min-height: 0;
   overflow: hidden;
-}
-
-/* ─── Texture — opt-in via .abd-*, rationed ──────────────────────── */
-
-/* Every texture here represents a real material or production effect.
-   That is the test a texture has to pass.
-
-   .abd-scanlines was retired in 3.1 and is deliberately not replaced: a
-   CRT electron sweep is an artefact of a display, not a document. It
-   measured 1.033:1 on the dark field — invisible in its canonical mode —
-   and 1.156:1 on bone, where it ruled over the ink rather than under it.
-   --texture-line retired with it, having had no other consumer. */
-
-/* Mechanical grain — large fields only; the speckle takes the mode's ink. */
-.abd-grain {
-  position: relative;
-}
-
-.abd-grain::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: 0.05;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* Light mode inverts the speckle's polarity: dark ink on bone. */
-:root[data-theme="light"] .abd-grain::before {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0.5 0.5 0 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-@media (prefers-color-scheme: light) {
-  :root:not([data-theme="dark"]) .abd-grain::before {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.5 0.5 0.5 0 0'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
 }
 
 /* Crosshairs for print references and diagnostic surfaces. */
@@ -1560,24 +1383,9 @@ a.chip:focus-visible {
   right: 6px;
 }
 
-/* Hazard tape — ONLY beside something actually wrong. 1.2s is the alarm
-   constant, deliberately slower than any interface duration. */
+/* Flat alarm bar, only beside something actually wrong. */
 .abd-hazard {
-  background: repeating-linear-gradient(
-    135deg,
-    var(--signal-alarm) 0 8px,
-    transparent 8px 16px
-  );
-  animation: abd-hazard-pulse 1.2s var(--ease-flat) infinite alternate;
-}
-
-@keyframes abd-hazard-pulse {
-  from {
-    opacity: 0.72;
-  }
-  to {
-    opacity: 1;
-  }
+  background: var(--signal-alarm);
 }
 
 /* Struck rule — the alarm form for a line of text. */
@@ -1587,37 +1395,18 @@ a.chip:focus-visible {
   text-decoration-thickness: 2px;
 }
 
-/* Barcode rules — colophons, footers, spec sheets. */
-.abd-barcode {
-  height: 24px;
-  background: repeating-linear-gradient(
-    90deg,
-    currentColor 0 1px,
-    transparent 1px 3px,
-    currentColor 3px 5px,
-    transparent 5px 9px,
-    currentColor 9px 10px,
-    transparent 10px 14px,
-    currentColor 14px 17px,
-    transparent 17px 21px
-  );
-  color: var(--ink-structure);
-}
-
 /* .abd-stamp is print-register furniture and deliberately does not ship
    here: an interface never carries the stamp (BRAND.md → Print Register). */
 
 /* ─── Site chrome ────────────────────────────────────────────────── */
 
-/* The sticky header band — the one surface sanctioned to blur. */
+/* Legacy site-nav support stays flat. */
 .site-nav {
-  background: color-mix(in srgb, var(--surface-page) 82%, transparent);
+  background: var(--surface-page);
   border-bottom: 1px solid var(--hairline);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 
-/* The identity band: bracketed studio name, /// separator, and AXIS//OPEN.
+/* The identity band: bracketed studio name and Nightfield public mark.
    Mirrors the marketing reference kit. */
 .dossier-band {
   display: flex;
@@ -1659,13 +1448,6 @@ a.chip:focus-visible {
   .band-doc--compact {
     display: inline;
   }
-}
-
-/* The 8px lacquer rule closes the chrome. Lacquer is the one ink both
-   modes share, so this rule is the same colour in either. */
-.lacquer-rule {
-  height: 8px;
-  background: var(--signal-identity);
 }
 
 .nav-link {
@@ -1875,7 +1657,7 @@ a.chip:focus-visible {
   transition: background var(--duration-hover) var(--ease-flat);
 }
 
-/* Hover extends a lacquer rule down the left edge — the active-rule
+/* Hover extends an Accent rule down the left edge — the active-rule
    gesture, not a glow. */
 .index-row::before {
   content: "";
@@ -2039,8 +1821,683 @@ a.chip:focus-visible {
   padding-left: 0.35em;
   direction: rtl;
   color: color-mix(in srgb, var(--ink-structure) 30%, transparent);
-  -webkit-mask-image: linear-gradient(155deg, black 39%, transparent 73%);
-  mask-image: linear-gradient(155deg, black 39%, transparent 73%);
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
+}
+
+/* ─── Approved Nightfield studio site ───────────────────────────── */
+
+@keyframes route-stage-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes surface-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes seal-settle {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.94) rotate(-1.5deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0);
+  }
+}
+
+.route-stage {
+  min-height: 100%;
+  animation: route-stage-in var(--duration-reveal) var(--ease-flat) both;
+}
+
+.motion-block,
+.motion-row {
+  animation: surface-rise 420ms var(--ease-flat) both;
+}
+
+.home-hero__seal .seal-key,
+.about-hero__seal .seal-key {
+  animation: seal-settle 620ms var(--ease-flat) 120ms both;
+  transform-origin: center;
+}
+
+.site-header {
+  width: 100%;
+  border-bottom: 1px solid var(--hairline);
+  background: var(--surface-page);
+}
+
+.identity-rail {
+  animation: surface-rise 360ms var(--ease-flat) both;
+}
+
+.site-header__main > * {
+  animation: surface-rise 420ms var(--ease-flat) 70ms both;
+}
+
+.identity-rail,
+.site-header__main,
+.site-footer {
+  width: min(100%, 1240px);
+  margin-inline: auto;
+  padding-inline: 36px;
+}
+
+.identity-rail {
+  display: flex;
+  min-height: 32px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  border-bottom: 1px solid var(--hairline);
+  font-family: var(--font-mono-stack);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+.site-header__main {
+  position: relative;
+  display: flex;
+  min-height: 72px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.site-lockup {
+  min-height: 44px;
+  color: var(--ink-primary);
+  text-decoration: none;
+}
+
+.site-navigation {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+}
+
+.site-navigation__link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono-stack);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink-secondary);
+  transition-property: color;
+  transition-duration: var(--duration-hover);
+  transition-timing-function: var(--ease-flat);
+}
+
+.site-navigation__link:hover,
+.site-navigation__link:focus-visible,
+.site-navigation__link[aria-current="page"] {
+  color: var(--ink-primary);
+}
+
+.site-navigation__link[aria-current="page"] {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 8px;
+}
+
+.mobile-menu-button {
+  display: none;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--hairline);
+  background: transparent;
+  color: var(--ink-primary);
+  cursor: pointer;
+  transition: border-color var(--duration-hover) var(--ease-flat),
+    color var(--duration-hover) var(--ease-flat),
+    transform var(--duration-hover) var(--ease-flat);
+}
+
+.mobile-menu-button:hover,
+.mobile-menu-button:focus-visible {
+  border-color: var(--hairline-strong);
+  color: var(--signal-link);
+}
+
+.mobile-menu-button:active {
+  transform: scale(0.94);
+}
+
+main > .route-stage > :not(.site-frame) {
+  padding-inline: clamp(20px, 3vw, 36px);
+}
+
+.site-frame {
+  width: min(100%, 1032px);
+  margin-inline: auto;
+  padding-inline: 36px;
+}
+
+.site-frame--wide {
+  width: min(100%, 1240px);
+  padding-inline: 0;
+}
+
+.site-frame--reading {
+  width: min(100%, 1032px);
+}
+
+.page-kicker,
+.registry-meta,
+.registry-boundary,
+.mobile-field-label {
+  font-family: var(--font-mono-stack);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.45;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+.text-link,
+.footer-link {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 7px;
+  color: var(--signal-link);
+  font-size: 13px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+  transition-property: color;
+  transition-duration: var(--duration-hover);
+  transition-timing-function: var(--ease-flat);
+}
+
+a [data-icon="arrow-right"],
+a [data-icon="arrow-left"],
+a [data-icon="arrow-up-right"] {
+  width: 1em;
+  height: 1em;
+  flex: none;
+  transition: transform var(--duration-panel) var(--ease-flat),
+    color var(--duration-hover) var(--ease-flat);
+}
+
+a:hover [data-icon="arrow-right"],
+a:focus-visible [data-icon="arrow-right"] {
+  transform: translateX(4px);
+}
+
+a:hover [data-icon="arrow-left"],
+a:focus-visible [data-icon="arrow-left"] {
+  transform: translateX(-4px);
+}
+
+a:hover [data-icon="arrow-up-right"],
+a:focus-visible [data-icon="arrow-up-right"] {
+  transform: translate(3px, -3px);
+}
+
+.text-link:hover,
+.text-link:focus-visible,
+.footer-link:hover,
+.footer-link:focus-visible {
+  color: var(--ink-primary);
+}
+
+.home-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.home-hero__copy {
+  padding: 88px 48px 80px 36px;
+  border-right: 1px solid var(--hairline);
+}
+
+.home-hero h1 {
+  max-width: 12ch;
+  margin: 22px 0 24px;
+  font-size: clamp(46px, 6vw, 64px);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+}
+
+.home-hero__copy > p {
+  max-width: 54ch;
+  margin-bottom: 22px;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-secondary);
+}
+
+.home-hero__seal,
+.about-hero__seal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.featured-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-bottom: 1px solid var(--hairline);
+}
+
+.featured-card {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  padding: 34px 32px 38px 36px;
+  border-right: 1px solid var(--hairline);
+  transition: background-color var(--duration-panel) var(--ease-flat);
+}
+
+.featured-card:hover,
+.featured-card:focus-within {
+  background: var(--surface-sunken);
+}
+
+.featured-card:last-child { border-right: 0; }
+
+.featured-card__number {
+  position: absolute;
+  top: -20px;
+  right: 8px;
+  font-family: var(--font-mono-stack);
+  font-size: 110px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--graphite-900);
+  user-select: none;
+  transition: color var(--duration-panel) var(--ease-flat),
+    transform var(--duration-panel-lg) var(--ease-flat);
+}
+
+.featured-card:hover .featured-card__number,
+.featured-card:focus-within .featured-card__number {
+  color: var(--surface);
+  transform: translateY(6px);
+}
+
+.featured-card h2 {
+  position: relative;
+  margin-bottom: 10px;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.featured-card p {
+  position: relative;
+  min-height: 6.4em;
+  margin-bottom: 16px;
+  color: var(--ink-secondary);
+}
+
+.featured-card .registry-meta { display: block; margin-bottom: 8px; }
+
+.home-tools {
+  display: grid;
+  grid-template-columns: 0.42fr 1fr;
+  gap: 64px;
+  padding: 56px 36px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.home-tools h2 {
+  max-width: 13ch;
+  margin-top: 14px;
+  font-size: 28px;
+  line-height: 1.2;
+}
+
+.home-tools__list { border-top: 1px solid var(--hairline); }
+
+.home-tool-row {
+  display: grid;
+  min-height: 58px;
+  grid-template-columns: 44px minmax(0, 1fr) 20px;
+  align-items: center;
+  gap: 18px;
+  border-bottom: 1px solid var(--hairline);
+  color: var(--ink-primary);
+  text-decoration: none;
+  transition-property: background-color, color, padding-left;
+  transition-duration: var(--duration-hover);
+  transition-timing-function: var(--ease-flat);
+}
+
+.home-tool-row:hover,
+.home-tool-row:focus-visible {
+  padding-left: 8px;
+  background: var(--surface-sunken);
+}
+.home-tool-row--all { color: var(--signal-link); }
+
+.privacy-statement {
+  padding: 58px 36px 64px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.privacy-statement p {
+  max-width: 30ch;
+  margin-bottom: 14px;
+  font-family: var(--font-mono-stack);
+  font-size: clamp(22px, 3vw, 28px);
+  font-weight: 500;
+  line-height: 1.45;
+  color: var(--ink-primary);
+}
+
+.site-footer {
+  display: flex;
+  min-height: 112px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 36px;
+  border-top: 1px solid var(--hairline);
+}
+
+.site-footer--full { min-height: 142px; }
+
+.site-footer__identity {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.site-footer__roundel { color: var(--graphite-300); }
+
+.site-footer__identity > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.site-footer__meta,
+.footer-link {
+  font-family: var(--font-mono-stack);
+  font-size: 11px;
+  color: var(--ink-dim);
+}
+
+.registry-intro,
+.document-intro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 48px;
+  padding: 52px 36px 40px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.registry-intro > div { max-width: 650px; }
+
+.registry-intro h1,
+.document-intro h1,
+.about-hero h1,
+.tool-intro h1,
+.not-found h1 {
+  margin: 16px 0;
+  font-size: clamp(38px, 5vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+
+.registry-intro p,
+.document-intro p,
+.about-copy,
+.tool-intro > p,
+.not-found__content > p:last-of-type {
+  max-width: 58ch;
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--ink-secondary);
+}
+
+.tool-registry__header,
+.tool-registry__row {
+  display: grid;
+  grid-template-columns: 42px 128px minmax(190px, 1fr) 220px 160px;
+  gap: 18px;
+  padding-inline: 36px;
+}
+
+.tool-registry__header {
+  padding-block: 12px;
+  border-bottom: 1px solid var(--hairline-strong);
+  font-family: var(--font-mono-stack);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.tool-registry__row {
+  align-items: baseline;
+  padding-block: 20px;
+  border-bottom: 1px solid var(--hairline);
+  color: var(--ink-primary);
+  text-decoration: none;
+  transition: background-color var(--duration-hover) var(--ease-flat),
+    padding-left var(--duration-panel) var(--ease-flat);
+}
+
+.tool-registry__row:hover,
+.tool-registry__row:focus-within {
+  padding-left: 44px;
+  background: var(--surface-sunken);
+}
+
+.tool-registry__row h2 { font-size: 17px; line-height: 1.25; }
+.tool-registry__row h2 { color: var(--ink-primary); }
+.tool-registry__row p { font-size: 13.5px; line-height: 1.55; color: var(--ink-secondary); }
+.registry-boundary { color: var(--ink-dim); }
+
+.document-intro {
+  display: block;
+  padding-inline: 0;
+  padding-block: 56px 44px;
+}
+
+.privacy-table { padding-block: 44px 48px; border-bottom: 1px solid var(--hairline); }
+.privacy-table__header,
+.privacy-table__row {
+  display: grid;
+  grid-template-columns: 150px 1fr 1fr;
+  gap: 18px;
+}
+
+.privacy-table__header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--hairline-strong);
+  font-family: var(--font-mono-stack);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+.privacy-table__row {
+  padding-block: 18px;
+  border-bottom: 1px solid var(--hairline);
+  transition: background-color var(--duration-hover) var(--ease-flat),
+    padding-inline var(--duration-panel) var(--ease-flat);
+}
+
+.privacy-table__row:hover,
+.privacy-table__row:focus-within {
+  padding-inline: 10px;
+  background: var(--surface-sunken);
+}
+
+.privacy-table__row:last-child { border-bottom: 0; }
+.privacy-table__row h2 { font-size: 15px; line-height: 1.3; }
+.privacy-table__row p { font-size: 13.5px; line-height: 1.6; color: var(--ink-secondary); }
+.mobile-field-label { display: none; }
+
+.verify-block { padding-block: 44px 56px; }
+.verify-block h2,
+.tool-boundaries h2 { margin: 14px 0 18px; font-size: 24px; line-height: 1.2; }
+.verify-block > p { max-width: 58ch; color: var(--ink-secondary); }
+.verify-block__links { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 18px; }
+
+.about-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.about-hero > div:first-child { padding: 64px 48px 60px 36px; border-right: 1px solid var(--hairline); }
+.about-copy { display: flex; flex-direction: column; gap: 14px; }
+
+.about-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.about-details > div { padding: 40px 36px 44px; }
+.about-details > div:first-child { border-right: 1px solid var(--hairline); }
+.record-list { margin-top: 16px; }
+.record-list div { display: grid; grid-template-columns: 70px 1fr; gap: 16px; padding-block: 10px; border-bottom: 1px solid var(--hairline); }
+.record-list div:last-child { border-bottom: 0; }
+.record-list dt { font-family: var(--font-mono-stack); font-size: 11px; color: var(--ink-dim); font-variant-numeric: tabular-nums; }
+.record-list dd,
+.contact-list p { font-size: 13px; color: var(--ink-secondary); }
+.contact-list { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 10px; }
+
+.tool-page { width: min(100%, 1032px); }
+.tool-page--wide { width: min(100%, 1180px); }
+.tool-intro { padding-block: 56px 48px; border-bottom: 1px solid var(--hairline); }
+.tool-intro__meta { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 16px; font-family: var(--font-mono-stack); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-dim); }
+.tool-intro__actions { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 16px; }
+.tool-interface { padding-block: 44px 48px; border-bottom: 1px solid var(--hairline); }
+.tool-boundaries { padding-block: 48px; border-bottom: 1px solid var(--hairline); }
+.tool-boundaries__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.tool-boundaries__grid > div { padding: 22px 24px; border: 1px solid var(--hairline); }
+.tool-boundaries__grid h3 { margin-bottom: 14px; font-family: var(--font-mono-stack); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-dim); }
+.tool-boundaries__grid p { color: var(--ink-secondary); }
+.related-tools { padding-block: 44px 56px; }
+.related-tools__header { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 12px; }
+.related-tools__row { display: grid; min-height: 58px; grid-template-columns: 44px 1fr 20px; align-items: center; gap: 18px; border-top: 1px solid var(--hairline); color: var(--ink-primary); text-decoration: none; transition: background-color var(--duration-hover) var(--ease-flat), padding-left var(--duration-panel) var(--ease-flat); }
+.related-tools__row:last-child { border-bottom: 1px solid var(--hairline); }
+.related-tools__row:hover,
+.related-tools__row:focus-visible { padding-left: 8px; background: var(--surface-sunken); }
+
+.not-found__content { padding-block: 96px 110px; }
+.not-found__address { display: flex; align-items: center; gap: 4px; margin-bottom: 18px; font-family: var(--font-mono-stack); color: var(--ink-secondary); }
+.redaction-bar { display: inline-block; width: 9ch; height: 0.9em; background: var(--ink-primary); }
+.not-found__links { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 18px; }
+
+@media (max-width: 960px) {
+  .tool-registry__header { display: none; }
+  .tool-registry__row {
+    grid-template-columns: 36px 150px minmax(0, 1fr) 72px;
+  }
+  .tool-registry__row > :nth-child(4) { grid-column: 2 / -1; }
+  .tool-registry__row > :nth-child(5) { grid-column: 4; grid-row: 1; }
+}
+
+@media (max-width: 760px) {
+  .identity-rail,
+  .site-header__main,
+  .site-footer { padding-inline: 20px; }
+  .identity-rail span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .identity-rail span:last-child { display: none; }
+  .mobile-menu-button { display: inline-flex; }
+  .site-navigation {
+    position: absolute;
+    top: 100%;
+    left: 20px;
+    right: 20px;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    border: 1px solid var(--hairline-strong);
+    background: var(--surface-page);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(-8px);
+    transition: opacity var(--duration-panel) var(--ease-flat),
+      transform var(--duration-panel) var(--ease-flat),
+      visibility 0s linear var(--duration-panel);
+  }
+  .site-navigation--open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+    transition-delay: 0s;
+  }
+  .site-navigation__link { padding-inline: 16px; border-bottom: 1px solid var(--hairline); }
+  .site-navigation__link:last-child { border-bottom: 0; }
+  .site-navigation__link[aria-current="page"] { text-underline-offset: 4px; }
+  .site-frame { padding-inline: 20px; }
+  .site-frame--wide { padding-inline: 0; }
+  .home-hero { grid-template-columns: 1fr; }
+  .home-hero__copy { padding: 56px 20px 48px; border-right: 0; }
+  .home-hero__seal { padding: 36px 20px 48px; border-top: 1px solid var(--hairline); }
+  .featured-grid { grid-template-columns: 1fr; }
+  .featured-card { padding-inline: 20px; border-right: 0; border-bottom: 1px solid var(--hairline); }
+  .featured-card:last-child { border-bottom: 0; }
+  .featured-card p { min-height: 0; }
+  .home-tools { grid-template-columns: 1fr; gap: 28px; padding: 48px 20px; }
+  .privacy-statement { padding: 48px 20px; }
+  .site-footer { flex-direction: column; align-items: flex-start; justify-content: center; padding-block: 28px; }
+  .registry-intro { display: block; padding: 48px 20px 36px; }
+  .tool-registry__row { grid-template-columns: 30px 1fr 64px; gap: 12px; padding-inline: 20px; }
+  .tool-registry__row:hover,
+  .tool-registry__row:focus-within { padding-left: 24px; }
+  .tool-registry__row > :nth-child(3),
+  .tool-registry__row > :nth-child(4) { grid-column: 2 / -1; }
+  .tool-registry__row > :nth-child(5) { grid-column: 3; grid-row: 1; }
+  .privacy-table__header { display: none; }
+  .privacy-table__row { grid-template-columns: 1fr; gap: 10px; }
+  .mobile-field-label { display: block; margin-bottom: 4px; }
+  .about-hero { grid-template-columns: 1fr; }
+  .about-hero > div:first-child { padding: 52px 20px 44px; border-right: 0; }
+  .about-hero__seal { border-top: 1px solid var(--hairline); }
+  .about-details { grid-template-columns: 1fr; }
+  .about-details > div { padding: 36px 20px; }
+  .about-details > div:first-child { border-right: 0; border-bottom: 1px solid var(--hairline); }
+  .tool-boundaries__grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 520px) {
+  .home-hero__seal .seal-key { --seal-size: 132px !important; }
+  .about-hero__seal .seal-key { --seal-size: 112px !important; }
+  .site-footer__roundel { display: none; }
+  .document-intro { padding-top: 44px; }
+  .tool-intro { padding-top: 44px; }
+  .not-found__content { padding-block: 72px 88px; }
 }

@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import AppleBadgeLink from "@/components/AppleBadgeLink";
+import AppleLogo from "@/components/AppleLogo";
 import FadeInWrapper from "@/components/FadeInWrapper";
 import FeatureGrid from "@/components/FeatureGrid";
 import FrostVisual from "@/components/FrostVisual";
+import Icon from "@/components/Icon";
 import SectionHeader from "@/components/SectionHeader";
 
 const REPO_URL = "https://github.com/Cuzeth/frost";
@@ -69,6 +70,20 @@ type Release = {
   assets: { name: string; browser_download_url: string }[];
 };
 
+function DownloadButton({ href, label }: { href: string; label: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="btn btn--primary"
+    >
+      <AppleLogo />
+      {label}
+    </a>
+  );
+}
+
 /** Latest-release download target, shared by the hero and closing CTA so the
  *  GitHub API is only hit once per page view. */
 function useLatestRelease() {
@@ -130,7 +145,7 @@ export default function Frost() {
               build, render, or agent runs unattended.
             </p>
             <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-3">
-              <AppleBadgeLink href={release.href} label={release.label} />
+              <DownloadButton href={release.href} label={release.label} />
               <a
                 href={REPO_URL}
                 target="_blank"
@@ -209,7 +224,7 @@ export default function Frost() {
               <p className="micro-label">macOS 14.6+ · No telemetry</p>
             </div>
             <div className="flex flex-col items-start gap-3">
-              <AppleBadgeLink href={release.href} label={release.label} />
+              <DownloadButton href={release.href} label={release.label} />
               <div className="flex flex-wrap gap-x-4 gap-y-1 font-mono text-control">
                 <a
                   href={RELEASES_URL}
@@ -217,10 +232,7 @@ export default function Frost() {
                   rel="noopener noreferrer"
                   className="chrome-link"
                 >
-                  All releases{" "}
-                  <span aria-hidden="true" className="index-arrow">
-                    &rarr;
-                  </span>
+                  All releases <Icon name="arrow-up-right" />
                 </a>
                 <a
                   href={REPO_URL}
@@ -228,10 +240,7 @@ export default function Frost() {
                   rel="noopener noreferrer"
                   className="chrome-link"
                 >
-                  GitHub{" "}
-                  <span aria-hidden="true" className="index-arrow">
-                    &rarr;
-                  </span>
+                  GitHub <Icon name="arrow-up-right" />
                 </a>
               </div>
             </div>

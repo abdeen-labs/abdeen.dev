@@ -30,6 +30,12 @@ export interface CatalogEntry {
   };
   /** Sitemap priority; entries without one (external apps) are omitted. */
   sitemapPriority?: number;
+  /** Plain-language boundary used by the registry and privacy page. */
+  boundary?: string;
+  privacy?: {
+    stays: string;
+    leaves: string;
+  };
 }
 
 const allApps: CatalogEntry[] = [
@@ -96,6 +102,11 @@ const allTools: CatalogEntry[] = [
       "Rebuilds the 2×2 playlist cover Apple retired. Four covers in, one square export out.",
     href: "/coverquad",
     meta: "/coverquad",
+    boundary: "Covers render locally; archive searches use the site proxy.",
+    privacy: {
+      stays: "Uploaded covers, layout choices, and the rendered export.",
+      leaves: "Search terms when you choose Cover Art Archive search.",
+    },
     sitemapPriority: 0.8,
     schema: {
       type: "WebApplication",
@@ -109,6 +120,11 @@ const allTools: CatalogEntry[] = [
       "Tests a regular expression against sample text with live match highlighting. Runs in the browser.",
     href: "/regex",
     meta: "/regex",
+    boundary: "Patterns and sample text stay in this browser.",
+    privacy: {
+      stays: "Patterns, sample text, matches, and replacement previews.",
+      leaves: "Nothing.",
+    },
     sitemapPriority: 0.9,
     schema: {
       type: "WebApplication",
@@ -122,6 +138,11 @@ const allTools: CatalogEntry[] = [
       "Interval timer for focused work. Configurable work and break durations, with session counts kept on the device.",
     href: "/pomodoro",
     meta: "/pomodoro",
+    boundary: "Timing and session counts stay in this browser.",
+    privacy: {
+      stays: "Work and break settings, countdown state, and session count.",
+      leaves: "Nothing.",
+    },
     sitemapPriority: 0.8,
     schema: {
       type: "WebApplication",
@@ -135,6 +156,11 @@ const allTools: CatalogEntry[] = [
       "Generates random passwords and diceware passphrases with stated entropy. Generation runs on the device.",
     href: "/pwgen",
     meta: "/pwgen",
+    boundary: "Generation and word lists stay on this device.",
+    privacy: {
+      stays: "Generated passwords, passphrases, settings, and entropy estimates.",
+      leaves: "Nothing.",
+    },
     sitemapPriority: 0.9,
     schema: {
       type: "WebApplication",
@@ -148,6 +174,11 @@ const allTools: CatalogEntry[] = [
       "Converts TOTP and HOTP secrets or otpauth links into authenticator-ready QR codes. The secret stays on the device.",
     href: "/2fa",
     meta: "/2fa",
+    boundary: "Secrets and QR rendering stay on this device.",
+    privacy: {
+      stays: "TOTP or HOTP secrets, otpauth links, and rendered QR codes.",
+      leaves: "Nothing.",
+    },
     sitemapPriority: 0.8,
     schema: {
       type: "WebApplication",
@@ -161,6 +192,11 @@ const allTools: CatalogEntry[] = [
       "Renders QR codes for links, WiFi, email, and phone. Styled on the device and exported as an image.",
     href: "/qr",
     meta: "/qr",
+    boundary: "Content and QR rendering stay on this device.",
+    privacy: {
+      stays: "Encoded content, style settings, and rendered QR codes.",
+      leaves: "Nothing.",
+    },
     sitemapPriority: 0.9,
     schema: {
       type: "WebApplication",

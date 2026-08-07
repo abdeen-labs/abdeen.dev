@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import Icon from "@/components/Icon";
 
 interface OUIData {
   camera: Record<string, string>;
@@ -189,9 +190,7 @@ export default function SafeStay() {
                 className="chrome-link flex min-h-12 items-center justify-between gap-3 px-4 py-3 font-mono text-control font-medium"
               >
                 <span>{dl.label}</span>
-                <span aria-hidden="true" className="index-arrow">
-                  &darr;
-                </span>
+                <Icon name="download" />
               </a>
             ))}
           </div>
@@ -232,10 +231,7 @@ export default function SafeStay() {
           rel="noopener noreferrer"
           className="chrome-link self-start font-mono text-control"
         >
-          View source on GitHub{" "}
-          <span aria-hidden="true" className="index-arrow">
-            &rarr;
-          </span>
+          View source on GitHub <Icon name="arrow-up-right" />
         </a>
       </section>
 

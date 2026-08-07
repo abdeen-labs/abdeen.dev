@@ -79,7 +79,7 @@
 }
 
 /* Clear — a destructive control floated over content: page ground,
-   lacquer outline, link-red glyph (the destructive-button recipe). */
+   warning outline and glyph. */
 .slotClear {
   position: absolute;
   top: 6px;

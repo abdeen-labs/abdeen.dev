@@ -12,8 +12,8 @@
   flex-shrink: 0;
 }
 
-/* Flag keys — compact toggles. A set flag takes the lacquer field with
-   the chalk label (the switch-on idiom); the letter itself is content,
+/* Flag keys — compact toggles. A set flag takes the Accent field with
+   the inverse label (the switch-on idiom); the letter itself is content,
    so it keeps its literal lowercase. */
 .flagBtn {
   width: 38px;
@@ -107,7 +107,7 @@
   font-feature-settings: "tnum";
 }
 
-/* Match spans — the selection idiom: chalk on lacquer (5.45:1). */
+/* Match spans use the canonical Accent and inverse-ink pairing. */
 .match {
   background: var(--signal-identity);
   color: var(--ink-inverse);

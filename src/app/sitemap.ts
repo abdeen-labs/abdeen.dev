@@ -18,6 +18,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     { url: base, lastModified, changeFrequency: 'monthly', priority: 1.0 },
+    { url: `${base}/tools`, lastModified, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${base}/privacy`, lastModified, changeFrequency: 'yearly', priority: 0.7 },
+    { url: `${base}/about`, lastModified, changeFrequency: 'yearly', priority: 0.6 },
     ...catalogUrls,
     { url: `${base}/hush/privacy`, lastModified, changeFrequency: 'yearly', priority: 0.3 },
     { url: `${base}/hush/terms`, lastModified, changeFrequency: 'yearly', priority: 0.3 },

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import FadeInWrapper from "@/components/FadeInWrapper";
+import Icon from "@/components/Icon";
 
 export const metadata: Metadata = {
   // Plain string: the root layout's title.template appends "· Abdeen Labs"
@@ -86,9 +87,7 @@ export default function HushTermsPage() {
           {/* Identification bar */}
           <div className="flex items-center justify-between gap-3 border-b border-hairline px-5 py-3 md:px-8">
             <Link href="/hush" className="micro-label chrome-link">
-              <span aria-hidden="true" className="text-signal-identity">
-                &larr;
-              </span>
+              <Icon name="arrow-left" />
               Hush
             </Link>
             <span className="micro-label">REF / TERMS</span>
@@ -123,16 +122,12 @@ export default function HushTermsPage() {
             {/* Cross-navigation */}
             <div className="mt-9 flex flex-wrap items-center gap-x-5 gap-y-2 border-t border-hairline pt-5">
               <Link href="/hush" className="micro-label chrome-link">
-                <span aria-hidden="true" className="text-signal-identity">
-                  &larr;
-                </span>
+                <Icon name="arrow-left" />
                 Hush
               </Link>
               <Link href="/hush/privacy" className="micro-label chrome-link">
                 Privacy Policy
-                <span aria-hidden="true" className="index-arrow">
-                  &rarr;
-                </span>
+                <Icon name="arrow-right" />
               </Link>
             </div>
           </div>

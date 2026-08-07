@@ -160,8 +160,8 @@ export default function PomodoroTimer() {
         ))}
       </div>
 
-      {/* Sunken readout field — the countdown is this screen's one live
-          value: phosphor while running, primary ink when idle. */}
+      {/* Sunken readout field — the countdown uses Accent while running
+          and primary ink while idle. */}
       <div className="tool-stage w-full">
         <div className={styles.timerWrap} role="timer" aria-label={`${MODE_LABELS[mode]}: ${minutes} minutes and ${seconds} seconds remaining`}>
           <svg className={styles.ring} viewBox="0 0 260 260" aria-hidden="true">

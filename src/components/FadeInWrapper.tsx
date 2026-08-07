@@ -12,8 +12,7 @@ interface FadeInWrapperProps {
   eager?: boolean;
 }
 
-/** Entrance confirmation for content arriving into view. Axis motion:
- *  panel-large duration, the flat easing, a short travel, no blur. */
+/** Entrance confirmation for content arriving into view: a short, restrained travel. */
 export default function FadeInWrapper({ children, delay = 0, direction = 'up', eager = false }: FadeInWrapperProps) {
   // Framer Motion drives these styles from JS, so the global CSS
   // prefers-reduced-motion rules never apply — gate here instead.

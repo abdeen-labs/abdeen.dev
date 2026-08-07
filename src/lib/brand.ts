@@ -9,7 +9,7 @@
  * `artifacts.marketing`. The brand repo remains the source.
  */
 
-const releaseVersion = "3.5";
+const releaseVersion = "3.11";
 const releaseIssued = "2026-08";
 
 /**
@@ -18,7 +18,7 @@ const releaseIssued = "2026-08";
  */
 export const release = {
   version: releaseVersion,
-  label: "Axis",
+  label: "Nightfield",
   issued: releaseIssued,
 } as const;
 
@@ -30,13 +30,15 @@ export const identity = {
   positioning: "Private software. Clear boundaries.",
   description:
     "Abdeen Labs makes private software. Its products work without accounts, collect as little as possible, and make it clear what stays on your device and what leaves it. The source is public.",
+  founder:
+    "Jaafar Abdeen, a Jordanian Palestinian engineer from al-Khalil",
 } as const;
 
 const marketingControlMark = `${release.label.toUpperCase()}//OPEN`;
 
 export const marketing = {
   controlMark: marketingControlMark,
-  /** Continuous public sites may carry the Axis name once, without record metadata. */
+  /** Continuous public sites may carry the Nightfield name once. */
   topChrome: marketingControlMark,
   footer: `${identity.studio} · Private software`,
 } as const;

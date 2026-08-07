@@ -24,8 +24,8 @@ export const SEAL_KEY = {
   viewBox: [0, 0, 40, 40],
   cut: 10.4,
   line: 1,
-  markScale: 0.32,
-  // Lacquer hairline as a true ring (even-odd keyhole); paint after the field.
+  markScale: 0.36,
+  // Accent hairline as a true ring (even-odd keyhole); paint after the field.
   ringPathEvenOdd: "M10.4 0H40.0V40.0H0V10.4ZM10.81 1.0H39.0V39.0H1.0V10.81Z",
   // Sunken field; paint first, exactly fills the ring's hole.
   fieldPath: "M10.81 1.0H39.0V39.0H1.0V10.81Z",

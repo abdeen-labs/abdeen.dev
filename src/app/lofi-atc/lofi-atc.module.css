@@ -28,7 +28,7 @@
   height: 3rem;
 }
 
-/* VU bars are furniture, not phosphor: neutral ink, square, driven by
+/* VU bars are neutral furniture: square and driven by
    the analyser. The token duration acts as a low-pass on frame updates. */
 .bar {
   width: 3px;
@@ -117,7 +117,7 @@
 }
 
 /* globals' .range declares `outline: none` later in the cascade than the
-   base :focus-visible rule, which swallows the lacquer ring on sliders.
+   base :focus-visible rule, which swallows the focus ring on sliders.
    Restore the focus ring here until the shared .range rule handles it. */
 .sliderGroup :global(.range):focus-visible {
   outline: var(--focus-ring);

@@ -100,14 +100,17 @@ export default function LofiAtcRadio() {
 
   // Restore and persist volume levels across visits
   useEffect(() => {
-    try {
-      const savedLofi = parseFloat(localStorage.getItem("lofi-atc:lofiVol") ?? "");
-      const savedAtc = parseFloat(localStorage.getItem("lofi-atc:atcVol") ?? "");
-      if (savedLofi >= 0 && savedLofi <= 1) setLofiVol(savedLofi);
-      if (savedAtc >= 0 && savedAtc <= 1) setAtcVol(savedAtc);
-    } catch {
-      // storage unavailable (private mode) — keep defaults
-    }
+    const frame = requestAnimationFrame(() => {
+      try {
+        const savedLofi = parseFloat(localStorage.getItem("lofi-atc:lofiVol") ?? "");
+        const savedAtc = parseFloat(localStorage.getItem("lofi-atc:atcVol") ?? "");
+        if (savedLofi >= 0 && savedLofi <= 1) setLofiVol(savedLofi);
+        if (savedAtc >= 0 && savedAtc <= 1) setAtcVol(savedAtc);
+      } catch {
+        // storage unavailable (private mode) — keep defaults
+      }
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
@@ -119,13 +122,10 @@ export default function LofiAtcRadio() {
     }
   }, [lofiVol, atcVol]);
 
-  // Session clock — feeds the one phosphor readout. Runs only while the
+  // Session clock feeds the live readout. It runs only while the
   // session is open; on stop the readout leaves the screen with it.
   useEffect(() => {
-    if (!playing) {
-      setElapsedSec(0);
-      return;
-    }
+    if (!playing) return;
     const startedAt = Date.now();
     const id = setInterval(() => {
       setElapsedSec(Math.floor((Date.now() - startedAt) / 1000));
@@ -148,10 +148,13 @@ export default function LofiAtcRadio() {
   }, []);
 
   useEffect(() => {
-    const ua = navigator.userAgent;
-    if (/Safari/.test(ua) && !/Chrome/.test(ua) && !/Chromium/.test(ua)) {
-      setIsSafari(true);
-    }
+    const frame = requestAnimationFrame(() => {
+      const ua = navigator.userAgent;
+      if (/Safari/.test(ua) && !/Chrome/.test(ua) && !/Chromium/.test(ua)) {
+        setIsSafari(true);
+      }
+    });
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   const getAudioContext = useCallback(() => {
@@ -290,6 +293,7 @@ export default function LofiAtcRadio() {
       const atc = createAudio(ATC_SOURCE.url, atcVol, setAtcStatus, atcGainRef);
       lofiRef.current = lofi;
       atcRef.current = atc;
+      setElapsedSec(0);
       lofi.play().catch(() => setLofiStatus("error"));
       atc.play().catch(() => setAtcStatus("error"));
       setPlaying(true);
@@ -305,6 +309,7 @@ export default function LofiAtcRadio() {
     lofiGainRef.current = null;
     atcGainRef.current = null;
     setPlaying(false);
+    setElapsedSec(0);
     setLofiStatus("idle");
     setAtcStatus("idle");
     stopVisualizer();
@@ -365,7 +370,7 @@ export default function LofiAtcRadio() {
     [],
   );
 
-  // The word carries the state; jade only for Live, ink for the rest. An
+  // The word carries the state; Accent only for Live, ink for the rest. An
   // error gets the hazard stripe beside it, never a red fill or button.
   const stateClass = (s: StreamStatus) =>
     s === "live" ? styles.stateLive : s === "error" ? styles.stateFault : undefined;
@@ -377,8 +382,8 @@ export default function LofiAtcRadio() {
 
   return (
     <div className={styles.container}>
-      {/* Signal stage — a sunken readout field. The session clock is the
-          screen's one phosphor element and leaves with the stream. */}
+      {/* Signal stage — a sunken readout field. The session clock
+          leaves with the stream. */}
       <div className={`tool-stage ${styles.stage}`}>
         <div className={styles.waveWrap} aria-hidden="true">
           {Array.from({ length: BARS }).map((_, i) => (

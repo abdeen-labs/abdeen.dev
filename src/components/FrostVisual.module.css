@@ -1,12 +1,5 @@
-/* Frost's product surface. The desktop and overlay are expressed through
-   theme roles so light stays light and dark stays dark.
-
-   Value separation, not shadow, does the depth work (Hard Rule #14). The
-   wallpaper sits mid-ramp and the windows take --surface-page, which is
-   the extreme of each mode: near-black windows on a lighter desktop in
-   dark, bright windows on a deeper desktop in light. That is how the two
-   modes actually look on a Mac, and it survives the blur — pairing two
-   adjacent ramp steps did not. */
+/* Flat schematic of Frost. Product behavior is communicated through value,
+   borders, and labels. */
 
 .visual {
   position: relative;
@@ -14,46 +7,13 @@
   aspect-ratio: 4 / 3;
   container-type: inline-size;
   min-width: 0;
-  margin: 0;
   overflow: hidden;
-  isolation: isolate;
   border: 1px solid var(--hairline);
-  border-radius: var(--radius-shell);
-  /* The wallpaper lives on the shell, not on the blurred layer: a gradient
-     has no edges to soften, and keeping it here means the blur below can
-     smear off-frame without dragging the wallpaper's own edges inward. */
-  background:
-    radial-gradient(
-      86% 64% at 76% 8%,
-      color-mix(in srgb, var(--signal-identity) 26%, transparent),
-      transparent 64%
-    ),
-    radial-gradient(
-      70% 58% at 6% 96%,
-      color-mix(in srgb, var(--signal-link) 13%, transparent),
-      transparent 70%
-    ),
-    linear-gradient(158deg, var(--surface-band), var(--surface-sunken));
+  background: var(--surface-band);
   color: var(--ink-primary);
 }
 
-/* ─── The desktop underneath ─────────────────────────────────────── */
-
-/* The blur is a plain `filter` on the windows themselves rather than a
-   `backdrop-filter` on the pane above them. backdrop-filter silently drew
-   nothing here — the tint landed and the blur did not — and there is no
-   reason to depend on it: nothing between these windows and the plate
-   needs to stay sharp. The container unit keeps the blur proportional, so
-   the compact instance is not over-frosted; the px value is the fallback
-   where a container unit is refused inside filter(). */
-.desktop {
-  position: absolute;
-  inset: 0;
-  filter: blur(12px) saturate(0.82);
-  filter: blur(2.2cqi) saturate(0.82);
-}
-
-/* ─── Windows ────────────────────────────────────────────────────── */
+.desktop { position: absolute; inset: 0; }
 
 .window {
   position: absolute;
@@ -61,23 +21,11 @@
   overflow: hidden;
   flex-direction: column;
   border: 1px solid var(--hairline-strong);
-  border-radius: var(--radius-plate);
-  background: color-mix(in srgb, var(--surface-page) 94%, transparent);
+  background: var(--surface-card);
 }
 
-.windowBack {
-  top: 11%;
-  left: 5%;
-  width: 62%;
-  height: 62%;
-}
-
-.windowFront {
-  right: 4%;
-  bottom: 9%;
-  width: 44%;
-  height: 46%;
-}
+.windowBack { top: 11%; left: 5%; width: 62%; height: 62%; }
+.windowFront { right: 4%; bottom: 9%; width: 44%; height: 46%; }
 
 .titleBar {
   display: flex;
@@ -85,125 +33,34 @@
   max-height: 22px;
   align-items: center;
   padding-inline: 2.4cqi;
-  border-bottom: 1px solid color-mix(in srgb, var(--hairline) 70%, transparent);
-  background: color-mix(in srgb, var(--surface-sunken) 72%, transparent);
+  border-bottom: 1px solid var(--hairline);
+  background: var(--surface-sunken);
 }
 
-.dots {
-  display: flex;
-  gap: 1.4cqi;
-}
-
-.dots > span {
-  width: 1.7cqi;
-  max-width: 7px;
-  aspect-ratio: 1;
-  border-radius: var(--radius-round);
-  background: var(--ink-structure);
-}
-
-.dots > span:first-child {
-  background: var(--signal-identity);
-}
-
-.windowBody {
-  display: flex;
-  min-height: 0;
-  flex: 1;
-}
+.dots { display: flex; gap: 1.4cqi; }
+.dots > span { width: 1.7cqi; max-width: 7px; aspect-ratio: 1; border-radius: 50%; background: var(--ink-structure); }
+.dots > span:first-child { background: var(--signal-identity); }
+.windowBody { display: flex; min-height: 0; flex: 1; }
 
 .sidebar {
   display: flex;
   width: 28%;
   flex-direction: column;
-  justify-content: flex-start;
   gap: 3.2cqi;
   padding: 3cqi 2.4cqi;
-  border-right: 1px solid color-mix(in srgb, var(--hairline) 70%, transparent);
-  background: color-mix(in srgb, var(--surface-sunken) 55%, transparent);
+  border-right: 1px solid var(--hairline);
+  background: var(--surface-sunken);
 }
 
-.content {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 3.4cqi;
-  padding: 3.4cqi 3cqi;
-}
+.content { display: flex; flex: 1; flex-direction: column; gap: 3.4cqi; padding: 3.4cqi 3cqi; }
+.row { height: 1.4cqi; max-height: 6px; flex: none; background: var(--ink-structure); }
+.rowMarked { background: var(--signal-identity); }
+.tiles { display: grid; flex: 1; grid-template-columns: repeat(3, 1fr); gap: 2.4cqi; padding: 3cqi; }
+.tiles > span { background: var(--ink-structure); }
+.tiles > span:nth-child(4) { background: var(--signal-identity); }
 
-/* Text stands in as ruled lines. They exist to give the blur something to
-   smear — legibility is the plate's job, not theirs. */
-.row {
-  height: 1.4cqi;
-  max-height: 6px;
-  flex: none;
-  border-radius: var(--radius-round);
-  background: color-mix(in srgb, var(--ink-primary) 36%, transparent);
-}
-
-.rowMarked {
-  background: color-mix(in srgb, var(--signal-identity) 70%, transparent);
-}
-
-.tiles {
-  display: grid;
-  flex: 1;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2.4cqi;
-  padding: 3cqi;
-}
-
-.tiles > span {
-  border-radius: var(--radius-control);
-  background: color-mix(in srgb, var(--ink-primary) 22%, transparent);
-}
-
-.tiles > span:nth-child(4) {
-  background: color-mix(in srgb, var(--signal-link) 55%, transparent);
-}
-
-/* ─── The frost ──────────────────────────────────────────────────── */
-
-.frost {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  background: linear-gradient(
-    170deg,
-    color-mix(in srgb, var(--surface-page) 18%, transparent),
-    color-mix(in srgb, var(--surface-page) 34%, transparent)
-  );
-  box-shadow: inset 0 1px 0 var(--edge-light);
-}
-
-/* The crystal — a rimed pane is never optically clean. Deliberately below
-   the threshold of anything you would call a pattern. */
-.frost::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0.055;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-/* The wall — the ice deepens where the prompt sits, so the plate reads
-   against a settled field rather than against whatever window it happens
-   to cover. Masked to a soft edge: a hard rectangle here would look like
-   a second card behind the first. */
-.wall {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 3;
-  width: min(96%, 560px);
-  aspect-ratio: 3 / 2;
-  transform: translate(-50%, -50%);
-  background: color-mix(in srgb, var(--surface-page) 26%, transparent);
-  mask-image: radial-gradient(closest-side, #000 40%, transparent 100%);
-  -webkit-mask-image: radial-gradient(closest-side, #000 40%, transparent 100%);
-}
-
-/* ─── The plate ──────────────────────────────────────────────────── */
+.frost { position: absolute; inset: 0; z-index: 2; background: color-mix(in srgb, var(--surface-page) 72%, transparent); }
+.wall { position: absolute; inset: 18% 12%; z-index: 3; border: 1px solid var(--hairline); background: var(--surface-page); }
 
 .plate {
   position: absolute;
@@ -215,12 +72,10 @@
   min-width: min(216px, calc(100% - 40px));
   transform: translate(-50%, -50%);
   flex-direction: column;
-  align-items: stretch;
   gap: clamp(12px, 3.4cqi, 18px);
   padding: clamp(16px, 4.6cqi, 24px);
   border: 1px solid var(--hairline-strong);
-  border-radius: var(--radius-plate);
-  background: color-mix(in srgb, var(--surface-page) 90%, transparent);
+  background: var(--surface-page);
 }
 
 .plateHead {
@@ -238,71 +93,12 @@
   color: var(--ink-dim);
 }
 
-/* The state pins to the trailing edge; it is the one live value here. */
-.plateState {
-  margin-left: auto;
-  color: var(--ink-secondary);
-}
+.plateState { margin-left: auto; color: var(--ink-secondary); }
+.plateTitle { display: flex; flex-direction: column; font-family: var(--font-display-stack); font-size: clamp(24px, 8cqi, 42px); font-weight: 600; line-height: 0.94; color: var(--ink-primary); }
+.period { color: var(--signal-identity); }
+.plateHint { display: flex; align-items: center; gap: var(--space-2); font-family: var(--font-mono-stack); font-size: clamp(8px, 2.6cqi, 10px); font-weight: 500; line-height: 1; letter-spacing: var(--tracking-micro); text-transform: uppercase; color: var(--ink-secondary); }
+.fingerprint { flex: none; color: var(--ink-primary); }
+.compact { height: 100%; min-height: 310px; aspect-ratio: auto; }
 
-.plateTitle {
-  display: flex;
-  flex-direction: column;
-  font-family: var(--font-display-stack);
-  font-size: clamp(24px, 8cqi, 42px);
-  font-weight: 900;
-  line-height: 0.86;
-  letter-spacing: var(--tracking-display);
-  text-transform: uppercase;
-  color: var(--ink-primary);
-}
-
-.period {
-  color: var(--signal-identity);
-}
-
-.plateHint {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  font-family: var(--font-mono-stack);
-  font-size: clamp(8px, 2.6cqi, 10px);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: var(--tracking-micro);
-  text-transform: uppercase;
-  color: var(--ink-secondary);
-}
-
-/* The unlock is live, so the glyph takes the active ink — not lacquer:
-   the icon is an affordance, not the signal itself. */
-.fingerprint {
-  width: clamp(14px, 4.4cqi, 18px);
-  height: auto;
-  flex: none;
-  color: var(--ink-primary);
-}
-
-/* ─── Fitting ────────────────────────────────────────────────────── */
-
-.compact {
-  height: 100%;
-  min-height: 310px;
-  aspect-ratio: auto;
-}
-
-@media (max-width: 767px) {
-  .compact {
-    min-height: 0;
-    aspect-ratio: 4 / 3;
-  }
-}
-
-@media (max-width: 420px) {
-  .visual {
-    aspect-ratio: 1 / 1;
-  }
-
-  .plate {
-    min-width: min(200px, calc(100% - 28px));
-  }
-}
+@media (max-width: 767px) { .compact { min-height: 0; aspect-ratio: 4 / 3; } }
+@media (max-width: 420px) { .visual { aspect-ratio: 1 / 1; } .plate { min-width: min(200px, calc(100% - 28px)); } }

@@ -3,9 +3,10 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import AppleBadgeLink, { APPLE_PATH } from "@/components/AppleBadgeLink";
+import AppleBadgeLink from "@/components/AppleBadgeLink";
 import FadeInWrapper from "@/components/FadeInWrapper";
 import FeatureGrid from "@/components/FeatureGrid";
+import Icon from "@/components/Icon";
 import SectionHeader from "@/components/SectionHeader";
 
 const features = [
@@ -73,9 +74,6 @@ function AppStoreButton() {
   if (!APP_STORE_URL) {
     return (
       <span className="chip">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-          <path d={APPLE_PATH} />
-        </svg>
         Coming to the App Store
       </span>
     );
@@ -160,7 +158,7 @@ export default function Hush() {
                 rel="noopener noreferrer"
                 className="chrome-link font-mono text-control"
               >
-                View source &rarr;
+                View source <Icon name="arrow-up-right" />
               </a>
             </div>
             <p className="micro-label">
@@ -243,7 +241,7 @@ export default function Hush() {
                   rel="noopener noreferrer"
                   className="chrome-link font-mono text-control"
                 >
-                  GitHub &rarr;
+                  GitHub <Icon name="arrow-up-right" />
                 </a>
                 <Link
                   href="/hush/privacy"

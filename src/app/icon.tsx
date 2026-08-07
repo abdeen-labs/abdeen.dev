@@ -15,19 +15,19 @@ import { MARK } from '@/lib/seal-geometry';
 export const size = { width: 32, height: 32 };
 export const contentType = 'image/png';
 
-// Key geometry at 32px: 26% chamfer, 1px lacquer hairline (floored),
-// mark ink at 0.32 × plate, centred on its ink bbox.
+// Key geometry at 32px: 26% chamfer, 1px Accent hairline (floored),
+// mark ink at 0.36 × plate, centred on its ink bbox.
 const CUT = 32 * 0.26;
 const LINE = 1;
 const INNER_CUT = CUT + LINE * 0.41;
 
 // Sunken field; paint first, exactly fills the ring's hole.
 const FIELD = `M${INNER_CUT} ${LINE}H${32 - LINE}V${32 - LINE}H${LINE}V${INNER_CUT}Z`;
-// Lacquer hairline as a true ring (even-odd keyhole); paint after the field.
+// Accent hairline as a true ring (even-odd keyhole); paint after the field.
 const RING = `M${CUT} 0H32V32H0V${CUT}Z${FIELD}`;
 
 const [MX0, MY0, MX1, MY1] = MARK.bbox;
-const MARK_SCALE = (32 * 0.32) / (MY1 - MY0);
+const MARK_SCALE = (32 * 0.36) / (MY1 - MY0);
 const MARK_TX = 16 - MARK_SCALE * ((MX0 + MX1) / 2);
 const MARK_TY = 16 - MARK_SCALE * ((MY0 + MY1) / 2);
 
@@ -41,12 +41,12 @@ export default function Icon() {
           viewBox="0 0 32 32"
           xmlns="http://www.w3.org/2000/svg"
         >
-          <path d={FIELD} fill="#0C1017" />
-          <path d={RING} fillRule="evenodd" fill="#CE2020" />
+          <path d={FIELD} fill="#00100A" />
+          <path d={RING} fillRule="evenodd" fill="#1FB977" />
           <g
             transform={`translate(${MARK_TX} ${MARK_TY}) scale(${MARK_SCALE})`}
           >
-            <path d={MARK.d} fill="#CE2020" />
+            <path d={MARK.d} fill="#F0FAF5" />
           </g>
         </svg>
       </div>

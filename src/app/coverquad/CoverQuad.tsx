@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useCallback, useEffect, type DragEvent, type ChangeEvent, type KeyboardEvent } from 'react';
-import { Add, Search, Upload } from '@carbon/icons-react';
+import Icon from '@/components/Icon';
 import styles from './coverquad.module.css';
 
 // --- Types ---
@@ -329,7 +329,7 @@ export default function CoverQuad() {
               aria-label={slot ? `Slot ${i + 1}: ${slot.label} · activate to replace` : `Slot ${i + 1}: empty · activate to add cover art`}
             >
               <div className={styles.slotEmpty}>
-                <Add size={32} />
+                <Icon name="plus" size={32} />
               </div>
               {slot && (
                 // eslint-disable-next-line @next/next/no-img-element
@@ -417,11 +417,11 @@ export default function CoverQuad() {
               <div className={styles.modalTitle}>Add cover art</div>
               <div className={styles.choiceButtons}>
                 <button className={styles.choiceBtn} onClick={handleUploadChoice}>
-                  <Upload size={28} />
+                  <Icon name="upload" size={28} />
                   Upload image
                 </button>
                 <button className={styles.choiceBtn} onClick={handleSearchChoice}>
-                  <Search size={28} />
+                  <Icon name="search" size={28} />
                   Search cover art
                 </button>
               </div>
