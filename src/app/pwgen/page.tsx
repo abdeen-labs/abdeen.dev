@@ -26,13 +26,24 @@ export default function PasswordGeneratorPage() {
     >
       <div className="tool-note" role="note">
         <span className="page-kicker">For show</span>
-        <p>
-          This recreates the memorable-password generator Apple retired from
-          Keychain — rebuilt here because it was missed, not because it should
-          be used. Passwords in this format are weak by modern standards,
-          which is part of why it was retired. Enjoy the format; protect real
-          accounts with your password manager&apos;s generator.
-        </p>
+        <div className="tool-note__grid">
+          <div>
+            <h3>What this is</h3>
+            <p>
+              A recreation of the memorable-password generator Apple retired
+              from Keychain — rebuilt because it was missed, not because it
+              should be used.
+            </p>
+          </div>
+          <div>
+            <h3>Why not to rely on it</h3>
+            <p>
+              Passwords in this format are weak by modern standards, which is
+              part of why Apple retired it. Protect real accounts with your
+              password manager&apos;s generator.
+            </p>
+          </div>
+        </div>
       </div>
       <PasswordGenerator />
     </ToolPageShell>

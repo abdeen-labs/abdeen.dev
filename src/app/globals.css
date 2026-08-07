@@ -2524,17 +2524,33 @@ a:focus-visible [data-icon="arrow-up-right"] {
 .privacy-table__row p { font-size: 13.5px; line-height: 1.6; color: var(--ink-secondary); }
 .mobile-field-label { display: none; }
 
-/* Quiet framed aside inside a tool interface — a statement of intent, not
-   an alarm, so it stays on hairlines and ink rather than hazard red. */
+/* Framed aside inside a tool interface. Hazard enters the one way the
+   brand permits — as a stripe on the leading edge — while the note itself
+   stays on hairlines and ink. */
 .tool-note {
   margin-bottom: 28px;
-  padding: 18px 20px;
+  padding: 18px 24px 24px;
   border: 1px solid var(--hairline-strong);
+  border-left: 3px solid var(--signal-alarm);
 }
 
-.tool-note p {
-  max-width: 70ch;
-  margin-top: 8px;
+.tool-note__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 16px;
+}
+
+.tool-note__grid h3 {
+  margin-bottom: 10px;
+  font-family: var(--font-mono-stack);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+.tool-note__grid p {
   font-size: 13.5px;
   line-height: 1.6;
   color: var(--ink-secondary);
@@ -2735,6 +2751,7 @@ a:focus-visible [data-icon="arrow-up-right"] {
   .about-details > div { padding: 36px 20px; }
   .about-details > div:first-child { border-right: 0; border-bottom: 1px solid var(--hairline); }
   .tool-boundaries__grid { grid-template-columns: 1fr; }
+  .tool-note__grid { grid-template-columns: 1fr; gap: 16px; }
 }
 
 @media (max-width: 520px) {
