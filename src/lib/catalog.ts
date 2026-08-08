@@ -70,6 +70,21 @@ const allApps: CatalogEntry[] = [
     },
   },
   {
+    title: "Pocketful",
+    description:
+      "Self-hosted Apple Wallet pass designer for iPhone. Builds passes visually, signs them with your server, and opens Wallet's native add-pass sheet.",
+    href: "/pocketful",
+    meta: "iOS · Self-hosted",
+    sitemapPriority: 0.9,
+    schema: {
+      type: "MobileApplication",
+      applicationCategory: "DesignApplication",
+      operatingSystem: "iOS",
+      description:
+        "Self-hosted Apple Wallet pass designer for iPhone with visual editing, server-side signing, over-the-air updates, and an MCP companion.",
+    },
+  },
+  {
     title: "SafeStay Scanner",
     description:
       "Network inspection CLI for rentals. Scans the local network, resolves MAC vendors, and flags camera-class devices.",

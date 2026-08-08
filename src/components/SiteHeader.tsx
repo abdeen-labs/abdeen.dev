@@ -20,6 +20,7 @@ const productRoutes = new Set([
   "hush",
   "icon",
   "lofi-atc",
+  "pocketful",
   "pomodoro",
   "pwgen",
   "qr",

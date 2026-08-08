@@ -39,6 +39,9 @@ export const metadata: Metadata = {
     "Hush",
     "focus sounds",
     "iOS app",
+    "Pocketful",
+    "Apple Wallet pass designer",
+    "self-hosted pass signing",
     // Disabled while SafeStay is off (enabled: false in src/lib/catalog.ts)
     // "SafeStay",
     // "hidden camera detector",
