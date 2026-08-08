@@ -6,9 +6,9 @@
   min-width: 0;
   place-items: center;
   overflow: hidden;
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius-shell);
-  background: var(--surface-sunken);
+  background:
+    linear-gradient(90deg, transparent 49.9%, var(--hairline) 50%, transparent 50.1%),
+    linear-gradient(transparent 49.9%, var(--hairline) 50%, transparent 50.1%);
   color: var(--ink-primary);
 }
 
@@ -19,6 +19,21 @@
   pointer-events: none;
   background: color-mix(in srgb, var(--signal-identity) 8%, transparent);
   filter: blur(64px);
+}
+
+.visual::after {
+  position: absolute;
+  right: 0;
+  bottom: 18px;
+  color: var(--surface-sunken);
+  font-family: var(--font-mono-stack);
+  font-size: clamp(82px, 11vw, 138px);
+  font-weight: 500;
+  letter-spacing: -0.08em;
+  line-height: 0.75;
+  content: "LOCK";
+  pointer-events: none;
+  user-select: none;
 }
 
 .screen {

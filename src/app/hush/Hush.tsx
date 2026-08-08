@@ -5,36 +5,34 @@ import Image from "next/image";
 import Link from "next/link";
 import AppleBadgeLink from "@/components/AppleBadgeLink";
 import FadeInWrapper from "@/components/FadeInWrapper";
-import FeatureGrid from "@/components/FeatureGrid";
 import Icon from "@/components/Icon";
 import SectionHeader from "@/components/SectionHeader";
+import styles from "./hush.module.css";
 
-const features = [
+const mixSteps = [
   {
-    label: "Noise generators",
-    detail: "White, pink, brown, and gray noise, synthesized in real time.",
+    number: "01",
+    mode: "Generate",
+    label: "Noise + tone",
+    detail: "White, pink, brown, gray, binaural, isochronic, and monaural.",
+    src: "/hush/screen-2.png",
+    alt: "Hush sound picker with imported audio and real-time noise generators",
   },
   {
-    label: "Binaural beats",
-    detail:
-      "Alpha, SMR, Beta, and Gamma ranges with a configurable carrier frequency.",
+    number: "02",
+    mode: "Layer",
+    label: "Build the scene",
+    detail: "Up to six sources, independent volume, and a focus timer.",
+    src: "/hush/screen-1.png",
+    alt: "Hush scene picker playing the Calm mix with pink noise and morning birdsong",
   },
   {
-    label: "Isochronic tones",
-    detail: "Brainwave entrainment with isochronic and monaural beats.",
-  },
-  {
-    label: "Recorded ambiences",
-    detail:
-      "80+ recordings: rain, fire, ocean, birds, cafe, train, forest, and more. Bundled with the app and played offline.",
-  },
-  {
-    label: "Layer and mix",
-    detail: "Combine up to 6 sounds with independent volume controls.",
-  },
-  {
-    label: "Focus timer",
-    detail: "Built-in timer with fade-out for focused work sessions.",
+    number: "03",
+    mode: "Listen",
+    label: "80+ ambiences",
+    detail: "Rain, fire, ocean, birds, cafe, train, forest, and more—offline.",
+    src: "/hush/screen-3.png",
+    alt: "Hush ambient library with rain, ocean, fire, nature, and city categories",
   },
 ];
 
@@ -53,19 +51,10 @@ const presets = [
 const REPO_URL = "https://github.com/cuzeth/hush";
 const APP_STORE_URL: string | null = "https://apps.apple.com/us/app/hush-focus-sounds/id6761935532";
 
-const screenshots = [
-  {
-    src: "/hush/screen-1.png",
-    alt: "Hush scene picker playing the Calm mix with pink noise and morning birdsong",
-  },
-  {
-    src: "/hush/screen-2.png",
-    alt: "Hush sound picker with imported audio and real-time noise generators",
-  },
-  {
-    src: "/hush/screen-3.png",
-    alt: "Hush ambient sound library organized into rain, ocean, fire, nature, and city categories",
-  },
+const studioFacts = [
+  { value: "6", label: "Simultaneous layers" },
+  { value: "80+", label: "Bundled recordings" },
+  { value: "Offline", label: "After download" },
 ];
 
 /** Primary conversion action, shared by the hero and closing CTA. Falls back
@@ -81,20 +70,21 @@ function AppStoreButton() {
   return <AppleBadgeLink href={APP_STORE_URL} label="Download on the App Store" />;
 }
 
-function ScreenshotImage({ src, alt }: { src: string; alt: string }) {
+function HeroPhone() {
   const [loaded, setLoaded] = useState(false);
   return (
-    <div className="relative h-[480px] w-[222px] flex-shrink-0 overflow-hidden rounded-plate border border-hairline bg-surface-sunken">
+    <div className={styles.heroStage}>
+      <span aria-hidden="true">MIX</span>
       <Image
-        src={src}
-        alt={alt}
-        width={222}
-        height={480}
-        sizes="222px"
-        className={`h-full w-full object-cover transition-opacity duration-[var(--duration-reveal)] ease-[var(--ease-flat)] ${loaded ? "opacity-100" : "opacity-0"}`}
+        src="/hush/screen-1.png"
+        alt="Hush app interface"
+        width={244}
+        height={530}
+        preload
+        sizes="(min-width: 1024px) 244px, 280px"
+        className={`${styles.heroPhone} ${loaded ? styles.imageLoaded : ""}`}
         onLoad={() => setLoaded(true)}
         ref={(img) => {
-          // Cached images can finish before hydration attaches onLoad
           if (img?.complete) setLoaded(true);
         }}
       />
@@ -102,27 +92,53 @@ function ScreenshotImage({ src, alt }: { src: string; alt: string }) {
   );
 }
 
-/** Hero device: the first screenshot mounted on a simple plate. */
-function HeroPhone() {
-  const [loaded, setLoaded] = useState(false);
+function MixStudio() {
+  const [activeStep, setActiveStep] = useState(0);
+
   return (
-    <div className="relative mx-auto w-full max-w-[280px] lg:ml-auto lg:mr-0">
-      <div className="plate p-2.5">
-        <div className="overflow-hidden border border-hairline">
-          <Image
-            src="/hush/screen-1.png"
-            alt="Hush app interface"
-            width={244}
-            height={528}
-            preload
-            sizes="(min-width: 1024px) 244px, 280px"
-            className={`block h-auto w-full transition-opacity duration-[var(--duration-reveal)] ease-[var(--ease-flat)] ${loaded ? "opacity-100" : "opacity-0"}`}
-            onLoad={() => setLoaded(true)}
-            ref={(img) => {
-              if (img?.complete) setLoaded(true);
-            }}
-          />
+    <div className={styles.mixStudio}>
+      <div className={styles.studioStage}>
+        <div className={styles.studioScreens} aria-live="polite">
+          {mixSteps.map((step, index) => (
+            <Image
+              key={step.number}
+              src={step.src}
+              alt={activeStep === index ? step.alt : ""}
+              aria-hidden={activeStep !== index}
+              width={286}
+              height={621}
+              sizes="(max-width: 700px) 240px, 286px"
+              className={`${styles.studioScreen} ${
+                activeStep === index ? styles.studioScreenActive : ""
+              }`}
+            />
+          ))}
         </div>
+        <span className={styles.studioPosition} aria-hidden="true">
+          {mixSteps[activeStep].number} / 03
+        </span>
+      </div>
+
+      <div className={styles.mixControls} role="tablist" aria-label="Hush mix stages">
+        {mixSteps.map((step, index) => (
+          <button
+            key={step.number}
+            type="button"
+            role="tab"
+            aria-selected={activeStep === index}
+            className={activeStep === index ? styles.mixControlActive : ""}
+            onClick={() => setActiveStep(index)}
+            onFocus={() => setActiveStep(index)}
+          >
+            <span className={styles.mixNumber}>{step.number}</span>
+            <span className={styles.mixCopy}>
+              <span>{step.mode}</span>
+              <strong>{step.label}</strong>
+              <small>{step.detail}</small>
+            </span>
+            <span className={styles.mixArrow} aria-hidden="true">→</span>
+          </button>
+        ))}
       </div>
     </div>
   );
@@ -146,9 +162,8 @@ export default function Hush() {
               Hush<span className="text-signal-identity">.</span>
             </h1>
             <p className="max-w-xl text-lede text-ink-secondary">
-              Sound studio for iOS. Hush generates noise and binaural beats in
-              real time and layers 80+ recorded ambiences into one mix. Up to
-              6 sources run together, all on the device.
+              Layer live noise, beats, and 80+ offline ambiences. Up to six
+              sounds, all on-device.
             </p>
             <div className="mt-1 flex flex-wrap items-center gap-x-5 gap-y-3">
               <AppStoreButton />
@@ -172,44 +187,41 @@ export default function Hush() {
         </FadeInWrapper>
       </section>
 
-      {/* Screenshots */}
-      <FadeInWrapper direction="up">
-        <section>
-          <SectionHeader label="Screenshots" count={screenshots.length} />
-          <div
-            className="flex gap-4 overflow-x-auto pb-4"
-            tabIndex={0}
-            role="region"
-            aria-label="App screenshots, scrollable"
-          >
-            {screenshots.map((screenshot) => (
-              <ScreenshotImage key={screenshot.src} {...screenshot} />
-            ))}
-          </div>
-        </section>
-      </FadeInWrapper>
-
-      {/* Features Grid */}
+      {/* Mix studio */}
       <section>
         <FadeInWrapper direction="up">
-          <SectionHeader label="Features" count={features.length} />
+          <SectionHeader label="Build a mix" count={mixSteps.length} />
         </FadeInWrapper>
         <FadeInWrapper direction="up" delay={0.05}>
-          <FeatureGrid items={features} />
+          <MixStudio />
         </FadeInWrapper>
       </section>
+
+      {/* Studio facts */}
+      <FadeInWrapper direction="up">
+        <section className={styles.studioFacts} aria-label="Hush facts">
+          {studioFacts.map((fact) => (
+            <div key={fact.label}>
+              <strong>{fact.value}</strong>
+              <span>{fact.label}</span>
+            </div>
+          ))}
+        </section>
+      </FadeInWrapper>
 
       {/* Presets */}
       <FadeInWrapper direction="up">
         <section>
           <SectionHeader label="Built-in presets" count={presets.length} />
-          <div className="flex flex-wrap gap-2">
-            {presets.map((p) => (
-              <span key={p} className="chip">
-                {p}
-              </span>
+          <ol className={styles.presetRail} tabIndex={0} aria-label="Built-in presets">
+            {presets.map((preset, index) => (
+              <li key={preset}>
+                <span>{String(index + 1).padStart(2, "0")}</span>
+                <strong>{preset}</strong>
+                <i aria-hidden="true" />
+              </li>
             ))}
-          </div>
+          </ol>
         </section>
       </FadeInWrapper>
 
@@ -227,21 +239,8 @@ export default function Hush() {
                 </span>
                 Get Hush
               </h2>
-              <p className="text-body text-ink-secondary">
-                Free on the App Store and open source under GPL-3.0.
-              </p>
-            </div>
-            <div className="flex flex-col items-start gap-3">
-              <AppStoreButton />
+              <p className="micro-label">iOS · Free · GPL-3.0</p>
               <div className="flex flex-wrap gap-x-4 gap-y-1">
-                <a
-                  href={REPO_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="chrome-link font-mono text-control"
-                >
-                  GitHub <Icon name="arrow-up-right" />
-                </a>
                 <Link
                   href="/hush/privacy"
                   className="chrome-link font-mono text-control"
@@ -255,6 +254,9 @@ export default function Hush() {
                   Terms
                 </Link>
               </div>
+            </div>
+            <div>
+              <AppStoreButton />
             </div>
           </div>
         </section>

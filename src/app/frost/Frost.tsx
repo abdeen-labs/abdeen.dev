@@ -3,66 +3,59 @@
 import { useEffect, useState } from "react";
 import AppleLogo from "@/components/AppleLogo";
 import FadeInWrapper from "@/components/FadeInWrapper";
-import FeatureGrid from "@/components/FeatureGrid";
 import FrostVisual from "@/components/FrostVisual";
-import Icon from "@/components/Icon";
 import SectionHeader from "@/components/SectionHeader";
+import styles from "./frost.module.css";
 
 const REPO_URL = "https://github.com/Cuzeth/frost";
 const RELEASES_URL = `${REPO_URL}/releases/latest`;
 
-const features = [
+const lockStates = [
   {
-    label: "Locks every input",
-    detail:
-      "Keyboard, mouse, and trackpad are suppressed at the system level.",
+    number: "01",
+    mode: "Lock",
+    label: "Freeze every input",
+    detail: "Keyboard, mouse, and trackpad stop at the system level.",
+    signal: "Input / blocked",
   },
   {
-    label: "Screen stays visible",
-    detail:
-      "A translucent overlay dims the desktop but never hides it, so you can watch a long task run while input is frozen.",
+    number: "02",
+    mode: "Watch",
+    label: "Keep the screen visible",
+    detail: "Every display stays visible beneath the overlay.",
+    signal: "Display / live",
   },
   {
-    label: "Every display",
-    detail:
-      "The overlay covers every connected display. The unlock prompt follows the display the lock started from.",
+    number: "03",
+    mode: "Release",
+    label: "Unlock in person",
+    detail: "Touch ID, Apple Watch, or the local shortcut releases the lock.",
+    signal: "Auth / required",
+  },
+];
+
+const systems = [
+  {
+    number: "01",
+    label: "Control",
+    items: ["Menu bar", "Shortcuts", "Idle auto-lock"],
   },
   {
-    label: "Touch ID unlock",
-    detail:
-      "Authenticate inside the overlay. Optionally arm Touch ID the moment a lock begins.",
+    number: "02",
+    label: "Authenticate",
+    items: ["Touch ID", "Apple Watch", "Local shortcut"],
   },
   {
-    label: "Apple Watch unlock",
-    detail:
-      "Opt in to approve unlocks with a double-press on a paired Apple Watch. It works even on desktop Macs without Touch ID.",
-  },
-  {
-    label: "Lock from Shortcuts",
-    detail:
-      "A Lock Input action for Shortcuts and scripts starts the same lock as the menu item. Lock-only by design. Nothing can unlock Frost programmatically.",
-  },
-  {
-    label: "Overlay message",
-    detail:
-      "Show an optional message on the locked screen, so anyone at the desk can see what is running.",
-  },
-  {
-    label: "Auto-lock",
-    detail:
-      "Lock automatically after the Mac sits idle, anywhere from 30 seconds to two hours.",
-  },
-  {
-    label: "Stays awake",
-    detail:
-      "Optionally hold the display on and keep the Mac from sleeping while it's locked.",
+    number: "03",
+    label: "Unattended",
+    items: ["Every display", "Overlay message", "Prevent sleep"],
   },
 ];
 
 const requirements = [
-  "macOS 14.6+",
-  "Apple Silicon & Intel",
-  "Touch ID (or Apple Watch)",
+  { label: "System", value: "macOS 14.6+" },
+  { label: "Architecture", value: "Apple Silicon + Intel" },
+  { label: "Unlock", value: "Touch ID or Apple Watch" },
 ];
 
 type Release = {
@@ -139,10 +132,8 @@ export default function Frost() {
               Frost<span className="text-signal-identity">.</span>
             </h1>
             <p className="max-w-xl text-body text-ink-secondary md:text-lede">
-              A menu-bar input locker for macOS. Frost freezes the keyboard,
-              mouse, and trackpad while the screen stays visible. Touch ID or a
-              paired Apple Watch releases the lock. Lock the desk while a
-              build, render, or agent runs unattended.
+              Freeze every input without hiding the screen. Touch ID or Apple
+              Watch releases the lock.
             </p>
             <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-3">
               <DownloadButton href={release.href} label={release.label} />
@@ -166,40 +157,76 @@ export default function Frost() {
         </FadeInWrapper>
       </section>
 
-      {/* Features */}
-      <section>
+      {/* Lock sequence */}
+      <section className={styles.sequenceSection} aria-label="How Frost locks and unlocks">
         <FadeInWrapper direction="up">
-          <SectionHeader label="Features" count={features.length} />
+          <SectionHeader label="Lock sequence" count={lockStates.length} />
         </FadeInWrapper>
         <FadeInWrapper direction="up" delay={0.05}>
-          <FeatureGrid items={features} />
+          <ol className={styles.sequence}>
+            {lockStates.map((state) => (
+              <li key={state.number}>
+                <div className={styles.sequenceMarker} aria-hidden="true">
+                  <span>{state.number}</span>
+                </div>
+                <p className={styles.sequenceMode}>{state.mode}</p>
+                <h3>{state.label}</h3>
+                <p className={styles.sequenceDetail}>{state.detail}</p>
+                <p className={styles.sequenceSignal}>{state.signal}</p>
+              </li>
+            ))}
+          </ol>
         </FadeInWrapper>
       </section>
 
-      {/* Requirements */}
-      <FadeInWrapper direction="up">
-        <section>
-          <SectionHeader label="Requirements" />
-          <div className="flex flex-wrap gap-2">
-            {requirements.map((r) => (
-              <span key={r} className="chip">
-                {r}
-              </span>
+      {/* Product systems */}
+      <section aria-label="Frost systems">
+        <FadeInWrapper direction="up">
+          <SectionHeader label="System" count={9} />
+        </FadeInWrapper>
+        <FadeInWrapper direction="up" delay={0.05}>
+          <div className={styles.systems}>
+            {systems.map((system) => (
+              <section key={system.number}>
+                <span className={styles.systemNumber} aria-hidden="true">
+                  {system.number}
+                </span>
+                <h3>{system.label}</h3>
+                <ul>
+                  {system.items.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              </section>
             ))}
+          </div>
+        </FadeInWrapper>
+      </section>
+
+      {/* Fail-safes */}
+      <FadeInWrapper direction="up">
+        <section className={styles.failSafe} aria-labelledby="frost-failsafe-title">
+          <SectionHeader label="Fail-safe" />
+          <div className={styles.failSafeBody}>
+            <h2 id="frost-failsafe-title">If Frost quits, input returns.</h2>
+            <div className={styles.failSafeFacts}>
+              <span>SIGTERM restores input</span>
+              <span>SSH kill works</span>
+              <span>Not a screen lock</span>
+            </div>
           </div>
         </section>
       </FadeInWrapper>
 
-      {/* Fail-safes */}
+      {/* Requirements */}
       <FadeInWrapper direction="up">
-        <section aria-label="Fail-safes">
-          <SectionHeader label="Fail-safes" />
-          <p className="max-w-2xl text-body text-ink-dim">
-            Frost is built to never trap you. The unlock shortcut stays
-            configurable, and a clean teardown on SIGTERM means a remote{" "}
-            <code>kill</code> over SSH always restores input. Frost is not a
-            screen lock and does not replace the macOS login window.
-          </p>
+        <section className={styles.requirements} aria-label="Requirements">
+          {requirements.map((requirement) => (
+            <div key={requirement.label}>
+              <span>{requirement.label}</span>
+              <strong>{requirement.value}</strong>
+            </div>
+          ))}
         </section>
       </FadeInWrapper>
 
@@ -225,24 +252,6 @@ export default function Frost() {
             </div>
             <div className="flex flex-col items-start gap-3">
               <DownloadButton href={release.href} label={release.label} />
-              <div className="flex flex-wrap gap-x-4 gap-y-1 font-mono text-control">
-                <a
-                  href={RELEASES_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="chrome-link"
-                >
-                  All releases <Icon name="arrow-up-right" />
-                </a>
-                <a
-                  href={REPO_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="chrome-link"
-                >
-                  GitHub <Icon name="arrow-up-right" />
-                </a>
-              </div>
             </div>
           </div>
         </section>
