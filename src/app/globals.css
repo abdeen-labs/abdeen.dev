@@ -1948,11 +1948,13 @@ a.chip:focus-visible {
    snapshot off the top. Animating both halves is what produces the washed-out
    double-exposure most cross-fades suffer from. */
 
-/* Nothing below the root is given a name of its own. A named group animates
-   between the old and new positions of its element, and this header is
-   in-flow rather than sticky — leaving a route scrolled down would slide the
-   chrome the full scroll distance. One group for the whole frame means the
-   route label and the active underline cross-fade with everything else. */
+/* Only the sticky chrome and the route label inside it are named below the
+   root; the rest of the frame cross-fades as one group. A named group
+   animates between the old and new positions of its element, which is safe
+   here because the pinned header sits at most one identity rail (32px) from
+   its at-rest spot — leaving a scrolled route, the chrome glides that
+   distance while the dissolve runs beneath it instead of fade-doubling
+   with the page. */
 ::view-transition-group(root) {
   animation-duration: var(--duration-route-exit);
 }
@@ -1980,6 +1982,33 @@ a.chip:focus-visible {
 ::view-transition-new(root) {
   z-index: 0;
   animation: none;
+}
+
+/* The chrome is on screen in both frames, so it takes no part in the
+   dissolve: the stale snapshot is dropped and the live header shows,
+   unfaded, from the first frame. Its group keeps the UA position morph so
+   the identity rail glides back in over the route beat instead of
+   reappearing in place when a scrolled page resets to the top. */
+.site-header {
+  view-transition-name: site-header;
+}
+
+::view-transition-group(site-header) {
+  animation-duration: var(--duration-route-exit);
+  animation-timing-function: var(--ease-route-exit);
+}
+
+::view-transition-image-pair(site-header) {
+  isolation: auto;
+}
+
+::view-transition-old(site-header) {
+  display: none;
+}
+
+::view-transition-new(site-header) {
+  animation: none;
+  mix-blend-mode: normal;
 }
 
 /* ─── Breadcrumb split-flap ─────────────────────────────────────── */
@@ -2045,11 +2074,12 @@ a.chip:focus-visible {
   }
 }
 
-/* Pinned: the UA's group animation slides the label between its old and new
-   viewport positions, and leaving a scrolled page that would read as the
-   label flying the scroll distance. */
+/* The label rides inside the sliding chrome, so its group takes the same
+   duration and ease as site-header — pinned dead (animation: none) it
+   would sit at its final spot while the rail glides in around it. */
 ::view-transition-group(route-label) {
-  animation: none;
+  animation-duration: var(--duration-route-exit);
+  animation-timing-function: var(--ease-route-exit);
 }
 
 ::view-transition-image-pair(route-label) {
@@ -2083,9 +2113,20 @@ a.chip:focus-visible {
 }
 
 .site-header {
+  position: sticky;
+  /* Pins so the identity rail (32px incl. its hairline) tucks away upward
+     and only the nav row stays. Above the mobile nav dropdown's z-index 20. */
+  top: -32px;
+  z-index: 30;
   width: 100%;
   border-bottom: 1px solid var(--hairline);
   background: var(--surface-page);
+}
+
+/* The pinned nav row (72px + hairline) must not cover content the skip
+   link scrolls into view. */
+#main-content {
+  scroll-margin-top: 73px;
 }
 
 .identity-rail {
