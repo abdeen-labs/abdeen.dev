@@ -1,21 +1,54 @@
 .visual {
   position: relative;
   display: grid;
-  min-height: 430px;
+  min-height: 460px;
   place-items: center;
   overflow: hidden;
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius-shell);
-  background: var(--surface-sunken);
+  background:
+    linear-gradient(90deg, transparent 49.9%, var(--hairline) 50%, transparent 50.1%),
+    linear-gradient(transparent 49.9%, var(--hairline) 50%, transparent 50.1%);
 }
 
 .visual::before {
   position: absolute;
-  inset: 24%;
+  inset: 18%;
   content: "";
   pointer-events: none;
-  background: color-mix(in srgb, var(--signal-identity) 8%, transparent);
-  filter: blur(64px);
+  background: color-mix(in srgb, var(--signal-identity) 11%, transparent);
+  filter: blur(72px);
+}
+
+.visualCode {
+  position: absolute;
+  right: 0;
+  bottom: 18px;
+  color: var(--surface-sunken);
+  font-family: var(--font-mono-stack);
+  font-size: clamp(72px, 10vw, 126px);
+  font-weight: 500;
+  letter-spacing: -0.08em;
+  line-height: 0.75;
+  user-select: none;
+}
+
+.visualAxisX,
+.visualAxisY {
+  position: absolute;
+  background: var(--signal-identity);
+}
+
+.visualAxisX {
+  top: 50%;
+  left: calc(50% - 18px);
+  width: 36px;
+  height: 1px;
+}
+
+.visualAxisY {
+  top: calc(50% - 18px);
+  left: 50%;
+  width: 1px;
+  height: 36px;
 }
 
 .passStack {
@@ -149,25 +182,67 @@
   text-transform: uppercase;
 }
 
-.boundaryGrid {
+.processSection {
+  padding-block: 40px 48px;
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.processHeading {
+  max-width: 340px;
+  margin-bottom: 34px;
+}
+
+.processHeading > div {
+  margin-bottom: 0;
+}
+
+.processRail {
+  position: relative;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  overflow: hidden;
-  border: 1px solid var(--hairline);
-  border-radius: var(--radius-plate);
-  background: var(--surface-card);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(28px, 4vw, 64px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
-.boundaryGrid > div {
-  padding: 28px;
+.processRail::before {
+  position: absolute;
+  top: 10px;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: var(--hairline-strong);
+  content: "";
 }
 
-.boundaryGrid > div + div {
-  border-left: 1px solid var(--hairline);
+.processStep {
+  position: relative;
+  padding-top: 42px;
 }
 
-.boundaryGrid h3 {
-  margin-top: 18px;
+.processMarker {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  width: 21px;
+  height: 21px;
+  place-items: center;
+  border: 1px solid var(--signal-identity);
+  border-radius: var(--radius-round);
+  color: var(--surface-page);
+  background: var(--signal-identity);
+  box-shadow: 0 0 0 7px var(--surface-page);
+  font-family: var(--font-mono-stack);
+  font-size: 7px;
+  font-variant-numeric: tabular-nums;
+}
+
+.processLocation,
+.processOutput,
+.boundaryLocation {
   font-family: var(--font-mono-stack);
   font-size: var(--fs-control);
   font-weight: 500;
@@ -175,15 +250,254 @@
   text-transform: uppercase;
 }
 
-.boundaryGrid p {
-  max-width: 48ch;
-  margin-top: 10px;
+.processLocation {
+  color: var(--signal-link);
+}
+
+.processStep h3 {
+  margin-top: 12px;
+  font-family: var(--font-display-stack);
+  font-size: clamp(22px, 2.2vw, 28px);
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.processOutput {
+  margin-top: 18px;
+  color: var(--ink-dim);
+}
+
+.processOutput::before {
+  color: var(--signal-identity);
+  content: "↳ ";
+}
+
+.capabilityStory {
+  display: grid;
+  grid-template-columns: minmax(170px, 0.38fr) minmax(0, 1.62fr);
+  gap: clamp(40px, 6vw, 80px);
+  align-items: start;
+}
+
+.capabilityIntro {
+  position: sticky;
+  top: 112px;
+}
+
+.boundaryHeading > h2 {
+  font-family: var(--font-display-stack);
+  font-size: clamp(30px, 4vw, 46px);
+  line-height: 1.08;
+  text-wrap: balance;
+}
+
+.capabilityLedger {
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--hairline-strong);
+  list-style: none;
+}
+
+.capabilityLedger li {
+  display: grid;
+  grid-template-columns: 44px minmax(150px, 0.66fr) minmax(0, 1fr);
+  gap: 20px;
+  align-items: baseline;
+  padding-block: 24px 26px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.capabilityNumber {
+  color: var(--ink-faint);
+  font-family: var(--font-mono-stack);
+  font-size: var(--fs-control);
+  font-variant-numeric: tabular-nums;
+}
+
+.capabilityLedger h3 {
+  font-family: var(--font-display-stack);
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.capabilityLedger p {
   color: var(--ink-secondary);
+  text-wrap: pretty;
+}
+
+.boundarySection {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(36px, 6vw, 72px);
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+  background: var(--surface-sunken);
+}
+
+.boundarySection::after {
+  position: absolute;
+  right: -18px;
+  bottom: -30px;
+  color: color-mix(in srgb, var(--signal-identity) 10%, transparent);
+  font-family: var(--font-mono-stack);
+  font-size: clamp(96px, 16vw, 190px);
+  font-weight: 500;
+  line-height: 0.8;
+  content: "BOUNDARY";
+  pointer-events: none;
+  user-select: none;
+}
+
+.boundaryHeading,
+.boundaryGrid {
+  position: relative;
+  z-index: 1;
+}
+
+.boundaryHeading {
+  max-width: 760px;
+}
+
+.boundaryGrid {
+  display: grid;
+  min-height: 230px;
+  grid-template-columns: minmax(0, 1fr) 104px minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: stretch;
+  margin-top: clamp(44px, 7vw, 80px);
+}
+
+.boundarySide {
+  padding-block: 20px;
+}
+
+.boundaryLocation {
+  color: var(--signal-link);
+}
+
+.boundaryGrid h3 {
+  margin-top: 20px;
+  font-family: var(--font-display-stack);
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.boundaryGrid p {
+  max-width: 42ch;
+  margin-top: 14px;
+  color: var(--ink-secondary);
+  text-wrap: pretty;
+}
+
+.boundaryLane {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--signal-link);
+}
+
+.boundaryLane::before {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: var(--hairline-strong);
+  content: "";
+}
+
+.boundaryLane b {
+  position: relative;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-round);
+  background: var(--surface-sunken);
+  font-size: 18px;
+  font-weight: 400;
+}
+
+@media (max-width: 860px) {
+  .capabilityStory {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .capabilityIntro {
+    position: static;
+    max-width: 620px;
+  }
+}
+
+@media (max-width: 700px) {
+  .processRail {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding-left: 42px;
+  }
+
+  .processRail::before {
+    top: 0;
+    bottom: 0;
+    left: 10px;
+    width: 1px;
+    height: auto;
+  }
+
+  .processStep {
+    padding-top: 0;
+  }
+
+  .processMarker {
+    top: 0;
+    left: -42px;
+  }
+
+  .capabilityLedger li {
+    grid-template-columns: 36px minmax(0, 1fr);
+    gap: 10px 14px;
+  }
+
+  .capabilityLedger p {
+    grid-column: 2;
+  }
+
+  .boundarySection {
+    padding-inline: 24px;
+  }
+
+  .boundaryGrid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .boundaryLane {
+    min-height: 88px;
+  }
+
+  .boundaryLane::before {
+    top: 50%;
+    right: 0;
+    bottom: auto;
+    left: 0;
+    width: auto;
+    height: 1px;
+  }
+
+  .boundaryLane b {
+    transform: rotate(90deg);
+  }
 }
 
 @media (max-width: 640px) {
   .visual {
-    min-height: 340px;
+    min-height: 360px;
   }
 
   .passStack {
@@ -203,13 +517,9 @@
     margin-top: 34px;
   }
 
-  .boundaryGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .boundaryGrid > div + div {
-    border-top: 1px solid var(--hairline);
-    border-left: 0;
+  .visualCode {
+    right: 8px;
+    bottom: 24px;
   }
 }
 

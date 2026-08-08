@@ -1,66 +1,77 @@
 import FadeInWrapper from "@/components/FadeInWrapper";
-import FeatureGrid from "@/components/FeatureGrid";
 import Icon from "@/components/Icon";
 import SectionHeader from "@/components/SectionHeader";
 import styles from "./pocketful.module.css";
 
 const REPO_URL = "https://github.com/abdeen-labs/pocketful";
-const SETUP_URL = `${REPO_URL}/blob/main/INSTRUCTIONS.md`;
+const SETUP_URL = "https://pass.abdeen.dev/";
 
 const features = [
   {
+    number: "01",
     label: "Visual pass editor",
     detail:
-      "Build generic passes, store cards, coupons, event tickets, and boarding passes directly on iPhone.",
+      "Build store cards, coupons, tickets, and boarding passes on iPhone.",
   },
   {
+    number: "02",
     label: "Eleven templates",
     detail:
-      "Start from a curated design or a blank pass, then change colors, artwork, fields, and barcode formats.",
+      "Start from a template or blank pass, then tune colors, artwork, fields, and barcodes.",
   },
   {
+    number: "03",
     label: "Full Wallet surface",
     detail:
-      "Add relevance, localization, personalization, NFC metadata, semantics, and modern ticket layouts.",
+      "Add relevance, localization, NFC, semantics, and modern ticket layouts.",
   },
   {
+    number: "04",
     label: "Your signing server",
     detail:
-      "An Express service validates and signs each pass while Apple certificates stay off the phone.",
+      "An Express service signs each pass while Apple certificates stay off the phone.",
   },
   {
+    number: "05",
     label: "Over-the-air updates",
     detail:
-      "Opt-in passes can be re-signed and pushed to devices through Apple's Wallet web service protocol.",
+      "Re-sign and push changes through Apple's Wallet web service.",
   },
   {
+    number: "06",
     label: "Agent-ready MCP",
     detail:
-      "Create, inspect, update, download, and delete passes from an AI agent through six focused tools.",
+      "Create, inspect, update, download, and delete passes through six MCP tools.",
   },
 ];
 
 const workflow = [
   {
+    number: "01",
+    location: "iPhone",
     label: "Design on iPhone",
-    detail:
-      "Pocketful turns the pass layout and on-device artwork into a portable JSON specification.",
+    output: "JSON + artwork",
   },
   {
+    number: "02",
+    location: "Your server",
     label: "Sign on your server",
-    detail:
-      "The self-hosted service validates the specification and builds the signed .pkpass in memory.",
+    output: "Signed .pkpass",
   },
   {
+    number: "03",
+    location: "Apple Wallet",
     label: "Add to Wallet",
-    detail:
-      "The app downloads the short-lived pass and opens Apple's native add-to-Wallet sheet.",
+    output: "Native Wallet sheet",
   },
 ];
 
 function PocketfulVisual() {
   return (
     <div className={styles.visual} aria-hidden="true">
+      <span className={styles.visualCode}>PKPASS</span>
+      <span className={styles.visualAxisX} />
+      <span className={styles.visualAxisY} />
       <div className={styles.passStack}>
         <div className={styles.pass}>
           <div className={styles.passHeader}>
@@ -104,9 +115,8 @@ export default function Pocketful() {
               Pocketful<span className="text-signal-identity">.</span>
             </h1>
             <p className="max-w-xl text-lede text-ink-secondary">
-              Design Apple Wallet passes on your phone, sign them with your
-              own server, and open Wallet&apos;s native add-pass sheet. No
-              account and no third-party signing service.
+              Design Apple Wallet passes on iPhone, sign them on your server,
+              and add them to Wallet. No account. No third-party signing service.
             </p>
             <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-3">
               <a
@@ -135,43 +145,73 @@ export default function Pocketful() {
         </FadeInWrapper>
       </section>
 
-      <section>
+      <section className={styles.processSection} aria-label="How Pocketful works">
         <FadeInWrapper direction="up">
-          <SectionHeader label="How it works" count={workflow.length} />
+          <div className={styles.processHeading}>
+            <SectionHeader label="How it works" count={workflow.length} />
+          </div>
         </FadeInWrapper>
         <FadeInWrapper direction="up" delay={0.05}>
-          <FeatureGrid items={workflow} />
+          <ol className={styles.processRail}>
+            {workflow.map((step) => (
+              <li key={step.number} className={styles.processStep}>
+                <div className={styles.processMarker} aria-hidden="true">
+                  <span>{step.number}</span>
+                </div>
+                <p className={styles.processLocation}>{step.location}</p>
+                <h3>{step.label}</h3>
+                <p className={styles.processOutput}>{step.output}</p>
+              </li>
+            ))}
+          </ol>
         </FadeInWrapper>
       </section>
 
-      <section>
+      <section className={styles.capabilityStory} aria-label="Pocketful capabilities">
         <FadeInWrapper direction="up">
-          <SectionHeader label="Capabilities" count={features.length} />
+          <div className={styles.capabilityIntro}>
+            <SectionHeader label="Capabilities" count={features.length} />
+          </div>
         </FadeInWrapper>
         <FadeInWrapper direction="up" delay={0.05}>
-          <FeatureGrid items={features} />
+          <ol className={styles.capabilityLedger}>
+            {features.map((feature) => (
+              <li key={feature.number}>
+                <span className={styles.capabilityNumber} aria-hidden="true">
+                  {feature.number}
+                </span>
+                <h3>{feature.label}</h3>
+                <p>{feature.detail}</p>
+              </li>
+            ))}
+          </ol>
         </FadeInWrapper>
       </section>
 
       <FadeInWrapper direction="up">
-        <section aria-labelledby="pocketful-boundary-title">
-          <SectionHeader label="Data boundary" />
+        <section className={styles.boundarySection} aria-labelledby="pocketful-boundary-title">
+          <div className={styles.boundaryHeading}>
+            <SectionHeader label="Data boundary" />
+            <h2 id="pocketful-boundary-title">
+              Your phone holds the design. Your server holds the keys.
+            </h2>
+          </div>
           <div className={styles.boundaryGrid}>
-            <div>
-              <span className="index-num" aria-hidden="true">01</span>
-              <h3 id="pocketful-boundary-title">On your phone</h3>
+            <div className={styles.boundarySide}>
+              <span className={styles.boundaryLocation}>01 · Device</span>
+              <h3>On your phone</h3>
               <p>
-                Designs and artwork stay on the device while you edit. The app
-                sends them only when you choose to create or update a pass.
+                Designs and artwork stay on-device until you create or update a pass.
               </p>
             </div>
-            <div>
-              <span className="index-num" aria-hidden="true">02</span>
+            <div className={styles.boundaryLane} aria-hidden="true">
+              <b>→</b>
+            </div>
+            <div className={styles.boundarySide}>
+              <span className={styles.boundaryLocation}>02 · Infrastructure</span>
               <h3>On your server</h3>
               <p>
-                One-shot passes are signed in memory and expire after 15
-                minutes. Updatable passes persist only when you opt in, so the
-                server can sign and push later versions.
+                One-shot passes expire after 15 minutes. Only updatable passes persist.
               </p>
             </div>
           </div>
@@ -190,9 +230,7 @@ export default function Pocketful() {
                 Build it yourself
               </h2>
               <p className="text-body text-ink-secondary">
-                The SwiftUI app has no third-party dependencies. Bring an
-                Apple Developer account, deploy the signing service, and run
-                Pocketful on your iPhone from Xcode.
+                Deploy the signing service, then run Pocketful from Xcode.
               </p>
               <p className="micro-label">Xcode 27+ · Paid Apple Developer account</p>
             </div>
@@ -204,14 +242,6 @@ export default function Pocketful() {
                 className="btn btn--primary"
               >
                 Follow the setup guide <Icon name="arrow-up-right" />
-              </a>
-              <a
-                href={REPO_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="chrome-link font-mono text-control"
-              >
-                GitHub <Icon name="arrow-up-right" />
               </a>
             </div>
           </div>
