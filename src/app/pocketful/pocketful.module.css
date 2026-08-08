@@ -46,8 +46,8 @@
   color: var(--ink-primary);
   background: linear-gradient(
     145deg,
-    color-mix(in srgb, var(--signal-identity) 10%, var(--surface-void)),
-    var(--surface-void) 72%
+    color-mix(in srgb, var(--signal-identity) 10%, var(--surface-page)),
+    var(--surface-page) 72%
   );
   box-shadow: 0 22px 56px rgb(0 0 0 / 0.28);
 }
