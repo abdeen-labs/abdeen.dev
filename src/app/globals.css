@@ -1948,8 +1948,8 @@ a.chip:focus-visible {
    snapshot off the top. Animating both halves is what produces the washed-out
    double-exposure most cross-fades suffer from. */
 
-/* Only the sticky chrome and the route label inside it are named below the
-   root; the rest of the frame cross-fades as one group. A named group
+/* Only the sticky chrome is named below the root; the rest of the frame
+   cross-fades as one group. A named group
    animates between the old and new positions of its element, which is safe
    here because the pinned header sits at most one identity rail (32px) from
    its at-rest spot — leaving a scrolled route, the chrome glides that
@@ -2016,14 +2016,12 @@ a.chip:focus-visible {
 /* The route label is the one piece of chrome that names the page, so it is
    the one piece that announces the change: a split-flap wave that sweeps
    right to left, one character flipping up and away as its replacement
-   rolls up beneath it. The flip runs in the live DOM (SiteHeader.tsx) —
-   per-character stagger is beyond what a view-transition snapshot can do —
-   so the label's view-transition group exists only to pin the region:
-   naming it cuts it out of the root crossfade, hiding the old snapshot
-   outright and showing the live page there from the first frame. */
+   rolls up beneath it. The flip runs in the live DOM (SiteHeader.tsx) and
+   shows through the chrome group's live new image — the old snapshot is
+   already dropped there. No group of the label's own: a named group morphs
+   between the two labels' box sizes, stretching the type mid-route. */
 .route-label {
   display: inline-block;
-  view-transition-name: route-label;
 }
 
 .route-label__flip {
@@ -2072,29 +2070,6 @@ a.chip:focus-visible {
     opacity: 1;
     transform: translateY(0) rotateX(0);
   }
-}
-
-/* The label rides inside the sliding chrome, so its group takes the same
-   duration and ease as site-header — pinned dead (animation: none) it
-   would sit at its final spot while the rail glides in around it. */
-::view-transition-group(route-label) {
-  animation-duration: var(--duration-route-exit);
-  animation-timing-function: var(--ease-route-exit);
-}
-
-::view-transition-image-pair(route-label) {
-  isolation: auto;
-}
-
-/* The live DOM plays the outgoing flaps itself; the stale snapshot on top
-   would only double them. */
-::view-transition-old(route-label) {
-  display: none;
-}
-
-::view-transition-new(route-label) {
-  animation: none;
-  mix-blend-mode: normal;
 }
 
 @media (prefers-reduced-motion: reduce) {
