@@ -26,12 +26,12 @@
 
 .sequence > li {
   position: relative;
-  padding-top: 46px;
+  padding-top: 30px;
 }
 
 .sequenceMarker {
   position: absolute;
-  top: 16px;
+  top: 0;
   left: 0;
   display: grid;
   width: 21px;
@@ -251,7 +251,6 @@
   }
 
   .sequenceMarker {
-    top: 0;
     left: -42px;
   }
 
