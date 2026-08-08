@@ -4,12 +4,14 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  animation: formFade var(--duration-panel) var(--ease-flat);
+  /* Replays on every tab switch (the form remounts per type), so it stays
+     a short opacity-only settle rather than an entrance with travel. */
+  animation: formFade var(--duration-hover) var(--ease-flat);
 }
 
 @keyframes formFade {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 /* Style-options panel body — the surface is the shared .plate--sunken,

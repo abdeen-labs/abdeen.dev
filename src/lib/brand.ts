@@ -29,7 +29,7 @@ export const identity = {
   establishedLine: "Abdeen Labs / 2027",
   positioning: "Private software. Clear boundaries.",
   description:
-    "Abdeen Labs makes private software. Its products work without accounts, collect as little as possible, and make it clear what stays on your device and what leaves it. The source is public.",
+    "Abdeen Labs makes private software. Our products work without accounts, collect as little as possible, and make it clear what stays on your device and what leaves it. The source is public.",
   founder:
     "Jaafar Abdeen, a Jordanian Palestinian engineer from al-Khalil",
 } as const;

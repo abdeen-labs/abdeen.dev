@@ -82,8 +82,8 @@
    warning outline and glyph. */
 .slotClear {
   position: absolute;
-  top: 6px;
-  right: 6px;
+  top: 8px;
+  right: 8px;
   width: 28px;
   height: 28px;
   display: none;
@@ -100,6 +100,15 @@
   z-index: 2;
   transition: border-color var(--duration-hover) var(--ease-flat),
     color var(--duration-hover) var(--ease-flat);
+}
+
+/* 44×44 hit target without moving a pixel of paint: the 8px offset plus
+   8px of reach lands the target flush with the tile corner, so it cannot
+   spill onto the neighbouring slot. */
+.slotClear::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
 }
 
 .slotClear:hover {
@@ -225,6 +234,13 @@
   line-height: 1;
   cursor: pointer;
   transition: color var(--duration-hover) var(--ease-flat);
+}
+
+/* Same 44×44 extension as .slotClear; stays inside the modal's edge. */
+.modalClose::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
 }
 
 .modalClose:hover {

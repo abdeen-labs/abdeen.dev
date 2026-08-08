@@ -16,7 +16,7 @@
    the inverse label (the switch-on idiom); the letter itself is content,
    so it keeps its literal lowercase. */
 .flagBtn {
-  width: 38px;
+  width: 40px;
   display: flex;
   align-items: center;
   justify-content: center;

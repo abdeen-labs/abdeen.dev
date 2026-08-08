@@ -18,8 +18,8 @@ export default function AboutPage() {
           <span className="page-kicker">The studio</span>
           <h1 id="about-title">A small studio, run in the open</h1>
           <div className="about-copy">
-            <p><ScrambledText>Abdeen Labs is an independent software studio. It makes tools for people who want to know where their data is—and for everything here, the answer begins with: on your device.</ScrambledText></p>
-            <p><ScrambledText>{`The studio is run by ${identity.founder}. Everything it ships is built and published in the open, and every privacy claim is meant to be inspectable.`}</ScrambledText></p>
+            <p><ScrambledText>Abdeen Labs is an independent software studio. We make tools for people who want to know where their data is—and for everything here, the answer begins with: on your device.</ScrambledText></p>
+            <p><ScrambledText>{`The studio is run by ${identity.founder}. Everything we ship is built and published in the open, and every privacy claim is meant to be inspectable.`}</ScrambledText></p>
           </div>
         </div>
         <div className="about-hero__seal" aria-hidden="true"><SealKey size={140} decorative /></div>

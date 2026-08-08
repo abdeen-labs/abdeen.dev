@@ -369,6 +369,9 @@ section[id] {
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    /* Stagger delays hold `both`-filled blocks at their hidden first frame;
+       with durations zeroed the wait is all that remains, so it goes too. */
+    animation-delay: 0s !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
@@ -886,7 +889,8 @@ a {
   cursor: pointer;
   transition: background var(--duration-hover) var(--ease-flat),
     border-color var(--duration-hover) var(--ease-flat),
-    color var(--duration-hover) var(--ease-flat);
+    color var(--duration-hover) var(--ease-flat),
+    transform var(--duration-hover) var(--ease-flat);
 }
 
 .btn:active {
@@ -2210,7 +2214,7 @@ a.chip:focus-visible {
 }
 
 .mobile-menu-button:active {
-  transform: scale(0.94);
+  transform: scale(0.96);
 }
 
 main > .route-stage > :not(.site-frame) {
@@ -2469,7 +2473,9 @@ a:focus-visible [data-icon="arrow-up-right"] {
   padding: 3px 6px;
   border: 1px solid var(--hairline-strong);
   font-family: var(--font-mono-stack);
-  font-size: 8px;
+  /* 10px — the chrome-kicker tier this row's meta already uses; 8px sat
+     below every readable tier in the system. */
+  font-size: 10px;
   font-weight: 500;
   line-height: 1;
   letter-spacing: 0.08em;
