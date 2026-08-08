@@ -1,7 +1,7 @@
-.heroStage {
+.visual {
   position: relative;
   display: grid;
-  min-height: 560px;
+  min-height: 460px;
   place-items: center;
   overflow: hidden;
   background:
@@ -9,15 +9,16 @@
     linear-gradient(transparent 49.9%, var(--hairline) 50%, transparent 50.1%);
 }
 
-.heroStage::before {
+.visual::before {
   position: absolute;
   inset: 20%;
   background: color-mix(in srgb, var(--signal-identity) 10%, transparent);
   filter: blur(72px);
   content: "";
+  pointer-events: none;
 }
 
-.heroStage > span {
+.visualCode {
   position: absolute;
   right: 0;
   bottom: 20px;
@@ -30,20 +31,150 @@
   user-select: none;
 }
 
-.heroPhone {
+.mixerStack {
   position: relative;
   z-index: 1;
-  display: block;
-  width: min(54%, 244px);
-  height: auto;
-  opacity: 0;
-  outline: 1px solid oklch(1 0 0 / 0.1);
-  box-shadow: 0 26px 68px rgb(0 0 0 / 0.28);
-  transition: opacity var(--duration-reveal) var(--ease-flat);
+  width: min(72%, 330px);
 }
 
-.imageLoaded {
-  opacity: 1;
+/* Echoed sheets behind the mixer: the layered sounds that are Hush's
+   whole premise. */
+.mixerStack::before,
+.mixerStack::after {
+  position: absolute;
+  inset: 0;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-shell);
+  background: color-mix(in srgb, var(--signal-identity) 7%, var(--surface-card));
+  content: "";
+}
+
+.mixerStack::before {
+  box-shadow: 0 8px 28px rgb(0 0 0 / 0.12);
+  opacity: 0.6;
+  transform: translate(26px, -22px) rotate(2.4deg);
+}
+
+.mixerStack::after {
+  box-shadow: 0 12px 36px rgb(0 0 0 / 0.16);
+  transform: translate(13px, -11px) rotate(1.2deg);
+}
+
+.mixer {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 22px;
+  border: 1px solid color-mix(in srgb, var(--signal-identity) 42%, var(--hairline));
+  border-radius: var(--radius-shell);
+  color: var(--ink-primary);
+  background: linear-gradient(
+    145deg,
+    color-mix(in srgb, var(--signal-identity) 10%, var(--surface-page)),
+    var(--surface-page) 72%
+  );
+  box-shadow: 0 22px 56px rgb(0 0 0 / 0.28);
+}
+
+.mixerHeader {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono-stack);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+}
+
+.mixerMeter {
+  display: inline-flex;
+  height: 18px;
+  align-items: flex-end;
+  gap: 3px;
+}
+
+.mixerMeter > span {
+  width: 3px;
+  background: var(--signal-identity);
+  transform-origin: bottom;
+  animation: mixer-meter 1.7s var(--ease-flat) infinite;
+}
+
+.mixerMeter > span:nth-child(1) { height: 9px; }
+.mixerMeter > span:nth-child(2) { height: 16px; animation-delay: -0.6s; }
+.mixerMeter > span:nth-child(3) { height: 11px; animation-delay: -1.1s; }
+.mixerMeter > span:nth-child(4) { height: 14px; animation-delay: -0.3s; }
+
+@keyframes mixer-meter {
+  0%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.55); }
+}
+
+.mixerLayers {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.mixerLayers > div {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px 12px;
+  align-items: baseline;
+}
+
+.mixerLayers > div > span {
+  font-family: var(--font-mono-stack);
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--ink-dim);
+  text-transform: uppercase;
+}
+
+.mixerLayers > div > span:last-of-type {
+  color: var(--ink-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.mixerLayers i {
+  position: relative;
+  display: block;
+  grid-column: 1 / -1;
+  height: 4px;
+  background: var(--surface-raised);
+}
+
+.mixerLayers b {
+  position: relative;
+  display: block;
+  height: 100%;
+  background: var(--signal-identity);
+}
+
+.mixerLayers b::after {
+  position: absolute;
+  top: -3px;
+  right: -5px;
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-round);
+  background: var(--ink-primary);
+  content: "";
+}
+
+.mixerFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid color-mix(in srgb, var(--ink-primary) 18%, transparent);
+  font-family: var(--font-mono-stack);
+  font-size: 8px;
+  letter-spacing: 0.1em;
+  color: var(--ink-dim);
+  text-transform: uppercase;
 }
 
 .mixStudio {
@@ -76,22 +207,30 @@
   position: relative;
   width: min(62%, 286px);
   aspect-ratio: 1320 / 2868;
+  /* Outline and shadow live on the stationary container, not the screens —
+     stacked on the images they double up mid-dissolve. */
+  outline: 1px solid oklch(1 0 0 / 0.1);
+  box-shadow: 0 28px 72px rgb(0 0 0 / 0.3);
 }
 
 .studioScreen {
   position: absolute;
   inset: 0;
+  z-index: 1;
   width: 100%;
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  outline: 1px solid oklch(1 0 0 / 0.1);
-  box-shadow: 0 28px 72px rgb(0 0 0 / 0.3);
-  transition: opacity 150ms var(--ease-flat);
+  /* The outgoing screen holds, fully opaque, underneath for the length of
+     the dissolve, then drops — the incoming one fades in over it and the
+     stage never shows through mid-fade. */
+  transition: opacity 0ms var(--ease-flat) var(--duration-reveal);
 }
 
 .studioScreenActive {
+  z-index: 2;
   opacity: 1;
+  transition: opacity var(--duration-reveal) var(--ease-flat);
 }
 
 .studioPosition {
@@ -279,8 +418,7 @@
 }
 
 @media (prefers-color-scheme: light) {
-  .heroPhone,
-  .studioScreen {
+  .studioScreens {
     outline-color: oklch(0 0 0 / 0.1);
   }
 }
@@ -302,12 +440,12 @@
 }
 
 @media (max-width: 640px) {
-  .heroStage {
-    min-height: 520px;
+  .visual {
+    min-height: 380px;
   }
 
-  .heroPhone {
-    width: min(62%, 240px);
+  .mixerStack {
+    width: min(80%, 310px);
   }
 
   .studioStage {
@@ -340,9 +478,12 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .heroPhone,
   .studioScreen,
   .mixArrow {
     transition: none;
+  }
+
+  .mixerMeter > span {
+    animation: none;
   }
 }

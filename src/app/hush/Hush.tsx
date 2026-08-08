@@ -70,25 +70,54 @@ function AppStoreButton() {
   return <AppleBadgeLink href={APP_STORE_URL} label="Download on the App Store" />;
 }
 
-function HeroPhone() {
-  const [loaded, setLoaded] = useState(false);
+const mixerLayers = [
+  { label: "Pink noise", level: 72 },
+  { label: "Birdsong", level: 46 },
+  { label: "Rain", level: 58 },
+];
+
+/** A compact depiction of Hush itself: the Calm mix as a stack of sound
+ * layers at independent volumes, in the same built-visual language as the
+ * Pocketful and Frost heroes. */
+function HushVisual() {
   return (
-    <div className={styles.heroStage}>
-      <span aria-hidden="true">MIX</span>
-      <Image
-        src="/hush/screen-1.png"
-        alt="Hush app interface"
-        width={244}
-        height={530}
-        preload
-        sizes="(min-width: 1024px) 244px, 280px"
-        className={`${styles.heroPhone} ${loaded ? styles.imageLoaded : ""}`}
-        onLoad={() => setLoaded(true)}
-        ref={(img) => {
-          if (img?.complete) setLoaded(true);
-        }}
-      />
-    </div>
+    <figure
+      className={styles.visual}
+      role="img"
+      aria-label="Hush playing the Calm mix: pink noise, birdsong, and rain layered at independent volumes with a focus timer running"
+    >
+      <span className={styles.visualCode} aria-hidden="true">
+        MIX
+      </span>
+      <div className={styles.mixerStack} aria-hidden="true">
+        <div className={styles.mixer}>
+          <div className={styles.mixerHeader}>
+            <span className={styles.mixerMeter}>
+              <span />
+              <span />
+              <span />
+              <span />
+            </span>
+            <span>CALM · PLAYING</span>
+          </div>
+          <div className={styles.mixerLayers}>
+            {mixerLayers.map((layer) => (
+              <div key={layer.label}>
+                <span>{layer.label}</span>
+                <span>{layer.level}</span>
+                <i>
+                  <b style={{ width: `${layer.level}%` }} />
+                </i>
+              </div>
+            ))}
+          </div>
+          <div className={styles.mixerFooter}>
+            <span>3 / 6 layers</span>
+            <span>Focus · 25:00</span>
+          </div>
+        </div>
+      </div>
+    </figure>
   );
 }
 
@@ -183,7 +212,7 @@ export default function Hush() {
         </FadeInWrapper>
 
         <FadeInWrapper direction="up" delay={0.08} eager>
-          <HeroPhone />
+          <HushVisual />
         </FadeInWrapper>
       </section>
 
