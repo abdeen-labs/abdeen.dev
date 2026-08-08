@@ -79,10 +79,9 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#eef5f0" },
-    { media: "(prefers-color-scheme: dark)", color: "#000704" },
-  ],
+  /* LIGHT-PIN: light mode is pinned off while the 3.14 ground candidates
+     sit in review — restore the light/dark themeColor pair when unpinning. */
+  themeColor: "#000704",
 };
 
 // Application entries derive from src/lib/catalog.ts, so a catalog toggle
@@ -106,6 +105,9 @@ export default function RootLayout({
       lang="en"
       className={fontVars}
       data-scroll-behavior="smooth"
+      /* LIGHT-PIN: forces the dark ground; globals.css only follows the OS
+         when data-theme is absent. Remove this attribute to unpin. */
+      data-theme="dark"
     >
       <body className="flex min-h-screen flex-col">
         <script

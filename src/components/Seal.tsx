@@ -64,10 +64,13 @@ export function SealRoundel({
 }: SealRoundelProps) {
   return (
     <picture>
+      {/* LIGHT-PIN: the page is pinned dark, but this <source> follows the
+          OS — an OS-light visitor would get carbon ink on the dark ground.
+          Restore when unpinning.
       <source
         media="(prefers-color-scheme: light)"
         srcSet="/brand/seal-roundel-carbon.svg"
-      />
+      /> */}
       <Image
         className={["seal-roundel", className].filter(Boolean).join(" ")}
         src="/brand/seal-roundel-chalk.svg"
