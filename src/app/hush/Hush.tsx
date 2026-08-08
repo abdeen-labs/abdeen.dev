@@ -271,7 +271,7 @@ export default function Hush() {
               <p className="micro-label">iOS · Free · GPL-3.0</p>
               <div className="flex flex-wrap gap-x-4 gap-y-1">
                 <Link
-                  href="/hush/privacy"
+                  href="/privacy"
                   className="chrome-link font-mono text-control"
                 >
                   Privacy

@@ -125,7 +125,7 @@ export default function HushTermsPage() {
                 <Icon name="arrow-left" />
                 Hush
               </Link>
-              <Link href="/hush/privacy" className="micro-label chrome-link">
+              <Link href="/privacy" className="micro-label chrome-link">
                 Privacy Policy
                 <Icon name="arrow-right" />
               </Link>

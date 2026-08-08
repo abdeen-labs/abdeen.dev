@@ -32,11 +32,13 @@ export interface CatalogEntry {
   };
   /** Sitemap priority; entries without one (external apps) are omitted. */
   sitemapPriority?: number;
-  /** Plain-language boundary used by the registry and privacy page. */
+  /** Plain-language boundary shown on the /tools registry. */
   boundary?: string;
+  /** Only exceptions and useful clarifications appear on /privacy. Products
+   *  without an entry are covered by the page's opening privacy promise. */
   privacy?: {
-    stays: string;
-    leaves: string;
+    kind: "exception" | "clarification";
+    summary: string;
   };
 }
 
@@ -50,6 +52,11 @@ const allApps: CatalogEntry[] = [
     href: "/pocketful",
     meta: "iOS",
     spotlight: true,
+    privacy: {
+      kind: "exception",
+      summary:
+        "Creating or updating a pass sends its design to the signing server you choose and host. Abdeen Labs does not receive it. One-time passes expire after 15 minutes; updatable passes remain on that server.",
+    },
     sitemapPriority: 0.9,
     schema: {
       type: "MobileApplication",
@@ -124,8 +131,9 @@ const allTools: CatalogEntry[] = [
     meta: "/coverquad",
     boundary: "Covers render locally; archive searches use the site proxy.",
     privacy: {
-      stays: "Uploaded covers, layout choices, and the rendered export.",
-      leaves: "Search terms when you choose Cover Art Archive search.",
+      kind: "exception",
+      summary:
+        "If you search for artwork, your search goes to MusicBrainz. When you choose artwork, the image is fetched from Cover Art Archive through the site proxy. Uploaded images and finished covers are not sent to us.",
     },
     sitemapPriority: 0.8,
     schema: {
@@ -141,10 +149,6 @@ const allTools: CatalogEntry[] = [
     href: "/regex",
     meta: "/regex",
     boundary: "Patterns and sample text stay in this browser.",
-    privacy: {
-      stays: "Patterns, sample text, matches, and replacement previews.",
-      leaves: "Nothing.",
-    },
     sitemapPriority: 0.9,
     schema: {
       type: "WebApplication",
@@ -159,10 +163,6 @@ const allTools: CatalogEntry[] = [
     href: "/pomodoro",
     meta: "/pomodoro",
     boundary: "Timing and session counts stay in this browser.",
-    privacy: {
-      stays: "Work and break settings, countdown state, and session count.",
-      leaves: "Nothing.",
-    },
     sitemapPriority: 0.8,
     schema: {
       type: "WebApplication",
@@ -177,10 +177,6 @@ const allTools: CatalogEntry[] = [
     href: "/pwgen",
     meta: "/pwgen",
     boundary: "Generation and word lists stay on this device.",
-    privacy: {
-      stays: "Generated passwords, passphrases, settings, and entropy estimates.",
-      leaves: "Nothing.",
-    },
     sitemapPriority: 0.9,
     schema: {
       type: "WebApplication",
@@ -195,10 +191,6 @@ const allTools: CatalogEntry[] = [
     href: "/2fa",
     meta: "/2fa",
     boundary: "Secrets and QR rendering stay on this device.",
-    privacy: {
-      stays: "TOTP or HOTP secrets, otpauth links, and rendered QR codes.",
-      leaves: "Nothing.",
-    },
     sitemapPriority: 0.8,
     schema: {
       type: "WebApplication",
@@ -213,10 +205,6 @@ const allTools: CatalogEntry[] = [
     href: "/qr",
     meta: "/qr",
     boundary: "Content and QR rendering stay on this device.",
-    privacy: {
-      stays: "Encoded content, style settings, and rendered QR codes.",
-      leaves: "Nothing.",
-    },
     sitemapPriority: 0.9,
     schema: {
       type: "WebApplication",

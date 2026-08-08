@@ -34,6 +34,11 @@ export default function ToolPageShell({
         </div>
         <div className="tool-intro__actions">
           <Link href="/tools" className="text-link">All tools <Icon name="arrow-right" size={16} /></Link>
+          {entry?.privacy && (
+            <Link href={`/privacy#${entry.href.replace(/^\//, "")}`} className="text-link">
+              Privacy <Icon name="arrow-right" size={16} />
+            </Link>
+          )}
           {currentPath && (
             <a
               href={`https://github.com/abdeen-labs/abdeen.dev/tree/main/src/app${currentPath}`}
@@ -50,23 +55,6 @@ export default function ToolPageShell({
       <section className="tool-interface motion-block" aria-label={`${title} interface`} style={{ animationDelay: "calc(var(--route-hold) + 90ms)" }}>
         {children}
       </section>
-
-      {entry?.privacy && (
-        <section className="tool-boundaries motion-block" aria-labelledby="tool-boundaries-title" style={{ animationDelay: "calc(var(--route-hold) + 160ms)" }}>
-          <span className="page-kicker">Boundaries</span>
-          <h2 id="tool-boundaries-title">What stays, and what leaves</h2>
-          <div className="tool-boundaries__grid">
-            <div>
-              <h3>Stays on this device</h3>
-              <p>{entry.privacy.stays}</p>
-            </div>
-            <div>
-              <h3>Leaves this device</h3>
-              <p>{entry.privacy.leaves}</p>
-            </div>
-          </div>
-        </section>
-      )}
 
       <nav className="related-tools" aria-label="Related tools">
         <div className="related-tools__header">
