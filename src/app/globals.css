@@ -261,6 +261,7 @@
   --ink-faint: var(--carbon-600);
   --ink-structure: var(--carbon-500);
   --ink-inverse: var(--chalk-100);
+  --signal-identity: var(--accent-ink);
   --signal-link: var(--accent-ink);
   --signal-press: var(--accent-deep);
   --signal-verified: var(--accent-ink);
@@ -270,6 +271,38 @@
   --seal-key-line: var(--accent-deep);
   --seal-key-ink: var(--carbon-900);
   --readout-color: var(--ink-primary);
+}
+
+/* Follow the operating-system preference by default. The data-theme
+   selectors above remain available for a future explicit user override. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme="dark"]) {
+    color-scheme: light;
+    --surface-page: var(--mist);
+    --surface-sunken: var(--mist-200);
+    --surface-card: var(--mist-300);
+    --surface-band: var(--mist-400);
+    --surface-raised: var(--mist-500);
+    --surface-void: var(--carbon-900);
+    --hairline: var(--carbon-200);
+    --hairline-strong: var(--carbon-300);
+    --ink-primary: var(--carbon-900);
+    --ink-secondary: var(--carbon-800);
+    --ink-dim: var(--carbon-700);
+    --ink-faint: var(--carbon-600);
+    --ink-structure: var(--carbon-500);
+    --ink-inverse: var(--chalk-100);
+    --signal-identity: var(--accent-ink);
+    --signal-link: var(--accent-ink);
+    --signal-press: var(--accent-deep);
+    --signal-verified: var(--accent-ink);
+    --signal-warning: var(--amber-700);
+    --signal-alarm: var(--hazard-700);
+    --seal-key-field: var(--mist-200);
+    --seal-key-line: var(--accent-deep);
+    --seal-key-ink: var(--carbon-900);
+    --readout-color: var(--ink-primary);
+  }
 }
 
 /* ─── Base ───────────────────────────────────────────────────────── */

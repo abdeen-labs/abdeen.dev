@@ -79,7 +79,10 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#000704",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#eef5f0" },
+    { media: "(prefers-color-scheme: dark)", color: "#000704" },
+  ],
 };
 
 // Application entries derive from src/lib/catalog.ts, so a catalog toggle
@@ -102,7 +105,6 @@ export default function RootLayout({
     <html
       lang="en"
       className={fontVars}
-      data-theme="dark"
       data-scroll-behavior="smooth"
     >
       <body className="flex min-h-screen flex-col">

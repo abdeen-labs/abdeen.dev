@@ -63,14 +63,20 @@ export function SealRoundel({
   className,
 }: SealRoundelProps) {
   return (
-    <Image
-      className={["seal-roundel", className].filter(Boolean).join(" ")}
-      src="/brand/seal-roundel-chalk.svg"
-      width={size}
-      height={size}
-      alt={decorative ? "" : "Abdeen Labs engraved roundel seal"}
-      aria-hidden={decorative || undefined}
-      unoptimized
-    />
+    <picture>
+      <source
+        media="(prefers-color-scheme: light)"
+        srcSet="/brand/seal-roundel-carbon.svg"
+      />
+      <Image
+        className={["seal-roundel", className].filter(Boolean).join(" ")}
+        src="/brand/seal-roundel-chalk.svg"
+        width={size}
+        height={size}
+        alt={decorative ? "" : "Abdeen Labs engraved roundel seal"}
+        aria-hidden={decorative || undefined}
+        unoptimized
+      />
+    </picture>
   );
 }
