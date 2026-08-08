@@ -25,7 +25,7 @@ export default function PasswordGeneratorPage() {
       description="Generate memorable passwords or diceware passphrases. Each result reports its entropy in bits."
     >
       <div className="tool-note" role="note">
-        <span className="page-kicker">A quick note</span>
+        <span className="page-kicker tool-note__kicker">A quick note</span>
         <div className="tool-note__grid">
           <div>
             <h3>Why this exists</h3>

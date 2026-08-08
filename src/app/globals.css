@@ -27,6 +27,7 @@
   --color-signal-press: var(--signal-press);
   --color-signal-verified: var(--signal-verified);
   --color-signal-warning: var(--signal-warning);
+  --color-signal-warning-ink: var(--signal-warning-ink);
   --color-signal-alarm: var(--signal-alarm);
   --color-readout: var(--readout-color);
 
@@ -149,8 +150,8 @@
   --hazard-700: #bf0000;
   --cobalt-400: #5aa7ff;
   --cobalt-700: #1d5a96;
-  --amber-400: #e2a81e;
-  --amber-700: #695318;
+  --amber-400: #f2a51d;
+  --amber-700: #c96600;
 
   --surface-page: var(--void);
   --surface-sunken: var(--pitch-900);
@@ -170,7 +171,11 @@
   --signal-link: var(--accent-bright);
   --signal-press: var(--accent-deep);
   --signal-verified: var(--accent-bright);
+  /* Warning splits by role on light ground: amber-700 draws marks and
+     edges only (3.52:1, never type); carbon-900 carries the wording. On
+     dark, amber-400 does both. */
   --signal-warning: var(--amber-400);
+  --signal-warning-ink: var(--amber-400);
   --signal-alarm: var(--hazard-500);
 
   --font-display-stack: var(--font-schibsted), -apple-system, sans-serif;
@@ -266,6 +271,7 @@
   --signal-press: var(--accent-deep);
   --signal-verified: var(--accent-ink);
   --signal-warning: var(--amber-700);
+  --signal-warning-ink: var(--carbon-900);
   --signal-alarm: var(--hazard-700);
   --seal-key-field: var(--mist-200);
   --seal-key-line: var(--accent-deep);
@@ -297,6 +303,7 @@
     --signal-press: var(--accent-deep);
     --signal-verified: var(--accent-ink);
     --signal-warning: var(--amber-700);
+    --signal-warning-ink: var(--carbon-900);
     --signal-alarm: var(--hazard-700);
     --seal-key-field: var(--mist-200);
     --seal-key-line: var(--accent-deep);
@@ -1365,7 +1372,7 @@ a.chip:focus-visible {
 }
 
 .console .warn {
-  color: var(--signal-warning);
+  color: var(--signal-warning-ink);
 }
 
 /* ─── Readout — the one live element per screen ──────────────────── */
@@ -2640,14 +2647,32 @@ a:focus-visible [data-icon="arrow-up-right"] {
 .privacy-table__row p { font-size: 13.5px; line-height: 1.6; color: var(--ink-secondary); }
 .mobile-field-label { display: none; }
 
-/* Framed aside inside a tool interface. Hazard enters the one way the
-   brand permits — as a stripe on the leading edge — while the note itself
-   stays on hairlines and ink. */
+/* Framed aside inside a tool interface — the warning-callout
+   construction: a 6px amber stripe on the leading edge and a
+   diamond-marked kicker. The diamond is always amber; the kicker wording
+   is amber only on dark ground (on light, carbon carries it). The note
+   body stays on hairlines and ink. */
 .tool-note {
   margin-bottom: 28px;
   padding: 18px 24px 24px;
   border: 1px solid var(--hairline-strong);
-  border-left: 3px solid var(--signal-alarm);
+  border-left: 6px solid var(--signal-warning);
+}
+
+.tool-note__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--signal-warning-ink);
+}
+
+.tool-note__kicker::before {
+  content: "";
+  flex: none;
+  width: 7px;
+  height: 7px;
+  background: var(--signal-warning);
+  transform: rotate(45deg);
 }
 
 .tool-note__grid {

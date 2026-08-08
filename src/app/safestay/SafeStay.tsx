@@ -271,7 +271,7 @@ export default function SafeStay() {
             <div className="plate--sunken px-4 py-3">
               {lookupResult.risk === "high" && (
                 <>
-                  <p className="font-mono text-control font-medium text-signal-warning">
+                  <p className="font-mono text-control font-medium text-signal-warning-ink">
                     Camera vendor match — {lookupResult.vendor}
                   </p>
                   <p className="mt-2 text-body text-ink-dim">
