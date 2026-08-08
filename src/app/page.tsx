@@ -12,7 +12,8 @@ function EntryLink({ item, children, className }: { item: CatalogEntry; children
 }
 
 export default function HomePage() {
-  const featured = apps.slice(0, 3);
+  const spotlight = apps.find((item) => item.spotlight) ?? apps[0];
+  const spotlightIndex = apps.indexOf(spotlight);
 
   return (
     <div className="site-frame site-frame--wide">
@@ -27,22 +28,54 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="featured-grid" aria-label="Featured products">
-        {featured.map((item, index) => (
-          <article
-            key={item.href}
-            className="featured-card motion-row"
-            style={{ animationDelay: `calc(var(--route-hold) + ${80 + index * 60}ms)` }}
-          >
-            <span className="featured-card__number" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
-            <h2>{item.title}</h2>
-            <p>{item.description}</p>
-            <span className="registry-meta">{item.meta}</span>
-            <EntryLink item={item} className="text-link">
-              Open {item.title} <Icon name={item.external ? "arrow-up-right" : "arrow-right"} size={16} />
+      <section className="project-showcase" aria-label="Projects">
+        <article
+          className="project-spotlight motion-row"
+          style={{ animationDelay: "calc(var(--route-hold) + 80ms)" }}
+        >
+          <div className="project-spotlight__header">
+            <span className="page-kicker">Latest release</span>
+            <span className="registry-meta">Live · {spotlight.meta}</span>
+          </div>
+          <span className="project-spotlight__number" aria-hidden="true">
+            {String(spotlightIndex + 1).padStart(2, "0")}
+          </span>
+          <div className="project-spotlight__copy">
+            <h2>{spotlight.title}</h2>
+            <p>{spotlight.description}</p>
+            <EntryLink item={spotlight} className="text-link project-spotlight__link">
+              Explore {spotlight.title}
+              <Icon name={spotlight.external ? "arrow-up-right" : "arrow-right"} size={16} />
             </EntryLink>
-          </article>
-        ))}
+          </div>
+        </article>
+
+        <div className="project-ledger motion-block" style={{ animationDelay: "calc(var(--route-hold) + 140ms)" }}>
+          <div className="project-ledger__header">
+            <div>
+              <span className="page-kicker">Studio index</span>
+              <h2>Project register</h2>
+            </div>
+            <span className="registry-meta">{String(apps.length).padStart(2, "0")} active</span>
+          </div>
+          <div className="project-ledger__list">
+            {apps.map((item, index) => (
+              <EntryLink
+                item={item}
+                className="project-ledger__row motion-row"
+                key={item.href}
+              >
+                <span className="registry-meta">{String(index + 1).padStart(2, "0")}</span>
+                <span className="project-ledger__name">
+                  <strong>{item.title}</strong>
+                  {item === spotlight && <span className="project-ledger__latest">Latest</span>}
+                </span>
+                <span className="registry-meta">{item.meta}</span>
+                <Icon name={item.external ? "arrow-up-right" : "arrow-right"} size={16} />
+              </EntryLink>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="home-tools motion-block" aria-labelledby="home-tools-title" style={{ animationDelay: "calc(var(--route-hold) + 190ms)" }}>

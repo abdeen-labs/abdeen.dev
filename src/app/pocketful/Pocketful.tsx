@@ -61,51 +61,27 @@ const workflow = [
 function PocketfulVisual() {
   return (
     <div className={styles.visual} aria-hidden="true">
-      <div className={styles.editor}>
-        <div className={styles.editorBar}>
-          <span>POCKETFUL / DESIGN</span>
-          <span>01 / 11</span>
-        </div>
-        <div className={styles.canvas}>
-          <div className={styles.pass}>
-            <div className={styles.passHeader}>
-              <span className={styles.passMark} />
-              <span>POCKETFUL</span>
-              <span>•••</span>
+      <div className={styles.passStack}>
+        <div className={styles.pass}>
+          <div className={styles.passHeader}>
+            <span className={styles.passMark} />
+            <span>POCKETFUL</span>
+          </div>
+          <div className={styles.passFields}>
+            <div>
+              <span>MEMBER</span>
+              <strong>Nightfield</strong>
             </div>
-            <div className={styles.passFields}>
-              <div>
-                <span>MEMBER</span>
-                <strong>Nightfield</strong>
-              </div>
-              <div>
-                <span>STATUS</span>
-                <strong>OPEN</strong>
-              </div>
+            <div>
+              <span>STATUS</span>
+              <strong>OPEN</strong>
             </div>
-            <div className={styles.barcode} />
+          </div>
+          <div className={styles.passFooter}>
+            <span>Member pass</span>
+            <span>PF · 0003</span>
           </div>
         </div>
-        <div className={styles.editorTabs}>
-          <span data-active="true">DESIGN</span>
-          <span>CONTENT</span>
-          <span>SMART</span>
-          <span>ADVANCED</span>
-        </div>
-      </div>
-
-      <div className={styles.serverCard}>
-        <span>SIGNING SERVER</span>
-        <code>POST /api/passes</code>
-        <span className={styles.serverStatus}>
-          <span /> SIGNED · 15 MIN
-        </span>
-      </div>
-
-      <div className={styles.mcpCard}>
-        <span>MCP</span>
-        <strong>06</strong>
-        <span>TOOLS</span>
       </div>
     </div>
   );

@@ -16,6 +16,8 @@ export interface CatalogEntry {
   /** Mono metadata shown next to the entry (platform or route). */
   meta: string;
   external?: boolean;
+  /** Promotes one enabled app into the homepage release spotlight. */
+  spotlight?: boolean;
   /** Defaults to true. False hides the entry everywhere and 404s its page. */
   enabled?: boolean;
   /** schema.org application entry for the layout JSON-LD graph. Entries
@@ -38,7 +40,25 @@ export interface CatalogEntry {
   };
 }
 
+// Newest first. Adding a release at the top makes it 01 in the studio index
+// and shifts every earlier project down without changing any display code.
 const allApps: CatalogEntry[] = [
+  {
+    title: "Pocketful",
+    description:
+      "Self-hosted Apple Wallet pass designer for iPhone. Builds passes visually, signs them with your server, and opens Wallet's native add-pass sheet.",
+    href: "/pocketful",
+    meta: "iOS",
+    spotlight: true,
+    sitemapPriority: 0.9,
+    schema: {
+      type: "MobileApplication",
+      applicationCategory: "DesignApplication",
+      operatingSystem: "iOS",
+      description:
+        "Self-hosted Apple Wallet pass designer for iPhone with visual editing, server-side signing, over-the-air updates, and an MCP companion.",
+    },
+  },
   {
     title: "Frost",
     description:
@@ -67,21 +87,6 @@ const allApps: CatalogEntry[] = [
       operatingSystem: "iOS",
       description:
         "Focus sounds for iOS. Noise generators, binaural beats, and 80+ recorded ambiences, layered on the device.",
-    },
-  },
-  {
-    title: "Pocketful",
-    description:
-      "Self-hosted Apple Wallet pass designer for iPhone. Builds passes visually, signs them with your server, and opens Wallet's native add-pass sheet.",
-    href: "/pocketful",
-    meta: "iOS · Self-hosted",
-    sitemapPriority: 0.9,
-    schema: {
-      type: "MobileApplication",
-      applicationCategory: "DesignApplication",
-      operatingSystem: "iOS",
-      description:
-        "Self-hosted Apple Wallet pass designer for iPhone with visual editing, server-side signing, over-the-air updates, and an MCP companion.",
     },
   },
   {

@@ -6,6 +6,7 @@ import { useState } from "react";
 import Icon from "@/components/Icon";
 import { SealKey } from "@/components/Seal";
 import { identity, marketing } from "@/lib/brand";
+import { apps, tools } from "@/lib/catalog";
 
 const navItems = [
   { label: "Tools", href: "/tools" },
@@ -13,20 +14,17 @@ const navItems = [
   { label: "About", href: "/about" },
 ] as const;
 
-const productRoutes = new Set([
-  "2fa",
-  "coverquad",
-  "frost",
-  "hush",
-  "icon",
-  "lofi-atc",
-  "pocketful",
-  "pomodoro",
-  "pwgen",
-  "qr",
-  "regex",
-  "safestay",
-]);
+function routeSegments(entries: typeof apps) {
+  return new Set(
+    entries
+      .filter((entry) => !entry.external)
+      .map((entry) => entry.href.split("/").filter(Boolean)[0])
+      .filter(Boolean),
+  );
+}
+
+const projectRoutes = routeSegments(apps);
+const toolRoutes = routeSegments(tools);
 
 function routeLabel(pathname: string) {
   if (pathname === "/") return "STUDIO SITE";
@@ -34,9 +32,9 @@ function routeLabel(pathname: string) {
   if (pathname === "/privacy") return "PRIVACY";
   if (pathname === "/about") return "THE STUDIO";
   const segment = pathname.split("/").filter(Boolean)[0];
-  return segment && productRoutes.has(segment)
-    ? `TOOLS / ${segment.toUpperCase()}`
-    : "NOT FOUND";
+  if (segment && projectRoutes.has(segment)) return `PROJECT / ${segment.toUpperCase()}`;
+  if (segment && toolRoutes.has(segment)) return `TOOL / ${segment.toUpperCase()}`;
+  return "NOT FOUND";
 }
 
 /* The wave sweeps right to left, so a character's delay counts from the end
