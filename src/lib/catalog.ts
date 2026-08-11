@@ -77,7 +77,7 @@ const allApps: CatalogEntry[] = [
     privacy: {
       kind: "clarification",
       summary:
-        "Hark is self-hosted and single-user. Webhooks, deliveries, and approvals stay on the server you run, and pushes travel through Apple's push service to your devices. Abdeen Labs operates no hosted instance and receives nothing.",
+        "Hark runs on your server. Webhooks, deliveries, and approvals stay there, and pushes travel through Apple's push service to your devices. Abdeen Labs operates no hosted instance and receives nothing.",
     },
     sitemapPriority: 0.9,
     schema: {
