@@ -417,15 +417,11 @@
   opacity: 0.7;
 }
 
-/* LIGHT-PIN: OS-scoped tweak disabled while the site is pinned dark —
-   it would fire for OS-light visitors on the dark ground. Restore when
-   unpinning.
 @media (prefers-color-scheme: light) {
   .studioScreens {
     outline-color: oklch(0 0 0 / 0.1);
   }
 }
-*/
 
 @media (max-width: 760px) {
   .mixStudio {
