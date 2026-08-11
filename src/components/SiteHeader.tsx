@@ -29,6 +29,7 @@ const toolRoutes = routeSegments(tools);
 function routeLabel(pathname: string) {
   if (pathname === "/") return "STUDIO SITE";
   if (pathname === "/tools") return "TOOLS";
+  if (pathname === "/projects") return "PROJECTS";
   if (pathname === "/privacy") return "PRIVACY";
   if (pathname === "/about") return "THE STUDIO";
   const segment = pathname.split("/").filter(Boolean)[0];

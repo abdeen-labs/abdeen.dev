@@ -1,6 +1,6 @@
 /**
  * schema.org JSON-LD for the root layout. The application entries in the
- * CollectionPage derive from the catalog, so enabling or disabling an entry
+ * CollectionPage derive from the catalog, so adding or retiring an entry
  * there updates the structured data automatically.
  */
 import { apps, tools, type CatalogEntry } from "./catalog";

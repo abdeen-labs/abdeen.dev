@@ -57,36 +57,28 @@ const requirements = [
   { label: "License", value: "MIT · Open source" },
 ];
 
-/** A compact depiction of Hark's whole loop: the API call arriving at the
- *  server, and the approval prompt it becomes on the iPhone Lock Screen.
- *  Inherits the page theme so Hark remains the subject. */
+/** A single Hark approval prompt, matching the restrained hero objects used
+ *  by the other product pages. */
 function HarkVisual() {
   return (
     <figure
       className={styles.visual}
       role="img"
-      aria-label="An API call arriving at a Hark server and appearing on an iPhone Lock Screen as an approval prompt with Approve and Deny actions."
+      aria-label="A Hark approval prompt for a production deployment, with Approve and Deny actions."
     >
-      <div className={styles.request} aria-hidden="true">
-        <span>POST /v1/interactions</span>
-        <span className={styles.requestMeta}>accepted → APNs</span>
-      </div>
-      <div className={styles.phone} aria-hidden="true">
-        <span className={styles.clock}>09:41</span>
-        <div className={styles.card}>
-          <div className={styles.cardHeader}>
-            <span className={styles.appDot} />
-            <span>Hark</span>
-            <span className={styles.cardTime}>now</span>
-          </div>
-          <strong>
-            Deploy to production<span className={styles.period}>?</span>
-          </strong>
-          <span className={styles.cardBody}>release v2.4.1 · asked by ci-agent</span>
-          <div className={styles.cardActions}>
-            <span className={styles.approve}>Approve</span>
-            <span className={styles.deny}>Deny</span>
-          </div>
+      <div className={styles.card} aria-hidden="true">
+        <div className={styles.cardHeader}>
+          <span className={styles.appDot} />
+          <span>Hark</span>
+          <span className={styles.cardTime}>now</span>
+        </div>
+        <strong>
+          Deploy to production<span className={styles.period}>?</span>
+        </strong>
+        <span className={styles.cardBody}>release v2.4.1 · ci-agent</span>
+        <div className={styles.cardActions}>
+          <span className={styles.approve}>Approve</span>
+          <span className={styles.deny}>Deny</span>
         </div>
       </div>
     </figure>

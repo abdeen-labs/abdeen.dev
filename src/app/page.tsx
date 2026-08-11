@@ -1,15 +1,12 @@
 import Link from "next/link";
+import EntryLink from "@/components/EntryLink";
 import Icon from "@/components/Icon";
 import { SealKey } from "@/components/Seal";
-import { apps, tools, type CatalogEntry } from "@/lib/catalog";
+import { apps, projectIndex, tools } from "@/lib/catalog";
 import { identity } from "@/lib/brand";
 
-function EntryLink({ item, children, className }: { item: CatalogEntry; children: React.ReactNode; className?: string }) {
-  if (item.external) {
-    return <a href={item.href} target="_blank" rel="noopener noreferrer" className={className}>{children}</a>;
-  }
-  return <Link href={item.href} className={className}>{children}</Link>;
-}
+/** Rows shown in the homepage index; the full index lives on /projects. */
+const INDEX_ROWS = 5;
 
 export default function HomePage() {
   const spotlight = apps.find((item) => item.spotlight) ?? apps[0];
@@ -54,12 +51,12 @@ export default function HomePage() {
           <div className="project-ledger__header">
             <div>
               <span className="page-kicker">Studio index</span>
-              <h2>Project register</h2>
+              <h2>Projects</h2>
             </div>
             <span className="registry-meta">{String(apps.length).padStart(2, "0")} active</span>
           </div>
           <div className="project-ledger__list">
-            {apps.map((item, index) => (
+            {apps.slice(0, INDEX_ROWS).map((item, index) => (
               <EntryLink
                 item={item}
                 className="project-ledger__row motion-row"
@@ -73,6 +70,14 @@ export default function HomePage() {
                 <Icon name={item.external ? "arrow-up-right" : "arrow-right"} size={16} />
               </EntryLink>
             ))}
+            <Link href="/projects" className="project-ledger__row project-ledger__row--all motion-row">
+              <span className="registry-meta">{String(projectIndex.length).padStart(2, "0")}</span>
+              <span className="project-ledger__name">
+                <strong>View every project</strong>
+              </span>
+              <span className="registry-meta" aria-hidden="true" />
+              <Icon name="arrow-right" size={16} />
+            </Link>
           </div>
         </div>
       </section>

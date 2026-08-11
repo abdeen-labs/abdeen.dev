@@ -1,10 +1,11 @@
 /**
  * Single source of truth for everything the site indexes: native apps and
- * browser tools. The homepage index, the footer navigation, the ToolPageShell
+ * browser tools. The homepage index, the /projects index, the ToolPageShell
  * "Related tools" strip, the sitemap, and the layout JSON-LD all render from
- * these arrays, so an entry added (or re-enabled) here appears everywhere at
- * once. Set `enabled: false` to pull an entry from all of those surfaces;
- * the route's page.tsx reads the same flag via entryEnabled() to 404 itself.
+ * these arrays, so an entry added here appears everywhere at once. Set
+ * `status: "retired"` to pull an entry from every live surface; it keeps its
+ * row on /projects, and the route's page.tsx reads the same flag via
+ * entryEnabled() to 404 itself.
  *
  * Copy stays specific: what the product does, where it runs when useful,
  * and what happens to the user's data.
@@ -18,8 +19,9 @@ export interface CatalogEntry {
   external?: boolean;
   /** Promotes one enabled app into the homepage release spotlight. */
   spotlight?: boolean;
-  /** Defaults to true. False hides the entry everywhere and 404s its page. */
-  enabled?: boolean;
+  /** Defaults to "live". Retired entries leave every live surface and their
+   *  page 404s, but apps keep their row on the /projects index. */
+  status?: "live" | "retired";
   /** schema.org application entry for the layout JSON-LD graph. Entries
    *  without one (external apps) stay out of the graph. */
   schema?: {
@@ -42,8 +44,8 @@ export interface CatalogEntry {
   };
 }
 
-// Newest first. Adding a release at the top makes it 01 in the studio index
-// and shifts every earlier project down without changing any display code.
+// Newest first. The homepage index shows the newest few; /projects renders
+// the full list, retired entries included.
 const allApps: CatalogEntry[] = [
   {
     title: "Pocketful",
@@ -122,7 +124,7 @@ const allApps: CatalogEntry[] = [
       "Network inspection CLI for rentals. Scans the local network, resolves MAC vendors, and flags camera-class devices.",
     href: "/safestay",
     meta: "macOS · Linux",
-    enabled: false,
+    status: "retired",
     sitemapPriority: 0.8,
     schema: {
       type: "SoftwareApplication",
@@ -239,7 +241,7 @@ const allTools: CatalogEntry[] = [
       "Streams lo-fi beats mixed with live JFK Tower air-traffic control radio.",
     href: "/lofi-atc",
     meta: "/lofi-atc",
-    enabled: false,
+    status: "retired",
     sitemapPriority: 0.8,
     schema: {
       type: "WebApplication",
@@ -249,14 +251,17 @@ const allTools: CatalogEntry[] = [
   },
 ];
 
-const isLive = (entry: CatalogEntry) => entry.enabled !== false;
+const isLive = (entry: CatalogEntry) => entry.status !== "retired";
 
-/** Enabled entries only — what the site actually shows and indexes. */
+/** Live entries only — what the site actually shows and indexes. */
 export const apps: CatalogEntry[] = allApps.filter(isLive);
 export const tools: CatalogEntry[] = allTools.filter(isLive);
 
-/** Whether the catalog entry for `href` exists and is enabled. Route pages
- *  for toggleable tools use this to decide between rendering and 404. */
+/** The full studio index for /projects: every app, retired ones included. */
+export const projectIndex: CatalogEntry[] = allApps;
+
+/** Whether the catalog entry for `href` exists and is live. Route pages
+ *  for retirable entries use this to decide between rendering and 404. */
 export function entryEnabled(href: string): boolean {
   const entry = [...allApps, ...allTools].find((e) => e.href === href);
   return !!entry && isLive(entry);

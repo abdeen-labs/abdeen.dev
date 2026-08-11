@@ -5,8 +5,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const base = 'https://abdeen.dev';
   const lastModified = new Date().toISOString().split('T')[0];
 
-  // Catalog-driven: enabled entries with a sitemapPriority (external apps
-  // and disabled tools drop out automatically).
+  // Catalog-driven: live entries with a sitemapPriority (external apps and
+  // retired entries drop out automatically).
   const catalogUrls: MetadataRoute.Sitemap = [...apps, ...tools]
     .filter((entry) => !entry.external && entry.sitemapPriority !== undefined)
     .map((entry) => ({
@@ -19,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: base, lastModified, changeFrequency: 'monthly', priority: 1.0 },
     { url: `${base}/tools`, lastModified, changeFrequency: 'monthly', priority: 0.9 },
+    { url: `${base}/projects`, lastModified, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${base}/privacy`, lastModified, changeFrequency: 'yearly', priority: 0.7 },
     { url: `${base}/about`, lastModified, changeFrequency: 'yearly', priority: 0.6 },
     ...catalogUrls,
