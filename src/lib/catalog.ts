@@ -71,7 +71,7 @@ const allApps: CatalogEntry[] = [
   {
     title: "Hark",
     description:
-      "Self-hosted notification server. Turns webhooks and agent API calls into iOS pushes, Live Activities, and approval prompts answered from the Lock Screen.",
+      "Send it a webhook or API call and it appears on your iPhone as a notification, Live Activity, or quick approval.",
     href: "/hark",
     meta: "iOS",
     privacy: {
@@ -85,7 +85,7 @@ const allApps: CatalogEntry[] = [
       applicationCategory: "DeveloperApplication",
       operatingSystem: "iOS, macOS, Linux",
       description:
-        "Self-hosted server that turns webhooks and agent API calls into iOS push notifications, Live Activities, and Lock Screen approval prompts.",
+        "Self-hosted server that sends webhooks and API calls to an iPhone as notifications, Live Activities, and approval prompts.",
     },
   },
   {

@@ -157,7 +157,6 @@
 }
 
 .sequenceMode,
-.sequenceSignal,
 .systemNumber,
 .requirements span {
   font-family: var(--font-mono-stack);
@@ -184,16 +183,6 @@
   margin-top: 12px;
   color: var(--ink-secondary);
   text-wrap: pretty;
-}
-
-.sequenceSignal {
-  margin-top: 22px;
-  color: var(--ink-dim);
-}
-
-.sequenceSignal::before {
-  color: var(--signal-identity);
-  content: "↳ ";
 }
 
 .systems {
@@ -225,88 +214,12 @@
   text-wrap: balance;
 }
 
-.systems ul {
-  margin: 24px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.systems li {
-  padding-block: 10px;
-  border-top: 1px solid var(--hairline);
+.systems p {
+  max-width: 34ch;
+  margin-top: 18px;
   color: var(--ink-secondary);
-}
-
-.systems li::before {
-  margin-right: 10px;
-  color: var(--signal-identity);
-  content: "/";
-  font-family: var(--font-mono-stack);
-}
-
-.statement {
-  position: relative;
-  overflow: hidden;
-  padding: clamp(36px, 6vw, 72px);
-  border-top: 1px solid var(--hairline);
-  border-bottom: 1px solid var(--hairline);
-  background: var(--surface-sunken);
-}
-
-.statement::after {
-  position: absolute;
-  right: -12px;
-  bottom: -28px;
-  color: color-mix(in srgb, var(--signal-identity) 9%, transparent);
-  font-family: var(--font-mono-stack);
-  font-size: clamp(100px, 17vw, 210px);
-  font-weight: 500;
-  line-height: 0.8;
-  content: "ONE";
-  pointer-events: none;
-  user-select: none;
-}
-
-.statement > div,
-.statementBody {
-  position: relative;
-  z-index: 1;
-}
-
-.statementBody {
-  display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
-  gap: clamp(40px, 7vw, 96px);
-  align-items: end;
-}
-
-.statement h2 {
-  max-width: 14ch;
-  font-family: var(--font-display-stack);
-  font-size: clamp(38px, 6vw, 68px);
-  line-height: 1.02;
-  text-wrap: balance;
-}
-
-.statementFacts {
-  border-top: 1px solid var(--hairline-strong);
-}
-
-.statementFacts span {
-  display: block;
-  padding-block: 13px;
-  border-bottom: 1px solid var(--hairline);
-  color: var(--ink-secondary);
-  font-family: var(--font-mono-stack);
-  font-size: var(--fs-control);
-  letter-spacing: var(--tracking-micro);
-  text-transform: uppercase;
-}
-
-.statementFacts span::before {
-  margin-right: 12px;
-  color: var(--signal-identity);
-  content: "✓";
+  line-height: 1.65;
+  text-wrap: pretty;
 }
 
 .requirements {
@@ -376,14 +289,6 @@
 
   .systems > section + section {
     border-top: 1px solid var(--hairline);
-  }
-
-  .statement {
-    padding-inline: 24px;
-  }
-
-  .statementBody {
-    grid-template-columns: 1fr;
   }
 
   .requirements div,

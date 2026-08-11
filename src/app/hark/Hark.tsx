@@ -9,45 +9,39 @@ const CONTRACT_URL = `${REPO_URL}/blob/main/docs/api.md`;
 const deliverySteps = [
   {
     number: "01",
-    mode: "Receive",
-    label: "A call lands on your server",
-    detail:
-      "Any service posts a webhook; any agent calls the API with a scoped token.",
-    signal: "HTTP / in",
+    mode: "Send",
+    label: "Something needs your attention",
+    detail: "A service sends a webhook, or an agent calls Hark's API.",
   },
   {
     number: "02",
-    mode: "Deliver",
-    label: "It reaches the Lock Screen",
-    detail:
-      "The event becomes a push notification, a Live Activity, or an approval prompt.",
-    signal: "APNs / out",
+    mode: "Notify",
+    label: "Hark puts it on your iPhone",
+    detail: "It shows up as a notification, a Live Activity, or a question you can answer.",
   },
   {
     number: "03",
-    mode: "Answer",
-    label: "Approve without unlocking",
-    detail:
-      "The answer flows back to whatever asked, through the outbound callback.",
-    signal: "Callback / back",
+    mode: "Reply",
+    label: "Your answer goes back",
+    detail: "For approval prompts, Hark sends your choice back to the caller.",
   },
 ];
 
 const systems = [
   {
     number: "01",
-    label: "Ingest",
-    items: ["Webhook services", "Agent API", "Scoped tokens"],
+    label: "Server",
+    detail: "Receives webhooks and API calls, sends pushes, and keeps a delivery history.",
   },
   {
     number: "02",
-    label: "Deliver",
-    items: ["Push notifications", "Live Activities", "Approval prompts"],
+    label: "iPhone app",
+    detail: "Shows notifications and Live Activities, and lets you answer prompts from the Lock Screen.",
   },
   {
     number: "03",
-    label: "Operate",
-    items: ["Admin dashboard", "Delivery history", "Published contract"],
+    label: "Dashboard",
+    detail: "Shows recent deliveries and gives you a simple place to manage access.",
   },
 ];
 
@@ -97,14 +91,15 @@ export default function Hark() {
                 aria-hidden="true"
                 className="inline-block h-2 w-2 bg-signal-identity"
               />
-              Self-hosted · Abdeen Labs
+              Self-hosted · iPhone
             </span>
             <h1 className="text-h1 md:text-display">
               Hark<span className="text-signal-identity">.</span>
             </h1>
             <p className="max-w-xl text-body text-ink-secondary md:text-lede">
-              Webhooks and agent API calls become iOS pushes, Live Activities,
-              and approval prompts you answer from the Lock Screen.
+              Send Hark a webhook or API call and it puts a notification on
+              your iPhone. It can keep a Live Activity up to date or ask for a
+              quick answer from the Lock Screen.
             </p>
             <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-3">
               <a
@@ -122,10 +117,10 @@ export default function Hark() {
                 rel="noopener noreferrer"
                 className="btn btn--quiet"
               >
-                Read the API contract
+                API docs
               </a>
             </div>
-            <p className="micro-label">Free · Open source · Run your own</p>
+            <p className="micro-label">Free · MIT licensed</p>
           </div>
         </FadeInWrapper>
 
@@ -140,7 +135,7 @@ export default function Hark() {
         aria-label="How a call becomes an answered prompt"
       >
         <FadeInWrapper direction="up">
-          <SectionHeader label="Delivery sequence" count={deliverySteps.length} />
+          <SectionHeader label="How it works" count={deliverySteps.length} />
         </FadeInWrapper>
         <FadeInWrapper direction="up" delay={0.05}>
           <ol className={styles.sequence}>
@@ -152,7 +147,6 @@ export default function Hark() {
                 <p className={styles.sequenceMode}>{step.mode}</p>
                 <h3>{step.label}</h3>
                 <p className={styles.sequenceDetail}>{step.detail}</p>
-                <p className={styles.sequenceSignal}>{step.signal}</p>
               </li>
             ))}
           </ol>
@@ -162,7 +156,7 @@ export default function Hark() {
       {/* Product systems */}
       <section aria-label="Hark systems">
         <FadeInWrapper direction="up">
-          <SectionHeader label="System" count={9} />
+          <SectionHeader label="What's included" count={systems.length} />
         </FadeInWrapper>
         <FadeInWrapper direction="up" delay={0.05}>
           <div className={styles.systems}>
@@ -172,31 +166,12 @@ export default function Hark() {
                   {system.number}
                 </span>
                 <h3>{system.label}</h3>
-                <ul>
-                  {system.items.map((item) => (
-                    <li key={item}>{item}</li>
-                  ))}
-                </ul>
+                <p>{system.detail}</p>
               </section>
             ))}
           </div>
         </FadeInWrapper>
       </section>
-
-      {/* Single-user by design */}
-      <FadeInWrapper direction="up">
-        <section className={styles.statement} aria-labelledby="hark-statement-title">
-          <SectionHeader label="Single-user" />
-          <div className={styles.statementBody}>
-            <h2 id="hark-statement-title">One account. No sign-up surface.</h2>
-            <div className={styles.statementFacts}>
-              <span>No analytics</span>
-              <span>No billing</span>
-              <span>Seeded at boot</span>
-            </div>
-          </div>
-        </section>
-      </FadeInWrapper>
 
       {/* Requirements */}
       <FadeInWrapper direction="up">
@@ -222,12 +197,12 @@ export default function Hark() {
                 <span aria-hidden="true" className="text-signal-identity">
                   /
                 </span>
-                Run your own
+                Run Hark yourself
               </h2>
               <p className="text-body text-ink-secondary">
-                One compose file and the whole stack is live: PostgreSQL and a
-                single Go binary serving the API, the dashboard, and the
-                published contract.
+                Hark runs as one Go server with PostgreSQL. Docker Compose
+                starts both, and the server also hosts the dashboard and API
+                docs.
               </p>
               <p className="micro-label">docker compose up --build</p>
             </div>
@@ -239,7 +214,7 @@ export default function Hark() {
                 className="btn btn--primary"
               >
                 <Icon name="github" size={16} />
-                View source
+                Open on GitHub
               </a>
             </div>
           </div>

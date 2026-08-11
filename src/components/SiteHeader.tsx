@@ -9,6 +9,7 @@ import { identity, marketing } from "@/lib/brand";
 import { apps, tools } from "@/lib/catalog";
 
 const navItems = [
+  { label: "Projects", href: "/projects" },
   { label: "Tools", href: "/tools" },
   { label: "Privacy", href: "/privacy" },
   { label: "About", href: "/about" },

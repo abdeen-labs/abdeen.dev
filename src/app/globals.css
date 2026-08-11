@@ -2614,86 +2614,6 @@ a:focus-visible [data-icon="arrow-up-right"] {
 .tool-registry__row p { font-size: 13.5px; line-height: 1.55; color: var(--ink-secondary); }
 .registry-boundary { color: var(--ink-dim); }
 
-/* Numeral watermark and hover fill mirror .project-spotlight — keep in sync. */
-.project-index__plate {
-  position: relative;
-  display: flex;
-  min-height: 216px;
-  padding: 26px 36px 32px;
-  overflow: hidden;
-  border-bottom: 1px solid var(--hairline);
-  color: var(--ink-primary);
-  text-decoration: none;
-  transition: background-color var(--duration-hover) var(--ease-flat);
-}
-
-a.project-index__plate:hover,
-a.project-index__plate:focus-visible { background: var(--surface-sunken); }
-
-.project-index__no {
-  position: absolute;
-  top: 50%;
-  right: 22px;
-  transform: translateY(-50%);
-  font-family: var(--font-mono-stack);
-  font-size: clamp(110px, 12vw, 168px);
-  font-weight: 500;
-  line-height: 0.8;
-  color: var(--graphite-900);
-  user-select: none;
-  transition: color var(--duration-panel) var(--ease-flat),
-    transform var(--duration-panel-lg) var(--ease-flat);
-}
-
-a.project-index__plate:hover .project-index__no,
-a.project-index__plate:focus-visible .project-index__no {
-  color: var(--surface);
-  transform: translateY(calc(-50% + 8px));
-}
-
-.project-index__copy {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.project-index__meta {
-  display: flex;
-  gap: 16px;
-  margin-bottom: auto;
-  padding-bottom: 28px;
-}
-
-.project-index__tag { color: var(--ink-secondary); }
-
-.project-index__copy h2 {
-  display: flex;
-  align-items: baseline;
-  gap: 12px;
-  font-size: clamp(28px, 3.4vw, 40px);
-  line-height: 1.05;
-}
-
-.project-index__copy h2 [data-icon] {
-  align-self: center;
-  color: var(--ink-secondary);
-}
-
-.project-index__copy p {
-  max-width: 52ch;
-  margin-top: 10px;
-  font-size: 14.5px;
-  line-height: 1.6;
-  color: var(--ink-secondary);
-  text-wrap: pretty;
-}
-
-.project-index__plate--retired h2,
-.project-index__plate--retired p { color: var(--ink-dim); }
-
 .document-intro {
   display: block;
   padding-inline: 0;
@@ -2997,10 +2917,6 @@ a.project-index__plate:focus-visible .project-index__no {
   .tool-registry__row > :nth-child(3),
   .tool-registry__row > :nth-child(4) { grid-column: 2 / -1; }
   .tool-registry__row > :nth-child(5) { grid-column: 3; grid-row: 1; }
-  .project-index__plate { min-height: 176px; padding: 22px 20px 26px; }
-  .project-index__no { right: 10px; font-size: clamp(88px, 22vw, 120px); }
-  .project-index__meta { padding-bottom: 20px; }
-  .project-index__copy h2 { font-size: clamp(26px, 7.5vw, 32px); }
   .privacy-detail { grid-template-columns: 1fr; gap: 12px; }
   .privacy-detail__heading .registry-meta { margin-top: 4px; }
   .about-hero { grid-template-columns: 1fr; }

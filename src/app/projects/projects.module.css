@@ -1,0 +1,349 @@
+.intro {
+  padding: clamp(64px, 9vw, 112px) 36px clamp(52px, 7vw, 80px);
+  border-bottom: 1px solid var(--hairline);
+}
+
+.intro h1 {
+  margin-top: 18px;
+  font-size: clamp(64px, 10vw, 120px);
+  letter-spacing: -0.045em;
+  line-height: 0.9;
+  text-wrap: balance;
+}
+
+.intro h1 span {
+  color: var(--signal-identity);
+}
+
+.intro p {
+  max-width: 42ch;
+  margin-top: 28px;
+  color: var(--ink-secondary);
+  font-size: clamp(17px, 2vw, 21px);
+  line-height: 1.55;
+  text-wrap: pretty;
+}
+
+.wall {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  padding: 1px;
+  background: var(--hairline-strong);
+}
+
+.card {
+  position: relative;
+  display: flex;
+  min-height: 410px;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 28px 32px 32px;
+  color: var(--ink-primary);
+  background: var(--surface-page);
+  text-decoration: none;
+  transition-property: background-color;
+  transition-duration: var(--duration-hover);
+  transition-timing-function: var(--ease-flat);
+}
+
+.cardWide {
+  min-height: 460px;
+  grid-column: 1 / -1;
+}
+
+a.card:hover,
+a.card:focus-visible {
+  background: var(--surface-sunken);
+}
+
+.cardTop {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font-family: var(--font-mono-stack);
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+
+.cardCopy {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  max-width: 54ch;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: auto;
+}
+
+.cardCopy h2 {
+  font-size: clamp(32px, 4vw, 52px);
+  letter-spacing: -0.025em;
+  line-height: 1;
+  text-wrap: balance;
+}
+
+.cardCopy p {
+  max-width: 52ch;
+  margin-top: 14px;
+  color: var(--ink-secondary);
+  font-size: 14.5px;
+  line-height: 1.65;
+  text-wrap: pretty;
+}
+
+.cardAction {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  color: var(--signal-link);
+  font-family: var(--font-mono-stack);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.mark {
+  position: absolute;
+  top: 82px;
+  right: clamp(32px, 7vw, 96px);
+  z-index: 1;
+  color: var(--signal-identity);
+  pointer-events: none;
+  transition-property: transform, opacity;
+  transition-duration: var(--duration-panel-lg);
+  transition-timing-function: var(--ease-flat);
+}
+
+a.card:hover .mark,
+a.card:focus-visible .mark {
+  transform: translateY(-6px);
+}
+
+.markPocketful {
+  width: 210px;
+  height: 124px;
+  border: 1px solid currentColor;
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--signal-identity) 7%, var(--surface-page));
+}
+
+.markPocketful::before {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border: 1px solid var(--hairline-strong);
+  border-radius: inherit;
+  content: "";
+  transform: translate(12px, -10px) rotate(2deg);
+}
+
+.markPocketful span {
+  position: absolute;
+  left: 20px;
+  height: 5px;
+  background: currentColor;
+}
+
+.markPocketful span:first-child { top: 24px; width: 58px; }
+.markPocketful span:nth-child(2) { bottom: 28px; width: 116px; background: var(--ink-structure); }
+.markPocketful i {
+  position: absolute;
+  right: 22px;
+  bottom: 24px;
+  width: 30px;
+  height: 30px;
+  border: 1px solid currentColor;
+  border-radius: var(--radius-round);
+}
+
+.markHark {
+  width: 220px;
+  height: 118px;
+  border: 1px solid currentColor;
+  border-radius: var(--radius-shell);
+}
+
+.markHark span:first-child {
+  position: absolute;
+  top: 22px;
+  left: 22px;
+  width: 7px;
+  height: 7px;
+  background: currentColor;
+}
+
+.markHark span:nth-child(2) {
+  position: absolute;
+  top: 48px;
+  left: 22px;
+  width: 132px;
+  height: 7px;
+  background: var(--ink-primary);
+}
+
+.markHark i {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 32px;
+  border-top: 1px solid var(--hairline-strong);
+}
+
+.markHark i::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  background: var(--hairline-strong);
+  content: "";
+}
+
+.markFrost {
+  display: grid;
+  width: 214px;
+  height: 132px;
+  place-items: center;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-shell);
+  background: color-mix(in srgb, var(--surface-band) 72%, transparent);
+}
+
+.markFrost span {
+  position: absolute;
+  inset: 16px;
+  border: 1px solid var(--hairline);
+  background: color-mix(in srgb, var(--surface-page) 58%, transparent);
+}
+
+.markFrost svg { position: relative; z-index: 1; }
+
+.markHush {
+  display: flex;
+  width: 220px;
+  height: 132px;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 12px;
+  padding: 18px 22px;
+  border-bottom: 1px solid var(--hairline-strong);
+}
+
+.markHush span {
+  width: 10px;
+  background: currentColor;
+}
+
+.markHush span:nth-child(1) { height: 34%; }
+.markHush span:nth-child(2) { height: 72%; }
+.markHush span:nth-child(3) { height: 48%; }
+.markHush span:nth-child(4) { height: 88%; }
+.markHush span:nth-child(5) { height: 58%; }
+
+.markSafeStay {
+  width: 148px;
+  height: 148px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-round);
+}
+
+.markSafeStay::before,
+.markSafeStay span {
+  position: absolute;
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-round);
+  content: "";
+}
+
+.markSafeStay::before { inset: 24px; }
+.markSafeStay span { inset: 48px; }
+.markSafeStay i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 50%;
+  height: 1px;
+  background: currentColor;
+  transform: rotate(-32deg);
+  transform-origin: left;
+}
+
+.markStrobe {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-display-stack);
+  font-size: 48px;
+  font-weight: 600;
+  letter-spacing: -0.06em;
+  line-height: 0.72;
+}
+
+.markStrobe span:nth-child(2) { margin-left: 20px; opacity: 0.55; }
+.markStrobe span:nth-child(3) { margin-left: 40px; opacity: 0.2; }
+
+.cardRetired .mark,
+.cardRetired .cardCopy {
+  opacity: 0.48;
+}
+
+.cardRetired .cardAction,
+.cardRetired .cardTop {
+  color: var(--ink-dim);
+}
+
+@media (max-width: 760px) {
+  .intro {
+    padding: 56px 20px 48px;
+  }
+
+  .wall {
+    grid-template-columns: 1fr;
+  }
+
+  .card,
+  .cardWide {
+    min-height: 380px;
+    grid-column: auto;
+    padding: 24px 20px 28px;
+  }
+
+  .mark {
+    top: 76px;
+    right: 20px;
+    scale: 0.8;
+    transform-origin: top right;
+  }
+
+  a.card:hover .mark,
+  a.card:focus-visible .mark {
+    transform: translateY(-4px);
+  }
+
+  .cardCopy {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .card,
+  .cardWide {
+    min-height: 400px;
+  }
+
+  .mark {
+    opacity: 0.78;
+    scale: 0.68;
+  }
+}
