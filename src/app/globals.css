@@ -2469,20 +2469,6 @@ a:focus-visible [data-icon="arrow-up-right"] {
   white-space: nowrap;
 }
 
-.project-ledger__latest {
-  padding: 3px 6px;
-  border: 1px solid var(--hairline-strong);
-  font-family: var(--font-mono-stack);
-  /* 10px — the chrome-kicker tier this row's meta already uses; 8px sat
-     below every readable tier in the system. */
-  font-size: 10px;
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: 0.08em;
-  color: var(--signal-link);
-  text-transform: uppercase;
-}
-
 .home-tools {
   display: grid;
   grid-template-columns: 0.42fr 1fr;

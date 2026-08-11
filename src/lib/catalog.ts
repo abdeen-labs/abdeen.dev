@@ -67,6 +67,26 @@ const allApps: CatalogEntry[] = [
     },
   },
   {
+    title: "Hark",
+    description:
+      "Self-hosted notification server. Turns webhooks and agent API calls into iOS pushes, Live Activities, and approval prompts answered from the Lock Screen.",
+    href: "/hark",
+    meta: "iOS",
+    privacy: {
+      kind: "clarification",
+      summary:
+        "Hark is self-hosted and single-user. Webhooks, deliveries, and approvals stay on the server you run, and pushes travel through Apple's push service to your devices. Abdeen Labs operates no hosted instance and receives nothing.",
+    },
+    sitemapPriority: 0.9,
+    schema: {
+      type: "SoftwareApplication",
+      applicationCategory: "DeveloperApplication",
+      operatingSystem: "iOS, macOS, Linux",
+      description:
+        "Self-hosted server that turns webhooks and agent API calls into iOS push notifications, Live Activities, and Lock Screen approval prompts.",
+    },
+  },
+  {
     title: "Frost",
     description:
       "Input locker for macOS. Freezes the keyboard, mouse, and trackpad while the screen stays visible. Unlocks with Touch ID.",

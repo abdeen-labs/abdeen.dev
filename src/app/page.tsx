@@ -68,7 +68,6 @@ export default function HomePage() {
                 <span className="registry-meta">{String(index + 1).padStart(2, "0")}</span>
                 <span className="project-ledger__name">
                   <strong>{item.title}</strong>
-                  {item === spotlight && <span className="project-ledger__latest">Latest</span>}
                 </span>
                 <span className="registry-meta">{item.meta}</span>
                 <Icon name={item.external ? "arrow-up-right" : "arrow-right"} size={16} />
