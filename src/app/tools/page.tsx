@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Icon from "@/components/Icon";
 import { tools } from "@/lib/catalog";
 
 export const metadata: Metadata = {
@@ -19,22 +20,22 @@ export default function ToolsPage() {
         </div>
       </header>
 
-      <section className="tool-registry" aria-label="Tool registry">
-        <div className="tool-registry__header" aria-hidden="true">
-          <span>No</span><span>Tool</span><span>What it does</span><span>Boundary</span><span>Status</span>
-        </div>
+      <section className="tool-gallery" aria-label="Available tools">
         {tools.map((tool, index) => (
           <Link
             href={tool.href}
-            className="tool-registry__row motion-row"
+            className="tool-gallery__card motion-row"
             key={tool.href}
             style={{ animationDelay: `calc(var(--route-hold) + ${80 + index * 45}ms)` }}
           >
-            <span className="registry-meta">{String(index + 1).padStart(2, "0")}</span>
-            <h2>{tool.title}</h2>
-            <p>{tool.description}</p>
-            <span className="registry-boundary">{tool.boundary}</span>
-            <span className="registry-meta">Live · {tool.meta.replace("/", "") || "Web"}</span>
+            <span className="tool-gallery__topline">
+              <span className="registry-meta">{String(index + 1).padStart(2, "0")}</span>
+              <Icon name="arrow-right" size={20} />
+            </span>
+            <span className="tool-gallery__copy">
+              <h2>{tool.title}</h2>
+              <p>{tool.description}</p>
+            </span>
           </Link>
         ))}
       </section>
