@@ -61,18 +61,25 @@ export default function ToolPageShell({
           <span className="page-kicker">Related tools</span>
           <Link href="/tools" className="text-link">View all <Icon name="arrow-right" size={16} /></Link>
         </div>
-        {relatedTools(currentPath ?? "").map((tool, index) => (
-          <Link
-            href={tool.href}
-            className="related-tools__row motion-row"
-            key={tool.href}
-            style={{ animationDelay: `calc(var(--route-hold) + ${220 + index * 50}ms)` }}
-          >
-            <span className="registry-meta">{String(index + 1).padStart(2, "0")}</span>
-            <span>{tool.title}</span>
-            <Icon name="arrow-right" size={16} />
-          </Link>
-        ))}
+        <div className="related-tools__grid">
+          {relatedTools(currentPath ?? "").map((tool, index) => (
+            <Link
+              href={tool.href}
+              className="related-tools__card motion-row"
+              key={tool.href}
+              style={{ animationDelay: `calc(var(--route-hold) + ${220 + index * 50}ms)` }}
+            >
+              <span className="related-tools__topline">
+                <span className="registry-meta">{String(index + 1).padStart(2, "0")}</span>
+                <Icon name="arrow-right" size={16} />
+              </span>
+              <span className="related-tools__copy">
+                <strong>{tool.title}</strong>
+                <span>{tool.description}</span>
+              </span>
+            </Link>
+          ))}
+        </div>
       </nav>
     </div>
   );
