@@ -1467,7 +1467,7 @@ a.chip:focus-visible {
   border-bottom: 1px solid var(--hairline);
 }
 
-/* The identity band: bracketed studio name and Nightfield public mark.
+/* The identity band: bracketed studio name and 4BD33N public mark.
    Mirrors the marketing reference kit. */
 .dossier-band {
   display: flex;

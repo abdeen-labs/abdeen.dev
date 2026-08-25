@@ -34,11 +34,13 @@ export const identity = {
     "Jaafar Abdeen, a Jordanian Palestinian engineer from al-Khalil",
 } as const;
 
-const marketingControlMark = `${release.label.toUpperCase()}//OPEN`;
+// Control marks have their own namespace; Nightfield remains the theme name.
+const controlNamespace = "4BD33N";
+const marketingControlMark = `${controlNamespace}//OPEN`;
 
 export const marketing = {
   controlMark: marketingControlMark,
-  /** Continuous public sites may carry the Nightfield name once. */
+  /** Continuous public sites may carry the 4BD33N public mark once. */
   topChrome: marketingControlMark,
   footer: `${identity.studio} · Private software`,
 } as const;
