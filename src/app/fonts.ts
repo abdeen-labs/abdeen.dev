@@ -1,6 +1,6 @@
 import localFont from "next/font/local";
 
-// Canonical Nightfield faces are vendored with the site. This avoids a build-
+// Canonical Redline faces are vendored with the site. This avoids a build-
 // time network dependency and keeps the browser on the exact brand cuts.
 export const schibsted = localFont({
   src: "./font-files/SchibstedGrotesk.woff2",

@@ -25,11 +25,11 @@ export default async function OGImage() {
     readFile(
       path.join(
         process.cwd(),
-        'public/fonts/nightfield/static/SchibstedGrotesk.ttf',
+        'public/fonts/redline/static/SchibstedGrotesk.ttf',
       ),
     ),
     readFile(
-      path.join(process.cwd(), 'public/fonts/nightfield/static/GeistMono.ttf'),
+      path.join(process.cwd(), 'public/fonts/redline/static/GeistMono.ttf'),
     ),
   ]);
 
@@ -43,7 +43,7 @@ export default async function OGImage() {
           flexDirection: 'column',
           justifyContent: 'space-between',
           padding: '64px 80px',
-          background: '#000704',
+          background: '#0A0F1C',
           fontFamily: 'Geist Mono',
         }}
       >
@@ -65,25 +65,25 @@ export default async function OGImage() {
               viewBox="0 0 40 40"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path d={SEAL_KEY.fieldPath} fill="#00100A" />
+              <path d={SEAL_KEY.fieldPath} fill="#121827" />
               <path
                 d={SEAL_KEY.ringPathEvenOdd}
                 fillRule="evenodd"
-                fill="#1FB977"
+                fill="#FE002A"
               />
               <g transform={SEAL_KEY_MARK.transform}>
-                <path d={MARK.d} fill="#F0FAF5" />
+                <path d={MARK.d} fill="#F3F7FF" />
               </g>
             </svg>
             <div
-              style={{ width: 1, height: 44, background: '#043923', display: 'flex' }}
+              style={{ width: 1, height: 44, background: '#313C5A', display: 'flex' }}
             />
             <span
               style={{
                 fontSize: 22,
                 fontWeight: 500,
                 letterSpacing: 4.84,
-                color: '#F0FAF5',
+                color: '#F3F7FF',
               }}
             >
               ABDEEN LABS
@@ -94,7 +94,7 @@ export default async function OGImage() {
               fontSize: 18,
               fontWeight: 500,
               letterSpacing: 2,
-              color: '#86A998',
+              color: '#939FBD',
             }}
           >
             REF / ABDEEN.DEV
@@ -111,7 +111,7 @@ export default async function OGImage() {
               fontSize: 104,
               lineHeight: 0.92,
               letterSpacing: -5.7,
-              color: '#F0FAF5',
+              color: '#F3F7FF',
             }}
           >
             PRIVATE SOFTWARE.
@@ -123,7 +123,7 @@ export default async function OGImage() {
               fontSize: 104,
               lineHeight: 0.92,
               letterSpacing: -5.7,
-              color: '#86A998',
+              color: '#939FBD',
             }}
           >
             CLEAR BOUNDARIES.
@@ -132,7 +132,7 @@ export default async function OGImage() {
             style={{
               width: 180,
               height: 2,
-              background: '#1FB977',
+              background: '#FE002A',
               marginTop: 40,
               display: 'flex',
             }}
@@ -148,7 +148,7 @@ export default async function OGImage() {
             width: '100%',
           }}
         >
-          <span style={{ fontSize: 30, fontWeight: 500, color: '#F0FAF5' }}>
+          <span style={{ fontSize: 30, fontWeight: 500, color: '#F3F7FF' }}>
             abdeen.dev
           </span>
           <span
@@ -156,7 +156,7 @@ export default async function OGImage() {
               fontSize: 18,
               fontWeight: 500,
               letterSpacing: 2,
-              color: '#86A998',
+              color: '#939FBD',
             }}
           >
             NO ACCOUNT · OPEN SOURCE

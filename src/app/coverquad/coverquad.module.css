@@ -150,7 +150,7 @@
   to { opacity: 1; }
 }
 
-/* Error line — the hazard stripe supports the message without filling it. */
+/* Error line — the alarm hatch supports the message without filling it. */
 .faultLine {
   display: flex;
   align-items: center;

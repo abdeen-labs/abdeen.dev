@@ -88,7 +88,7 @@ function RouteLabel({ label }: { label: string }) {
   );
 }
 
-/** Shared Nightfield chrome. The route owns the approved dark/light ground. */
+/** Shared Redline chrome. The route owns the approved dark/light ground. */
 export default function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);

@@ -1,10 +1,18 @@
 /* 2FA — tool-specific styling. Shared controls live in globals.css. */
 
 /* Invalid field — layered on the shared .input recipe. Real errors only:
-   one of the secret/label pair is missing, or the URI fails to parse. */
+   one of the secret/label pair is missing, or the URI fails to parse. The
+   alarm is a hatched leading edge inside the field, never a solid border. */
 .invalid,
 .invalid:focus {
-  border-color: var(--signal-alarm);
+  padding-left: calc(0.8rem + 8px);
+  background-image: repeating-linear-gradient(
+    135deg,
+    var(--signal-alarm) 0 4px,
+    transparent 4px 8px
+  );
+  background-size: 8px 100%;
+  background-repeat: no-repeat;
 }
 
 .divider {
@@ -29,7 +37,7 @@
   color: var(--ink-dim); /* dim floor on the card plate */
 }
 
-/* Error line under the URI field. The hazard stripe supports the text. */
+/* Error line under the URI field. The alarm hatch supports the text. */
 .fault {
   display: flex;
   align-items: stretch;

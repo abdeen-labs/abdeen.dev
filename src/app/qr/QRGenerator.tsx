@@ -355,11 +355,11 @@ export default function QRGenerator() {
           Generate QR code
         </button>
 
-        {/* Validation notice — a plain sentence; the hazard stripe marks the
+        {/* Validation notice — a plain sentence; the alarm hatch marks the
             blocked generate. */}
         {error && (
           <div role="alert" className="flex items-center gap-3">
-            <span aria-hidden="true" className="abd-hazard h-3 w-12 flex-none" />
+            <span aria-hidden="true" className="abd-alarm h-3 w-12 flex-none" />
             <p className="font-mono text-control text-ink-secondary">{error}</p>
           </div>
         )}

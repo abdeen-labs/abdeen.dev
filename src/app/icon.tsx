@@ -46,12 +46,12 @@ export default function Icon() {
           xmlns="http://www.w3.org/2000/svg"
         >
           <g transform={`translate(${OFFSET} ${OFFSET})`}>
-            <path d={FIELD} fill="#00100A" />
-            <path d={RING} fillRule="evenodd" fill="#1FB977" />
+            <path d={FIELD} fill="#121827" />
+            <path d={RING} fillRule="evenodd" fill="#FE002A" />
             <g
               transform={`translate(${MARK_TX} ${MARK_TY}) scale(${MARK_SCALE})`}
             >
-              <path d={MARK.d} fill="#F0FAF5" />
+              <path d={MARK.d} fill="#F3F7FF" />
             </g>
           </g>
         </svg>

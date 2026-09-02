@@ -52,7 +52,7 @@
   border-color: var(--signal-link);
 }
 
-/* Error report — the hazard stripe supports clear text for an invalid or
+/* Error report — the alarm hatch supports clear text for an invalid or
    timed-out pattern. */
 .fault {
   display: flex;

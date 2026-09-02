@@ -371,7 +371,7 @@ export default function LofiAtcRadio() {
   );
 
   // The word carries the state; Accent only for Live, ink for the rest. An
-  // error gets the hazard stripe beside it, never a red fill or button.
+  // error gets the alarm hatch beside it, never a fill or button.
   const stateClass = (s: StreamStatus) =>
     s === "live" ? styles.stateLive : s === "error" ? styles.stateFault : undefined;
 
@@ -420,7 +420,7 @@ export default function LofiAtcRadio() {
             {status === "error" && (
               <span
                 aria-hidden="true"
-                className={`abd-hazard ${styles.faultStripe}`}
+                className={`abd-alarm ${styles.faultStripe}`}
               />
             )}
           </span>

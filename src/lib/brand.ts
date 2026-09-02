@@ -9,8 +9,8 @@
  * `artifacts.marketing`. The brand repo remains the source.
  */
 
-const releaseVersion = "3.11";
-const releaseIssued = "2026-08";
+const releaseVersion = "4.0";
+const releaseIssued = "2026-09";
 
 /**
  * Release details are kept for tooling and internal synchronization. Public
@@ -18,7 +18,7 @@ const releaseIssued = "2026-08";
  */
 export const release = {
   version: releaseVersion,
-  label: "Nightfield",
+  label: "Redline",
   issued: releaseIssued,
 } as const;
 
@@ -34,7 +34,7 @@ export const identity = {
     "Jaafar Abdeen, a Jordanian Palestinian engineer from al-Khalil",
 } as const;
 
-// Control marks have their own namespace; Nightfield remains the theme name.
+// Control marks have their own namespace; Redline remains the theme name.
 const controlNamespace = "4BD33N";
 const marketingControlMark = `${controlNamespace}//OPEN`;
 

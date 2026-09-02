@@ -275,7 +275,7 @@ export default function RegexTester() {
             </div>
             {error && (
               <div id="regex-error" className={styles.fault} role="alert">
-                <span aria-hidden="true" className={`abd-hazard ${styles.faultStripe}`} />
+                <span aria-hidden="true" className={`abd-alarm ${styles.faultStripe}`} />
                 <div className={styles.faultBody}>
                   <span className={styles.faultLine}>
                     Check the pattern and try again.
@@ -352,7 +352,7 @@ export default function RegexTester() {
               <div className={styles.placeholder}>Enter a valid pattern.</div>
             ) : timedOut ? (
               <div className={styles.fault} role="alert">
-                <span aria-hidden="true" className={`abd-hazard ${styles.faultStripe}`} />
+                <span aria-hidden="true" className={`abd-alarm ${styles.faultStripe}`} />
                 <div className={styles.faultBody}>
                   <span className={styles.faultLine}>
                     This pattern took too long. Try simplifying it.

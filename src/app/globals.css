@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* Abdeen Labs · Nightfield. Canonical anchors: Void, Surface, Border,
+/* Abdeen Labs · Redline. Canonical anchors: Void, Surface, Border,
    Mist, Accent. */
 
 @theme inline {
@@ -27,7 +27,6 @@
   --color-signal-press: var(--signal-press);
   --color-signal-verified: var(--signal-verified);
   --color-signal-warning: var(--signal-warning);
-  --color-signal-warning-ink: var(--signal-warning-ink);
   --color-signal-alarm: var(--signal-alarm);
   --color-readout: var(--readout-color);
 
@@ -88,7 +87,7 @@
   --radius-shell: 0;
   --radius-round: 999px;
 
-  /* Nightfield is a flat system. */
+  /* Redline is a flat system. */
   --shadow-*: initial;
   --inset-shadow-*: initial;
   --drop-shadow-*: initial;
@@ -99,59 +98,58 @@
   --ease-flat: cubic-bezier(0.3, 0, 0.2, 1);
 }
 
-/* ─── Canonical Nightfield tokens ───────────────────────────────── */
+/* ─── Canonical Redline tokens ───────────────────────────────── */
 
 :root,
 [data-mode="dark"] {
   color-scheme: dark;
 
   --pitch-960: #000000;
-  --void: #000704;
-  --pitch-900: #00100a;
-  --surface: #001a0f;
-  --pitch-800: #012416;
-  --pitch-700: #022e1d;
-  --pitch-600: #043923;
-  --border: #07452d;
+  --void: #0a0f1c;
+  --pitch-900: #121827;
+  --surface: #192133;
+  --pitch-800: #212a40;
+  --pitch-700: #29334d;
+  --pitch-600: #313c5a;
+  --border: #3a4769;
 
-  --graphite-900: #00140c;
-  --graphite-800: #163128;
-  --graphite-700: #345248;
-  --graphite-600: #48665b;
-  --graphite-500: #6b837a;
-  --graphite-400: #86a998;
-  --graphite-300: #a6c0b4;
-  --graphite-200: #c1d7cc;
-  --graphite-100: #dcebe3;
+  --graphite-900: #090e1e;
+  --graphite-800: #232a3e;
+  --graphite-700: #414a61;
+  --graphite-600: #555e75;
+  --graphite-500: #747d90;
+  --graphite-400: #939fbd;
+  --graphite-300: #afb9cf;
+  --graphite-200: #c9d1e4;
+  --graphite-100: #e1e7f4;
 
-  --chalk-100: #f0faf5;
-  --chalk-200: #e5f2eb;
-  --chalk-300: #d4e8de;
+  --chalk-100: #f3f7ff;
+  --chalk-200: #e9eefa;
+  --chalk-300: #dbe2f4;
 
-  --mist: #eef5f0;
-  --mist-200: #e8f0eb;
-  --mist-300: #d9e8df;
-  --mist-400: #ccdfd3;
-  --mist-500: #bcd3c4;
+  --mist: #f0f3fa;
+  --mist-200: #eaeef5;
+  --mist-300: #dee4f2;
+  --mist-400: #d2d9eb;
+  --mist-500: #c3cce2;
 
-  --carbon-900: #06150d;
-  --carbon-800: #142b20;
-  --carbon-700: #314c40;
-  --carbon-600: #486557;
-  --carbon-500: #6f887a;
-  --carbon-300: #a9c2b3;
-  --carbon-200: #b4ccbd;
+  --carbon-900: #0a0f1c;
+  --carbon-800: #1e2537;
+  --carbon-700: #3c455a;
+  --carbon-600: #535d75;
+  --carbon-500: #788197;
+  --carbon-300: #b1bbd2;
+  --carbon-200: #bbc5db;
 
-  --accent-bright: #43d995;
-  --accent: #1fb977;
-  --accent-deep: #0d8f5b;
-  --accent-ink: #087248;
-  --hazard-500: #ff2a2a;
-  --hazard-700: #bf0000;
+  --accent: #fe002a;
+  --accent-deep: #d4212c;
+  --accent-ink: #be0018;
+  --alarm-500: #ff2bd6;
+  --alarm-700: #bf0099;
+  --warn-400: #f5ff00;
+  --warn-700: #766800;
   --cobalt-400: #5aa7ff;
   --cobalt-700: #1d5a96;
-  --amber-400: #f2a51d;
-  --amber-700: #c96600;
 
   --surface-page: var(--void);
   --surface-sunken: var(--pitch-900);
@@ -168,15 +166,13 @@
   --ink-structure: var(--graphite-700);
   --ink-inverse: var(--carbon-900);
   --signal-identity: var(--accent);
-  --signal-link: var(--accent-bright);
+  --signal-link: var(--accent);
   --signal-press: var(--accent-deep);
-  --signal-verified: var(--accent-bright);
-  /* Warning splits by role on light ground: amber-700 draws marks and
-     edges only (3.52:1, never type); carbon-900 carries the wording. On
-     dark, amber-400 does both. */
-  --signal-warning: var(--amber-400);
-  --signal-warning-ink: var(--amber-400);
-  --signal-alarm: var(--hazard-500);
+  --signal-verified: var(--cobalt-400);
+  /* The ground's warning step sets a warning's line and label; the
+     message stays on primary ink. */
+  --signal-warning: var(--warn-400);
+  --signal-alarm: var(--alarm-500);
 
   --font-display-stack: var(--font-schibsted), -apple-system, sans-serif;
   --font-mono-stack: var(--font-geist-mono), ui-monospace, monospace;
@@ -243,7 +239,7 @@
   --seal-key-line: var(--accent);
   --seal-key-ink: var(--chalk-100);
   --readout-scale: 1.4;
-  --readout-color: var(--accent-bright);
+  --readout-color: var(--accent);
   --readout-glow: none;
   --edge-light: transparent;
   --select-arrow: none;
@@ -269,10 +265,9 @@
   --signal-identity: var(--accent-ink);
   --signal-link: var(--accent-ink);
   --signal-press: var(--accent-deep);
-  --signal-verified: var(--accent-ink);
-  --signal-warning: var(--amber-700);
-  --signal-warning-ink: var(--carbon-900);
-  --signal-alarm: var(--hazard-700);
+  --signal-verified: var(--cobalt-700);
+  --signal-warning: var(--warn-700);
+  --signal-alarm: var(--alarm-700);
   --seal-key-field: var(--mist-200);
   --seal-key-line: var(--accent-deep);
   --seal-key-ink: var(--carbon-900);
@@ -301,10 +296,9 @@
     --signal-identity: var(--accent-ink);
     --signal-link: var(--accent-ink);
     --signal-press: var(--accent-deep);
-    --signal-verified: var(--accent-ink);
-    --signal-warning: var(--amber-700);
-    --signal-warning-ink: var(--carbon-900);
-    --signal-alarm: var(--hazard-700);
+    --signal-verified: var(--cobalt-700);
+    --signal-warning: var(--warn-700);
+    --signal-alarm: var(--alarm-700);
     --seal-key-field: var(--mist-200);
     --seal-key-line: var(--accent-deep);
     --seal-key-ink: var(--carbon-900);
@@ -1376,7 +1370,7 @@ a.chip:focus-visible {
 }
 
 .console .warn {
-  color: var(--signal-warning-ink);
+  color: var(--signal-warning);
 }
 
 /* ─── Readout — the one live element per screen ──────────────────── */
@@ -1444,9 +1438,13 @@ a.chip:focus-visible {
   right: 6px;
 }
 
-/* Flat alarm bar, only beside something actually wrong. */
-.abd-hazard {
-  background: var(--signal-alarm);
+/* Hatched edge — the alarm form, only beside something actually wrong. */
+.abd-alarm {
+  background: repeating-linear-gradient(
+    135deg,
+    var(--signal-alarm) 0 4px,
+    transparent 4px 8px
+  );
 }
 
 /* Struck rule — the alarm form for a line of text. */
@@ -1884,7 +1882,7 @@ a.chip:focus-visible {
   color: color-mix(in srgb, var(--ink-structure) 30%, transparent);
 }
 
-/* ─── Approved Nightfield studio site ───────────────────────────── */
+/* ─── Approved Redline studio site ───────────────────────────── */
 
 /* The stage used to translate 12px while every block inside it translated
    another 16px, so a route change played two nested slides at once — the
@@ -2710,22 +2708,21 @@ a:focus-visible [data-icon="arrow-up-right"] {
 .privacy-contact a { color: var(--ink-primary); text-decoration-color: var(--signal-link); text-underline-offset: 4px; }
 
 /* Framed aside inside a tool interface — the warning-callout
-   construction: a 6px amber stripe on the leading edge and a
-   diamond-marked kicker. The diamond is always amber; the kicker wording
-   is amber only on dark ground (on light, carbon carries it). The note
+   construction: a 3px dashed leading edge and a diamond-marked kicker.
+   The diamond and the kicker take the ground's warning step; the note
    body stays on hairlines and ink. */
 .tool-note {
   margin-bottom: 28px;
   padding: 18px 24px 24px;
   border: 1px solid var(--hairline-strong);
-  border-left: 6px solid var(--signal-warning);
+  border-left: 3px dashed var(--signal-warning);
 }
 
 .tool-note__kicker {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  color: var(--signal-warning-ink);
+  color: var(--signal-warning);
 }
 
 .tool-note__kicker::before {
