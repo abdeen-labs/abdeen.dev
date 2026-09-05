@@ -1450,7 +1450,7 @@ a.chip:focus-visible {
 }
 
 /* Highlighter chip — the only warning form the light ground allows, and
-   valid on dark. Sized in em so it takes the type scale of its context. */
+   valid on dark. */
 .abd-warn-chip {
   display: inline-flex;
   align-items: center;
