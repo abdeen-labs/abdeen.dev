@@ -271,8 +271,9 @@ export default function SafeStay() {
             <div className="plate--sunken px-4 py-3">
               {lookupResult.risk === "high" && (
                 <>
-                  <p className="font-mono text-control font-medium text-signal-warning">
-                    Camera vendor match — {lookupResult.vendor}
+                  <p className="font-mono text-control font-medium text-ink-primary">
+                    <span className="abd-warn-chip">Camera vendor match</span>{" "}
+                    — {lookupResult.vendor}
                   </p>
                   <p className="mt-2 text-body text-ink-dim">
                     This prefix is registered to a surveillance or camera

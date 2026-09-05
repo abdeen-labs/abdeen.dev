@@ -374,7 +374,14 @@ export default function PasswordGenerator() {
               </div>
               <span className={styles.strengthLabel}>
                 {selected.entropy} bits &middot;{' '}
-                <span className={styles.strengthWord} data-level={strength.level}>
+                <span
+                  className={
+                    strength.level === 1
+                      ? `${styles.strengthWord} abd-warn-chip`
+                      : styles.strengthWord
+                  }
+                  data-level={strength.level}
+                >
                   {strength.label}
                 </span>
               </span>
@@ -389,6 +396,10 @@ export default function PasswordGenerator() {
             {copied && <span className={styles.copyStatus}>Copied</span>}
             {copyFailed && (
               <span className={styles.copyFault}>
+                <span
+                  aria-hidden="true"
+                  className={`abd-alarm ${styles.copyFaultStripe}`}
+                />
                 Couldn&apos;t copy. Select the password and copy it manually.
               </span>
             )}

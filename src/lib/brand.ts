@@ -9,7 +9,7 @@
  * `artifacts.marketing`. The brand repo remains the source.
  */
 
-const releaseVersion = "4.0";
+const releaseVersion = "4.2";
 const releaseIssued = "2026-09";
 
 /**

@@ -145,9 +145,7 @@
   --accent-deep: #d4212c;
   --accent-ink: #be0018;
   --alarm-500: #ff2bd6;
-  --alarm-700: #bf0099;
   --warn-400: #f5ff00;
-  --warn-700: #766800;
   --cobalt-400: #5aa7ff;
   --cobalt-700: #1d5a96;
 
@@ -169,8 +167,9 @@
   --signal-link: var(--accent);
   --signal-press: var(--accent-deep);
   --signal-verified: var(--cobalt-400);
-  /* The ground's warning step sets a warning's line and label; the
-     message stays on primary ink. */
+  /* Neon yellow never sets text, a line, a frame, or a glyph on mist;
+     the highlighter chip carries the warning there. Alarm magenta holds
+     on both grounds, and the message stays on primary ink. */
   --signal-warning: var(--warn-400);
   --signal-alarm: var(--alarm-500);
 
@@ -266,8 +265,8 @@
   --signal-link: var(--accent-ink);
   --signal-press: var(--accent-deep);
   --signal-verified: var(--cobalt-700);
-  --signal-warning: var(--warn-700);
-  --signal-alarm: var(--alarm-700);
+  --signal-warning: var(--warn-400);
+  --signal-alarm: var(--alarm-500);
   --seal-key-field: var(--mist-200);
   --seal-key-line: var(--accent-deep);
   --seal-key-ink: var(--carbon-900);
@@ -297,8 +296,8 @@
     --signal-link: var(--accent-ink);
     --signal-press: var(--accent-deep);
     --signal-verified: var(--cobalt-700);
-    --signal-warning: var(--warn-700);
-    --signal-alarm: var(--alarm-700);
+    --signal-warning: var(--warn-400);
+    --signal-alarm: var(--alarm-500);
     --seal-key-field: var(--mist-200);
     --seal-key-line: var(--accent-deep);
     --seal-key-ink: var(--carbon-900);
@@ -1369,10 +1368,6 @@ a.chip:focus-visible {
   color: var(--signal-verified);
 }
 
-.console .warn {
-  color: var(--signal-warning);
-}
-
 /* ─── Readout — the one live element per screen ──────────────────── */
 
 /* One live readout per screen. Dark uses Accent; light uses primary ink.
@@ -1452,6 +1447,28 @@ a.chip:focus-visible {
   text-decoration: line-through;
   text-decoration-color: var(--signal-alarm);
   text-decoration-thickness: 2px;
+}
+
+/* Highlighter chip — the only warning form the light ground allows, and
+   valid on dark. Sized in em so it takes the type scale of its context. */
+.abd-warn-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45em;
+  padding: 0.15em 0.45em;
+  background: var(--warn-400);
+  color: var(--carbon-900);
+  font-family: var(--font-mono-stack);
+  font-weight: 500;
+}
+
+.abd-warn-chip::before {
+  content: "";
+  flex: none;
+  width: 0.42em;
+  height: 0.42em;
+  background: currentColor;
+  transform: rotate(45deg);
 }
 
 /* .abd-stamp is print-register furniture and deliberately does not ship
@@ -2707,31 +2724,20 @@ a:focus-visible [data-icon="arrow-up-right"] {
 .privacy-contact p { margin-top: 18px; font-size: 18px; color: var(--ink-secondary); }
 .privacy-contact a { color: var(--ink-primary); text-decoration-color: var(--signal-link); text-underline-offset: 4px; }
 
-/* Framed aside inside a tool interface — the warning-callout
-   construction: a 3px dashed leading edge and a diamond-marked kicker.
-   The diamond and the kicker take the ground's warning step; the note
-   body stays on hairlines and ink. */
+/* Framed aside inside a tool interface. The chip carries the warning;
+   the note body stays on hairlines and ink. */
 .tool-note {
   margin-bottom: 28px;
   padding: 18px 24px 24px;
   border: 1px solid var(--hairline-strong);
-  border-left: 3px dashed var(--signal-warning);
 }
 
 .tool-note__kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--signal-warning);
-}
-
-.tool-note__kicker::before {
-  content: "";
-  flex: none;
-  width: 7px;
-  height: 7px;
-  background: var(--signal-warning);
-  transform: rotate(45deg);
+  padding: 3px 7px;
+  font-size: 10px;
+  line-height: 1.45;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .tool-note__grid {
