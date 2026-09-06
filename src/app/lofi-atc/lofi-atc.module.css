@@ -73,16 +73,6 @@
   color: var(--signal-verified);
 }
 
-/* The word stays ink; the stripe beside it is the alarm form. */
-.stateFault {
-  color: var(--ink-primary);
-}
-
-.faultStripe {
-  width: 16px;
-  height: 8px;
-}
-
 /* ---------- station selector ---------- */
 
 .stationField {

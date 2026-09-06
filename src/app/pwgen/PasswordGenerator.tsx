@@ -153,7 +153,7 @@ export default function PasswordGenerator() {
     return (
       <div className="flex flex-col items-center gap-5 py-12" role="alert">
         <div className={styles.fault}>
-          <span aria-hidden="true" className={`abd-alarm ${styles.faultStripe}`} />
+          <span className="abd-alarm-chip">Error</span>
           <p className={styles.faultText}>
             The word lists could not be loaded. Check your connection and try again.
           </p>
@@ -181,7 +181,7 @@ export default function PasswordGenerator() {
       <div className="flex min-w-0 flex-col gap-5">
         {/* Mode selector */}
         <div
-          className="segmented segmented--accent"
+          className="segmented segmented--primary"
           ref={modeSlider}
         >
           <div className="segmented-thumb" />
@@ -396,10 +396,7 @@ export default function PasswordGenerator() {
             {copied && <span className={styles.copyStatus}>Copied</span>}
             {copyFailed && (
               <span className={styles.copyFault}>
-                <span
-                  aria-hidden="true"
-                  className={`abd-alarm ${styles.copyFaultStripe}`}
-                />
+                <span className="abd-alarm-chip">Copy failed</span>
                 Couldn&apos;t copy. Select the password and copy it manually.
               </span>
             )}

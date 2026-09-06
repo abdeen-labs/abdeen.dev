@@ -263,7 +263,7 @@ export default function TwoFactorQR() {
           />
           {uriInvalid && (
             <p id="twofa-uri-error" role="alert" className={styles.fault}>
-              <span aria-hidden="true" className={`abd-alarm ${styles.faultStripe}`} />
+              <span className="abd-alarm-chip">Invalid</span>
               <span>Enter a valid otpauth:// address.</span>
             </p>
           )}

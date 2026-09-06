@@ -217,7 +217,7 @@ export default function QRGenerator() {
       <div className="flex min-w-0 flex-col gap-5">
         {/* Type selector */}
         <div
-          className="segmented segmented--accent"
+          className="segmented segmented--primary"
           role="tablist"
           aria-label="QR code type"
           ref={tabSlider}
@@ -355,11 +355,11 @@ export default function QRGenerator() {
           Generate QR code
         </button>
 
-        {/* Validation notice — a plain sentence; the alarm hatch marks the
-            blocked generate. */}
+        {/* Validation notice — the alarm chip names the state; the sentence
+            stays on ink. */}
         {error && (
-          <div role="alert" className="flex items-center gap-3">
-            <span aria-hidden="true" className="abd-alarm h-3 w-12 flex-none" />
+          <div role="alert" className="flex items-baseline gap-3">
+            <span className="abd-alarm-chip text-control">Invalid</span>
             <p className="font-mono text-control text-ink-secondary">{error}</p>
           </div>
         )}

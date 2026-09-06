@@ -144,7 +144,7 @@
   --accent: #fe002a;
   --accent-deep: #d4212c;
   --accent-ink: #be0018;
-  --alarm-500: #ff2bd6;
+  --alarm: var(--accent);
   --warn-400: #f5ff00;
   --cobalt-400: #5aa7ff;
   --cobalt-700: #1d5a96;
@@ -168,10 +168,11 @@
   --signal-press: var(--accent-deep);
   --signal-verified: var(--cobalt-400);
   /* Neon yellow never sets text, a line, a frame, or a glyph on mist;
-     the highlighter chip carries the warning there. Alarm magenta holds
-     on both grounds, and the message stays on primary ink. */
+     the highlighter chip carries the warning there. The alarm is scarlet
+     in alarm forms and follows the Key's line by ground; the message
+     stays on primary ink. */
   --signal-warning: var(--warn-400);
-  --signal-alarm: var(--alarm-500);
+  --signal-alarm: var(--alarm);
 
   --font-display-stack: var(--font-schibsted), -apple-system, sans-serif;
   --font-mono-stack: var(--font-geist-mono), ui-monospace, monospace;
@@ -266,7 +267,8 @@
   --signal-press: var(--accent-deep);
   --signal-verified: var(--cobalt-700);
   --signal-warning: var(--warn-400);
-  --signal-alarm: var(--alarm-500);
+  --alarm: var(--accent-deep);
+  --signal-alarm: var(--alarm);
   --seal-key-field: var(--mist-200);
   --seal-key-line: var(--accent-deep);
   --seal-key-ink: var(--carbon-900);
@@ -297,7 +299,8 @@
     --signal-press: var(--accent-deep);
     --signal-verified: var(--cobalt-700);
     --signal-warning: var(--warn-400);
-    --signal-alarm: var(--alarm-500);
+    --alarm: var(--accent-deep);
+    --signal-alarm: var(--alarm);
     --seal-key-field: var(--mist-200);
     --seal-key-line: var(--accent-deep);
     --seal-key-ink: var(--carbon-900);
@@ -899,10 +902,11 @@ a {
   transform: none;
 }
 
-/* Primary — the system's mode-invariant Accent field and inverse label. */
+/* Primary — the ground's ink as its field; scarlet never fills a call
+   to action. */
 .btn--primary,
 .btn-primary {
-  background: var(--signal-identity);
+  background: var(--ink-primary);
   color: var(--ink-inverse);
 }
 
@@ -913,17 +917,19 @@ a {
 
 .btn--primary:active:not(:disabled),
 .btn-primary:active:not(:disabled) {
-  background: var(--signal-press);
+  background: var(--ink-secondary);
 }
 
-/* Destructive is OUTLINED — the filled red button is the primary. */
+/* Destructive — the one filled scarlet control: accent-deep under chalk
+   ink on either ground (4.83:1). The label names what is destroyed. */
 .btn--destructive {
-  border-color: var(--signal-identity);
-  color: var(--signal-link);
+  background: var(--accent-deep);
+  border-color: var(--accent-deep);
+  color: var(--chalk-100);
 }
 
 .btn--destructive:hover:not(:disabled) {
-  border-color: var(--signal-link);
+  border-color: var(--ink-primary);
 }
 
 /* Quiet — hairline border, secondary ink. (.btn-ghost is the legacy name.) */
@@ -1094,20 +1100,21 @@ a {
   transform: translateY(1px);
 }
 
-/* Accent variant for primary type selectors. */
-.segmented--accent .segmented-thumb {
-  background: var(--signal-identity);
+/* Primary variant for type selectors — the ground's ink as the thumb. */
+.segmented--primary .segmented-thumb {
+  background: var(--ink-primary);
   border-color: transparent;
 }
 
-.segmented--accent .segmented-item[data-active="true"] {
+.segmented--primary .segmented-item[data-active="true"] {
   color: var(--ink-inverse);
 }
 
 /* ─── Switch — the one circular control ──────────────────────────── */
 
 /* Checkbox-hosted variant of the brand switch: 36×20 track, 14px thumb,
-   Accent field when on. The only rounded track in the system. */
+   the ground's ink as the field when on. The only rounded track in the
+   system. */
 .switch {
   position: relative;
   display: inline-flex;
@@ -1154,7 +1161,7 @@ a {
 }
 
 .switch input:checked + .switch-track {
-  background: var(--signal-identity);
+  background: var(--ink-primary);
   border-color: transparent;
 }
 
@@ -1183,10 +1190,10 @@ a {
 .check-row input[type="checkbox"] {
   width: 1rem;
   height: 1rem;
-  accent-color: var(--signal-identity);
+  accent-color: var(--ink-primary);
 }
 
-/* Range — hairline track (structure, square), circular Accent thumb
+/* Range — hairline track (structure, square), circular ink thumb
    (a dot — the sanctioned round form). No glow ring. */
 .range {
   -webkit-appearance: none;
@@ -1202,14 +1209,14 @@ a {
   width: 14px;
   height: 14px;
   border-radius: var(--radius-round);
-  background: var(--signal-identity);
+  background: var(--ink-primary);
   cursor: pointer;
   border: none;
   transition: background var(--duration-hover) var(--ease-flat);
 }
 
 .range::-webkit-slider-thumb:hover {
-  background: var(--signal-press);
+  background: var(--ink-secondary);
 }
 
 .range::-moz-range-thumb {
@@ -1217,7 +1224,7 @@ a {
   height: 14px;
   border: none;
   border-radius: var(--radius-round);
-  background: var(--signal-identity);
+  background: var(--ink-primary);
   cursor: pointer;
 }
 
@@ -1433,13 +1440,10 @@ a.chip:focus-visible {
   right: 6px;
 }
 
-/* Hatched edge — the alarm form, only beside something actually wrong. */
+/* Dashed frame — the alarm form for a region, only around something
+   actually wrong. Never a solid line, never a hatch. */
 .abd-alarm {
-  background: repeating-linear-gradient(
-    135deg,
-    var(--signal-alarm) 0 4px,
-    transparent 4px 8px
-  );
+  border: 2px dashed var(--signal-alarm);
 }
 
 /* Struck rule — the alarm form for a line of text. */
@@ -1449,9 +1453,11 @@ a.chip:focus-visible {
   text-decoration-thickness: 2px;
 }
 
-/* Highlighter chip — the only warning form the light ground allows, and
-   valid on dark. */
-.abd-warn-chip {
+/* Highlighter chips — the warning chip is the only warning form the
+   light ground allows, and valid on dark; the alarm chip is chalk on
+   accent-deep on either ground (4.83:1) and names the fault. */
+.abd-warn-chip,
+.abd-alarm-chip {
   display: inline-flex;
   align-items: center;
   gap: 0.45em;
@@ -1462,7 +1468,13 @@ a.chip:focus-visible {
   font-weight: 500;
 }
 
-.abd-warn-chip::before {
+.abd-alarm-chip {
+  background: var(--accent-deep);
+  color: var(--chalk-100);
+}
+
+.abd-warn-chip::before,
+.abd-alarm-chip::before {
   content: "";
   flex: none;
   width: 0.42em;

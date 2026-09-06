@@ -143,7 +143,7 @@ export default function PomodoroTimer() {
   return (
     <div className={styles.container}>
       <div
-        className="segmented segmented--accent w-full"
+        className="segmented segmented--primary w-full"
         ref={modeSlider}
       >
         <div className="segmented-thumb" />

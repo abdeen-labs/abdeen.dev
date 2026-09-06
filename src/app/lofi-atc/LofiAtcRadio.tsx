@@ -370,10 +370,10 @@ export default function LofiAtcRadio() {
     [],
   );
 
-  // The word carries the state; Accent only for Live, ink for the rest. An
-  // error gets the alarm hatch beside it, never a fill or button.
+  // The word carries the state: cobalt for Live, ink for the rest, and the
+  // alarm chip for an error — never a fill or button.
   const stateClass = (s: StreamStatus) =>
-    s === "live" ? styles.stateLive : s === "error" ? styles.stateFault : undefined;
+    s === "live" ? styles.stateLive : s === "error" ? "abd-alarm-chip" : undefined;
 
   const channels = [
     { name: "Lo-fi", status: lofiStatus },
@@ -417,12 +417,6 @@ export default function LofiAtcRadio() {
               /
             </span>
             <span className={stateClass(status)}>{statusLabel(status)}</span>
-            {status === "error" && (
-              <span
-                aria-hidden="true"
-                className={`abd-alarm ${styles.faultStripe}`}
-              />
-            )}
           </span>
         ))}
       </div>

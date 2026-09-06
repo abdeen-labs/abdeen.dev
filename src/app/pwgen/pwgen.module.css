@@ -34,19 +34,13 @@
   40% { opacity: 1; }
 }
 
-/* ── Load error ── */
+/* ── Load error — the alarm chip names the state; the text stays on ink ── */
 .fault {
   display: flex;
-  align-items: stretch;
+  align-items: baseline;
   gap: var(--space-3);
   max-width: 32rem;
   text-align: left;
-}
-
-/* Sizing only — .abd-alarm supplies the hatch. */
-.faultStripe {
-  flex: none;
-  width: 6px;
 }
 
 .faultText {
@@ -132,15 +126,9 @@
 
 .copyFault {
   display: inline-flex;
-  align-items: stretch;
+  align-items: baseline;
   gap: var(--space-2);
   color: var(--ink-secondary);
-}
-
-/* Sizing only — .abd-alarm supplies the hatch. */
-.copyFaultStripe {
-  flex: none;
-  width: 6px;
 }
 
 /* ── Batch list — hairline-ruled index of candidates ── */

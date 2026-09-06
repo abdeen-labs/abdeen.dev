@@ -43,7 +43,7 @@
 }
 
 .flagBtnActive {
-  background: var(--signal-identity);
+  background: var(--ink-primary);
   border-color: transparent;
   color: var(--ink-inverse);
 }
@@ -52,17 +52,12 @@
   border-color: var(--signal-link);
 }
 
-/* Error report — the alarm hatch supports clear text for an invalid or
-   timed-out pattern. */
+/* Error report — the alarm chip names the state; the text for an invalid
+   or timed-out pattern stays on ink. */
 .fault {
   display: flex;
-  align-items: stretch;
+  align-items: baseline;
   gap: 0.7rem;
-}
-
-.faultStripe {
-  width: 6px;
-  flex: none;
 }
 
 .faultBody {

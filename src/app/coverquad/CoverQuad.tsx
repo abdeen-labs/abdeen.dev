@@ -367,7 +367,7 @@ export default function CoverQuad() {
         </div>
         {slotError && (
           <p role="alert" className={styles.faultLine}>
-            <span aria-hidden="true" className={`${styles.faultStripe} abd-alarm`} />
+            <span className="abd-alarm-chip">Error</span>
             {slotError}
           </p>
         )}

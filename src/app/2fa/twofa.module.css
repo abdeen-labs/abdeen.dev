@@ -1,18 +1,15 @@
 /* 2FA — tool-specific styling. Shared controls live in globals.css. */
 
 /* Invalid field — layered on the shared .input recipe. Real errors only:
-   one of the secret/label pair is missing, or the URI fails to parse. The
-   alarm is a hatched leading edge inside the field, never a solid border. */
+   one of the secret/label pair is missing. The alarm is a 2px dashed
+   frame in the alarm step, never a solid border; the padding absorbs the
+   second border pixel. The hover and focus selectors outrank the shared
+   .input border rules. */
 .invalid,
+.invalid:hover:not(:disabled),
 .invalid:focus {
-  padding-left: calc(0.8rem + 8px);
-  background-image: repeating-linear-gradient(
-    135deg,
-    var(--signal-alarm) 0 4px,
-    transparent 4px 8px
-  );
-  background-size: 8px 100%;
-  background-repeat: no-repeat;
+  padding: calc(0.6rem - 1px) calc(0.8rem - 1px);
+  border: 2px dashed var(--signal-alarm);
 }
 
 .divider {
@@ -37,21 +34,17 @@
   color: var(--ink-dim); /* dim floor on the card plate */
 }
 
-/* Error line under the URI field. The alarm hatch supports the text. */
+/* Error line under the URI field. The alarm chip names the state; the
+   text stays on ink. */
 .fault {
   display: flex;
-  align-items: stretch;
+  align-items: baseline;
   gap: var(--space-2);
   margin: 0;
   font-family: var(--font-mono-stack);
   font-size: var(--fs-control);
   line-height: var(--leading-mono);
   color: var(--ink-secondary);
-}
-
-.faultStripe {
-  flex: none;
-  width: 8px;
 }
 
 /* QR image — content, not interface: the black-on-white module field and

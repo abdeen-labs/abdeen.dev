@@ -78,8 +78,8 @@
   to { opacity: 1; }
 }
 
-/* Clear — a destructive control floated over content: page ground,
-   warning outline and glyph. */
+/* Clear — the destructive control floated over content: the one filled
+   scarlet control, accent-deep under chalk ink on either ground. */
 .slotClear {
   position: absolute;
   top: 8px;
@@ -90,10 +90,10 @@
   align-items: center;
   justify-content: center;
   padding: 0;
-  border: 1px solid var(--signal-identity);
+  border: 1px solid var(--accent-deep);
   border-radius: var(--radius-control);
-  background: var(--surface-page);
-  color: var(--signal-link);
+  background: var(--accent-deep);
+  color: var(--chalk-100);
   font-size: 16px;
   line-height: 1;
   cursor: pointer;
@@ -112,7 +112,7 @@
 }
 
 .slotClear:hover {
-  border-color: var(--signal-link);
+  border-color: var(--ink-primary);
 }
 
 .slotClear:active {
@@ -150,22 +150,16 @@
   to { opacity: 1; }
 }
 
-/* Error line — the alarm hatch supports the message without filling it. */
+/* Error line — the alarm chip names the state; the message stays on ink. */
 .faultLine {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: center;
   gap: var(--space-3);
   font-family: var(--font-mono-stack);
   font-size: var(--fs-control);
   line-height: var(--leading-mono);
   color: var(--ink-secondary);
-}
-
-.faultStripe {
-  width: 28px;
-  height: 10px;
-  flex: none;
 }
 
 /* Modal — the page recedes one veil (a surface, not a black scrim);
