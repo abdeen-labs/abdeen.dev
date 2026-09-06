@@ -35,12 +35,12 @@ export const identity = {
 } as const;
 
 // Control marks have their own namespace; Redline remains the theme name.
-const controlNamespace = "4BD33N";
+const controlNamespace = "ABD33N";
 const marketingControlMark = `${controlNamespace}//OPEN`;
 
 export const marketing = {
   controlMark: marketingControlMark,
-  /** Continuous public sites may carry the 4BD33N public mark once. */
+  /** Continuous public sites may carry the ABD33N public mark once. */
   topChrome: marketingControlMark,
   footer: `${identity.studio} · Private software`,
 } as const;

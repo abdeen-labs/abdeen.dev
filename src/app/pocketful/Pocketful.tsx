@@ -81,7 +81,7 @@ function PocketfulVisual() {
           <div className={styles.passFields}>
             <div>
               <span>MEMBER</span>
-              <strong>4BD33N</strong>
+              <strong>ABD33N</strong>
             </div>
             <div>
               <span>STATUS</span>
