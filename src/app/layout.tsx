@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import Script from "next/script";
 import { schibsted, geist, geistMono, arefRuqaa } from "./fonts";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
@@ -127,8 +126,11 @@ export default function RootLayout({
           {children}
         </main>
         <SiteFooter />
-        <Analytics />
-        <SpeedInsights />
+        <Script
+          src="https://stats.abdeen.ai/script.js"
+          data-website-id="83ea6980-3f4a-497c-b000-3e764d23184b"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

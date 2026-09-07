@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://abdeen.dev/privacy" },
 };
 
-const LAST_UPDATED = "August 8, 2026";
+const LAST_UPDATED = "September 6, 2026";
 
 type PrivacyEntry = Pick<CatalogEntry, "title" | "meta" | "href"> & {
   privacy: NonNullable<CatalogEntry["privacy"]>;
@@ -21,7 +21,7 @@ const siteEntry: PrivacyEntry = {
   privacy: {
     kind: "exception",
     summary:
-      "This site uses Vercel Analytics and Speed Insights for anonymous, aggregate page views and performance data. They do not use cookies or track you across sites. The Frost page also asks GitHub for the latest release information.",
+      "This site uses a self-hosted Umami instance at stats.abdeen.ai for anonymous, aggregate page views. It does not use cookies or track you across sites. The Frost page also asks GitHub for the latest release information.",
   },
 };
 
