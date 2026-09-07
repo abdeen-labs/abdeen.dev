@@ -3,6 +3,18 @@
     <channel>
         <title>frost</title>
         <item>
+            <title>2.2.2</title>
+            <pubDate>Sun, 06 Sep 2026 21:47:53 -0700</pubDate>
+            <sparkle:version>17</sparkle:version>
+            <sparkle:shortVersionString>2.2.2</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.6</sparkle:minimumSystemVersion>
+            <description sparkle:format="markdown"><![CDATA[### Changed
+
+- The Frost process is now named `Frost` rather than `frost`. The SSH recovery command is now `pkill -ix frost`, which matches either name, so it works on this and earlier versions.
+]]></description>
+            <enclosure url="https://github.com/abdeen-labs/frost/releases/download/v2.2.2/Frost-2.2.2.dmg" length="3597963" type="application/octet-stream" sparkle:edSignature="oNJoenrZwRa76Oi2DUdOZs4E9hAdjhfooKkVpJzBcYM//eJWAa0J++XpjYHtmQfYHugQLD09zNLtAdPEKuScAA=="/>
+        </item>
+        <item>
             <title>2.2.1</title>
             <pubDate>Sun, 06 Sep 2026 21:30:55 -0700</pubDate>
             <sparkle:version>16</sparkle:version>
@@ -46,18 +58,6 @@
 - Auto-lock no longer wakes the app every few seconds when it is turned off.
 ]]></description>
             <enclosure url="https://github.com/Cuzeth/frost/releases/download/v2.2/Frost-2.2.dmg" length="3452991" type="application/octet-stream" sparkle:edSignature="5WzUcyXleFevrxVuaqCngpn5uO45gxnJ3BjaU9Q3ZY26ItyJxK4UJP3HUuJdJ15FXpyjhrn6tpL39UeH0pIxDQ=="/>
-        </item>
-        <item>
-            <title>2.1.2</title>
-            <pubDate>Tue, 07 Jul 2026 21:00:46 -0400</pubDate>
-            <sparkle:version>14</sparkle:version>
-            <sparkle:shortVersionString>2.1.2</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>14.6</sparkle:minimumSystemVersion>
-            <description sparkle:format="markdown"><![CDATA[### Fixed
-
-- Frost no longer opens the Settings window when it starts automatically at login — it now comes up quietly in the background, like other menu-bar apps.
-]]></description>
-            <enclosure url="https://github.com/Cuzeth/frost/releases/download/v2.1.2/Frost-2.1.2.dmg" length="3416264" type="application/octet-stream" sparkle:edSignature="Kb72jmvu6sl8m7OUTaIRBmXYUtchDCtocVWTX3JBHDpPiulQ9YeLockJ2X9/zlZINCSIL44hcLDAC2DrBzagAQ=="/>
         </item>
     </channel>
 </rss>
