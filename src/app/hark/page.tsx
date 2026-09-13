@@ -4,12 +4,12 @@ import Hark from "./Hark";
 export const metadata: Metadata = {
   title: "Hark — self-hosted iOS notification server",
   description:
-    "Send Hark a webhook or API call and it appears on your iPhone as a notification, Live Activity, or approval prompt.",
+    "Send notifications, Live Activities, questions, and Wallet passes to your iPhone through webhooks, REST, or MCP. Self-hosted, with scoped tokens and OAuth.",
   alternates: { canonical: "https://abdeen.dev/hark" },
   openGraph: {
     title: "Hark · Abdeen Labs",
     description:
-      "Send Hark a webhook or API call and it appears on your iPhone as a notification, Live Activity, or approval prompt.",
+      "Send notifications, Live Activities, questions, and Wallet passes to your iPhone through webhooks, REST, or MCP. Self-hosted, with scoped tokens and OAuth.",
     url: "https://abdeen.dev/hark",
   },
 };

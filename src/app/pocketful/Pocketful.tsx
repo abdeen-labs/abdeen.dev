@@ -1,35 +1,36 @@
 import FadeInWrapper from "@/components/FadeInWrapper";
+import Link from "next/link";
 import Icon from "@/components/Icon";
 import SectionHeader from "@/components/SectionHeader";
 import styles from "./pocketful.module.css";
 
 const REPO_URL = "https://github.com/abdeen-labs/pocketful";
-const SETUP_URL = "https://pass.abdeen.dev/";
+const SETUP_URL = `${REPO_URL}/blob/main/INSTRUCTIONS.md`;
 
 const features = [
   {
     number: "01",
-    label: "Visual pass editor",
+    label: "Passes from a prompt",
     detail:
-      "Build store cards, coupons, tickets, and boarding passes on iPhone.",
+      "Ask an AI agent for a pass. It sends the specification to your server through MCP, or a script can use REST.",
   },
   {
     number: "02",
-    label: "Eleven templates",
+    label: "Artwork handled",
     detail:
-      "Start from a template or blank pass, then tune colors, artwork, fields, and barcodes.",
+      "Supply one image per slot. The server crops and renders artwork at 1x, 2x, and 3x for Wallet.",
   },
   {
     number: "03",
-    label: "Full Wallet surface",
+    label: "Wallet layouts",
     detail:
-      "Add relevance, localization, NFC, semantics, and modern ticket layouts.",
+      "Create store cards, coupons, tickets, boarding passes, and iOS 27 poster layouts, with fallback styles for older iOS.",
   },
   {
     number: "04",
-    label: "Your signing server",
+    label: "Delivered through Hark",
     detail:
-      "An Express service signs each pass while Apple certificates stay off the phone.",
+      "Connect your Hark server to receive a pass notification on iPhone. Tap to open Add to Wallet, or open the download link directly.",
   },
   {
     number: "05",
@@ -39,7 +40,7 @@ const features = [
   },
   {
     number: "06",
-    label: "Agent-ready MCP",
+    label: "Six MCP tools",
     detail:
       "Create, inspect, update, download, and delete passes through six MCP tools.",
   },
@@ -48,8 +49,8 @@ const features = [
 const workflow = [
   {
     number: "01",
-    location: "iPhone",
-    label: "Design on iPhone",
+    location: "Agent or script",
+    label: "Describe your pass",
     output: "JSON + artwork",
   },
   {
@@ -62,7 +63,7 @@ const workflow = [
     number: "03",
     location: "Apple Wallet",
     label: "Add to Wallet",
-    output: "Native Wallet sheet",
+    output: "Hark or download link",
   },
 ];
 
@@ -109,14 +110,15 @@ export default function Pocketful() {
                 aria-hidden="true"
                 className="inline-block h-2 w-2 bg-signal-identity"
               />
-              iPhone App · Self-hosted
+              Self-hosted · MCP + REST
             </span>
             <h1 className="text-h1 md:text-display">
               Pocketful<span className="text-signal-identity">.</span>
             </h1>
             <p className="max-w-xl text-lede text-ink-secondary">
-              Design Apple Wallet passes on iPhone, sign them on your server,
-              and add them to Wallet. No account. No third-party signing service.
+              Describe an Apple Wallet pass to an AI agent. Your server sizes
+              the artwork, signs the pass with your certificates, and returns
+              a download link. Connect Hark to deliver it to your iPhone.
             </p>
             <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-3">
               <a
@@ -136,7 +138,7 @@ export default function Pocketful() {
                 Read the setup guide
               </a>
             </div>
-            <p className="micro-label">iOS 27+ · Free · Open source</p>
+            <p className="micro-label">Internal tool · Public source</p>
           </div>
         </FadeInWrapper>
 
@@ -193,25 +195,31 @@ export default function Pocketful() {
           <div className={styles.boundaryHeading}>
             <SectionHeader label="Data boundary" />
             <h2 id="pocketful-boundary-title">
-              Your phone holds the design. Your server holds the keys.
+              Your server signs the pass and holds the keys.
             </h2>
           </div>
           <div className={styles.boundaryGrid}>
             <div className={styles.boundarySide}>
-              <span className={styles.boundaryLocation}>01 · Device</span>
-              <h3>On your phone</h3>
+              <span className={styles.boundaryLocation}>01 · Signing</span>
+              <h3>On your server</h3>
               <p>
-                Designs and artwork stay on-device until you create or update a pass.
+                Your agent or script sends the specification and artwork to
+                your server. Signing certificates stay there. One-shot downloads
+                are held in memory and expire after 15 minutes by default;
+                updatable passes persist in SQLite.
               </p>
             </div>
             <div className={styles.boundaryLane} aria-hidden="true">
               <b>→</b>
             </div>
             <div className={styles.boundarySide}>
-              <span className={styles.boundaryLocation}>02 · Infrastructure</span>
-              <h3>On your server</h3>
+              <span className={styles.boundaryLocation}>02 · Delivery</span>
+              <h3>On your iPhone</h3>
               <p>
-                One-shot passes expire after 15 minutes. Only updatable passes persist.
+                Open the download link in Wallet, or let your own Hark server
+                send it through Apple&apos;s push service. The AI client you
+                choose determines how your prompt and artwork are handled
+                before they reach Pocketful.
               </p>
             </div>
           </div>
@@ -227,12 +235,15 @@ export default function Pocketful() {
             <div className="flex max-w-lg flex-col gap-3">
               <h2 className="micro-label">
                 <span aria-hidden="true" className="text-signal-identity">/</span>
-                Build it yourself
+                Run it yourself
               </h2>
               <p className="text-body text-ink-secondary">
-                Deploy the signing service, then run Pocketful from Xcode.
+                Deploy the signing server with your Apple certificates, then
+                connect an MCP client or use the REST API. Add{" "}
+                <Link href="/hark" className="text-signal-link">Hark</Link>{" "}
+                for delivery to your iPhone.
               </p>
-              <p className="micro-label">Xcode 27+ · Paid Apple Developer account</p>
+              <p className="micro-label">Bun tooling · Paid Apple Developer account</p>
             </div>
             <div className="flex flex-col items-start gap-3">
               <a

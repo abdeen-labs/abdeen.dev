@@ -50,34 +50,34 @@ const allApps: CatalogEntry[] = [
   {
     title: "Pocketful",
     description:
-      "Self-hosted Apple Wallet pass designer for iPhone. Builds passes visually, signs them with your server, and opens Wallet's native add-pass sheet.",
+      "Self-hosted Apple Wallet pass signing through MCP or REST. Renders artwork, signs passes with your certificates, and delivers them to iPhone through Hark.",
     href: "/pocketful",
-    meta: "iOS",
+    meta: "Self-hosted · MCP",
     spotlight: true,
     privacy: {
       kind: "exception",
       summary:
-        "Creating or updating a pass sends its design to the signing server you choose and host. Abdeen Labs does not receive it. One-time passes expire after 15 minutes; updatable passes remain on that server.",
+        "Your agent or script sends pass specifications and artwork to your signing server. One-shot downloads expire after 15 minutes by default; updatable passes persist in SQLite. Optional Hark delivery sends the download URL through your Hark server and Apple's push service. Your AI client's data handling also applies.",
     },
     sitemapPriority: 0.9,
     schema: {
-      type: "MobileApplication",
+      type: "SoftwareApplication",
       applicationCategory: "DesignApplication",
-      operatingSystem: "iOS",
+      operatingSystem: "macOS, Linux",
       description:
-        "Self-hosted Apple Wallet pass designer for iPhone with visual editing, server-side signing, over-the-air updates, and an MCP companion.",
+        "Self-hosted Apple Wallet pass signing server with MCP and REST APIs, artwork rendering, optional Hark delivery, and over-the-air updates.",
     },
   },
   {
     title: "Hark",
     description:
-      "Send it a webhook or API call and it appears on your iPhone as a notification, Live Activity, or quick approval.",
+      "Send notifications, Live Activities, questions, and Wallet passes to your iPhone through webhooks, REST, or MCP.",
     href: "/hark",
     meta: "iOS",
     privacy: {
       kind: "clarification",
       summary:
-        "Hark runs on your server. Webhooks, deliveries, and approvals stay there, and pushes travel through Apple's push service to your devices. Abdeen Labs operates no hosted instance and receives nothing.",
+        "Hark keeps delivery history and replies on your server. Pushes travel through Apple's push service to your devices; Wallet notifications include a pass download URL. Connected API and MCP clients can read records within their granted scope, and configured webhook callbacks receive replies. Abdeen Labs operates no hosted Hark service.",
     },
     sitemapPriority: 0.9,
     schema: {
@@ -85,7 +85,7 @@ const allApps: CatalogEntry[] = [
       applicationCategory: "DeveloperApplication",
       operatingSystem: "iOS, macOS, Linux",
       description:
-        "Self-hosted server that sends webhooks and API calls to an iPhone as notifications, Live Activities, and approval prompts.",
+        "Self-hosted iPhone notification server with webhooks, REST, MCP, scoped tokens, and OAuth. Delivers notifications, Live Activities, questions, and Wallet passes.",
     },
   },
   {

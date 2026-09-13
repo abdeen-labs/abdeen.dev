@@ -1,4 +1,5 @@
 import FadeInWrapper from "@/components/FadeInWrapper";
+import Link from "next/link";
 import Icon from "@/components/Icon";
 import SectionHeader from "@/components/SectionHeader";
 import styles from "./hark.module.css";
@@ -11,7 +12,7 @@ const deliverySteps = [
     number: "01",
     mode: "Send",
     label: "Something needs your attention",
-    detail: "A service sends a webhook, or an agent calls Hark's API.",
+    detail: "A service sends a webhook, a script calls the API, or an agent connects through MCP.",
   },
   {
     number: "02",
@@ -23,7 +24,7 @@ const deliverySteps = [
     number: "03",
     mode: "Reply",
     label: "Your answer goes back",
-    detail: "For approval prompts, Hark sends your choice back to the caller.",
+    detail: "Approve, answer yes or no, or send a text reply. The caller can read your response; webhooks can receive a callback.",
   },
 ];
 
@@ -31,17 +32,17 @@ const systems = [
   {
     number: "01",
     label: "Server",
-    detail: "Receives webhooks and API calls, sends pushes, and keeps a delivery history.",
+    detail: "Receives webhooks, API calls, and MCP requests. Agents connect with scoped tokens or OAuth to send notifications and ask questions.",
   },
   {
     number: "02",
     label: "iPhone app",
-    detail: "Shows notifications and Live Activities, and lets you answer prompts from the Lock Screen.",
+    detail: "Shows notifications and Live Activities, accepts replies from the Lock Screen, and opens Wallet passes from a notification.",
   },
   {
     number: "03",
     label: "Dashboard",
-    detail: "Shows recent deliveries and gives you a simple place to manage access.",
+    detail: "Tracks delivery history and manages webhook services, devices, API tokens, and access. An admin can provision separate user accounts.",
   },
 ];
 
@@ -97,9 +98,9 @@ export default function Hark() {
               Hark<span className="text-signal-identity">.</span>
             </h1>
             <p className="max-w-xl text-body text-ink-secondary md:text-lede">
-              Send Hark a webhook or API call and it puts a notification on
-              your iPhone. It can keep a Live Activity up to date or ask for a
-              quick answer from the Lock Screen.
+              Send a webhook, call the API, or connect an AI agent through MCP.
+              Hark puts notifications, Live Activities, and questions on your
+              iPhone, with replies from the Lock Screen and Wallet passes a tap away.
             </p>
             <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-3">
               <a
@@ -203,6 +204,12 @@ export default function Hark() {
                 Hark runs as one Go server with PostgreSQL. Docker Compose
                 starts both, and the server also hosts the dashboard and API
                 docs.
+              </p>
+              <p className="text-body text-ink-secondary">
+                Configure Apple push credentials and install the iPhone app
+                to receive notifications. Connect{" "}
+                <Link href="/pocketful" className="text-signal-link">Pocketful</Link>{" "}
+                to sign Wallet passes on your server and deliver them through Hark.
               </p>
               <p className="micro-label">docker compose up --build</p>
             </div>
