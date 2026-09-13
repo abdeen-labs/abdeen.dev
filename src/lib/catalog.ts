@@ -50,9 +50,9 @@ const allApps: CatalogEntry[] = [
   {
     title: "Pocketful",
     description:
-      "Self-hosted Apple Wallet pass signing through MCP or REST. Renders artwork, signs passes with your certificates, and delivers them to iPhone through Hark.",
+      "Create Apple Wallet passes with an AI agent and send them to your iPhone through Hark.",
     href: "/pocketful",
-    meta: "Self-hosted · MCP",
+    meta: "Apple Wallet",
     spotlight: true,
     privacy: {
       kind: "exception",
@@ -65,7 +65,7 @@ const allApps: CatalogEntry[] = [
       applicationCategory: "DesignApplication",
       operatingSystem: "macOS, Linux",
       description:
-        "Self-hosted Apple Wallet pass signing server with MCP and REST APIs, artwork rendering, optional Hark delivery, and over-the-air updates.",
+        "Apple Wallet pass signing with MCP and REST APIs, artwork rendering, optional Hark delivery, and over-the-air updates.",
     },
   },
   {
@@ -85,7 +85,7 @@ const allApps: CatalogEntry[] = [
       applicationCategory: "DeveloperApplication",
       operatingSystem: "iOS, macOS, Linux",
       description:
-        "Self-hosted iPhone notification server with webhooks, REST, MCP, scoped tokens, and OAuth. Delivers notifications, Live Activities, questions, and Wallet passes.",
+        "iPhone notifications through webhooks, REST, or MCP. Delivers notifications, Live Activities, questions, and Wallet passes.",
     },
   },
   {

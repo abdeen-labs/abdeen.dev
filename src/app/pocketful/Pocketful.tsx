@@ -110,7 +110,7 @@ export default function Pocketful() {
                 aria-hidden="true"
                 className="inline-block h-2 w-2 bg-signal-identity"
               />
-              Self-hosted · MCP + REST
+              Apple Wallet
             </span>
             <h1 className="text-h1 md:text-display">
               Pocketful<span className="text-signal-identity">.</span>
@@ -138,7 +138,6 @@ export default function Pocketful() {
                 Read the setup guide
               </a>
             </div>
-            <p className="micro-label">Internal tool · Public source</p>
           </div>
         </FadeInWrapper>
 

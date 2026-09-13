@@ -92,7 +92,7 @@ export default function Hark() {
                 aria-hidden="true"
                 className="inline-block h-2 w-2 bg-signal-identity"
               />
-              Self-hosted · iPhone
+              iPhone
             </span>
             <h1 className="text-h1 md:text-display">
               Hark<span className="text-signal-identity">.</span>

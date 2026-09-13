@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Pocketful from "./Pocketful";
 
 export const metadata: Metadata = {
-  title: "Pocketful — self-hosted Apple Wallet pass signing",
+  title: "Pocketful — Apple Wallet passes",
   description:
     "Create Apple Wallet passes through MCP or REST. Pocketful renders artwork, signs passes on your server, and supports Hark delivery and over-the-air updates.",
   alternates: { canonical: "https://abdeen.dev/pocketful" },
