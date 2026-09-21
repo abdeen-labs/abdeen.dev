@@ -1,8 +1,10 @@
 # abdeen.dev
 
-Private software. Clear boundaries. This repository powers [abdeen.dev](https://abdeen.dev), the Abdeen Labs studio site for product pages, releases, and small open-source tools.
+Private software. Clear boundaries. This repository powers [abdeen.dev](https://abdeen.dev), the home of Abdeen Labs, the open-source and experimental division of Abdeen Industries. It hosts project pages, releases, and browser tools.
 
-Built with [Next.js](https://nextjs.org) (App Router), Tailwind CSS v4, and TypeScript. Deployed on Vercel. The interface implements **Redline**, the Abdeen Labs brand system, with the canonical Void, Surface, Border, Mist, and Accent anchors and the official Iconoir React package.
+Built with [Next.js](https://nextjs.org) (App Router), Tailwind CSS v4, and TypeScript. Deployed on Vercel. The interface implements **Redline**, the shared Abdeen brand system, with the canonical Void, Surface, Border, Mist, and Accent anchors and the official Iconoir React package.
+
+`src/lib/brand.ts` mirrors the canonical copy in `../abdeen-brand/brand-content.js`. Labs retains its identity and the `abdeen-labs` GitHub organization; Industries appears as a secondary endorsement. Product-specific accounts, licensing and privacy details belong to each product.
 
 ## Development
 
@@ -23,7 +25,7 @@ bun run build    # production build
 - `src/app/globals.css` · Redline role tokens, the approved studio-site layouts, and shared tool controls.
 - `src/app/font-files/` · canonical local webfonts loaded through `next/font/local`.
 - `public/fonts/redline/static/` · local font files used by the OG renderer.
-- `public/brand/` · canonical generated brand assets copied from the sibling `abdeen-brand` source.
+- `public/brand/` · generated Labs assets copied from `../abdeen-brand/renders/labs/svg/components/`.
 - `public/data/` · word lists and lookup data fetched by the tools at runtime.
 
 The live interface mark `عابدين` is set in Aref Ruqaa 700. Standalone SVG exports, the favicon, and the OG renderer derive from the canonical Seal geometry.

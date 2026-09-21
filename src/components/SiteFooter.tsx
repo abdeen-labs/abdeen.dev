@@ -20,6 +20,7 @@ export default function SiteFooter() {
         <div>
           <span className="wordmark">Abdeen Labs</span>
           <span className="site-footer__meta">{identity.studio} — EST {identity.established}</span>
+          <span className="site-footer__meta">{identity.endorsement}</span>
         </div>
       </div>
       <a

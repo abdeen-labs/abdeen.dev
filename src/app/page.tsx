@@ -16,7 +16,7 @@ export default function HomePage() {
     <div className="site-frame site-frame--wide">
       <section className="home-hero motion-block" aria-labelledby="home-title">
         <div className="home-hero__copy">
-          <span className="page-kicker">An independent studio</span>
+          <span className="page-kicker">{identity.role}</span>
           <h1 id="home-title">Software that stays yours.</h1>
           <p>{identity.description}</p>
         </div>

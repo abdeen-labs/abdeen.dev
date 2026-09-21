@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import Icon from "@/components/Icon";
 import ScrambledText from "@/components/ScrambledText";
 import { SealKey } from "@/components/Seal";
-import { identity } from "@/lib/brand";
+import { identity, industries } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "About Abdeen Labs, an independent software studio run by Jaafar Abdeen.",
+  description: "Abdeen Labs is the open-source and experimental division of Abdeen Industries, run by Jaafar Abdeen.",
   alternates: { canonical: "https://abdeen.dev/about" },
 };
 
@@ -15,11 +15,12 @@ export default function AboutPage() {
     <div className="site-frame site-frame--wide">
       <section className="about-hero motion-block" aria-labelledby="about-title">
         <div>
-          <span className="page-kicker">The studio</span>
-          <h1 id="about-title">A small studio, run in the open</h1>
+          <span className="page-kicker">About Labs</span>
+          <h1 id="about-title">Built in the open</h1>
           <div className="about-copy">
-            <p><ScrambledText>Abdeen Labs is an independent software studio. We make tools for people who want to know where their data is—and for everything here, the answer begins with: on your device.</ScrambledText></p>
-            <p><ScrambledText>{`The studio is run by ${identity.founder}. Everything we ship is built and published in the open, and every privacy claim is meant to be inspectable.`}</ScrambledText></p>
+            <p><ScrambledText>{identity.description}</ScrambledText></p>
+            <p><ScrambledText>{`Labs is run by ${identity.founder}. Everything we ship is built and published in the open, and every privacy claim is meant to be inspectable.`}</ScrambledText></p>
+            <p>{industries.name} builds and operates products. Each product states its own licensing, account requirements and data practices.</p>
           </div>
         </div>
         <div className="about-hero__seal" aria-hidden="true"><SealKey size={140} decorative /></div>
@@ -50,7 +51,7 @@ export default function AboutPage() {
         <div className="motion-row" style={{ animationDelay: "calc(var(--route-hold) + 340ms)" }}>
           <span className="page-kicker">Record</span>
           <dl className="record-list">
-            <div><dt>2027</dt><dd>Abdeen Labs established.</dd></div>
+            <div><dt>{identity.established}</dt><dd>Abdeen Labs established.</dd></div>
             <div><dt>2026</dt><dd>Public tools and product work published in the open.</dd></div>
           </dl>
         </div>

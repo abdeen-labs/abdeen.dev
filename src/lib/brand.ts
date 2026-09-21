@@ -5,11 +5,11 @@
  * moves, instead of repeating the same positioning and identity copy across
  * chrome, hero, metadata, and footer.
  *
- * Keep in sync with `brand-content.js` → `release`, `identity`, and
- * `artifacts.marketing`. The brand repo remains the source.
+ * Keep in sync with `brand-content.js` → `release`, `brands`, `family`,
+ * and `artifacts.marketing`. The brand repo remains the source.
  */
 
-const releaseVersion = "4.2";
+const releaseVersion = "5.0";
 const releaseIssued = "2026-09";
 
 /**
@@ -24,14 +24,22 @@ export const release = {
 
 export const identity = {
   studio: "Abdeen Labs",
-  /** The studio dates from a single year; there is no founding→present range. */
+  role: "Open-source software and experiments",
+  endorsement: "Part of Abdeen Industries",
   established: "2027",
   establishedLine: "Abdeen Labs / 2027",
   positioning: "Private software. Clear boundaries.",
   description:
-    "Abdeen Labs makes private software. Our products work without accounts, collect as little as possible, and make it clear what stays on your device and what leaves it. The source is public.",
+    "Abdeen Labs is the open-source and experimental division of Abdeen Industries. We make private software that works without accounts, collects as little as possible, and clearly shows what stays on your device and what leaves it. Our source is public.",
   founder:
     "Jaafar Abdeen, a Jordanian Palestinian engineer from al-Khalil",
+} as const;
+
+export const industries = {
+  name: "Abdeen Industries",
+  url: "https://abdeen.ai",
+  description:
+    "Abdeen Industries builds and operates independent products. Abdeen Labs is our home for open-source software and experiments.",
 } as const;
 
 // Control marks have their own namespace; Redline remains the theme name.

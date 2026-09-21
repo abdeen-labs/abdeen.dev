@@ -4,6 +4,7 @@
  * there updates the structured data automatically.
  */
 import { apps, tools, type CatalogEntry } from "./catalog";
+import { identity, industries } from "./brand";
 
 const SITE_URL = "https://abdeen.dev";
 
@@ -29,17 +30,23 @@ export function buildJsonLd() {
         "@id": `${SITE_URL}/#website`,
         name: "abdeen.dev",
         url: SITE_URL,
-        description:
-          "The Abdeen Labs studio site for private software, including apps and small tools that work without an account.",
+        description: identity.description,
         author: { "@id": `${SITE_URL}/#person` },
         publisher: { "@id": `${SITE_URL}/#organization` },
       },
       {
         "@type": "Organization",
         "@id": `${SITE_URL}/#organization`,
-        name: "Abdeen Labs",
-        description:
-          "Abdeen Labs makes private software with clear data boundaries and no account required.",
+        name: identity.studio,
+        url: SITE_URL,
+        description: identity.description,
+        sameAs: ["https://github.com/abdeen-labs"],
+        parentOrganization: {
+          "@type": "Organization",
+          name: industries.name,
+          url: industries.url,
+          description: industries.description,
+        },
         founder: { "@id": `${SITE_URL}/#person` },
       },
       {
