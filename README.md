@@ -4,7 +4,7 @@ Private software. Clear boundaries. This repository powers [abdeen.dev](https://
 
 Built with [Next.js](https://nextjs.org) (App Router), Tailwind CSS v4, and TypeScript. Deployed on Vercel. The interface implements **Redline**, the shared Abdeen brand system, with the canonical Void, Surface, Border, Mist, and Accent anchors and the official Iconoir React package.
 
-`src/lib/brand.ts` mirrors the canonical copy in `../abdeen-brand/brand-content.js`. Labs retains its identity and the `abdeen-labs` GitHub organization; Industries appears as a secondary endorsement. Product-specific accounts, licensing and privacy details belong to each product.
+`src/lib/brand.ts` mirrors the canonical copy in `../abdeen-brand/brand-content.js`.
 
 ## Development
 
