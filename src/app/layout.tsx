@@ -127,7 +127,7 @@ export default function RootLayout({
         </main>
         <SiteFooter />
         <Script
-          src="https://stats.abdeen.ai/script.js"
+          src="https://stats.abdeen.industries/script.js"
           data-website-id="83ea6980-3f4a-497c-b000-3e764d23184b"
           strategy="afterInteractive"
         />
