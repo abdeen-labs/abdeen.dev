@@ -25,7 +25,7 @@ export const release = {
 export const identity = {
   studio: "Abdeen Labs",
   role: "Open-source software and experiments",
-  endorsement: "Part of Abdeen Industries",
+  endorsement: "A division of Abdeen Industries",
   established: "2027",
   establishedLine: "Abdeen Labs / 2027",
   positioning: "Private software. Clear boundaries.",
