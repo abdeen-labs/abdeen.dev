@@ -46,8 +46,8 @@ export default function Icon() {
           xmlns="http://www.w3.org/2000/svg"
         >
           <g transform={`translate(${OFFSET} ${OFFSET})`}>
-            <path d={FIELD} fill="#121827" />
-            <path d={RING} fillRule="evenodd" fill="#FE002A" />
+            <path d={FIELD} fill="#111827" />
+            <path d={RING} fillRule="evenodd" fill="#FF002B" />
             <g
               transform={`translate(${MARK_TX} ${MARK_TY}) scale(${MARK_SCALE})`}
             >

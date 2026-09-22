@@ -43,7 +43,7 @@ export default async function OGImage() {
           flexDirection: 'column',
           justifyContent: 'space-between',
           padding: '64px 80px',
-          background: '#0A0F1C',
+          background: '#090F1B',
           fontFamily: 'Geist Mono',
         }}
       >
@@ -65,18 +65,18 @@ export default async function OGImage() {
               viewBox="0 0 40 40"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path d={SEAL_KEY.fieldPath} fill="#121827" />
+              <path d={SEAL_KEY.fieldPath} fill="#111827" />
               <path
                 d={SEAL_KEY.ringPathEvenOdd}
                 fillRule="evenodd"
-                fill="#FE002A"
+                fill="#FF002B"
               />
               <g transform={SEAL_KEY_MARK.transform}>
                 <path d={MARK.d} fill="#F3F7FF" />
               </g>
             </svg>
             <div
-              style={{ width: 1, height: 44, background: '#313C5A', display: 'flex' }}
+              style={{ width: 1, height: 44, background: '#2F3C5A', display: 'flex' }}
             />
             <span
               style={{
@@ -94,7 +94,7 @@ export default async function OGImage() {
               fontSize: 18,
               fontWeight: 500,
               letterSpacing: 2,
-              color: '#939FBD',
+              color: '#8FA0BC',
             }}
           >
             REF / ABDEEN.DEV
@@ -123,7 +123,7 @@ export default async function OGImage() {
               fontSize: 104,
               lineHeight: 0.92,
               letterSpacing: -5.7,
-              color: '#939FBD',
+              color: '#8FA0BC',
             }}
           >
             CLEAR BOUNDARIES.
@@ -132,7 +132,7 @@ export default async function OGImage() {
             style={{
               width: 180,
               height: 2,
-              background: '#FE002A',
+              background: '#FF002B',
               marginTop: 40,
               display: 'flex',
             }}
@@ -156,7 +156,7 @@ export default async function OGImage() {
               fontSize: 18,
               fontWeight: 500,
               letterSpacing: 2,
-              color: '#939FBD',
+              color: '#8FA0BC',
             }}
           >
             NO ACCOUNT · OPEN SOURCE
