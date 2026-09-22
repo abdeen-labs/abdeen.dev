@@ -37,7 +37,7 @@ export const identity = {
 
 export const industries = {
   name: "Abdeen Industries",
-  url: "https://abdeen.ai",
+  url: "https://abdeen.industries",
   description:
     "Abdeen Industries builds and operates independent products. Abdeen Labs is our home for open-source software and experiments.",
 } as const;
