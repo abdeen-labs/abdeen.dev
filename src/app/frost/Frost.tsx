@@ -7,7 +7,8 @@ import FrostVisual from "@/components/FrostVisual";
 import SectionHeader from "@/components/SectionHeader";
 import styles from "./frost.module.css";
 
-const REPO_URL = "https://github.com/Cuzeth/frost";
+const REPO = "abdeen-labs/frost";
+const REPO_URL = `https://github.com/${REPO}`;
 const RELEASES_URL = `${REPO_URL}/releases/latest`;
 
 const lockStates = [
@@ -29,7 +30,7 @@ const lockStates = [
     number: "03",
     mode: "Release",
     label: "Unlock in person",
-    detail: "Touch ID, Apple Watch, or the local shortcut releases the lock.",
+    detail: "Touch ID or Apple Watch unlocks. The shortcut only opens the prompt.",
     signal: "Auth / required",
   },
 ];
@@ -43,7 +44,7 @@ const systems = [
   {
     number: "02",
     label: "Authenticate",
-    items: ["Touch ID", "Apple Watch", "Local shortcut"],
+    items: ["Touch ID", "Apple Watch", "Shortcut opens prompt"],
   },
   {
     number: "03",
@@ -85,7 +86,7 @@ function useLatestRelease() {
 
   useEffect(() => {
     let cancelled = false;
-    fetch("https://api.github.com/repos/Cuzeth/frost/releases/latest", {
+    fetch(`https://api.github.com/repos/${REPO}/releases/latest`, {
       headers: { Accept: "application/vnd.github+json" },
     })
       .then((r) => (r.ok ? (r.json() as Promise<Release>) : Promise.reject(r.status)))
