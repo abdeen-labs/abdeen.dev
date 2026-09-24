@@ -52,7 +52,6 @@ const LIMITS = [
   "AP or client isolation hides every other device on the network from this tool",
   "Cameras that only write to an SD card and never go online cannot be detected",
   "Many hidden cameras run unbranded firmware on commodity chips (Tuya, ESP32, Anyka, Ingenic) and match no known vendor",
-  "Treat the scan as a starting point, not a guarantee — pair it with the physical sweep",
 ];
 
 const DOWNLOAD_LINKS = [
@@ -143,9 +142,6 @@ export default function SafeStay() {
           network scan can see.
         </p>
         <p className="micro-label">Scans this network only</p>
-        <p className="text-body text-ink-dim">
-          Hobby project — the full disclaimer sits at the end of this page.
-        </p>
 
         <div className="flex flex-col gap-2">
           <div className="flex flex-wrap items-center justify-between gap-3">
@@ -172,7 +168,7 @@ export default function SafeStay() {
           <p className="text-body text-ink-dim">
             The script installs to <code>~/.local/bin</code>, verifies the
             binary against the release&apos;s SHA-256 checksums before
-            installing, and never asks for sudo. Inspect it before you run it.
+            installing, and never asks for sudo.
           </p>
         </div>
 
@@ -245,10 +241,9 @@ export default function SafeStay() {
           <a href={OUI_DB_URL} target="_blank" rel="noopener noreferrer">
             SafeStay OUI table
           </a>
-          , derived from the IEEE MA-L registry. A vendor label is a technical
-          reference, not an identification: MACs can be spoofed and OUI blocks
-          are reused. The installed scanner adds port probes and per-device
-          risk assessment.
+          , derived from the IEEE MA-L registry. MAC prefixes identify registered
+          vendors, though addresses can be spoofed and blocks reused. The
+          installed scanner also probes ports and assesses each device.
         </p>
         <div className="flex flex-col gap-3">
           <div className="flex flex-col gap-2">
@@ -276,11 +271,8 @@ export default function SafeStay() {
                     — {lookupResult.vendor}
                   </p>
                   <p className="mt-2 text-body text-ink-dim">
-                    This prefix is registered to a surveillance or camera
-                    company. On its own that is not proof of what the device
-                    is: MACs can be spoofed and OUI blocks are reused. An
-                    unexpected major-brand camera may be a disclosed device —
-                    check the listing.
+                    This prefix is registered to a camera manufacturer. Check
+                    the device against the rental&apos;s disclosed equipment.
                   </p>
                 </>
               )}
@@ -290,10 +282,8 @@ export default function SafeStay() {
                     Chipset vendor match — {lookupResult.vendor}
                   </p>
                   <p className="mt-2 text-body text-ink-dim">
-                    This chipset ships inside many hidden cameras — and inside
-                    many ordinary IoT devices. Treat it as a lead, not a
-                    finding: it matters when the same device also exposes
-                    camera-class ports.
+                    This chipset is used in cameras and other IoT devices.
+                    Check whether the device also exposes camera-class ports.
                   </p>
                 </>
               )}
@@ -303,9 +293,7 @@ export default function SafeStay() {
                     No match
                   </p>
                   <p className="mt-2 text-body text-ink-dim">
-                    No camera-manufacturer match for this prefix. That is not
-                    a clearance: hidden cameras often ship with unregistered
-                    or randomized MACs precisely to stay out of vendor tables.
+                    This prefix isn&apos;t in the camera-vendor table.
                   </p>
                 </>
               )}
@@ -363,8 +351,8 @@ export default function SafeStay() {
       <section className="flex flex-col gap-3">
         <h2 className="text-h3">Coverage limits</h2>
         <p className="text-body text-ink-secondary">
-          A clean scan is not a guarantee. SafeStay covers one slice of the
-          threat surface; these sit outside it.
+          These devices and network configurations are outside the scan&apos;s
+          coverage.
         </p>
         <ul className="flex flex-col gap-1.5">
           {LIMITS.map((item) => (
