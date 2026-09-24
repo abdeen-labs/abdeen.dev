@@ -1,4 +1,4 @@
-// Generated from abdeen-brand exports/labs/geometry.json — do not hand-edit.
+// Generated brand geometry — do not hand-edit.
 //
 // The عابدين mark (HarfBuzz-shaped from Aref Ruqaa) and the tracked Geist Mono
 // wordmark as raw glyph outlines, plus the Key seal's ring/field geometry.

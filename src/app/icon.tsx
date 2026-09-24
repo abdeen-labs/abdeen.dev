@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og';
 import { MARK } from '@/lib/seal-geometry';
 
 /**
- * Favicon — a build-time render of the Key seal (BRAND.md → The Seal).
+ * Favicon — a build-time render of the Key seal.
  * Sanctioned: raster icons are renders of the live Seal component, never
  * traced artwork. Ramp literals appear here because the artifact is
  * standalone — there is no cascade to carry roles. Everything is painted
@@ -18,7 +18,7 @@ export const contentType = 'image/png';
 
 // Key geometry at 28px: 26% chamfer, 1px Accent hairline (floored),
 // mark ink at 0.36 × plate, centred on its ink bbox. The 7/8 inset matches
-// the canonical favicon cuts in abdeen-brand.
+// the canonical favicon cuts.
 const PLATE = 32 * 0.875;
 const OFFSET = (32 - PLATE) / 2;
 const CUT = PLATE * 0.26;

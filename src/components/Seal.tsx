@@ -2,9 +2,8 @@ import type { CSSProperties } from "react";
 import Image from "next/image";
 
 /**
- * The two approved Seal forms (BRAND.md → The Seal). Both are supplied
- * components and are never redrawn (Hard Rule #3). The mark is set live
- * in Aref Ruqaa 700 — no logo file exists.
+ * The two approved Seal forms. Both are supplied components and are never
+ * redrawn. The mark is set live in Aref Ruqaa 700 — no logo file exists.
  */
 
 interface SealKeyProps {
@@ -55,7 +54,7 @@ interface SealRoundelProps {
   className?: string;
 }
 
-/** A · Roundel — the exact generated 04A asset from abdeen-brand.
+/** A · Roundel — the exact generated 04A asset.
  * Never reconstruct its mark, ring type, or baseline in consumer code. */
 export function SealRoundel({
   size = 96,

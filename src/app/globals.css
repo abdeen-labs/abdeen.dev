@@ -538,7 +538,7 @@ textarea {
 
 /* ─── Mark · Wordmark · Lockup ───────────────────────────────────── */
 
-/* The mark is live-set. No logo file exists (Hard Rule #1). */
+/* The mark is live-set. No logo file exists. */
 .mark {
   font-family: var(--font-mark-stack);
   font-weight: 700;
@@ -1638,7 +1638,7 @@ a.chip:focus-visible {
 
 /* The panel echoes the Key's 26% chamfer as a silhouette, so only the
    continuous page shows through the notch. A chamfer never pairs with a
-   radius (Hard Rule #3), which is why .obj declares no border-radius. */
+   radius, which is why .obj declares no border-radius. */
 .obj {
   --cut: 20px;
   position: relative;
@@ -2808,7 +2808,7 @@ a:focus-visible [data-icon="arrow-up-right"] {
   text-align: center;
 }
 
-/* The mark set live per BRAND.md — Aref Ruqaa 700, rtl, with the ruqaa
+/* The mark set live — Aref Ruqaa 700, rtl, with the ruqaa
    tail's overshoot rebalanced the same way the hero watermark does it. */
 .about-plate__mark {
   font-family: var(--font-mark-stack);

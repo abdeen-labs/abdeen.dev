@@ -1,15 +1,12 @@
 /**
- * Canonical brand strings mirrored from abdeen-brand/system/brand-content.js.
+ * Canonical brand strings.
  *
- * Mirroring them here gives the site one file to update when the brand repo
- * moves, instead of repeating the same positioning and identity copy across
- * chrome, hero, metadata, and footer.
- *
- * Keep in sync with `brand-content.js` → `release`, `brands`, and `family`.
- * The brand repo remains the source.
+ * Keeping them here gives the site one file to update instead of repeating
+ * the same positioning and identity copy across chrome, hero, metadata, and
+ * footer.
  */
 
-const releaseVersion = "5.0";
+const releaseVersion = "5.2";
 const releaseIssued = "2026-09";
 
 /**
@@ -39,7 +36,7 @@ export const industries = {
   name: "Abdeen Industries",
   url: "https://abdeen.industries",
   description:
-    "Abdeen Industries builds and operates independent products. Abdeen Labs is our home for open-source software and experiments.",
+    "Abdeen Industries is a software development and cybersecurity company founded by Jaafar Abdeen. Ideas into industry.",
 } as const;
 
 // Control marks have their own namespace; Redline remains the theme name.

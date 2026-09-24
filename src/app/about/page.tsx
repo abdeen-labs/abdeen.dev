@@ -20,13 +20,13 @@ export default function AboutPage() {
           <div className="about-copy">
             <p><ScrambledText>{identity.description}</ScrambledText></p>
             <p><ScrambledText>{`Labs is run by ${identity.founder}. Everything we ship is built and published in the open, and every privacy claim is meant to be inspectable.`}</ScrambledText></p>
-            <p>{industries.name} builds and operates products. Each product states its own licensing, account requirements and data practices.</p>
+            <p>{industries.name} is a software development and cybersecurity company. Each Industries product states its own licensing, accounts, data handling and network behavior.</p>
           </div>
         </div>
         <div className="about-hero__seal" aria-hidden="true"><SealKey size={140} decorative /></div>
       </section>
 
-      {/* Brand plate: the mark set live (BRAND.md — there is no logo file),
+      {/* Brand plate: the mark set live (there is no logo file),
           the wordmark as a specimen, the positioning line. The footer's
           Roundel is this page's one Roundel, so the plate stays with the
           bare mark. */}

@@ -4,7 +4,7 @@ Private software. Clear boundaries. This repository powers [abdeen.dev](https://
 
 Built with [Next.js](https://nextjs.org) (App Router), Tailwind CSS v4, and TypeScript. Deployed on Vercel. The interface implements **Redline**, the shared Abdeen brand system, with the canonical Void, Surface, Border, Mist, and Accent anchors and the official Iconoir React package.
 
-`src/lib/brand.ts` mirrors the canonical copy in `../abdeen-brand/system/brand-content.js`.
+`src/lib/brand.ts` holds the brand copy used across the site.
 
 ## Development
 
@@ -25,7 +25,7 @@ bun run build    # production build
 - `src/app/globals.css` · Redline role tokens, the approved studio-site layouts, and shared tool controls.
 - `src/app/font-files/` · canonical local webfonts loaded through `next/font/local`.
 - `public/fonts/redline/static/` · local font files used by the OG renderer.
-- `public/brand/` · generated Labs assets copied from `../abdeen-brand/exports/labs/svg/components/`.
+- `public/brand/` · generated Labs assets.
 - `public/data/` · word lists and lookup data fetched by the tools at runtime.
 
 The live interface mark `عابدين` is set in Aref Ruqaa 700. Standalone SVG exports, the favicon, and the OG renderer derive from the canonical Seal geometry.
