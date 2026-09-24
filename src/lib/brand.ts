@@ -1,12 +1,12 @@
 /**
- * Canonical brand strings mirrored from abdeen-brand/brand-content.js.
+ * Canonical brand strings mirrored from abdeen-brand/system/brand-content.js.
  *
  * Mirroring them here gives the site one file to update when the brand repo
  * moves, instead of repeating the same positioning and identity copy across
  * chrome, hero, metadata, and footer.
  *
- * Keep in sync with `brand-content.js` → `release`, `brands`, `family`,
- * and `artifacts.marketing`. The brand repo remains the source.
+ * Keep in sync with `brand-content.js` → `release`, `brands`, and `family`.
+ * The brand repo remains the source.
  */
 
 const releaseVersion = "5.0";

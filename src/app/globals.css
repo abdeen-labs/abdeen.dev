@@ -230,7 +230,7 @@
   --ease-route-exit: cubic-bezier(0.25, 0.1, 0.25, 1);
   --focus-ring: 2px solid var(--accent);
   --focus-ring-offset: 3px;
-  --mark-optical-shift: 0.168em;
+  --mark-optical-shift: 0.241em;
   --seal-mark-scale: 0.36;
   --seal-cut: 26%;
   --seal-size: 40px;
@@ -654,7 +654,7 @@ textarea {
 
 /* A plate is the middle step of the concentric scale: --radius-plate, 4px
    wider than the --radius-control on the buttons and fields inside it, so
-   the inner corners sit concentric with the outer ones (Hard Rule #13). */
+   the inner corners sit concentric with the outer ones. */
 .plate {
   background: var(--surface-card);
   border: 1px solid var(--hairline);
@@ -699,7 +699,7 @@ textarea {
 /* Hairline grids: razor dividers from grid gap, not borders. The grid is
    the plate, so the radius and the clip live here rather than on the cells
    — a rounded cell would let the 1px gap colour show through its corner
-   notches as four wedges (the third square exemption in Hard Rule #13). */
+   notches as four wedges. */
 .hairline-grid {
   display: grid;
   gap: 1px;
@@ -828,7 +828,7 @@ textarea {
    tightest step — always 4px tighter than the --radius-plate on the
    plate, well, or console they sit inside. That step is what separates
    touch from structure now that both are soft, so do not collapse it.
-   The switch is fully circular rather than stepped (Hard Rule #13). */
+   The switch is fully circular rather than stepped. */
 
 .btn,
 .chip,
@@ -1485,9 +1485,6 @@ a.chip:focus-visible {
   transform: rotate(45deg);
 }
 
-/* .abd-stamp is print-register furniture and deliberately does not ship
-   here: an interface never carries the stamp (BRAND.md → Print Register). */
-
 /* ─── Site chrome ────────────────────────────────────────────────── */
 
 /* Legacy site-nav support stays flat. */
@@ -1603,8 +1600,7 @@ a.chip:focus-visible {
 }
 
 /* ─── Marketing page structure ─────────────────────────────────────
-   Ported from abdeen-brand/system/ui_kits/marketing/index.html: a clear
-   introduction, section rails, and measured content panels. */
+   A clear introduction, section rails, and measured content panels. */
 
 /* The hero's studio line: one ruled mono line along the section's foot. */
 .hero-register {
@@ -1642,7 +1638,7 @@ a.chip:focus-visible {
 
 /* The panel echoes the Key's 26% chamfer as a silhouette, so only the
    continuous page shows through the notch. A chamfer never pairs with a
-   radius (Hard Rule #13), which is why .obj declares no border-radius. */
+   radius (Hard Rule #3), which is why .obj declares no border-radius. */
 .obj {
   --cut: 20px;
   position: relative;
@@ -1899,8 +1895,7 @@ a.chip:focus-visible {
 
 /* ─── Hero watermark — the mark as furniture, printed solid ──────── */
 
-/* Decorative only (aria-hidden). Solid structure tone — outline and
-   stroked type are not in the system (Hard Rule #12). */
+/* Decorative only (aria-hidden). Solid structure tone. */
 .hero-mark {
   position: absolute;
   pointer-events: none;

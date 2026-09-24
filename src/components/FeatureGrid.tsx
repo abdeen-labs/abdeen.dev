@@ -1,7 +1,7 @@
 /**
  * Numbered capability grid used by the product pages: one hairline-divided
  * machined panel. Each cell separates into a mono label and a Geist
- * sentence (BRAND.md → Type).
+ * sentence.
  */
 interface FeatureGridProps {
   items: { label: string; detail: string }[];
