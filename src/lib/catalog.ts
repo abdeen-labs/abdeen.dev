@@ -137,7 +137,7 @@ const allApps: CatalogEntry[] = [
   {
     title: "Strobe",
     description:
-      "Rapid serial visual reader for iPhone, iPad, and Mac. Converts PDFs, EPUBs, and plain text into a timed reading stream.",
+      "Read books and documents one word at a time on iPhone, iPad, and Mac, with adjustable timing, chapter navigation, and searchable full text.",
     href: "https://strobefast.app",
     meta: "strobefast.app",
     external: true,
