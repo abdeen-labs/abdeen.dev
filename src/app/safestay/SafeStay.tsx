@@ -182,6 +182,9 @@ export default function SafeStay() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="chrome-link flex min-h-12 items-center justify-between gap-3 px-4 py-3 font-mono text-control font-medium"
+                data-umami-event="download"
+                data-umami-event-app="safestay"
+                data-umami-event-file={dl.file}
               >
                 <span>{dl.label}</span>
                 <Icon name="download" />
@@ -224,6 +227,9 @@ export default function SafeStay() {
           target="_blank"
           rel="noopener noreferrer"
           className="chrome-link self-start font-mono text-control"
+          data-umami-event="github"
+          data-umami-event-app="safestay"
+          data-umami-event-location="install"
         >
           View source on GitHub <Icon name="arrow-up-right" />
         </a>
@@ -395,6 +401,9 @@ export default function SafeStay() {
             target="_blank"
             rel="noopener noreferrer"
             className="chrome-link inline-flex min-h-6 items-center font-mono text-control"
+            data-umami-event="github"
+            data-umami-event-app="safestay"
+            data-umami-event-location="disclaimer"
           >
             Source
           </a>

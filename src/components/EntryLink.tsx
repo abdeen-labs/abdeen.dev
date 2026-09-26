@@ -21,6 +21,8 @@ export default function EntryLink({
         rel="noopener noreferrer"
         className={className}
         style={style}
+        data-umami-event="product"
+        data-umami-event-app={item.title.toLowerCase()}
       >
         {children}
       </a>

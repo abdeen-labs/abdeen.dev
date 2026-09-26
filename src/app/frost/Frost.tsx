@@ -64,13 +64,24 @@ type Release = {
   assets: { name: string; browser_download_url: string }[];
 };
 
-function DownloadButton({ href, label }: { href: string; label: string }) {
+function DownloadButton({
+  href,
+  label,
+  location,
+}: {
+  href: string;
+  label: string;
+  location: string;
+}) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noopener noreferrer"
       className="btn btn--primary"
+      data-umami-event="download"
+      data-umami-event-app="frost"
+      data-umami-event-location={location}
     >
       <AppleLogo />
       {label}
@@ -137,12 +148,15 @@ export default function Frost() {
               Watch releases the lock.
             </p>
             <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-3">
-              <DownloadButton href={release.href} label={release.label} />
+              <DownloadButton href={release.href} label={release.label} location="hero" />
               <a
                 href={REPO_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn--quiet"
+                data-umami-event="github"
+                data-umami-event-app="frost"
+                data-umami-event-location="hero"
               >
                 View source
               </a>
@@ -252,7 +266,7 @@ export default function Frost() {
               <p className="micro-label">macOS 14.6+</p>
             </div>
             <div className="flex flex-col items-start gap-3">
-              <DownloadButton href={release.href} label={release.label} />
+              <DownloadButton href={release.href} label={release.label} location="closing" />
             </div>
           </div>
         </section>

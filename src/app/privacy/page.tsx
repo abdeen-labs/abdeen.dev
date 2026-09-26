@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://abdeen.dev/privacy" },
 };
 
-const LAST_UPDATED = "September 25, 2026";
+const LAST_UPDATED = "September 26, 2026";
 
 type PrivacyEntry = Pick<CatalogEntry, "title" | "meta" | "href"> & {
   privacy: NonNullable<CatalogEntry["privacy"]>;
@@ -21,7 +21,7 @@ const siteEntry: PrivacyEntry = {
   privacy: {
     kind: "exception",
     summary:
-      "This site uses a self-hosted Umami instance at stats.abdeen.industries for anonymous, aggregate page views and performance metrics. It does not use cookies or track you across sites. The Frost page also asks GitHub for the latest release information.",
+      "This site uses a self-hosted Umami instance at stats.abdeen.industries for anonymous, aggregate page views, link clicks and performance metrics. It does not use cookies or track you across sites. The Frost page also asks GitHub for the latest release information.",
   },
 };
 
@@ -66,7 +66,11 @@ export default function PrivacyPage() {
       <section className="privacy-contact motion-block" aria-labelledby="privacy-contact-title">
         <h2 id="privacy-contact-title">Questions?</h2>
         <p>
-          Email us at <a href="mailto:help@abdeen.dev">help@abdeen.dev</a>.
+          Email us at{" "}
+          <a href="mailto:help@abdeen.dev" data-umami-event="email" data-umami-event-location="legal">
+            help@abdeen.dev
+          </a>
+          .
         </p>
       </section>
     </div>

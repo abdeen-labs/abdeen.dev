@@ -28,6 +28,8 @@ export default function SiteFooter() {
         target="_blank"
         rel="noopener noreferrer"
         className="footer-link"
+        data-umami-event="github"
+        data-umami-event-location="footer"
       >
         github.com/abdeen-labs <Icon name="arrow-up-right" size={16} />
       </a>

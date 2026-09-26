@@ -45,6 +45,9 @@ export default function ToolPageShell({
               target="_blank"
               rel="noopener noreferrer"
               className="text-link"
+              data-umami-event="github"
+              data-umami-event-app={currentPath.replace(/^\//, "")}
+              data-umami-event-location="tool-page"
             >
               View source <Icon name="arrow-up-right" size={16} />
             </a>

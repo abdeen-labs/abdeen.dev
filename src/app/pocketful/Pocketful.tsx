@@ -126,6 +126,9 @@ export default function Pocketful() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn--primary"
+                data-umami-event="github"
+                data-umami-event-app="pocketful"
+                data-umami-event-location="hero"
               >
                 Get the source <Icon name="arrow-up-right" />
               </a>
@@ -134,6 +137,9 @@ export default function Pocketful() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn--quiet"
+                data-umami-event="docs"
+                data-umami-event-app="pocketful"
+                data-umami-event-location="hero"
               >
                 Read the setup guide
               </a>
@@ -250,6 +256,9 @@ export default function Pocketful() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn--primary"
+                data-umami-event="docs"
+                data-umami-event-app="pocketful"
+                data-umami-event-location="closing"
               >
                 Follow the setup guide <Icon name="arrow-up-right" />
               </a>

@@ -108,6 +108,9 @@ export default function Hark() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn--primary"
+                data-umami-event="github"
+                data-umami-event-app="hark"
+                data-umami-event-location="hero"
               >
                 <Icon name="github" size={16} />
                 View source
@@ -117,6 +120,9 @@ export default function Hark() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn--quiet"
+                data-umami-event="docs"
+                data-umami-event-app="hark"
+                data-umami-event-location="hero"
               >
                 API docs
               </a>
@@ -219,6 +225,9 @@ export default function Hark() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn--primary"
+                data-umami-event="github"
+                data-umami-event-app="hark"
+                data-umami-event-location="self-host"
               >
                 <Icon name="github" size={16} />
                 Open on GitHub

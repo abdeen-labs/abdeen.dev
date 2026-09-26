@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Icon from "@/components/Icon";
+import NotFoundTracker from "@/components/NotFoundTracker";
 
 export const metadata: Metadata = {
   title: "Not found",
@@ -18,9 +19,10 @@ export default function NotFound() {
         <div className="not-found__links">
           <Link href="/" className="text-link">Back to the start <Icon name="arrow-right" size={16} /></Link>
           <Link href="/tools" className="text-link">Tools <Icon name="arrow-right" size={16} /></Link>
-          <a href="https://github.com/abdeen-labs" target="_blank" rel="noopener noreferrer" className="text-link">Source <Icon name="arrow-up-right" size={16} /></a>
+          <a href="https://github.com/abdeen-labs" target="_blank" rel="noopener noreferrer" className="text-link" data-umami-event="github" data-umami-event-location="404">Source <Icon name="arrow-up-right" size={16} /></a>
         </div>
       </section>
+      <NotFoundTracker />
     </div>
   );
 }

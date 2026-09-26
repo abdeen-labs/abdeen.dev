@@ -59,7 +59,7 @@ const studioFacts = [
 
 /** Primary conversion action, shared by the hero and closing CTA. Falls back
  *  to a non-interactive status chip while APP_STORE_URL is unset. */
-function AppStoreButton() {
+function AppStoreButton({ location }: { location: string }) {
   if (!APP_STORE_URL) {
     return (
       <span className="chip">
@@ -67,7 +67,14 @@ function AppStoreButton() {
       </span>
     );
   }
-  return <AppleBadgeLink href={APP_STORE_URL} label="Download on the App Store" />;
+  return (
+    <AppleBadgeLink
+      href={APP_STORE_URL}
+      label="Download on the App Store"
+      app="hush"
+      location={location}
+    />
+  );
 }
 
 const mixerLayers = [
@@ -195,12 +202,15 @@ export default function Hush() {
               sounds, all on-device.
             </p>
             <div className="mt-1 flex flex-wrap items-center gap-x-5 gap-y-3">
-              <AppStoreButton />
+              <AppStoreButton location="hero" />
               <a
                 href={REPO_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="chrome-link font-mono text-control"
+                data-umami-event="github"
+                data-umami-event-app="hush"
+                data-umami-event-location="hero"
               >
                 View source <Icon name="arrow-up-right" />
               </a>
@@ -285,7 +295,7 @@ export default function Hush() {
               </div>
             </div>
             <div>
-              <AppStoreButton />
+              <AppStoreButton location="closing" />
             </div>
           </div>
         </section>

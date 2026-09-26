@@ -73,7 +73,10 @@ const sections = [
     body: (
       <>
         Questions? Reach out at{" "}
-        <a href="mailto:help@abdeen.dev">help@abdeen.dev</a>.
+        <a href="mailto:help@abdeen.dev" data-umami-event="email" data-umami-event-location="legal">
+          help@abdeen.dev
+        </a>
+        .
       </>
     ),
   },

@@ -130,6 +130,7 @@ export default function RootLayout({
           src="https://stats.abdeen.industries/script.js"
           data-website-id="83ea6980-3f4a-497c-b000-3e764d23184b"
           data-performance="true"
+          data-domains="abdeen.dev"
           strategy="afterInteractive"
         />
       </body>
