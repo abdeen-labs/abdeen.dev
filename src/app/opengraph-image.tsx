@@ -101,8 +101,7 @@ export default async function OGImage() {
           </span>
         </div>
 
-        {/* Positioning line as macro display; the second line steps its
-            ink down a tier — never hollow type. */}
+        {/* Positioning line with a quieter second line. */}
         <div style={{ display: 'flex', flexDirection: 'column' }}>
           <span
             style={{

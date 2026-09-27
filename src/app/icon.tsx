@@ -3,8 +3,7 @@ import { MARK } from '@/lib/seal-geometry';
 
 /**
  * Favicon — a build-time render of the Key seal.
- * Sanctioned: raster icons are renders of the live Seal component, never
- * traced artwork. Ramp literals appear here because the artifact is
+ * Palette literals appear here because the artifact is
  * standalone — there is no cascade to carry roles. Everything is painted
  * as one SVG: Satori cannot shape Arabic (live type renders disjoined
  * letters) and its nested clip-paths drop the hairline ring, so the mark

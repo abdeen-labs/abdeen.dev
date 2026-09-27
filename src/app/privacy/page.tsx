@@ -4,11 +4,11 @@ import { apps, tools, type CatalogEntry } from "@/lib/catalog";
 export const metadata: Metadata = {
   title: "Privacy Policy",
   description:
-    "Abdeen Labs apps and tools do not collect or sell personal data. This policy explains the few exceptions and clarifications.",
+    "How the Labs website, apps and tools handle data.",
   alternates: { canonical: "https://abdeen.dev/privacy" },
 };
 
-const LAST_UPDATED = "September 26, 2026";
+const LAST_UPDATED = "September 27, 2026";
 
 type PrivacyEntry = Pick<CatalogEntry, "title" | "meta" | "href"> & {
   privacy: NonNullable<CatalogEntry["privacy"]>;
@@ -37,12 +37,12 @@ export default function PrivacyPage() {
     <div className="site-frame site-frame--reading privacy-page">
       <header className="privacy-intro motion-block">
         <h1>Privacy policy</h1>
-        <p>Abdeen Labs apps and tools do not collect or sell personal data.</p>
+        <p>How the Labs website, apps and tools handle data.</p>
         <p className="privacy-updated">Last updated {LAST_UPDATED}</p>
       </header>
 
       <section className="privacy-details" aria-labelledby="privacy-details-title">
-        <h2 id="privacy-details-title">Exceptions and clarifications</h2>
+        <h2 id="privacy-details-title">Website and products</h2>
         <div className="privacy-details__list">
           {privacyEntries.map((entry, index) => (
             <article

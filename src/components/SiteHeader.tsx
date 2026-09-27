@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import Icon from "@/components/Icon";
 import { SealKey } from "@/components/Seal";
-import { identity, marketing } from "@/lib/brand";
+import { identity } from "@/lib/brand";
 import { apps, tools } from "@/lib/catalog";
 
 const navItems = [
@@ -88,7 +88,7 @@ function RouteLabel({ label }: { label: string }) {
   );
 }
 
-/** Shared Redline chrome. The route owns the approved dark/light ground. */
+/** Shared site header and route label. */
 export default function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -97,7 +97,6 @@ export default function SiteHeader() {
     <header className="site-header" role="banner">
       <div className="identity-rail">
         <span>[ {identity.studio.toUpperCase()} ] <span aria-hidden="true">{"///"}</span> <RouteLabel label={routeLabel(pathname)} /></span>
-        <span>{marketing.topChrome}</span>
       </div>
 
       <div className="site-header__main">

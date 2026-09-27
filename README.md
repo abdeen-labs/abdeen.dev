@@ -22,7 +22,7 @@ bun run build    # production build
 - `src/app/` · routes. Each browser tool is a folder with a `page.tsx` (metadata + shell) and one client component.
 - `src/components/` · shared UI (tool page shell, Seal, section header, fade-in wrapper).
 - `src/lib/catalog.ts` · the single index of apps and tools that drives the homepage, footer, and cross-links.
-- `src/app/globals.css` · Redline role tokens, the approved studio-site layouts, and shared tool controls.
+- `src/app/globals.css` · Redline role tokens, site layouts, and shared tool controls.
 - `src/app/font-files/` · canonical local webfonts loaded through `next/font/local`.
 - `public/fonts/redline/static/` · local font files used by the OG renderer.
 - `public/brand/` · generated Labs assets.

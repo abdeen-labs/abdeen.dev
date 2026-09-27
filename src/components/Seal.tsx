@@ -2,8 +2,8 @@ import type { CSSProperties } from "react";
 import Image from "next/image";
 
 /**
- * The two approved Seal forms. Both are supplied components and are never
- * redrawn. The mark is set live in Aref Ruqaa 700 — no logo file exists.
+ * Labs Key and Roundel. The Key sets the mark live in Aref Ruqaa 700;
+ * the Roundel uses the supplied SVG.
  */
 
 interface SealKeyProps {
@@ -47,7 +47,7 @@ export function SealKey({
 }
 
 interface SealRoundelProps {
-  /** Diameter in px. Never below 56. One per page. */
+  /** Diameter in px. Minimum 56. */
   size?: number;
   /** Hide from assistive tech when adjacent text already names the studio. */
   decorative?: boolean;

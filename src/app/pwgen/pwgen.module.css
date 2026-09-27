@@ -65,8 +65,7 @@
   font-feature-settings: "tnum";
 }
 
-/* Segment differentiation rides on ink tiers and weight, never on a
-   signal colour — the characters are values, not status. */
+/* Password segments use different ink tiers and weights. */
 .segWord { color: var(--ink-primary); }
 .segNumber { color: var(--ink-secondary); }
 .segSpecial { color: var(--ink-primary); font-weight: 700; }

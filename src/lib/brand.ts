@@ -6,7 +6,7 @@
  * footer.
  */
 
-const releaseVersion = "5.2";
+const releaseVersion = "5.5";
 const releaseIssued = "2026-09";
 
 /**
@@ -27,7 +27,7 @@ export const identity = {
   establishedLine: "Abdeen Labs / 2027",
   positioning: "Private software. Clear boundaries.",
   description:
-    "Abdeen Labs is the open-source and experimental division of Abdeen Industries. We make private software that works without accounts, collects as little as possible, and clearly shows what stays on your device and what leaves it. Our source is public.",
+    "Abdeen Labs is the open-source and experimental division of Abdeen Industries.",
   founder:
     "Jaafar Abdeen, a Jordanian Palestinian engineer from al-Khalil",
 } as const;
@@ -37,15 +37,4 @@ export const industries = {
   url: "https://abdeen.industries",
   description:
     "Abdeen Industries is a software development and cybersecurity company founded by Jaafar Abdeen. Ideas into industry.",
-} as const;
-
-// Control marks have their own namespace; Redline remains the theme name.
-const controlNamespace = "ABD33N";
-const marketingControlMark = `${controlNamespace}//OPEN`;
-
-export const marketing = {
-  controlMark: marketingControlMark,
-  /** Continuous public sites may carry the ABD33N public mark once. */
-  topChrome: marketingControlMark,
-  footer: `${identity.studio} · Private software`,
 } as const;

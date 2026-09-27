@@ -19,17 +19,14 @@ export default function AboutPage() {
           <h1 id="about-title">Built in the open</h1>
           <div className="about-copy">
             <p><ScrambledText>{identity.description}</ScrambledText></p>
-            <p><ScrambledText>{`Labs is run by ${identity.founder}. Everything we ship is built and published in the open, and every privacy claim is meant to be inspectable.`}</ScrambledText></p>
-            <p>{industries.name} is a software development and cybersecurity company. Each Industries product states its own licensing, accounts, data handling and network behavior.</p>
+            <p><ScrambledText>{`Labs is run by ${identity.founder}.`}</ScrambledText></p>
+            <p>{industries.name} is a software development and cybersecurity company. Each product states its own licensing, accounts, data handling and network behavior.</p>
           </div>
         </div>
         <div className="about-hero__seal" aria-hidden="true"><SealKey size={140} decorative /></div>
       </section>
 
-      {/* Brand plate: the mark set live (there is no logo file),
-          the wordmark as a specimen, the positioning line. The footer's
-          Roundel is this page's one Roundel, so the plate stays with the
-          bare mark. */}
+      {/* Brand plate: live mark, wordmark and positioning line. */}
       <section className="about-plate" aria-labelledby="about-plate-title">
         <span className="page-kicker motion-row" id="about-plate-title" style={{ animationDelay: "calc(var(--route-hold) + 120ms)" }}>
           The mark
