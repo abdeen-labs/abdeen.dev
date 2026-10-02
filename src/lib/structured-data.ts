@@ -46,6 +46,7 @@ export function buildJsonLd() {
           name: industries.name,
           url: industries.url,
           description: industries.description,
+          sameAs: [industries.github],
         },
         founder: { "@id": `${SITE_URL}/#person` },
       },

@@ -35,6 +35,7 @@ export const identity = {
 export const industries = {
   name: "Abdeen Industries",
   url: "https://abdeen.industries",
+  github: "https://github.com/abdeen-industries",
   description:
     "Abdeen Industries is a software development and cybersecurity company founded by Jaafar Abdeen. Ideas into industry.",
 } as const;
