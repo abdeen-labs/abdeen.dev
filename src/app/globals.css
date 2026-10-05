@@ -2521,6 +2521,13 @@ a:focus-visible [data-icon="arrow-up-right"] {
 
 .site-footer--full { min-height: 142px; }
 
+.site-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 24px;
+}
+
 .site-footer__identity {
   display: flex;
   align-items: center;

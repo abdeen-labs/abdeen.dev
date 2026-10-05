@@ -28,8 +28,6 @@ export const identity = {
   positioning: "Private software. Clear boundaries.",
   description:
     "Abdeen Labs is the open-source and experimental division of Abdeen Industries.",
-  founder:
-    "Jaafar Abdeen, a Jordanian Palestinian engineer from al-Khalil",
 } as const;
 
 export const industries = {

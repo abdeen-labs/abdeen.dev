@@ -136,17 +136,6 @@ export default function SiteHeader() {
               </Link>
             );
           })}
-          <a
-            href="https://jaafar.cv"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="site-navigation__link"
-            onClick={() => setOpen(false)}
-            data-umami-event="jaafar-cv"
-            data-umami-event-location="header"
-          >
-            Jaafar <Icon name="arrow-up-right" size={16} />
-          </a>
         </nav>
       </div>
     </header>

@@ -19,7 +19,6 @@ export default function AboutPage() {
           <h1 id="about-title">Built in the open</h1>
           <div className="about-copy">
             <p><ScrambledText>{identity.description}</ScrambledText></p>
-            <p><ScrambledText>{`Labs is run by ${identity.founder}.`}</ScrambledText></p>
             <p>{industries.name} is a software development and cybersecurity company. Each product states its own licensing, accounts, data handling and network behavior.</p>
           </div>
         </div>
