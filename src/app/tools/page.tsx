@@ -15,8 +15,8 @@ export default function ToolsPage() {
       <header className="registry-intro motion-block">
         <div>
           <span className="page-kicker">Tools</span>
-          <h1>Every tool, on the record</h1>
-          <p>A collection of small, focused utilities. Pick one and get to work.</p>
+          <h1>Small, sharp browser tools.</h1>
+          <p>Quick utilities that run right in your browser. No logins, no popups—just pick one and use it.</p>
         </div>
       </header>
 

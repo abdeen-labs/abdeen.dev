@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://abdeen.dev/privacy" },
 };
 
-const LAST_UPDATED = "September 27, 2026";
+const LAST_UPDATED = "October 15, 2026";
 
 type PrivacyEntry = Pick<CatalogEntry, "title" | "meta" | "href"> & {
   privacy: NonNullable<CatalogEntry["privacy"]>;
@@ -21,7 +21,7 @@ const siteEntry: PrivacyEntry = {
   privacy: {
     kind: "exception",
     summary:
-      "This site uses a self-hosted Umami instance at stats.abdeen.industries for anonymous, aggregate page views, link clicks and performance metrics. It does not use cookies or track you across sites. The Frost page also asks GitHub for the latest release information.",
+      "We run a self-hosted Umami instance at stats.abdeen.industries to see basic, anonymous page views, link clicks, and performance metrics. There are no cookies, no cross-site tracking, and no ad networks. On the Frost page, your browser also asks GitHub's API for the latest release.",
   },
 };
 

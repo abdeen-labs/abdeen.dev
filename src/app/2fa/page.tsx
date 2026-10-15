@@ -5,7 +5,7 @@ import TwoFactorQR from './TwoFactorQR';
 export const metadata: Metadata = {
   title: '2FA QR Generator',
   description:
-    'Converts TOTP and HOTP secrets or otpauth:// URIs into QR codes for Google Authenticator, Authy, Yubico Authenticator, and other authenticator apps.',
+    'Turn a TOTP or HOTP secret or an otpauth:// URI into a scannable QR code for Google Authenticator, Authy, Yubico Authenticator, or any other authenticator app.',
   alternates: { canonical: 'https://abdeen.dev/2fa' },
   openGraph: {
     title: '2FA QR Generator · Abdeen Labs',

@@ -76,7 +76,7 @@ export default function ProjectsPage() {
       <header className={`${styles.intro} motion-block`}>
         <span className="page-kicker">Abdeen Labs</span>
         <h1>Projects<span>.</span></h1>
-        <p>Apps, utilities, and experiments I wanted to exist.</p>
+        <p>Apps, utilities, and experiments we wanted to exist.</p>
       </header>
 
       <section className={styles.wall} aria-label="Projects">

@@ -19,7 +19,7 @@ export default function AboutPage() {
           <h1 id="about-title">Built in the open</h1>
           <div className="about-copy">
             <p><ScrambledText>{identity.description}</ScrambledText></p>
-            <p>{industries.name} is a software development and cybersecurity company. Each product states its own licensing, accounts, data handling and network behavior.</p>
+            <p>{industries.name} is our parent software and cybersecurity company. Every app and tool we ship here is upfront about its license, accounts, data storage, and network activity.</p>
           </div>
         </div>
         <div className="about-hero__seal" aria-hidden="true"><SealKey size={140} decorative /></div>
@@ -48,7 +48,7 @@ export default function AboutPage() {
           <span className="page-kicker">Record</span>
           <dl className="record-list">
             <div><dt>{identity.established}</dt><dd>Abdeen Labs established.</dd></div>
-            <div><dt>2026</dt><dd>Public tools and product work published in the open.</dd></div>
+            <div><dt>2026</dt><dd>Shipping open-source apps, developer utilities, and experiments in public.</dd></div>
           </dl>
         </div>
         <div className="motion-row" style={{ animationDelay: "calc(var(--route-hold) + 400ms)" }}>

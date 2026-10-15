@@ -355,11 +355,11 @@ export default function RegexTester() {
                 <span className="abd-alarm-chip">Timed out</span>
                 <div className={styles.faultBody}>
                   <span className={styles.faultLine}>
-                    This pattern took too long. Try simplifying it.
+                    This pattern took too long.
                   </span>
                   <span className={styles.faultDetail}>
-                    Stopped after {MATCH_TIMEOUT_MS} ms. Probable catastrophic
-                    backtracking against this input.
+                    Stopped after {MATCH_TIMEOUT_MS} ms—looks like catastrophic
+                    backtracking on this input. Try tightening your quantifiers.
                   </span>
                 </div>
               </div>

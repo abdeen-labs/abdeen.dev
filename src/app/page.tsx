@@ -85,7 +85,7 @@ export default function HomePage() {
       <section className="home-tools motion-block" aria-labelledby="home-tools-title" style={{ animationDelay: "calc(var(--route-hold) + 190ms)" }}>
         <div>
           <span className="page-kicker">Browser tools</span>
-          <h2 id="home-tools-title">Small utilities that do one thing well.</h2>
+          <h2 id="home-tools-title">Small browser tools that do one job well.</h2>
         </div>
         <div className="home-tools__list">
           {tools.slice(0, 4).map((tool, index) => (

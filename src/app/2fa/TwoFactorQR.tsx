@@ -199,7 +199,7 @@ export default function TwoFactorQR() {
         <div className="disclosure" data-open={showAdvanced}>
           <div className={`disclosure-inner ${styles.advancedPanelInner}`}>
             <p className={styles.advancedNote}>
-              Google Authenticator ignores advanced parameters. Yubico Authenticator applies them.
+              Heads up: Google Authenticator ignores these advanced settings, though apps like Yubico Authenticator respect them.
             </p>
             <div className="flex flex-col gap-2">
               <label htmlFor="twofa-algorithm" className="field-label">Algorithm</label>
@@ -304,11 +304,11 @@ export default function TwoFactorQR() {
               </>
             ) : (
               <div className={styles.placeholder}>
-                Enter a secret and label to generate the code.
+                Type in a secret and a label to generate your QR code.
               </div>
             )}
           </div>
-          <span className="micro-label">Nothing stored. Nothing sent.</span>
+          <span className="micro-label">Runs entirely in your browser. Nothing is saved or sent.</span>
         </div>
       </div>
     </div>

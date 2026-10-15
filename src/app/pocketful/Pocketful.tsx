@@ -12,37 +12,37 @@ const features = [
     number: "01",
     label: "Passes from a prompt",
     detail:
-      "Ask an AI agent for a pass. It sends the specification to your server through MCP, or a script can use REST.",
+      "Tell an AI agent what card or ticket you need. It formats the JSON spec and calls your server over MCP (or hit the REST API from a script).",
   },
   {
     number: "02",
-    label: "Artwork handled",
+    label: "Automatic artwork sizing",
     detail:
-      "Supply one image per slot. The server crops and renders artwork at 1x, 2x, and 3x for Wallet.",
+      "Drop in a single image per slot. Pocketful crops and exports the exact 1x, 2x, and 3x assets Apple Wallet requires.",
   },
   {
     number: "03",
-    label: "Wallet layouts",
+    label: "Every Wallet style",
     detail:
-      "Create store cards, coupons, tickets, boarding passes, and iOS 27 poster layouts, with fallback styles for older iOS.",
+      "Supports store cards, coupons, event tickets, boarding passes, and iOS 27 poster passes—with automatic fallbacks for older iOS versions.",
   },
   {
     number: "04",
-    label: "Delivered through Hark",
+    label: "Push to iPhone via Hark",
     detail:
-      "Connect your Hark server to receive a pass notification on iPhone. Tap to open Add to Wallet, or open the download link directly.",
+      "Hook up your Hark server to get a push notification the second a pass is signed. Tap it to open right in Apple Wallet.",
   },
   {
     number: "05",
     label: "Over-the-air updates",
     detail:
-      "Re-sign and push changes through Apple's Wallet web service.",
+      "Edit a saved pass and push the update through Apple's Wallet web service to anyone who already added it to their Wallet.",
   },
   {
     number: "06",
-    label: "Six MCP tools",
+    label: "Seven MCP tools",
     detail:
-      "Create, inspect, update, download, and delete passes through six MCP tools.",
+      "Gives your AI agent everything it needs to upload artwork and create, list, inspect, update, download, and delete passes.",
   },
 ];
 
@@ -116,9 +116,10 @@ export default function Pocketful() {
               Pocketful<span className="text-signal-identity">.</span>
             </h1>
             <p className="max-w-xl text-lede text-ink-secondary">
-              Describe an Apple Wallet pass to an AI agent. Your server sizes
-              the artwork, signs the pass with your certificates, and returns
-              a download link. Connect Hark to deliver it to your iPhone.
+              Describe the pass you want to an AI agent. Your server crops the
+              artwork, signs the .pkpass bundle with your Apple certificates,
+              and hands back a download link—or pushes it straight to your
+              iPhone via Hark.
             </p>
             <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-3">
               <a
@@ -200,7 +201,7 @@ export default function Pocketful() {
           <div className={styles.boundaryHeading}>
             <SectionHeader label="Data boundary" />
             <h2 id="pocketful-boundary-title">
-              Your server signs the pass and holds the keys.
+              Your server holds the keys and signs the passes.
             </h2>
           </div>
           <div className={styles.boundaryGrid}>
@@ -208,10 +209,10 @@ export default function Pocketful() {
               <span className={styles.boundaryLocation}>01 · Signing</span>
               <h3>On your server</h3>
               <p>
-                Your agent or script sends the specification and artwork to
-                your server. Signing certificates stay there. One-shot downloads
-                are held in memory and expire after 15 minutes by default;
-                updatable passes persist in SQLite.
+                Your agent or script sends the pass layout and artwork to your
+                server, where your Apple signing certificates stay locked down.
+                One-off downloads live in RAM and expire after 15 minutes by
+                default; updatable passes are saved in SQLite.
               </p>
             </div>
             <div className={styles.boundaryLane} aria-hidden="true">
@@ -221,10 +222,10 @@ export default function Pocketful() {
               <span className={styles.boundaryLocation}>02 · Delivery</span>
               <h3>On your iPhone</h3>
               <p>
-                Open the download link in Wallet, or let your own Hark server
-                send it through Apple&apos;s push service. The AI client you
-                choose determines how your prompt and artwork are handled
-                before they reach Pocketful.
+                Open the link directly on your phone, or let your Hark server
+                push it over APNs. (Keep in mind that whatever AI provider you
+                use will process your initial prompt and images before sending
+                them to Pocketful.)
               </p>
             </div>
           </div>
@@ -243,8 +244,8 @@ export default function Pocketful() {
                 Run it yourself
               </h2>
               <p className="text-body text-ink-secondary">
-                Deploy the signing server with your Apple certificates, then
-                connect an MCP client or use the REST API. Add{" "}
+                Spin up the signing server with your Apple Developer certs, then
+                point your MCP client or scripts at it. Add{" "}
                 <Link href="/hark" className="text-signal-link">Hark</Link>{" "}
                 for delivery to your iPhone.
               </p>

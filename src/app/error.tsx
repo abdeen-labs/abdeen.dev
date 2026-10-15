@@ -20,7 +20,7 @@ export default function Error({
       <span className="micro-label abd-alarm-chip">Error</span>
       <h1 className="text-h2 md:text-h1">Something went wrong.</h1>
       <p className="max-w-xl text-body text-ink-dim">
-        Try the page again. If the problem continues, return home and start over.
+        Try refreshing the page. If it keeps breaking, head back home and start fresh.
       </p>
       <div className="flex flex-wrap items-center gap-4">
         <button type="button" onClick={reset} className="btn btn--primary">

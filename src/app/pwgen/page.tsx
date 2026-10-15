@@ -5,7 +5,7 @@ import PasswordGenerator from './PasswordGenerator';
 export const metadata: Metadata = {
   title: 'Password Generator',
   description:
-    'Generate memorable passwords in the classic Apple Keychain format, or diceware passphrases from the EFF Large and BIP-39 word lists. Each result reports its entropy in bits.',
+    'Generate classic Apple Keychain-style memorable passwords or diceware passphrases from the EFF Large and BIP-39 word lists, with live entropy calculations in bits.',
   alternates: { canonical: 'https://abdeen.dev/pwgen' },
   openGraph: {
     title: 'Password Generator · Abdeen Labs',
@@ -30,8 +30,8 @@ export default function PasswordGeneratorPage() {
           <div>
             <h3>Why this exists</h3>
             <p>
-              Apple used to make passwords in this format. I missed that
-              Keychain generator, so I rebuilt it here.
+              Apple used to make passwords in this format. We missed that
+              Keychain generator, so we rebuilt it here.
             </p>
           </div>
           <div>

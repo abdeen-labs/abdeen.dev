@@ -5,7 +5,7 @@ import PomodoroTimer from './PomodoroTimer';
 export const metadata: Metadata = {
   title: 'Pomodoro Timer',
   description:
-    'Pomodoro interval timer. Set work and break durations, start the countdown, and count completed sessions.',
+    'A clean, no-nonsense Pomodoro timer. Set your work and break lengths, start the clock, and keep track of your finished sessions.',
   alternates: { canonical: 'https://abdeen.dev/pomodoro' },
   openGraph: {
     title: 'Pomodoro Timer · Abdeen Labs',

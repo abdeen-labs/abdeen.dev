@@ -342,7 +342,7 @@ export default function QRGenerator() {
               <textarea
                 id="qr-phone-msg"
                 className="textarea"
-                placeholder="Leave blank for a call; enter a message for SMS"
+                placeholder="Leave blank for a voice call, or type a pre-filled text message"
                 value={phoneMessage}
                 onChange={(e) => setPhoneMessage(e.target.value)}
               />
@@ -520,7 +520,7 @@ export default function QRGenerator() {
               />
               {!generated && (
                 <div className="pointer-events-none absolute inset-0 flex items-center justify-center rounded-plate border border-hairline px-6 text-center font-mono text-control text-ink-dim">
-                  Enter details and generate to preview.
+                  Fill in the fields and hit Generate to preview your code.
                 </div>
               )}
             </div>

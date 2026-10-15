@@ -13,24 +13,24 @@ const mixSteps = [
   {
     number: "01",
     mode: "Generate",
-    label: "Noise + tone",
-    detail: "White, pink, brown, gray, binaural, isochronic, and monaural.",
+    label: "Noise & tones",
+    detail: "Synthesize white, pink, brown, and gray noise—plus binaural, isochronic, and monaural beats—on the fly.",
     src: "/hush/screen-2.png",
     alt: "Hush sound picker with imported audio and real-time noise generators",
   },
   {
     number: "02",
     mode: "Layer",
-    label: "Build the scene",
-    detail: "Up to six sources, independent volume, and a focus timer.",
+    label: "Build your mix",
+    detail: "Combine up to six tracks with independent volume sliders and a fade-out focus timer.",
     src: "/hush/screen-1.png",
     alt: "Hush scene picker playing the Calm mix with pink noise and morning birdsong",
   },
   {
     number: "03",
     mode: "Listen",
-    label: "80+ ambiences",
-    detail: "Rain, fire, ocean, birds, cafe, train, forest, and more—offline.",
+    label: "80+ offline ambiences",
+    detail: "Rainstorms, crackly fires, ocean waves, birdsong, coffee shops, trains, forests, and more—all bundled for offline play.",
     src: "/hush/screen-3.png",
     alt: "Hush ambient library with rain, ocean, fire, nature, and city categories",
   },
@@ -198,8 +198,9 @@ export default function Hush() {
               Hush<span className="text-signal-identity">.</span>
             </h1>
             <p className="max-w-xl text-lede text-ink-secondary">
-              Layer live noise, beats, and 80+ offline ambiences. Up to six
-              sounds, all on-device.
+              Mix real-time synthesized noise, binaural beats, and over 80
+              offline ambient recordings. Layer up to six sounds at once, all
+              running locally on your device.
             </p>
             <div className="mt-1 flex flex-wrap items-center gap-x-5 gap-y-3">
               <AppStoreButton location="hero" />

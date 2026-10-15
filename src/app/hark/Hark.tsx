@@ -11,20 +11,20 @@ const deliverySteps = [
   {
     number: "01",
     mode: "Send",
-    label: "Something needs your attention",
-    detail: "A service sends a webhook, a script calls the API, or an agent connects through MCP.",
+    label: "Something needs your call",
+    detail: "A cron job fires a webhook, a script hits the API, or an AI agent connects via MCP.",
   },
   {
     number: "02",
     mode: "Notify",
-    label: "Hark puts it on your iPhone",
-    detail: "It shows up as a notification, a Live Activity, or a question you can answer.",
+    label: "It lands on your Lock Screen",
+    detail: "Shows up immediately as a push notification, a live progress bar, or an interactive prompt.",
   },
   {
     number: "03",
     mode: "Reply",
-    label: "Your answer goes back",
-    detail: "Approve, answer yes or no, or send a text reply. The caller can read your response; webhooks can receive a callback.",
+    label: "Your answer goes right back",
+    detail: "Tap Approve/Deny, Yes/No, or type a reply from the notification. Your script gets the response via polling or webhook callback.",
   },
 ];
 
@@ -98,9 +98,10 @@ export default function Hark() {
               Hark<span className="text-signal-identity">.</span>
             </h1>
             <p className="max-w-xl text-body text-ink-secondary md:text-lede">
-              Send a webhook, call the API, or connect an AI agent through MCP.
-              Hark puts notifications, Live Activities, and questions on your
-              iPhone, with replies from the Lock Screen and Wallet passes a tap away.
+              Hook up a webhook, call the REST API, or connect an AI agent over
+              MCP. Hark sends notifications, Live Activities, and interactive
+              prompts straight to your iPhone—so you can approve deploys from
+              your Lock Screen or grab Wallet passes in a tap.
             </p>
             <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-3">
               <a
@@ -207,15 +208,15 @@ export default function Hark() {
                 Run Hark yourself
               </h2>
               <p className="text-body text-ink-secondary">
-                Hark runs as one Go server with PostgreSQL. Docker Compose
-                starts both, and the server also hosts the dashboard and API
-                docs.
+                Hark is a single Go binary backed by Postgres. Spin up both
+                with Docker Compose—the same server hosts the web dashboard and
+                API docs.
               </p>
               <p className="text-body text-ink-secondary">
-                Configure Apple push credentials and install the iPhone app
-                to receive notifications. Connect{" "}
+                Add your Apple push keys and install the iOS app to start
+                getting pings, then pair it with{" "}
                 <Link href="/pocketful" className="text-signal-link">Pocketful</Link>{" "}
-                to sign Wallet passes on your server and deliver them through Hark.
+                to deliver signed Wallet passes.
               </p>
               <p className="micro-label">docker compose up --build</p>
             </div>

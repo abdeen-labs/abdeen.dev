@@ -16,21 +16,21 @@ const lockStates = [
     number: "01",
     mode: "Lock",
     label: "Freeze every input",
-    detail: "Keyboard, mouse, and trackpad stop at the system level.",
+    detail: "Stops keystrokes, clicks, and trackpad gestures at the system level, before apps ever see them.",
     signal: "Input / blocked",
   },
   {
     number: "02",
     mode: "Watch",
-    label: "Keep the screen visible",
-    detail: "Every display stays visible beneath the overlay.",
+    label: "Keep the screen live",
+    detail: "Your builds, logs, and renders stay visible on every display beneath a dimmed overlay.",
     signal: "Display / live",
   },
   {
     number: "03",
     mode: "Release",
     label: "Unlock in person",
-    detail: "Touch ID or Apple Watch unlocks. The shortcut only opens the prompt.",
+    detail: "Hit your shortcut to pop up the Touch ID or Apple Watch prompt. Nothing else unlocks it.",
     signal: "Auth / required",
   },
 ];
@@ -144,8 +144,9 @@ export default function Frost() {
               Frost<span className="text-signal-identity">.</span>
             </h1>
             <p className="max-w-xl text-body text-ink-secondary md:text-lede">
-              Freeze every input without hiding the screen. Touch ID or Apple
-              Watch releases the lock.
+              Lock your keyboard, mouse, and trackpad while keeping your screen
+              in plain view. Unlock in a second with Touch ID or your Apple
+              Watch.
             </p>
             <div className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-3">
               <DownloadButton href={release.href} label={release.label} location="hero" />
@@ -260,8 +261,9 @@ export default function Frost() {
                 Download
               </h2>
               <p className="text-body text-ink-secondary">
-                One DMG and no installer. Drag Frost to Applications, then lock
-                the desk from the menu bar.
+                Just a clean DMG—no background installers or kexts. Drag Frost
+                to Applications and lock your Mac whenever you need from the
+                menu bar.
               </p>
               <p className="micro-label">macOS 14.6+</p>
             </div>

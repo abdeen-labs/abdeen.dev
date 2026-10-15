@@ -57,7 +57,7 @@ const allApps: CatalogEntry[] = [
     privacy: {
       kind: "exception",
       summary:
-        "Your agent or script sends pass specifications and artwork to your signing server. One-shot downloads expire after 15 minutes by default; updatable passes persist in SQLite. Optional Hark delivery sends the download URL through your Hark server and Apple's push service. Your AI client's data handling also applies.",
+        "Your agent or script sends pass specs and images to your own Pocketful server. One-time download links stay in memory and expire after 15 minutes by default; updatable passes are stored locally in SQLite. If you use Hark for delivery, the download link goes through your Hark server and Apple's push network (APNs). Whatever AI client you use to prompt the pass has its own privacy policy.",
     },
     sitemapPriority: 0.9,
     schema: {
@@ -77,7 +77,7 @@ const allApps: CatalogEntry[] = [
     privacy: {
       kind: "clarification",
       summary:
-        "Hark keeps delivery history and replies on your server. Pushes travel through Apple's push service to your devices; Wallet notifications include a pass download URL. Connected API and MCP clients can read records within their granted scope, and configured webhook callbacks receive replies. Abdeen Labs operates no hosted Hark service.",
+        "Hark is entirely self-hosted—Abdeen Labs doesn't run a central Hark server. Your message history and replies stay in your own Postgres database, and notifications travel directly through Apple's push network (APNs) to your devices; Wallet notifications include a pass download link. Connected API and MCP tokens can only read data within their scope, and webhook callbacks send replies only to the URLs you configure.",
     },
     sitemapPriority: 0.9,
     schema: {
@@ -121,7 +121,7 @@ const allApps: CatalogEntry[] = [
   {
     title: "SafeStay Scanner",
     description:
-      "Network inspection CLI for rentals. Scans the local network, resolves MAC vendors, and flags camera-class devices.",
+      "Command-line network scanner for short-term rentals. Sweeps the local WiFi, resolves MAC vendors, and flags devices that look like network cameras.",
     href: "/safestay",
     meta: "macOS · Linux",
     status: "retired",
@@ -148,14 +148,14 @@ const allTools: CatalogEntry[] = [
   {
     title: "CoverQuad",
     description:
-      "Rebuilds the 2×2 playlist cover Apple retired. Four covers in, one square export out.",
+      "Brings back the classic 2×2 album-art playlist cover that Apple killed off. Drop in four covers, get one crisp square PNG.",
     href: "/coverquad",
     meta: "/coverquad",
     boundary: "Covers render locally; archive searches use the site proxy.",
     privacy: {
       kind: "exception",
       summary:
-        "If you search for artwork, your search goes to MusicBrainz. When you choose artwork, the image is fetched from Cover Art Archive through the site proxy. Uploaded images and finished covers are not sent to us.",
+        "Everything renders locally in your browser. If you search for album art, your query goes to MusicBrainz, and the covers are fetched from the Cover Art Archive through our proxy. Images you upload from your own device and the covers you export never touch our servers.",
     },
     sitemapPriority: 0.8,
     schema: {

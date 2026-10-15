@@ -372,7 +372,7 @@ export default function CoverQuad() {
           </p>
         )}
         <p className="text-center font-mono text-control text-ink-dim">
-          Select a tile to upload or search cover art. Drag and drop is supported.
+          Click any tile to upload an image or search for an album (or just drag and drop an image onto a tile).
         </p>
       </div>
 
@@ -404,7 +404,7 @@ export default function CoverQuad() {
             Export PNG
           </button>
           <p className="font-mono text-control text-ink-dim">
-            Fill all four slots to export one square PNG.
+            Fill all four corners to export your PNG.
           </p>
         </div>
       </div>

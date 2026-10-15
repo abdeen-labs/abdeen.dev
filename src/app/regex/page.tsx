@@ -5,7 +5,7 @@ import RegexTester from './RegexTester';
 export const metadata: Metadata = {
   title: 'Regex Tester',
   description:
-    'Test a regular expression against sample text with live match highlighting, capture groups, a replacement preview, and a syntax reference.',
+    'Test regular expressions live against sample text—with match highlighting, capture group breakdowns, find-and-replace previews, and a quick syntax reference.',
   alternates: { canonical: 'https://abdeen.dev/regex' },
   openGraph: {
     title: 'Regex Tester · Abdeen Labs',
