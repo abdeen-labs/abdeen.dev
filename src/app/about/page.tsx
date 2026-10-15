@@ -6,7 +6,7 @@ import { identity, industries } from "@/lib/brand";
 
 export const metadata: Metadata = {
   title: "About",
-  description: "Abdeen Labs is the open-source and experimental division of Abdeen Industries, run by Jaafar Abdeen.",
+  description: "About Abdeen Labs, the open-source and experimental division of Abdeen Industries.",
   alternates: { canonical: "https://abdeen.dev/about" },
 };
 
