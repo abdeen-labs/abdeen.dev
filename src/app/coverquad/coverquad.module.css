@@ -79,7 +79,7 @@
 }
 
 /* Clear — the destructive control floated over content: the one filled
-   scarlet control, accent-deep under chalk ink on either ground. */
+   scarlet control, navy-98 ink on the one scarlet on either ground. */
 .slotClear {
   position: absolute;
   top: 8px;
@@ -90,10 +90,10 @@
   align-items: center;
   justify-content: center;
   padding: 0;
-  border: 1px solid var(--accent-deep);
+  border: 1px solid var(--accent);
   border-radius: var(--radius-control);
-  background: var(--accent-deep);
-  color: var(--chalk-100);
+  background: var(--accent);
+  color: var(--navy-98);
   font-size: 16px;
   line-height: 1;
   cursor: pointer;

@@ -4,6 +4,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import Icon from '@/components/Icon';
 import { useSlider } from '@/hooks/useSlider';
 import {
   generateMemorable,
@@ -382,6 +383,7 @@ export default function PasswordGenerator() {
                   }
                   data-level={strength.level}
                 >
+                  {strength.level >= 3 && <Icon name="check" />}
                   {strength.label}
                 </span>
               </span>

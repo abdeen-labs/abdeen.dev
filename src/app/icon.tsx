@@ -50,7 +50,7 @@ export default function Icon() {
             <g
               transform={`translate(${MARK_TX} ${MARK_TY}) scale(${MARK_SCALE})`}
             >
-              <path d={MARK.d} fill="#F3F7FF" />
+              <path d={MARK.d} fill="#F5F9FF" />
             </g>
           </g>
         </svg>

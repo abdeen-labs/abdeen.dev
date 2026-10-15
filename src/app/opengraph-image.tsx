@@ -72,18 +72,18 @@ export default async function OGImage() {
                 fill="#FF002B"
               />
               <g transform={SEAL_KEY_MARK.transform}>
-                <path d={MARK.d} fill="#F3F7FF" />
+                <path d={MARK.d} fill="#F5F9FF" />
               </g>
             </svg>
             <div
-              style={{ width: 1, height: 44, background: '#2F3C5A', display: 'flex' }}
+              style={{ width: 1, height: 44, background: '#303D57', display: 'flex' }}
             />
             <span
               style={{
                 fontSize: 22,
                 fontWeight: 500,
                 letterSpacing: 4.84,
-                color: '#F3F7FF',
+                color: '#F5F9FF',
               }}
             >
               ABDEEN LABS
@@ -94,7 +94,7 @@ export default async function OGImage() {
               fontSize: 18,
               fontWeight: 500,
               letterSpacing: 2,
-              color: '#8FA0BC',
+              color: '#949FB4',
             }}
           >
             REF / ABDEEN.DEV
@@ -110,7 +110,7 @@ export default async function OGImage() {
               fontSize: 104,
               lineHeight: 0.92,
               letterSpacing: -5.7,
-              color: '#F3F7FF',
+              color: '#F5F9FF',
             }}
           >
             PRIVATE SOFTWARE.
@@ -122,7 +122,7 @@ export default async function OGImage() {
               fontSize: 104,
               lineHeight: 0.92,
               letterSpacing: -5.7,
-              color: '#8FA0BC',
+              color: '#949FB4',
             }}
           >
             CLEAR BOUNDARIES.
@@ -147,7 +147,7 @@ export default async function OGImage() {
             width: '100%',
           }}
         >
-          <span style={{ fontSize: 30, fontWeight: 500, color: '#F3F7FF' }}>
+          <span style={{ fontSize: 30, fontWeight: 500, color: '#F5F9FF' }}>
             abdeen.dev
           </span>
           <span
@@ -155,7 +155,7 @@ export default async function OGImage() {
               fontSize: 18,
               fontWeight: 500,
               letterSpacing: 2,
-              color: '#8FA0BC',
+              color: '#949FB4',
             }}
           >
             NO ACCOUNT · OPEN SOURCE

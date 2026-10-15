@@ -370,8 +370,8 @@ export default function LofiAtcRadio() {
     [],
   );
 
-  // The word carries the state: cobalt for Live, ink for the rest, and the
-  // alarm chip for an error — never a fill or button.
+  // The word carries the state: primary ink for Live, the label's faint ink
+  // for the rest, and the alarm chip for an error — never a fill or button.
   const stateClass = (s: StreamStatus) =>
     s === "live" ? styles.stateLive : s === "error" ? "abd-alarm-chip" : undefined;
 

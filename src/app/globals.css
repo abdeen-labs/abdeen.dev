@@ -23,7 +23,6 @@
   --color-signal-identity: var(--signal-identity);
   --color-signal-link: var(--signal-link);
   --color-signal-press: var(--signal-press);
-  --color-signal-verified: var(--signal-verified);
   --color-signal-warning: var(--signal-warning);
   --color-signal-alarm: var(--signal-alarm);
   --color-readout: var(--readout-color);
@@ -94,73 +93,61 @@
 [data-mode="dark"] {
   color-scheme: dark;
 
-  --pitch-960: #000000;
-  --void: #090f1b;
-  --pitch-900: #111827;
-  --surface: #182133;
-  --pitch-800: #1f2a40;
-  --pitch-700: #26344d;
-  --pitch-600: #2f3c5a;
-  --border: #364868;
+  /* Navy — the one neutral ramp. Step = OKLCH lightness × 100. */
+  --navy-0: #000000; /* removed content on dark only */
+  --navy-17: #090f1b;
+  --navy-21: #111827;
+  --navy-25: #182133;
+  --navy-29: #212b40;
+  --navy-33: #29354e;
+  --navy-36: #303d57;
+  --navy-40: #3a4763;
+  --navy-43: #42506a;
+  --navy-48: #515e77;
+  --navy-54: #636f87;
+  --navy-59: #727d95;
+  --navy-65: #848fa6;
+  --navy-70: #949fb4;
+  --navy-73: #9da8bd;
+  --navy-79: #b0bbcf;
+  --navy-82: #bac4d8;
+  --navy-84: #c1cbdd;
+  --navy-89: #d3dbeb;
+  --navy-92: #dee5f2;
+  --navy-95: #eaeff7;
+  --navy-96: #f0f3fa;
+  --navy-98: #f5f9ff;
 
-  --graphite-900: #121b2e;
-  --graphite-800: #212a3d;
-  --graphite-700: #3f4a61;
-  --graphite-600: #545e74;
-  --graphite-500: #747d90;
-  --graphite-400: #8fa0bc;
-  --graphite-300: #aeb9cf;
-  --graphite-200: #c8d1e4;
-  --graphite-100: #e0e7f4;
-
-  --chalk-100: #f3f7ff;
-  --chalk-200: #e8eefa;
-  --chalk-300: #dae2f4;
-
-  --mist: #f0f3fa;
-  --mist-200: #eaeef5;
-  --mist-300: #dde4f2;
-  --mist-400: #d0daeb;
-  --mist-500: #c1cce2;
-
-  --carbon-900: #090f1b;
-  --carbon-800: #1e2537;
-  --carbon-700: #3c455a;
-  --carbon-600: #535d74;
-  --carbon-500: #788196;
-  --carbon-300: #afbcd2;
-  --carbon-200: #bac5db;
-
-  --accent: #ff002b;
-  --accent-deep: #db0023;
-  --accent-ink: #bd001d;
+  --void: var(--navy-17);
+  --surface: var(--navy-25);
+  --border: var(--navy-40);
+  --mist: var(--navy-96);
+  --accent: #ff002b; /* one scarlet on both grounds */
+  --accent-ink: #bd001d; /* running text and links on light; pressed state */
   --alarm: var(--accent);
   --warn-400: #f5ff00;
-  --cobalt-400: #5aa7ff;
-  --cobalt-700: #1d5a96;
 
-  --surface-page: var(--void);
-  --surface-sunken: var(--pitch-900);
-  --surface-card: var(--surface);
-  --surface-band: var(--pitch-800);
-  --surface-raised: var(--pitch-700);
-  --surface-void: var(--pitch-960);
-  --hairline: var(--pitch-600);
-  --hairline-strong: var(--border);
-  --ink-primary: var(--chalk-100);
-  --ink-secondary: var(--chalk-300);
-  --ink-dim: var(--graphite-400);
-  --ink-faint: var(--graphite-500);
-  --ink-structure: var(--graphite-700);
-  --ink-inverse: var(--carbon-900);
+  --surface-page: var(--navy-17);
+  --surface-sunken: var(--navy-21);
+  --surface-card: var(--navy-25);
+  --surface-band: var(--navy-29);
+  --surface-raised: var(--navy-33);
+  --surface-void: var(--navy-0);
+  --hairline: var(--navy-36);
+  --hairline-strong: var(--navy-40);
+  --ink-primary: var(--navy-98);
+  --ink-secondary: var(--navy-92);
+  --ink-dim: var(--navy-70);
+  --ink-faint: var(--navy-59);
+  --ink-structure: var(--navy-40);
+  --ink-inverse: var(--navy-17);
   --signal-identity: var(--accent);
   --signal-link: var(--accent);
-  --signal-press: var(--accent-deep);
-  --signal-verified: var(--cobalt-400);
+  --signal-press: var(--accent-ink);
   /* Neon yellow never sets text, a line, a frame, or a glyph on mist;
-     the highlighter chip carries the warning there. The alarm is scarlet
-     in alarm forms and follows the Key's line by ground; the message
-     stays on primary ink. */
+     the highlighter chip carries the warning there. The alarm is the one
+     scarlet in alarm forms on both grounds; the message stays on primary
+     ink. A passing state carries no colour: primary ink and a check. */
   --signal-warning: var(--warn-400);
   --signal-alarm: var(--alarm);
 
@@ -225,9 +212,9 @@
   --seal-cut: 26%;
   --seal-size: 40px;
   --seal-line: max(1px, calc(var(--seal-size) / 40));
-  --seal-key-field: var(--pitch-900);
+  --seal-key-field: var(--navy-21);
   --seal-key-line: var(--accent);
-  --seal-key-ink: var(--chalk-100);
+  --seal-key-ink: var(--navy-98);
   --readout-scale: 1.4;
   --readout-color: var(--accent);
   --readout-glow: none;
@@ -235,33 +222,32 @@
   --select-arrow: none;
 }
 
+/* The light ground. The Key's line, identity and the alarm keep the one
+   scarlet; links take accent-ink. */
 :root[data-theme="light"],
 [data-mode="light"] {
   color-scheme: light;
-  --surface-page: var(--mist);
-  --surface-sunken: var(--mist-200);
-  --surface-card: var(--mist-300);
-  --surface-band: var(--mist-400);
-  --surface-raised: var(--mist-500);
-  --surface-void: var(--carbon-900);
-  --hairline: var(--carbon-200);
-  --hairline-strong: var(--carbon-300);
-  --ink-primary: var(--carbon-900);
-  --ink-secondary: var(--carbon-800);
-  --ink-dim: var(--carbon-700);
-  --ink-faint: var(--carbon-600);
-  --ink-structure: var(--carbon-500);
-  --ink-inverse: var(--chalk-100);
-  --signal-identity: var(--accent-ink);
+  --surface-page: var(--navy-96);
+  --surface-sunken: var(--navy-95);
+  --surface-card: var(--navy-92);
+  --surface-band: var(--navy-89);
+  --surface-raised: var(--navy-84);
+  --surface-void: var(--navy-17);
+  --hairline: var(--navy-82);
+  --hairline-strong: var(--navy-79);
+  --ink-primary: var(--navy-17);
+  --ink-secondary: var(--navy-21);
+  --ink-dim: var(--navy-43);
+  --ink-faint: var(--navy-54);
+  --ink-structure: var(--navy-73);
+  --ink-inverse: var(--navy-98);
+  --signal-identity: var(--accent);
   --signal-link: var(--accent-ink);
-  --signal-press: var(--accent-deep);
-  --signal-verified: var(--cobalt-700);
+  --signal-press: var(--accent-ink);
   --signal-warning: var(--warn-400);
-  --alarm: var(--accent-deep);
   --signal-alarm: var(--alarm);
-  --seal-key-field: var(--mist-200);
-  --seal-key-line: var(--accent-deep);
-  --seal-key-ink: var(--carbon-900);
+  --seal-key-field: var(--navy-95);
+  --seal-key-ink: var(--navy-17);
   --readout-color: var(--ink-primary);
 }
 
@@ -270,30 +256,27 @@
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]) {
     color-scheme: light;
-    --surface-page: var(--mist);
-    --surface-sunken: var(--mist-200);
-    --surface-card: var(--mist-300);
-    --surface-band: var(--mist-400);
-    --surface-raised: var(--mist-500);
-    --surface-void: var(--carbon-900);
-    --hairline: var(--carbon-200);
-    --hairline-strong: var(--carbon-300);
-    --ink-primary: var(--carbon-900);
-    --ink-secondary: var(--carbon-800);
-    --ink-dim: var(--carbon-700);
-    --ink-faint: var(--carbon-600);
-    --ink-structure: var(--carbon-500);
-    --ink-inverse: var(--chalk-100);
-    --signal-identity: var(--accent-ink);
+    --surface-page: var(--navy-96);
+    --surface-sunken: var(--navy-95);
+    --surface-card: var(--navy-92);
+    --surface-band: var(--navy-89);
+    --surface-raised: var(--navy-84);
+    --surface-void: var(--navy-17);
+    --hairline: var(--navy-82);
+    --hairline-strong: var(--navy-79);
+    --ink-primary: var(--navy-17);
+    --ink-secondary: var(--navy-21);
+    --ink-dim: var(--navy-43);
+    --ink-faint: var(--navy-54);
+    --ink-structure: var(--navy-73);
+    --ink-inverse: var(--navy-98);
+    --signal-identity: var(--accent);
     --signal-link: var(--accent-ink);
-    --signal-press: var(--accent-deep);
-    --signal-verified: var(--cobalt-700);
+    --signal-press: var(--accent-ink);
     --signal-warning: var(--warn-400);
-    --alarm: var(--accent-deep);
     --signal-alarm: var(--alarm);
-    --seal-key-field: var(--mist-200);
-    --seal-key-line: var(--accent-deep);
-    --seal-key-ink: var(--carbon-900);
+    --seal-key-field: var(--navy-95);
+    --seal-key-ink: var(--navy-17);
     --readout-color: var(--ink-primary);
   }
 }
@@ -338,10 +321,10 @@ section[id] {
   scroll-margin-top: 6rem;
 }
 
-/* Selection uses the canonical Accent. */
+/* Selection keeps the Accent behind navy-17 ink on either ground. */
 ::selection {
   background: var(--signal-identity);
-  color: var(--ink-inverse);
+  color: var(--navy-17);
 }
 
 /* Focus & reduced motion ship in the base layer. */
@@ -581,7 +564,7 @@ textarea {
   height: var(--seal-size);
   flex: none;
   display: inline-block;
-  background: var(--seal-key-field, var(--pitch-900));
+  background: var(--seal-key-field, var(--navy-21));
   clip-path: polygon(var(--seal-cut) 0, 100% 0, 100% 100%, 0 100%, 0 var(--seal-cut));
 }
 
@@ -612,7 +595,7 @@ textarea {
   transform: translate(-50%, calc(-50% - var(--mark-optical-shift)));
   font-family: var(--font-mark-stack);
   font-weight: 700;
-  color: var(--seal-key-ink, var(--chalk-100));
+  color: var(--seal-key-ink, var(--navy-98));
   /* mark ink height = 0.36 × plate; ink height ≈ 0.883 × font-size */
   font-size: calc(var(--seal-size) * var(--seal-mark-scale) / 0.883);
   line-height: 1;
@@ -904,11 +887,11 @@ a {
   background: var(--ink-secondary);
 }
 
-/* Destructive action: accent-deep field with chalk text. */
+/* Destructive action: scarlet field with navy-98 text. */
 .btn--destructive {
-  background: var(--accent-deep);
-  border-color: var(--accent-deep);
-  color: var(--chalk-100);
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--navy-98);
 }
 
 .btn--destructive:hover:not(:disabled) {
@@ -1354,10 +1337,6 @@ a.chip:focus-visible {
   color: var(--ink-dim);
 }
 
-.console .ok {
-  color: var(--signal-verified);
-}
-
 /* ─── Readout — the one live element per screen ──────────────────── */
 
 /* One live readout per screen. Dark uses Accent; light uses primary ink.
@@ -1437,8 +1416,8 @@ a.chip:focus-visible {
 }
 
 /* Highlighter chips — the warning chip is the only warning form the
-   light ground allows, and valid on dark; the alarm chip is chalk on
-   accent-deep on either ground (4.85:1) and names the fault. */
+   light ground allows, and valid on dark; the alarm chip is navy-98 on
+   the one scarlet on either ground and names the fault. */
 .abd-warn-chip,
 .abd-alarm-chip {
   display: inline-flex;
@@ -1446,14 +1425,14 @@ a.chip:focus-visible {
   gap: 0.45em;
   padding: 0.15em 0.45em;
   background: var(--warn-400);
-  color: var(--carbon-900);
+  color: var(--navy-17);
   font-family: var(--font-mono-stack);
   font-weight: 500;
 }
 
 .abd-alarm-chip {
-  background: var(--accent-deep);
-  color: var(--chalk-100);
+  background: var(--signal-alarm);
+  color: var(--navy-98);
 }
 
 .abd-warn-chip::before,
@@ -2373,7 +2352,7 @@ a:focus-visible [data-icon="arrow-up-right"] {
   font-size: clamp(132px, 16vw, 210px);
   font-weight: 500;
   line-height: 0.8;
-  color: var(--graphite-900);
+  color: var(--navy-21);
   user-select: none;
   transition: color var(--duration-panel) var(--ease-flat),
     transform var(--duration-panel-lg) var(--ease-flat);
@@ -2534,7 +2513,7 @@ a:focus-visible [data-icon="arrow-up-right"] {
   gap: 22px;
 }
 
-.site-footer__roundel { color: var(--graphite-300); }
+.site-footer__roundel { color: var(--navy-79); }
 
 .site-footer__identity > div {
   display: flex;

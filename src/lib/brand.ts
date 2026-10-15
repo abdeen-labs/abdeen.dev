@@ -6,8 +6,8 @@
  * footer.
  */
 
-const releaseVersion = "5.5";
-const releaseIssued = "2026-09";
+const releaseVersion = "5.6";
+const releaseIssued = "2026-10";
 
 /**
  * Release details are kept for tooling and internal synchronization. Public
