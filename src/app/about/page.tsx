@@ -19,7 +19,7 @@ export default function AboutPage() {
           <h1 id="about-title">Built in the open</h1>
           <div className="about-copy">
             <p><ScrambledText>{identity.description}</ScrambledText></p>
-            <p>{industries.name} is our parent software and cybersecurity company. Every app and tool we ship here is upfront about its license, accounts, data storage, and network activity.</p>
+            <p><ScrambledText>{industries.name} is our parent software and cybersecurity company. Every app and tool we ship here is upfront about its license, accounts, data storage, and network activity.</ScrambledText></p>
           </div>
         </div>
         <div className="about-hero__seal" aria-hidden="true"><SealKey size={140} decorative /></div>

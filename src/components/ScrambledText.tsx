@@ -13,7 +13,8 @@ interface ScrambledTextProps {
   scrambleChars?: string;
   className?: string;
   style?: CSSProperties;
-  children: string;
+  /** Plain text. Interpolations like `{name} is …` are joined into one string. */
+  children: string | number | (string | number)[];
 }
 
 /**
@@ -119,11 +120,12 @@ export default function ScrambledText({
     };
   }, [radius, duration, speed, scrambleChars]);
 
-  const words = children.split(" ");
+  const text = Array.isArray(children) ? children.join("") : String(children);
+  const words = text.split(" ");
 
   return (
     <span ref={rootRef} className={`scramble ${className}`} style={style}>
-      <span className="sr-only">{children}</span>
+      <span className="sr-only">{text}</span>
       <span aria-hidden="true">
         {words.map((word, wi) => (
           <Fragment key={wi}>
