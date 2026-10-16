@@ -530,7 +530,7 @@ textarea {
 .wordmark {
   font-family: var(--font-mono-stack);
   font-weight: 500;
-  font-size: var(--fs-micro); /* 11px floor — scale up, never down */
+  font-size: var(--fs-micro);
   letter-spacing: var(--tracking-wordmark);
   text-transform: uppercase;
   /* letter-spacing trails the last glyph — rebalance the optical box */
@@ -553,8 +553,8 @@ textarea {
 
 /* ─── Seal — the mark's carrier. Never redrawn. ──────────────────── */
 
-/* B · Key. Field follows the mode; the hairline uses Accent.
-   Minimum 16px, with the supplied 26% top-left cut. */
+/* B · Key. Field follows the mode; the hairline uses Accent and
+   follows the supplied 26% top-left cut. */
 .seal-key {
   /* Re-declared here so it resolves against each instance's --seal-size;
      a :root-only copy would bake in the 40px default. */
@@ -614,10 +614,10 @@ textarea {
   --seal-key-field: transparent;
 }
 
-/* A · Roundel. currentColor; minimum 56px. */
+/* A · Roundel. currentColor. */
 .seal-roundel {
   display: inline-block;
-  width: 96px; /* never below 56px */
+  width: 96px;
   height: 96px;
 }
 

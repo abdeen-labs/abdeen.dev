@@ -7,7 +7,7 @@ import Image from "next/image";
  */
 
 interface SealKeyProps {
-  /** Plate size in px. 16 minimum; the mark reads as a motif below 24. */
+  /** Plate size in px. The mark reads as a motif below 24. */
   size?: number;
   /** flush: transparent field for foreign grounds. mono: currentColor. */
   variant?: "flush" | "mono";
@@ -47,14 +47,14 @@ export function SealKey({
 }
 
 interface SealRoundelProps {
-  /** Diameter in px. Minimum 56. */
+  /** Diameter in px. The ring lettering wants display sizes. */
   size?: number;
   /** Hide from assistive tech when adjacent text already names the studio. */
   decorative?: boolean;
   className?: string;
 }
 
-/** A · Roundel — the exact generated 04A asset.
+/** A · Roundel — the exact generated asset.
  * Never reconstruct its mark, ring type, or baseline in consumer code. */
 export function SealRoundel({
   size = 96,
