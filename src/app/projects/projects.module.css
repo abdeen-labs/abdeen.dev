@@ -280,6 +280,40 @@ a.card:focus-visible .mark {
   transform-origin: left;
 }
 
+/* A history list: the main line in ink, a branch in the identity color that
+   leaves it and merges back, and a bar for each commit's message. */
+.markEspalier {
+  width: 220px;
+  height: 132px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-shell);
+  background: var(--surface-page);
+}
+
+.markEspalier svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: var(--ink-structure);
+  stroke-width: 2;
+}
+
+.markEspalier path { fill: none; }
+.markEspalier circle { fill: var(--surface-page); }
+
+.graphMain,
+.graphNode { stroke: var(--ink-primary); }
+
+.graphBranch,
+.graphBranchNode { stroke: currentColor; }
+
+.markEspalier .graphHead {
+  fill: var(--ink-primary);
+  stroke: var(--ink-primary);
+}
+
+.markEspalier .graphHeadMessage { fill: var(--ink-primary); }
+
 .markStrobe {
   display: flex;
   flex-direction: column;

@@ -17,8 +17,6 @@ export interface CatalogEntry {
   /** Mono metadata shown next to the entry (platform or route). */
   meta: string;
   external?: boolean;
-  /** Promotes one enabled app into the homepage release spotlight. */
-  spotlight?: boolean;
   /** Defaults to "live". Retired entries leave every live surface and their
    *  page 404s, but apps keep their row on the /projects index. */
   status?: "live" | "retired";
@@ -44,16 +42,24 @@ export interface CatalogEntry {
   };
 }
 
-// Newest first. The homepage index shows the newest few; /projects renders
-// the full list, retired entries included.
+// Newest first. The homepage's Latest release is the newest live app and its
+// index shows the newest few; /projects renders the full list, retired
+// entries included.
 const allApps: CatalogEntry[] = [
+  {
+    title: "Espalier",
+    description:
+      "A native Git client for the Mac. Keep track of your branches, stage individual lines, and clean up your commits before you push.",
+    href: "https://espalier.abdeen.dev",
+    meta: "macOS",
+    external: true,
+  },
   {
     title: "Pocketful",
     description:
       "Create Apple Wallet passes with an AI agent and send them to your iPhone through Hark.",
     href: "/pocketful",
     meta: "Apple Wallet",
-    spotlight: true,
     privacy: {
       kind: "exception",
       summary:

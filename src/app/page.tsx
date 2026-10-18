@@ -9,8 +9,7 @@ import { identity } from "@/lib/brand";
 const INDEX_ROWS = 5;
 
 export default function HomePage() {
-  const spotlight = apps.find((item) => item.spotlight) ?? apps[0];
-  const spotlightIndex = apps.indexOf(spotlight);
+  const spotlight = apps[0];
 
   return (
     <div className="site-frame site-frame--wide">
@@ -35,7 +34,7 @@ export default function HomePage() {
             <span className="registry-meta">Live · {spotlight.meta}</span>
           </div>
           <span className="project-spotlight__number" aria-hidden="true">
-            {String(spotlightIndex + 1).padStart(2, "0")}
+            01
           </span>
           <div className="project-spotlight__copy">
             <h2>{spotlight.title}</h2>
