@@ -35,5 +35,5 @@ export const industries = {
   url: "https://abdeen.industries",
   github: "https://github.com/abdeen-industries",
   description:
-    "Abdeen Industries is a software development and cybersecurity company.",
+    "Abdeen Industries is a software engineering company that builds and runs software products for other organizations.",
 } as const;
