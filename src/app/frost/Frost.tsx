@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import AppleLogo from "@/components/AppleLogo";
+import BrewCommand from "@/components/BrewCommand";
 import FadeInWrapper from "@/components/FadeInWrapper";
 import FrostVisual from "@/components/FrostVisual";
 import SectionHeader from "@/components/SectionHeader";
@@ -10,6 +11,7 @@ import styles from "./frost.module.css";
 const REPO = "abdeen-labs/frost";
 const REPO_URL = `https://github.com/${REPO}`;
 const RELEASES_URL = `${REPO_URL}/releases/latest`;
+const BREW_CMD = "brew install --cask abdeen-labs/tap/frost";
 
 const lockStates = [
   {
@@ -267,8 +269,9 @@ export default function Frost() {
               </p>
               <p className="micro-label">macOS 14.6+</p>
             </div>
-            <div className="flex flex-col items-start gap-3">
+            <div className={`flex flex-col items-start gap-5 ${styles.install}`}>
               <DownloadButton href={release.href} label={release.label} location="closing" />
+              <BrewCommand command={BREW_CMD} />
             </div>
           </div>
         </section>
