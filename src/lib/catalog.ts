@@ -73,6 +73,11 @@ const allApps: CatalogEntry[] = [
     href: "https://espalier.abdeen.dev",
     meta: "macOS",
     external: true,
+    privacy: {
+      kind: "clarification",
+      summary:
+        "Espalier doesn't require an account or collect analytics, telemetry, or crash reports. Your GitHub tokens, AI API keys, and saved passwords stay in your Mac's login Keychain. Espalier contacts your Git remotes when you fetch, pull, or push, and fetches in the background to keep status current. After you sign in, it connects to GitHub.com or GitHub Enterprise for pull requests, check runs, and notifications. To show profile pictures, it sends the email addresses of commit authors you view to GitHub's avatar service. It sends AI requests only to providers you configure (OpenAI, Anthropic, Azure OpenAI, or a local model), after you approve each provider's first request. Espalier has no AI service of its own and sends no AI requests if you add no provider. Once a day, it contacts updates.abdeen.industries to check for and download signed updates.",
+    },
   },
   {
     title: "Pocketful",

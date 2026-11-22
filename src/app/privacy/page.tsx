@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://abdeen.dev/privacy" },
 };
 
-const LAST_UPDATED = "October 15, 2026";
+const LAST_UPDATED = "November 21, 2026";
 
 type PrivacyEntry = Pick<CatalogEntry, "title" | "meta" | "href"> & {
   privacy: NonNullable<CatalogEntry["privacy"]>;
@@ -29,8 +29,14 @@ const privacyEntries = [siteEntry, ...apps, ...tools].filter(
   (entry): entry is PrivacyEntry => Boolean(entry.privacy),
 );
 
+/** The anchor each entry's own page links to: its route for site pages, its
+ *  title for apps hosted elsewhere (espalier.abdeen.dev → #espalier). */
 const slugOf = (entry: PrivacyEntry) =>
-  entry.href === "/privacy" ? "site" : entry.href.replace(/^\//, "");
+  entry.href === "/privacy"
+    ? "site"
+    : entry.href.startsWith("/")
+      ? entry.href.slice(1)
+      : entry.title.toLowerCase();
 
 export default function PrivacyPage() {
   return (
