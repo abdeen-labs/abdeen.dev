@@ -280,6 +280,33 @@ a.card:focus-visible .mark {
   transform-origin: left;
 }
 
+/* A stage: curtains in ink drawn back on five bars of light in the identity
+   color, standing on the floor like a waveform. */
+.markEncore {
+  width: 220px;
+  height: 132px;
+  overflow: hidden;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-shell);
+  background: var(--surface-page);
+}
+
+.markEncore svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke-width: 1.5;
+}
+
+.markEncore rect { fill: currentColor; }
+
+.stageFloor { stroke: var(--hairline-strong); }
+
+.curtainCloth { fill: var(--surface-sunken); }
+.curtainFolds { stroke: var(--ink-structure); }
+.curtainEdge { stroke: var(--ink-primary); }
+
 /* A history list: the main line in ink, a branch in the identity color that
    leaves it and merges back, and a bar for each commit's message. */
 .markEspalier {

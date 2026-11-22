@@ -47,6 +47,26 @@ export interface CatalogEntry {
 // entries included.
 const allApps: CatalogEntry[] = [
   {
+    title: "Encore",
+    description:
+      "Local voice AI for the Mac. Text to speech, voice cloning, voice design, voice changing, multi-speaker scripts, and transcription, all on your own machine.",
+    href: "/encore",
+    meta: "macOS",
+    privacy: {
+      kind: "clarification",
+      summary:
+        "Encore runs entirely on your Mac, with no account and no cloud. Nothing you type, record, or generate leaves your computer. Encore goes online for two things only: Hugging Face, to download the models you pick, and updates.abdeen.industries, to check for new versions of Encore. It asks before checking for updates automatically, and the check sends only Encore's version.",
+    },
+    sitemapPriority: 0.9,
+    schema: {
+      type: "SoftwareApplication",
+      applicationCategory: "MultimediaApplication",
+      operatingSystem: "macOS",
+      description:
+        "Local voice AI for macOS. Text to speech, voice cloning, voice design, voice changing, multi-speaker scripts, and transcription on the device.",
+    },
+  },
+  {
     title: "Espalier",
     description:
       "A native Git client for the Mac. Keep track of your branches, stage individual lines, and clean up your commits before you push.",

@@ -1,0 +1,361 @@
+/* ─── Hero visual: a line of script and the take performed from it ── */
+
+.visual {
+  position: relative;
+  display: grid;
+  min-height: 430px;
+  min-width: 0;
+  place-items: center;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, transparent 49.9%, var(--hairline) 50%, transparent 50.1%),
+    linear-gradient(transparent 49.9%, var(--hairline) 50%, transparent 50.1%);
+}
+
+.visual::before {
+  position: absolute;
+  inset: 24%;
+  background: color-mix(in srgb, var(--signal-identity) 8%, transparent);
+  filter: blur(64px);
+  content: "";
+  pointer-events: none;
+}
+
+.visualCode {
+  position: absolute;
+  right: 0;
+  bottom: 18px;
+  color: var(--surface-sunken);
+  font-family: var(--font-mono-stack);
+  font-size: clamp(82px, 11vw, 138px);
+  font-weight: 500;
+  letter-spacing: -0.08em;
+  line-height: 0.75;
+  user-select: none;
+}
+
+.take {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: min(76%, 360px);
+  flex-direction: column;
+  gap: 22px;
+  padding: 22px;
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--radius-shell);
+  color: var(--ink-primary);
+  background: var(--surface-page);
+  box-shadow: 0 24px 64px rgb(0 0 0 / 0.24);
+}
+
+.takeHeader,
+.takeFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: var(--font-mono-stack);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.takeHeader { color: var(--ink-dim); }
+
+.takeLine {
+  font-family: var(--font-display-stack);
+  font-size: 20px;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.period { color: var(--signal-identity); }
+
+.takeWave {
+  display: flex;
+  height: 56px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3px;
+}
+
+.takeWave > span {
+  width: 3px;
+  flex: none;
+  background: var(--ink-structure);
+}
+
+.takeWave > .played { background: var(--signal-identity); }
+
+.takeFooter {
+  padding-top: 12px;
+  border-top: 1px solid var(--hairline);
+  color: var(--ink-dim);
+}
+
+/* ─── Modes: six ruled cells, three across ───────────────────────── */
+
+.modes {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--hairline-strong);
+  border-bottom: 1px solid var(--hairline-strong);
+}
+
+.modes li {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+  padding: 26px clamp(20px, 3vw, 36px) 30px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.modes li:not(:nth-child(3n + 1)) {
+  border-left: 1px solid var(--hairline);
+}
+
+.modes li:nth-last-child(-n + 3) {
+  border-bottom: 0;
+}
+
+.modeNumber {
+  padding-top: 2px;
+  color: var(--ink-faint);
+  font-family: var(--font-mono-stack);
+  font-size: var(--fs-control);
+  font-variant-numeric: tabular-nums;
+}
+
+.modeCopy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+}
+
+.modeCopy > span {
+  color: var(--signal-link);
+  font-family: var(--font-mono-stack);
+  font-size: var(--fs-control);
+  font-weight: 500;
+  letter-spacing: var(--tracking-micro);
+  text-transform: uppercase;
+}
+
+.modeCopy strong {
+  margin-top: 10px;
+  font-family: var(--font-display-stack);
+  font-size: clamp(22px, 2.2vw, 28px);
+  font-weight: 500;
+  line-height: 1.15;
+  text-wrap: balance;
+}
+
+.modeCopy small {
+  max-width: 40ch;
+  margin-top: 10px;
+  color: var(--ink-secondary);
+  font-family: var(--font-text-stack);
+  font-size: var(--fs-body);
+  line-height: var(--leading-text);
+  text-wrap: pretty;
+}
+
+/* ─── Facts and requirements: ruled three-up strips ───────────────── */
+
+.facts,
+.requirements {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--hairline-strong);
+  border-bottom: 1px solid var(--hairline-strong);
+}
+
+.facts div,
+.requirements div {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 8px;
+  padding: 22px 28px 24px 0;
+}
+
+.facts div + div,
+.requirements div + div {
+  padding-left: 28px;
+  border-left: 1px solid var(--hairline);
+}
+
+.facts strong {
+  font-family: var(--font-display-stack);
+  font-size: clamp(26px, 3vw, 36px);
+  font-weight: 500;
+  line-height: 1;
+  overflow-wrap: anywhere;
+}
+
+.facts span,
+.requirements span,
+.localFacts span {
+  font-family: var(--font-mono-stack);
+  font-size: var(--fs-control);
+  letter-spacing: var(--tracking-micro);
+  text-transform: uppercase;
+}
+
+.facts span,
+.requirements span {
+  color: var(--ink-dim);
+}
+
+.requirements span { font-weight: 500; }
+
+.requirements strong {
+  font-family: var(--font-display-stack);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+/* ─── On your machine ─────────────────────────────────────────────── */
+
+.local {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(36px, 6vw, 72px);
+  border-top: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--hairline);
+  background: var(--surface-sunken);
+}
+
+.local::after {
+  position: absolute;
+  right: -12px;
+  bottom: -28px;
+  color: color-mix(in srgb, var(--signal-identity) 9%, transparent);
+  font-family: var(--font-mono-stack);
+  font-size: clamp(100px, 17vw, 210px);
+  font-weight: 500;
+  line-height: 0.8;
+  content: "LOCAL";
+  pointer-events: none;
+  user-select: none;
+}
+
+.local > div {
+  position: relative;
+  z-index: 1;
+}
+
+.localBody {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
+  gap: clamp(40px, 7vw, 96px);
+  align-items: end;
+}
+
+.local h2 {
+  max-width: 14ch;
+  font-family: var(--font-display-stack);
+  font-size: clamp(38px, 6vw, 68px);
+  line-height: 1.02;
+  text-wrap: balance;
+}
+
+.localFacts {
+  border-top: 1px solid var(--hairline-strong);
+}
+
+.localFacts span {
+  display: block;
+  padding-block: 13px;
+  border-bottom: 1px solid var(--hairline);
+  color: var(--ink-secondary);
+}
+
+.localFacts span::before {
+  margin-right: 12px;
+  color: var(--signal-identity);
+  content: "✓";
+}
+
+/* ─── Download ────────────────────────────────────────────────────── */
+
+.install {
+  width: min(100%, 440px);
+}
+
+@media (max-width: 900px) {
+  .modes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .modes li:not(:nth-child(3n + 1)) {
+    border-left: 0;
+  }
+
+  .modes li:nth-child(2n) {
+    border-left: 1px solid var(--hairline);
+  }
+
+  .modes li:nth-last-child(-n + 3) {
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .modes li:nth-last-child(-n + 2) {
+    border-bottom: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .visual {
+    min-height: 340px;
+  }
+
+  .take {
+    width: calc(100% - 48px);
+    padding: 18px;
+  }
+
+  .modes {
+    grid-template-columns: 1fr;
+  }
+
+  .modes li,
+  .modes li:nth-child(2n) {
+    border-left: 0;
+  }
+
+  .modes li:nth-last-child(-n + 2) {
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .modes li:last-child {
+    border-bottom: 0;
+  }
+
+  .facts,
+  .requirements,
+  .localBody {
+    grid-template-columns: 1fr;
+  }
+
+  .facts div,
+  .facts div + div,
+  .requirements div,
+  .requirements div + div {
+    padding: 18px 0 20px;
+    border-left: 0;
+  }
+
+  .facts div + div,
+  .requirements div + div {
+    border-top: 1px solid var(--hairline);
+  }
+
+  .local {
+    padding-inline: 24px;
+  }
+}

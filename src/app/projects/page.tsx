@@ -10,7 +10,36 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://abdeen.dev/projects" },
 };
 
+/** The left stage curtain, drawn back at its tie; the right is it mirrored. */
+const CURTAIN_EDGE = "M58 0C52 28 45 56 40 76C36 94 30 112 26 130";
+const CURTAIN_FOLDS = "M20 0C20 30 26 58 38 76M40 0C38 30 36 56 39 76M37 82C33 100 22 116 12 130";
+
 function ProjectMark({ href }: { href: string }) {
+  if (href === "/encore") {
+    return (
+      <div className={`${styles.mark} ${styles.markEncore}`} aria-hidden="true">
+        <svg viewBox="0 0 218 130">
+          <path className={styles.stageFloor} d="M0 112H218" />
+          <rect x="69" y="84" width="8" height="28" rx="4" />
+          <rect x="87" y="62" width="8" height="50" rx="4" />
+          <rect x="105" y="42" width="8" height="70" rx="4" />
+          <rect x="123" y="60" width="8" height="52" rx="4" />
+          <rect x="141" y="82" width="8" height="30" rx="4" />
+          <g>
+            <path className={styles.curtainCloth} d={`${CURTAIN_EDGE}H0V0Z`} />
+            <path className={styles.curtainFolds} d={CURTAIN_FOLDS} />
+            <path className={styles.curtainEdge} d={CURTAIN_EDGE} />
+          </g>
+          <g transform="matrix(-1 0 0 1 218 0)">
+            <path className={styles.curtainCloth} d={`${CURTAIN_EDGE}H0V0Z`} />
+            <path className={styles.curtainFolds} d={CURTAIN_FOLDS} />
+            <path className={styles.curtainEdge} d={CURTAIN_EDGE} />
+          </g>
+        </svg>
+      </div>
+    );
+  }
+
   if (href === "/pocketful") {
     return (
       <div className={`${styles.mark} ${styles.markPocketful}`} aria-hidden="true">
