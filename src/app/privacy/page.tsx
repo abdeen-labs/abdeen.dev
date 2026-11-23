@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://abdeen.dev/privacy" },
 };
 
-const LAST_UPDATED = "November 21, 2026";
+const LAST_UPDATED = "November 22, 2026";
 
 type PrivacyEntry = Pick<CatalogEntry, "title" | "meta" | "href"> & {
   privacy: NonNullable<CatalogEntry["privacy"]>;

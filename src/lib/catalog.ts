@@ -55,7 +55,7 @@ const allApps: CatalogEntry[] = [
     privacy: {
       kind: "clarification",
       summary:
-        "Encore runs entirely on your Mac, with no account and no cloud. Nothing you type, record, or generate leaves your computer. Encore goes online for two things only: Hugging Face, to download the models you pick, and updates.abdeen.industries, to check for new versions of Encore. It asks before checking for updates automatically, and the check sends only Encore's version.",
+        "Encore runs entirely on your Mac, with no account and no cloud. Nothing you type, record, or generate leaves your computer. Encore goes online for two things only: Hugging Face, to download the models you pick and, if you add a token for a gated model, to check that it works; and updates.abdeen.industries, to check for new versions of Encore. It asks before checking for updates automatically, and the check sends only Encore's version. Its optional local API, off until you turn it on, accepts connections only from apps on your Mac and refuses requests from web pages. Encore sends nothing those apps give it anywhere else; what an app does with the results is up to that app.",
     },
     sitemapPriority: 0.9,
     schema: {
